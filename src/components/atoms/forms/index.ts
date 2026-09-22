@@ -1,0 +1,8 @@
+export { default as TamsTextInput } from './TamsTextInput'
+export { default as TamsNumberInput } from './TamsNumberInput'
+export { default as TamsPasswordInput } from './TamsPasswordInput'
+export { default as TamsSelectInput } from './TamsSelectInput'
+export { default as TamsTextArea } from './TamsTextArea'
+export { default as TamsMultiSelect } from './TamsMultiSelect'
+export { default as TamsDateInput } from './TamsDateInput'
+export { default as TamsSwitchInput } from './TamsSwitchInput'

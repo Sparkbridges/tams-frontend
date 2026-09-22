@@ -1,0 +1,64 @@
+.tams-clock__wordmark-image {
+    width: 100%;
+    height: auto;
+}
+
+.tams-clock-block {
+    width: 68px;
+    position: absolute;
+    left: 60px;
+    display: inline-block;
+    z-index: 9 !important;
+    padding: 0px 0px 3px 0px;
+    background: #f2f6f9 !important;
+}
+
+.tams-clock_divider {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #dce7ef;
+}
+
+
+.tams-clock__mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+}
+
+.tams-clock__svg {
+    display: block;
+    z-index: 9 !important;
+    position: relative;
+}
+
+.tams-clock__wordmark-dot {
+    display: none;
+    /* the clock face itself doubles as the "t" tittle, per the source logo */
+}
+
+.tams-clock__digital {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-weight: 600;
+    font-size: 18px;
+    color: #1a1a1a;
+    letter-spacing: 0.04em;
+    background: #f2f6f9;
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+.tams-clock__colon {
+    color: #016aea;
+    padding: 0 1px;
+}
+
+.text-dark {
+    color: #1a1a1a;
+}
+
+.bg-light {
+    background-color: #f2f6f9;
+}

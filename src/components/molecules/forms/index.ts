@@ -1,0 +1,1 @@
+export { default as Tams2ColsForm } from './Tams2ColsForm'
