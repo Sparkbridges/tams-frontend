@@ -6,7 +6,7 @@ import {
 } from '#/components'
 import {
   documentHelper,
-  useFetchAttendanceDashboardPunctuality,
+  // useFetchAttendanceDashboardPunctuality,
   useFetchEmployeeHomeDetails,
   useTamsStore,
 } from '#/lib'
@@ -26,7 +26,12 @@ import { useMemo } from 'react'
 
 export const Route = createFileRoute('/admin-dashboard/')({
   component: RouteComponent,
-  head: () => documentHelper({ title: 'Admin Dashboard | Tams', content: 'Admin Dashboard Page', name: 'description' }),
+  head: () =>
+    documentHelper({
+      title: 'Admin Dashboard | Tams',
+      content: 'Admin Dashboard Page',
+      name: 'description',
+    }),
   errorComponent: () => <TamsPageError type="500" />,
 })
 
@@ -46,8 +51,10 @@ function RouteComponent() {
     [activeBranch],
   )
 
-  const { data: attendanceDashboardPunctuality } =
-    useFetchAttendanceDashboardPunctuality(params)
+  console.log(params)
+
+  /*  const { data: attendanceDashboardPunctuality } =
+    useFetchAttendanceDashboardPunctuality(params) */
 
   const handleQuickLinkClick = (href: string) => navigate({ to: href })
 

@@ -14,7 +14,9 @@
     "format": "prettier --write . && eslint --fix",
     "check": "prettier --check .",
     "vitest": "vitest run",
-    "vitest:watch": "vitest"
+    "vitest:watch": "vitest",
+    "prepare": "husky",
+    "typecheck": "tsc --noEmit --pretty"
   },
   "dependencies": {
     "@mantine/charts": "^9.5.2",
@@ -58,7 +60,9 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^9.20.0",
+    "husky": "^9.1.7",
     "jsdom": "^29.1.1",
+    "lint-staged": "^16.4.0",
     "postcss": "^8.5.26",
     "postcss-preset-mantine": "^1.18.0",
     "postcss-simple-vars": "^7.0.1",
@@ -71,6 +75,15 @@
     "onlyBuiltDependencies": [
       "esbuild",
       "lightningcss"
+    ]
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix --max-warnings=0",
+      "prettier --write"
+    ],
+    "*.{js,jsx,json,css,md}": [
+      "prettier --write"
     ]
   }
 }

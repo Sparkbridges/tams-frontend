@@ -52,7 +52,7 @@ const TAuthForm = () => {
   }
 
   const handleVerifyCompanyUrl = async () => {
-    if (validateStepForms(currentSchema, form)) {
+    if (validateStepForms(currentSchema, form as any)) {
       try {
         const response = await verifyCompanyUrlAsync({
           company_id: form.getValues().company_id,
@@ -90,7 +90,11 @@ const TAuthForm = () => {
     <Paper radius="lg" p="xl" withBorder>
       <form
         className="space-y-3"
-        onSubmit={form.onSubmit(handleLogin, handleError)}
+        onSubmit={form.onSubmit(
+          async (values) =>
+            await handleLogin(values as unknown as AllLoginSchemaType),
+          handleError,
+        )}
       >
         <Stepper
           size="sm"

@@ -92,7 +92,7 @@ const OrgDepartmentDetailDrawer = ({ opened, onClose, selectedRow }: Props) => {
                   Organization department
                 </Text>
                 <Title order={3} fw={700} c="gray.8">
-                  {formatValue(selectedRow.departmentName)}
+                  {formatValue(selectedRow.departmentName as string)}
                 </Title>
               </Stack>
 
@@ -102,7 +102,7 @@ const OrgDepartmentDetailDrawer = ({ opened, onClose, selectedRow }: Props) => {
                 radius="sm"
                 size="lg"
               >
-                {formatValue(selectedRow.status)}
+                {formatValue(selectedRow.status as string)}
               </Badge>
             </Group>
 
@@ -114,7 +114,7 @@ const OrgDepartmentDetailDrawer = ({ opened, onClose, selectedRow }: Props) => {
                   Department ID
                 </Text>
                 <Text mt={6} fw={600} c="gray.8">
-                  {formatValue(selectedRow.id)}
+                  {formatValue(selectedRow.id as string)}
                 </Text>
               </Paper>
 
@@ -123,7 +123,7 @@ const OrgDepartmentDetailDrawer = ({ opened, onClose, selectedRow }: Props) => {
                   Group department
                 </Text>
                 <Text mt={6} fw={600} c="gray.8">
-                  {formatValue(selectedRow.groupDepartment)}
+                  {formatValue(selectedRow.groupDepartment as string)}
                 </Text>
               </Paper>
 
@@ -132,7 +132,7 @@ const OrgDepartmentDetailDrawer = ({ opened, onClose, selectedRow }: Props) => {
                   Branch
                 </Text>
                 <Text mt={6} fw={600} c="gray.8">
-                  {formatValue(selectedRow.branches)}
+                  {formatValue(selectedRow.branches as string)}
                 </Text>
               </Paper>
 
@@ -141,7 +141,7 @@ const OrgDepartmentDetailDrawer = ({ opened, onClose, selectedRow }: Props) => {
                   Head of department
                 </Text>
                 <Text mt={6} fw={600} c="gray.8">
-                  {formatValue(selectedRow.headOfDepartment)}
+                  {formatValue(selectedRow.headOfDepartment as string)}
                 </Text>
               </Paper>
             </SimpleGrid>
@@ -161,22 +161,22 @@ const OrgDepartmentDetailDrawer = ({ opened, onClose, selectedRow }: Props) => {
               <DetailRow
                 icon={<HashIcon size={16} />}
                 label="Department ID"
-                value={formatValue(selectedRow.id)}
+                value={formatValue(selectedRow.id as string)}
               />
               <DetailRow
                 icon={<UserIcon size={16} />}
                 label="Head of department"
-                value={formatValue(selectedRow.headOfDepartment)}
+                value={formatValue(selectedRow.headOfDepartment as string)}
               />
               <DetailRow
                 icon={<UsersThreeIcon size={16} />}
                 label="Group department"
-                value={formatValue(selectedRow.groupDepartment)}
+                value={formatValue(selectedRow.groupDepartment as string)}
               />
               <DetailRow
                 icon={<BuildingOfficeIcon size={16} />}
                 label="Branch"
-                value={formatValue(selectedRow.branches)}
+                value={formatValue(selectedRow.branches as string)}
               />
             </Stack>
           </Paper>
@@ -195,12 +195,12 @@ const OrgDepartmentDetailDrawer = ({ opened, onClose, selectedRow }: Props) => {
               <DetailRow
                 icon={<CalendarBlankIcon size={16} />}
                 label="Created"
-                value={formatDate(selectedRow.createdAt)}
+                value={formatDate(selectedRow.createdAt as string)}
               />
               <DetailRow
                 icon={<CalendarBlankIcon size={16} />}
                 label="Last updated"
-                value={formatDate(selectedRow.updatedAt)}
+                value={formatDate(selectedRow.updatedAt as string)}
               />
             </SimpleGrid>
 
@@ -210,7 +210,7 @@ const OrgDepartmentDetailDrawer = ({ opened, onClose, selectedRow }: Props) => {
               Notes
             </Text>
             <Text mt="xs" size="sm" c="gray.7" lh={1.6}>
-              {formatValue(selectedRow.notes)}
+              {formatValue(selectedRow.notes as string)}
             </Text>
           </Paper>
         </Stack>
