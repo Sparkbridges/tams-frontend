@@ -22,7 +22,7 @@
     "@mantine/charts": "^9.5.2",
     "@mantine/core": "^9.5.2",
     "@mantine/dates": "^9.5.2",
-    "@mantine/dropzone": "^9.6.1",
+    "@mantine/dropzone": "^9.5.2",
     "@mantine/form": "^9.5.2",
     "@mantine/hooks": "^9.5.2",
     "@mantine/modals": "^9.5.2",

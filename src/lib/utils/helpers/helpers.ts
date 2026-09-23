@@ -75,7 +75,7 @@ export const documentHelper = ({
   links: [
     {
       rel: 'icon',
-      href: '/favicon.ico',
+      href: '/images/tams-logo.ico',
     },
   ],
   styles: [
@@ -121,7 +121,7 @@ export const millifyValue = (
 }
 
 export function normalize(s: string) {
-  return s.replace(/[_\-]/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase()
+  return s.replace(/[_-]/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase()
 }
 
 export function autoMatch(

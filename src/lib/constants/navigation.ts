@@ -39,7 +39,12 @@ export const pageHeaderNav: Record<
     title: 'Employee management',
     icon: FolderUserIcon,
     description: 'Manage employees within the organization',
-  }
+  },
+  reports: {
+    title: 'Reports',
+    icon: ChartLineUpIcon,
+    description: 'Manage organization users reports',
+  },
 }
 
 export const adminNavigation: TamsNavigation[] = [
