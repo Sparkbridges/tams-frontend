@@ -1,4 +1,4 @@
-import type { TLabelValueWithoutNull } from '../types'
+import type { TLabelValueWithoutNull, TReportFilter } from '../types'
 
 export const RELIGION_TYPES: TLabelValueWithoutNull[] = [
   { label: 'Christianity', value: 'christianity' },
@@ -63,4 +63,182 @@ export const EMERGENCY_CONTACT_RELATIONSHIP_TYPES: TLabelValueWithoutNull[] = [
   { label: 'Spouse', value: 'spouse' },
   { label: 'Friend', value: 'friend' },
   { label: 'Other', value: 'other' },
+]
+
+export const reportsFilter: TReportFilter[] = [
+  {
+    label: 'Pin',
+    value: 'pin',
+    description: 'Personal Identification Number',
+  },
+  {
+    label: 'Name',
+    value: 'name',
+    description: 'Full Name of Employee',
+  },
+  {
+    label: 'Email',
+    value: 'email',
+    description: 'Email Address of Employee',
+  },
+  {
+    label: 'Employee Type',
+    value: 'employee_type',
+    description: 'Type of Employee',
+  },
+  {
+    label: 'Grade',
+    value: 'employee_grade',
+    description: 'Grade of Employee',
+  },
+  {
+    label: 'Gender',
+    value: 'gender',
+    description: 'Demographic Information of Employee',
+  },
+  {
+    label: 'Department',
+    value: 'department',
+    description: 'Operational Unit of Employee',
+  },
+  {
+    label: 'Branch',
+    value: 'branch',
+    description: 'Branch of Employee',
+  },
+  {
+    label: 'Birthday',
+    value: 'date_of_birth',
+    description: 'Date of Birth of Employee',
+  },
+  {
+    label: 'Address',
+    value: 'address',
+    description: 'Residential Address of Employee',
+  },
+  {
+    label: 'Account Name',
+    value: 'account_name',
+    description: 'Bank Account Name of Employee',
+  },
+  {
+    label: 'Genotype',
+    value: 'genotype',
+    description: 'Genotype of Employee',
+  },
+  {
+    label: 'Mobile Number',
+    value: 'mobile_number',
+    description: 'Mobile Number of Employee',
+  },
+  {
+    label: 'Local Government',
+    value: 'local_government',
+    description: 'Local Government Area of Employee',
+  },
+  {
+    label: 'City',
+    value: 'city',
+    description: 'City of Residence of Employee',
+  },
+  {
+    label: 'State',
+    value: 'state',
+    description: 'State of Residence of Employee',
+  },
+  {
+    label: 'Country',
+    value: 'country',
+    description: 'Country of Residence of Employee',
+  },
+  {
+    label: 'Employment Date',
+    value: 'appointment_date',
+    description: 'Date of Employment of Employee',
+  },
+  {
+    label: 'Blood Group',
+    value: 'blood_group',
+    description: 'Blood Group of Employee',
+  },
+  {
+    label: 'Nationality',
+    value: 'nationality',
+    description: 'Nationality of Employee',
+  },
+  {
+    label: 'Religion',
+    value: 'religion',
+    description: 'Religion of Employee',
+  },
+  {
+    label: 'Marital Status',
+    value: 'marital_status',
+    description: 'Marital Status of Employee',
+  },
+  {
+    label: 'Employee Category',
+    value: 'employee_category',
+    description: 'Category of Employee',
+  },
+  {
+    label: 'Employee Designation',
+    value: 'employee_designation',
+    description: 'Designation of Employee',
+  },
+  {
+    label: 'Bank Name',
+    value: 'bank',
+    description: 'Bank Name of Employee',
+  },
+  {
+    label: 'Account Number',
+    value: 'account_number',
+    description: 'Bank Account Number of Employee',
+  },
+  {
+    label: 'Bank Branch',
+    value: 'bank_branch',
+    description: 'Bank Branch of Employee',
+  },
+  {
+    label: 'Tax Id',
+    value: 'tax_id',
+    description: 'Tax Identification Number of Employee',
+  },
+  {
+    label: 'PFA',
+    value: 'pension_fund_administrator',
+    description: 'Pension Fund Administrator of Employee',
+  },
+  {
+    label: 'RSA Pin',
+    value: 'rsa_pin',
+    description: 'RSA Pin of Employee',
+  },
+]
+
+export const segmentedControlData = [
+  { label: 'All Employees', value: 'all' },
+  { label: 'By Branch', value: 'branch' },
+  { label: 'By Department', value: 'department' },
+  { label: 'Individuals', value: 'employee' },
+]
+
+export const reportDateOptions = [
+  {
+    label: 'All time',
+    value: 'all',
+    description: 'Includes all available data',
+  },
+  {
+    label: 'Last 30 days',
+    value: 'last_30_days',
+    description: 'Includes data from the last 30 days',
+  },
+  {
+    label: 'Custom Range',
+    value: 'custom_range',
+    description: 'Select a custom date range',
+  },
 ]

@@ -380,7 +380,7 @@ export type TEmployeeDetail = {
   salutation: string
   address: string
   picture: string | null
-  bank_id: number |null
+  bank_id: number | null
   bank_branch: null
   pension_fund_administrator: string | null
   rsa_pin: string
@@ -392,12 +392,12 @@ export type TEmployeeDetail = {
   alt_mobile_number: string | null
   means_of_identity: string
   id_no: string
-  id_expiration: string 
+  id_expiration: string
   emergency_contact_name: string | null
   emergency_contact_rel: string | null
   emergency_contact_no: string | null
   emergency_contact_address: string | null
-  bank_code: string |null
+  bank_code: string | null
   recipient_code: string | null
   branch_id: number
   employee_designation: { id: number; designation_name: string } | null
@@ -596,102 +596,136 @@ export type TValidateEmployeeDataResponse = TPostApiResponse<{
 }>
 
 export type TGetNextFreePinPayload = {
-    excludePins?: string
+  excludePins?: string
 }
 
 export interface CommitResult {
   createdCount: number
   updatedCount: number
   failedCount: number
-  timeline: { row?: number; message: string, type: 'success' | 'failure', time: Date }[]
+  timeline: {
+    row?: number
+    message: string
+    type: 'success' | 'failure'
+    time: Date
+  }[]
 }
 
 type CommitStatus = {
-    state: 'waiting' | 'active' | 'completed' | 'failed' | 'delayed' | 'unknown';
-    progress: number; // 0-100
-    result: CommitResult | null; // populated only once state === 'completed'
+  state: 'waiting' | 'active' | 'completed' | 'failed' | 'delayed' | 'unknown'
+  progress: number // 0-100
+  result: CommitResult | null // populated only once state === 'completed'
 }
 
 export type TGetUploadEmployeeDataStatusResponse = TGetApiResponse<CommitStatus>
 
-export type TGetBanksResponse = TGetApiResponse<{
-  id: number
-  bank_name: string
-  bank_code: string
-  is_active_on_remita: number
-}[]>
+export type TGetBanksResponse = TGetApiResponse<
+  {
+    id: number
+    bank_name: string
+    bank_code: string
+    is_active_on_remita: number
+  }[]
+>
 
 export type TGetEmployeeTypes = {
-    id: number
-    type_name: string
-    company_id: number
-    station_id: number | null
+  id: number
+  type_name: string
+  company_id: number
+  station_id: number | null
 }
 
 export type TGetEmployeeTypesResponse = TGetApiResponse<{
-    results: TGetEmployeeTypes[]
-    total: number
+  results: TGetEmployeeTypes[]
+  total: number
 }>
 
 export type TGetEmployeeDesignations = {
-    id: number
-    designation_name: string
-    station_id: number | null
-    company_id: number
-    is_system: number
-    created_at: string
-    updated_at: string
+  id: number
+  designation_name: string
+  station_id: number | null
+  company_id: number
+  is_system: number
+  created_at: string
+  updated_at: string
 }
 
 export type TGetEmployeeDesignationsResponse = TGetApiResponse<{
-    results: TGetEmployeeDesignations[]
-    total: number
+  results: TGetEmployeeDesignations[]
+  total: number
 }>
 
 export type TGetEmployeeGrades = {
-    id: number
-    grade_name: string
-    pay_package_id: number | null
-    station_id: number | null
-    company_id: number
-    is_system: number
-    deleted_at: string | null
-    created_at: string
-    updated_at: string
-    rank: number
+  id: number
+  grade_name: string
+  pay_package_id: number | null
+  station_id: number | null
+  company_id: number
+  is_system: number
+  deleted_at: string | null
+  created_at: string
+  updated_at: string
+  rank: number
 }
 
 export type TGetEmployeeGradesResponse = TGetApiResponse<{
-    results: TGetEmployeeGrades[]
-    total: number
+  results: TGetEmployeeGrades[]
+  total: number
 }>
 
 export type TGetEmployeeCategories = {
-    id: number
-    category_name: string
-    station_id: number | null
-    company_id: number
-    is_system: number
-    created_at: string
-    updated_at: string
+  id: number
+  category_name: string
+  station_id: number | null
+  company_id: number
+  is_system: number
+  created_at: string
+  updated_at: string
 }
 
 export type TGetEmployeeCategoriesResponse = TGetApiResponse<{
-    results: TGetEmployeeCategories[]
-    total: number
+  results: TGetEmployeeCategories[]
+  total: number
 }>
 
 export type TUploadEmployeeImagePayload = {
-    image: FormData
+  image: FormData
 }
 
 export type TUploadEmployeeImageResponse = TPostApiResponse<string>
 
 export type TGetEmployeeRoles = {
-    id: number
-    name: string
-    description: string | null
-    is_system: number
+  id: number
+  name: string
+  description: string | null
+  is_system: number
 }
 
 export type TGetEmployeeRolesResponse = TGetApiResponse<TGetEmployeeRoles[]>
+
+export type TCreateEmployeeReportsPayload = {
+  fetch_by: 'employee' | 'company' | 'branch' | 'department'
+  fetch_by_id: number[]
+  columns: string[]
+  page: number
+  perPage: number
+  date_filter?: 'last_30_days' | 'custom_range'
+  date_from?: string
+  date_to?: string
+}
+
+export type TFetchEmployeeReportsResponse = TPostApiResponse<{
+  results: {
+    name: string
+    email: string | null
+    gender: string | null
+  }[]
+  total: number
+}>
+
+export type TFetchDepartmentsAssignedToBranchResponse = TGetApiResponse<
+  {
+    id: number
+    department_name: string
+  }[]
+>

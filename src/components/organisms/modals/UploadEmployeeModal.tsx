@@ -7,7 +7,7 @@ import {
   TamsTerminal,
   TamsTextInput,
 } from '#/components/atoms'
-import { TamsTabs } from '#/components/molecules'
+import { TamsStatsCard, TamsTabs } from '#/components/molecules'
 import { millifyValue, useHandleEmployeeUpload } from '#/lib'
 import {
   Box,
@@ -291,26 +291,14 @@ const UploadEmployeeModal = ({ opened, onClose }: UploadEmployeeModalProps) => {
               <main className="px-5 overflow-y-auto space-y-6 max-h-150 pb-20 bg-gray-50 py-3">
                 <div className="grid grid-cols-4 gap-4">
                   {dashboardAnalytics.map((item, index) => (
-                    <Paper
-                      radius={'md'}
-                      className="px-3 py-2 flex items-center justify-between"
+                    <TamsStatsCard
                       key={index}
-                    >
-                      <div className="space-y-0.5">
-                        <Text size="sm" c={item.color}>
-                          {item.title}
-                        </Text>
-                        <Text fz={28} fw={700} c={item.color}>
-                          {item.value}
-                        </Text>
-                        <Text size="xs" c={item.color}>
-                          {item.description}
-                        </Text>
-                      </div>
-                      <ThemeIcon size={'lg'} color={item.color} variant="light">
-                        <item.icon />
-                      </ThemeIcon>
-                    </Paper>
+                      color={item.color}
+                      icon={item.icon}
+                      title={item.title}
+                      value={item.value}
+                      description={item.description}
+                    />
                   ))}
                 </div>
 

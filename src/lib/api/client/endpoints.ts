@@ -39,10 +39,13 @@ export const ENDPOINTS = {
   employeeDesignations: '/organization/employees/settings/designations',
   employeeGrades: '/organization/employees/settings/grades',
   employeeCategories: '/organization/employees/settings/categories',
-    employeeImageUpload: '/organization/employees/image-upload',
+  employeeImageUpload: '/organization/employees/image-upload',
   organizationSystemSettingsRoles: '/organization/system-settings/roles',
+  fetchEmployeeReports: '/organization/reports/employees/fetch',
+  fetchDepartmentsAssignedToBranch:
+    '/organization/branches/:branch_id/departments',
 
-  //payroll
+  // payroll
   verifyAccountNumber:
     '/payroll/payment-management/payments/verify-account-number',
 }

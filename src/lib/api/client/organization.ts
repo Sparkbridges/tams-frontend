@@ -47,8 +47,15 @@ import type {
   TUploadEmployeeImagePayload,
   TUploadEmployeeImageResponse,
   TGetEmployeeRolesResponse,
+  TCreateEmployeeReportsPayload,
+  TFetchEmployeeReportsResponse,
+  TFetchDepartmentsAssignedToBranchResponse,
 } from '#/lib/types'
-import { paramsSerializer, type TCreateEmployeePayload, type TUpdateEmployeePayload } from '#/lib/utils'
+import { paramsSerializer } from '#/lib/utils'
+import type {
+  TCreateEmployeePayload,
+  TUpdateEmployeePayload,
+} from '#/lib/utils'
 import { ENDPOINTS } from './endpoints'
 
 const organizationClient = {
@@ -302,7 +309,7 @@ const organizationClient = {
    * @throws {Error} If the request fails.
    */
   fetchOrganizationAllEmployees: async (
-    params: TFetchOrganizationAllEmployeesParams,
+    params?: TFetchOrganizationAllEmployeesParams,
   ) => {
     return await Client.get<TEmployeeResponse>(`${ENDPOINTS.employees}`, {
       params,
@@ -631,6 +638,30 @@ const organizationClient = {
   getEmployeeRoles: async () => {
     return await Client.get<TGetEmployeeRolesResponse>(
       `${ENDPOINTS.organizationSystemSettingsRoles}`,
+    )
+  },
+
+  /**
+   * Description - Fetch employee reports.
+   * @returns Data fetched from `/organization/reports/employees/fetch`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  createEmployeeReports: async (payload: TCreateEmployeeReportsPayload) => {
+    return await Client.post<TFetchEmployeeReportsResponse>(
+      `${ENDPOINTS.fetchEmployeeReports}`,
+      payload,
+    )
+  },
+
+  /**
+   * Description - Fetch departments assigned to a specific branch.
+   * @param branchId The ID of the branch.
+   * @returns Data fetched from `/organization/branches/:branch_id/departments`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  fetchDepartmentsAssignedToBranch: async (branchId: number) => {
+    return await Client.get<TFetchDepartmentsAssignedToBranchResponse>(
+      `${ENDPOINTS.fetchDepartmentsAssignedToBranch.replace(':branch_id', String(branchId))}`,
     )
   },
 }

@@ -103,7 +103,7 @@ const useHandleEmployeeUpload = () => {
       fieldsFromResponse?.employeeUploadFields &&
       fieldsFromResponse.fieldsFromCSV
     ) {
-      const tableData = fieldsFromResponse.employeeUploadFields.map(
+      const tableData2 = fieldsFromResponse.employeeUploadFields.map(
         (field, _, array) => {
           const sampleData =
             fieldsFromResponse.sampleRows[
@@ -132,8 +132,8 @@ const useHandleEmployeeUpload = () => {
           }
         },
       )
-      setTableData(tableData as unknown as TamsTableData[])
-      setTableDataInitial(tableData as unknown as TamsTableData[])
+      setTableData(tableData2 as unknown as TamsTableData[])
+      setTableDataInitial(tableData2 as unknown as TamsTableData[])
     }
   }, [fieldsFromResponse])
 
@@ -211,7 +211,7 @@ const useHandleEmployeeUpload = () => {
               color: 'red',
             })
         return !rowLevelError
-      case 2:
+      case 2: {
         const isAllFieldsValid = validatedRows.every(
           (row) => row.status === 'valid',
         )
@@ -223,7 +223,7 @@ const useHandleEmployeeUpload = () => {
               color: 'red',
             })
         return isAllFieldsValid
-        break
+      }
       case 3:
         // Validation logic for step 3
         break
