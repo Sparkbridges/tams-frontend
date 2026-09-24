@@ -4,6 +4,7 @@ import type {
   TArchivedEmployeeResponse,
   TCreateBranchPayload,
   TCreateDepartmentPayload,
+  TCreateEmployeeReportsPayload,
   TCreateTeamPayload,
   TDeleteBulkOrganizationBranchPayload,
   TDeleteOrganizationDepartmentPayload,
@@ -13,6 +14,7 @@ import type {
   TEmployeeResponse,
   TFetchArchivedOrganizationEmployeesParams,
   TFetchCountriesResponse,
+  TFetchDepartmentsAssignedToBranchResponse,
   TFetchOrganizationAllEmployeesParams,
   TFetchOrganizationBranchesParams,
   TFetchOrganizationBranchesResponse,
@@ -42,7 +44,10 @@ import type {
   TValidateEmployeeDataPayload,
 } from '#/lib/types'
 import { notifications } from '@mantine/notifications'
-import type { TCreateEmployeePayload, TUpdateEmployeePayload } from '#/lib/utils'
+import type {
+  TCreateEmployeePayload,
+  TUpdateEmployeePayload,
+} from '#/lib/utils'
 
 export const useSearchOrganizationEmployees = <TSelected>(
   queryParams: {
@@ -331,7 +336,7 @@ export const useFetchOrganizationTeamDetails = <TSelected>(
 }
 
 export const useFetchOrganizationAllEmployees = <TSelected>(
-  params: TFetchOrganizationAllEmployeesParams,
+  params?: TFetchOrganizationAllEmployeesParams,
   select?: (data: TEmployeeResponse) => TSelected,
 ) => {
   return useQuery({
@@ -347,7 +352,8 @@ export const useFetchOrganizationAllEmployeeDetails = <TSelected>(
 ) => {
   return useQuery({
     queryKey: [ENDPOINTS.employees, params],
-    queryFn: () => organizationClient.fetchOrganizationAllEmployeeDetails(params),
+    queryFn: () =>
+      organizationClient.fetchOrganizationAllEmployeeDetails(params),
     select,
     enabled: !!params.id,
   })
@@ -515,7 +521,8 @@ export const useValidateEmployeeData = () => {
 export const useGetNextFreePin = () => {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: (payload: TGetNextFreePinPayload) => organizationClient.getNextFreePin(payload),
+    mutationFn: (payload: TGetNextFreePinPayload) =>
+      organizationClient.getNextFreePin(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [ENDPOINTS.employees] })
       notifications.show({
@@ -559,22 +566,19 @@ export const useUploadEmployeeData = () => {
   })
 }
 
-
-export const useGetUploadEmployeeDataStatus = (jobId: string) => { 
+export const useGetUploadEmployeeDataStatus = (jobId: string) => {
   return useQuery({
     queryKey: [ENDPOINTS.uploadEmployeeDataStatus, jobId],
     queryFn: () => organizationClient.getUploadEmployeeDataStatus(jobId),
     enabled: !!jobId,
     refetchInterval: (query) => {
-    return query.state.data?.data.state === "completed"
-      ? false
-      : 3000;
-  },
+      return query.state.data?.data.state === 'completed' ? false : 3000
+    },
   })
 }
 
 export const useGetBanks = <TSelected>(
-  select?: (data: TGetBanksResponse) => TSelected
+  select?: (data: TGetBanksResponse) => TSelected,
 ) => {
   return useQuery({
     queryKey: [ENDPOINTS.getBanks],
@@ -584,7 +588,7 @@ export const useGetBanks = <TSelected>(
 }
 
 export const useGetEmployeeTypes = <TSelected>(
-  select?: (data: TGetEmployeeTypesResponse) => TSelected
+  select?: (data: TGetEmployeeTypesResponse) => TSelected,
 ) => {
   return useQuery({
     queryKey: [ENDPOINTS.employeeTypes],
@@ -594,7 +598,7 @@ export const useGetEmployeeTypes = <TSelected>(
 }
 
 export const useGetEmployeeDesignations = <TSelected>(
-  select?: (data: TGetEmployeeDesignationsResponse) => TSelected
+  select?: (data: TGetEmployeeDesignationsResponse) => TSelected,
 ) => {
   return useQuery({
     queryKey: [ENDPOINTS.employeeDesignations],
@@ -604,7 +608,7 @@ export const useGetEmployeeDesignations = <TSelected>(
 }
 
 export const useGetEmployeeGrades = <TSelected>(
-  select?: (data: TGetEmployeeGradesResponse) => TSelected
+  select?: (data: TGetEmployeeGradesResponse) => TSelected,
 ) => {
   return useQuery({
     queryKey: [ENDPOINTS.employeeGrades],
@@ -614,7 +618,7 @@ export const useGetEmployeeGrades = <TSelected>(
 }
 
 export const useGetEmployeeCategories = <TSelected>(
-  select?: (data: TGetEmployeeCategoriesResponse) => TSelected
+  select?: (data: TGetEmployeeCategoriesResponse) => TSelected,
 ) => {
   return useQuery({
     queryKey: [ENDPOINTS.employeeCategories],
@@ -667,11 +671,40 @@ export const useUploadOrganizationEmployeeImage = () => {
 }
 
 export const useGetEmployeeRoles = <TSelected>(
-  select?: (data: TGetEmployeeRolesResponse) => TSelected
+  select?: (data: TGetEmployeeRolesResponse) => TSelected,
 ) => {
   return useQuery({
     queryKey: [ENDPOINTS.organizationSystemSettingsRoles],
     queryFn: () => organizationClient.getEmployeeRoles(),
+    select,
+  })
+}
+
+export const useCreateEmployeeReports = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TCreateEmployeeReportsPayload) =>
+      organizationClient.createEmployeeReports(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [ENDPOINTS.employees] })
+      notifications.show({
+        title: 'Success',
+        message: 'Employee report created successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useFetchDepartmentsAssignedToBranch = <TSelected>(
+  branch_id?: number,
+  select?: (data: TFetchDepartmentsAssignedToBranchResponse) => TSelected,
+) => {
+  return useQuery({
+    queryKey: [ENDPOINTS.fetchDepartmentsAssignedToBranch, branch_id],
+    queryFn: () =>
+      organizationClient.fetchDepartmentsAssignedToBranch(branch_id as number),
+    enabled: !!branch_id,
     select,
   })
 }

@@ -114,3 +114,18 @@ export type TLabelValueWithoutNull = {
   label: string
   value: string
 }
+
+export type TReportFilter = {
+  label: string
+  value: string
+  description?: string
+}
+
+export type TStatsCard = {
+  title: string
+  value: string | number
+  icon: Icon
+  color: MantineColor
+  description?: string
+  loading?: boolean
+}

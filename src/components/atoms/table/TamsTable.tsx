@@ -49,7 +49,7 @@ type TamsTableProps = {
   tdClassName?: string
   disablePagination?: boolean
   disableSearch?: boolean
-  withHeaders?:boolean
+  withHeaders?: boolean
 }
 
 type ThProps = {
@@ -98,7 +98,7 @@ const TamsTable = ({
   selectedIds,
   disablePagination,
   disableSearch,
-  withHeaders=true
+  withHeaders = true,
 }: TamsTableProps) => {
   const {
     newData,
@@ -192,7 +192,7 @@ const TamsTable = ({
           }
           return (
             <Table.Td miw={column.width} key={i}>
-              {row[column.accessor as string]}
+              {row[column.accessor]}
             </Table.Td>
           )
         })}
@@ -257,17 +257,21 @@ const TamsTable = ({
 
   return (
     <>
-      <Paper withBorder className={`${!withHeaders ? 'py-0' : 'py-4 space-y-4 rounded-lg'}`}>
+      <Paper
+        withBorder
+        className={`${!withHeaders ? 'py-0' : 'py-4 space-y-4 rounded-lg'}`}
+      >
         <div className="px-5 flex items-center gap-3 justify-between">
           {!disableSearch && (
             <TamsTextInput
-            value={search}
-            className="w-4/12"
-            onChange={(e) => setSearch?.(e.target.value)}
-            radius="xl"
-            size="md"
-            placeholder={placeholder ?? 'Search...'}
-          />)}
+              value={search}
+              className="w-4/12"
+              onChange={(e) => setSearch?.(e.target.value)}
+              radius="xl"
+              size="md"
+              placeholder={placeholder ?? 'Search...'}
+            />
+          )}
           {filters}
         </div>
         <Table.ScrollContainer minWidth={650}>
@@ -279,16 +283,16 @@ const TamsTable = ({
             <Table.Tbody>{renderContent()}</Table.Tbody>
           </Table>
         </Table.ScrollContainer>
-       {!disablePagination && (
-        <div className="py-4">
-          <TamsPagination
-            limit={limit}
-            page={page}
-            total={total}
-            onPageChange={setPage ?? (() => {})}
-          />
-        </div>
-       )}
+        {!disablePagination && (
+          <div className="py-4">
+            <TamsPagination
+              limit={limit}
+              page={page}
+              total={total}
+              onPageChange={setPage ?? (() => {})}
+            />
+          </div>
+        )}
       </Paper>
       <Transition
         mounted={selection.size > 0}
