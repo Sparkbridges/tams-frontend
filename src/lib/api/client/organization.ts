@@ -54,6 +54,14 @@ import type {
   TFetchEmployeeDesignationsParams,
   TFetchEmployeeGradesParams,
   TFetchEmployeeCategoriesParams,
+  TUpdateEmployeeCategoryPayload,
+  TUpdateEmployeeTypePayload,
+  TUpdateEmployeeGradePayload,
+  TUpdateEmployeeDesignationPayload,
+  TCreateEmployeeCategoryPayload,
+  TCreateEmployeeTypePayload,
+  TCreateEmployeeGradePayload,
+  TCreateEmployeeDesignationPayload,
 } from '#/lib/types'
 import { paramsSerializer } from '#/lib/utils'
 import type {
@@ -657,7 +665,7 @@ const organizationClient = {
   /**
    * Description - Delete an employee category.
    * @param categoryId The ID of the employee category to delete.
-   * @returns Data fetched from `/organization/employees/settings/categories/:category_id`, or an error if the API call fails.
+   * @returns Data fetched from `/organization/employees/settings/categories?id=:category_id`, or an error if the API call fails.
    * @throws {Error} If the request fails.  
    */
   deleteEmployeeCategory: async (categoryId: number) => {
@@ -666,6 +674,129 @@ const organizationClient = {
         id: categoryId,
       },
     })
+  },
+
+  /**
+   * Description - Delete an employee type.
+   * @param typeId The ID of the employee type to delete.
+   * @returns Data fetched from `/organization/employees/settings/types?id=:type_id`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  deleteEmployeeType: async (typeId: number) => {
+    return await Client.delete(`${ENDPOINTS.employeeTypes}`, {
+      params: {
+        id: typeId,
+      },
+    })
+  },
+
+  /**
+   * Description - Delete an employee grade.
+   * @param gradeId The ID of the employee grade to delete.
+   * @returns Data fetched from `/organization/employees/settings/grades?id=:grade_id`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  deleteEmployeeGrade: async (gradeId: number) => {
+    return await Client.delete(`${ENDPOINTS.employeeGrades}`, {
+      params: {
+        id: gradeId,
+      },
+    })
+  },
+
+  /**
+   * Description - Delete an employee designation.
+   * @param designationId The ID of the employee designation to delete.
+   * @returns Data fetched from `/organization/employees/settings/designations?id=:designation_id`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  deleteEmployeeDesignation: async (designationId: number) => {
+    return await Client.delete(`${ENDPOINTS.employeeDesignations}`, {
+      params: {
+        id: designationId,
+      },
+    })
+  },
+
+  /**
+   * Description - update an employee category.
+   * @param payload The data to update the employee category with.
+   * @returns Data fetched from `/organization/employees/settings/categories?id=:category_id`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  updateEmployeeCategory: async (payload: TUpdateEmployeeCategoryPayload) => {
+    return await Client.put(`${ENDPOINTS.employeeCategories}`, payload)
+  },
+
+  /**
+   * Description - update an employee type.
+   * @param payload The data to update the employee type with.
+   * @returns Data fetched from `/organization/employees/settings/types?id=:type_id`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  updateEmployeeType: async (payload: TUpdateEmployeeTypePayload) => {
+    return await Client.put(`${ENDPOINTS.employeeTypes}`, payload)
+  },
+
+  /**
+   * Description - update an employee grade.
+   * @param payload The data to update the employee grade with.
+   * @returns Data fetched from `/organization/employees/settings/grades?id=:grade_id`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  updateEmployeeGrade: async (payload: TUpdateEmployeeGradePayload) => {
+    return await Client.put(`${ENDPOINTS.employeeGrades}`, payload)
+  },
+
+  /**
+   * Description - update an employee designation.
+   * @param payload The data to update the employee designation with.
+   * @returns Data fetched from `/organization/employees/settings/designations?id=:designation_id`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  updateEmployeeDesignation: async (
+    payload: TUpdateEmployeeDesignationPayload,
+  ) => {
+    return await Client.put(`${ENDPOINTS.employeeDesignations}`, payload)
+  },
+
+  /**
+   * Description - create an employee category.
+   * @param payload The data to create the employee category with.
+   * @returns Data fetched from `/organization/employees/settings/categories`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  createEmployeeCategory: async (payload: TCreateEmployeeCategoryPayload) => {
+    return await Client.post(`${ENDPOINTS.employeeCategories}`, payload)
+  },
+  /**
+   * Description - create an employee type.
+   * @param payload The data to create the employee type with.
+   * @returns Data fetched from `/organization/employees/settings/types`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  createEmployeeType: async (payload: TCreateEmployeeTypePayload) => {
+    return await Client.post(`${ENDPOINTS.employeeTypes}`, payload)
+  },
+  /**
+   * Description - create an employee grade.
+   * @param payload The data to create the employee grade with.
+   * @returns Data fetched from `/organization/employees/settings/grades`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  createEmployeeGrade: async (payload: TCreateEmployeeGradePayload) => {
+    return await Client.post(`${ENDPOINTS.employeeGrades}`, payload)
+  },
+  /**
+   * Description - create an employee designation.
+   * @param payload The data to create the employee designation with.
+   * @returns Data fetched from `/organization/employees/settings/designations`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  createEmployeeDesignation: async (
+    payload: TCreateEmployeeDesignationPayload,
+  ) => {
+    return await Client.post(`${ENDPOINTS.employeeDesignations}`, payload)
   },
 
   /**

@@ -1,14 +1,24 @@
-import { TamsTable } from '#/components/atoms'
+import {
+  TamsButton,
+  TamsModal,
+  TamsTable,
+  TamsTextInput,
+} from '#/components/atoms'
 import { TamsConfirmation } from '#/components/molecules'
-import { useOrganizationEmployeeSettingsTable } from '#/lib'
+import { capitalize, useOrganizationEmployeeSettingsTable } from '#/lib'
+import { Group } from '@mantine/core'
 
 type OrganizationEmployeeSettingsTableProps = {
   activeTab: 'types' | 'designation' | 'category' | 'grades' | null
   setTabCounts: (counts: { [key: string]: number }) => void
+  createType: string
+  setCreateType: (type: string) => void
 }
 const OrganizationEmployeeSettingsTable = ({
   activeTab,
   setTabCounts,
+  createType,
+  setCreateType,
 }: OrganizationEmployeeSettingsTableProps) => {
   const {
     columns,
@@ -24,7 +34,23 @@ const OrganizationEmployeeSettingsTable = ({
     handleRowClick,
     modalInfo,
     emptyState,
-  } = useOrganizationEmployeeSettingsTable({ activeTab, setTabCounts })
+    createEditOpened,
+    handleCloseCreateEdit,
+    inputFieldValue,
+    setInputFieldValue,
+    selectedId,
+    handleEdit,
+    handleCreate,
+    isEditing,
+    isCreating,
+    errorMsg,
+    hasEditChanged,
+  } = useOrganizationEmployeeSettingsTable({
+    activeTab,
+    setTabCounts,
+    createType,
+    setCreateType,
+  })
 
   const defaultPlaceholder =
     activeTab === 'types'
@@ -60,6 +86,44 @@ const OrganizationEmployeeSettingsTable = ({
         onConfirm={modalInfo?.action}
         loading={modalInfo?.loading}
       />
+
+      <TamsModal
+        allowblur
+        title={
+          selectedId
+            ? `Edit ${capitalize(activeTab ?? '')}`
+            : `Create ${capitalize(createType ?? '')}`
+        }
+        opened={createEditOpened}
+        onClose={handleCloseCreateEdit}
+      >
+        <section className="space-y-2">
+          <div>
+            <TamsTextInput
+              withAsterisk
+              label={
+                selectedId
+                  ? `Edit ${activeTab ?? ''}`
+                  : `Enter ${createType ?? ''}`
+              }
+              value={inputFieldValue}
+              onChange={(e) => setInputFieldValue(e.target.value)}
+              error={errorMsg}
+            />
+          </div>
+          <Group justify="end">
+            <TamsButton
+              size="md"
+              radius="xl"
+              disabled={!hasEditChanged}
+              onClick={selectedId ? handleEdit : handleCreate}
+              loading={isEditing || isCreating}
+            >
+              {selectedId ? 'Update' : 'Save'}
+            </TamsButton>
+          </Group>
+        </section>
+      </TamsModal>
     </div>
   )
 }
