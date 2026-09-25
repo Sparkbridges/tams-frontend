@@ -1,5 +1,9 @@
 import { ActionIcon, Divider, EmptyState, Paper } from '@mantine/core'
-import { EyeClosedIcon, EyeIcon, MagnifyingGlassIcon } from '@phosphor-icons/react'
+import {
+  EyeClosedIcon,
+  EyeIcon,
+  MagnifyingGlassIcon,
+} from '@phosphor-icons/react'
 import { useMemo, useRef, useState } from 'react'
 import { DonutChart } from '@mantine/charts'
 import type { TFetchEmployeeHomeDetails } from '#/lib'
@@ -17,36 +21,36 @@ const WorkForcePulseCard = ({ data }: TWorkForcePulseCardItem) => {
   const list = useMemo(() => {
     if (!data) return []
     return [
-        {
-          id:1,
+      {
+        id: 1,
         name: 'Present Employees',
         value: data?.present_employees?.length || 400,
         color: 't-blue.3',
         type: 'present',
       },
-        {
-        id:2,
+      {
+        id: 2,
         name: 'Absent Employees',
         value: data?.absent_employees?.length || 240,
         color: '#f43f5e',
         type: 'absent',
       },
       {
-        id:3,
+        id: 3,
         name: 'On Leave Employees',
         value: data?.employees_on_leave?.total || 0,
         color: '#facc15',
         type: 'on_leave',
       },
       {
-        id:4,
+        id: 4,
         name: 'Employees on exit',
         value: data?.employee_exits?.length || 0,
         color: '#10b981',
         type: 'on_exit',
       },
       {
-        id:5,
+        id: 5,
         name: 'New Joiners',
         value: data?.new_joiners?.length || 0,
         color: '#3b82f6',
@@ -56,34 +60,34 @@ const WorkForcePulseCard = ({ data }: TWorkForcePulseCardItem) => {
   }, [data])
 
   const handleOpenModal = (type: string) => {
-    let items: string[] = []
+    let itemsy: string[] = []
     if (type === 'present') {
-      items =
+      itemsy =
         data?.present_employees.map((emp) => emp.employee_details.name) || []
       titleRef.current = 'Present Employees'
     }
     if (type === 'absent') {
-      /* items =
+      /* itemsy =
         data?.absent_employees.map((emp) => emp.employee_details.name) || [] */
       titleRef.current = 'Absent Employees'
     }
-    /*if (type === 'on_leave') {
-      items =
+    /* if (type === 'on_leave') {
+      itemsy =
         data?.employees_on_leave.map((emp) => emp.employee_details.name) || []
       titleRef.current = 'On Leave Employees'
     }
     if (type === 'on_exit') {
-      items =
+      itemsy =
         data?.employee_exits.map((emp) => emp.employee_details.name) || []
       titleRef.current = 'Employees on Exit'
     }
     if (type === 'new_joiners') {
-      items =
+      itemsy =
         data?.new_joiners.map((emp) => emp.employee_details.name) || []
       titleRef.current = 'New Joiners'
     } */
     open()
-    setItems(items)
+    setItems(itemsy)
   }
 
   return (
@@ -129,7 +133,7 @@ const WorkForcePulseCard = ({ data }: TWorkForcePulseCardItem) => {
                 size={'sm'}
                 onClick={() => handleOpenModal(item.type)}
               >
-               {index === item.id && opened ? <EyeIcon /> : <EyeClosedIcon/>}
+                {index === item.id && opened ? <EyeIcon /> : <EyeClosedIcon />}
               </ActionIcon>
             </div>
           ))}

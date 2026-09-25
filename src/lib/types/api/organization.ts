@@ -721,3 +721,24 @@ export type TFetchEmployeeTypesParams = TBaseQueryParams
 export type TFetchEmployeeDesignationsParams = TBaseQueryParams
 export type TFetchEmployeeGradesParams = TBaseQueryParams
 export type TFetchEmployeeCategoriesParams = TBaseQueryParams
+
+export type TUpdateEmployeeCategoryPayload = {
+  name: string
+  id: number
+}
+
+export type TUpdateEmployeeTypePayload = TUpdateEmployeeCategoryPayload
+
+export type TUpdateEmployeeGradePayload = TUpdateEmployeeCategoryPayload
+
+export type TUpdateEmployeeDesignationPayload = TUpdateEmployeeCategoryPayload
+
+export type TCreateEmployeeCategoryPayload = {
+  name: string
+}
+
+export type TCreateEmployeeTypePayload = TCreateEmployeeCategoryPayload
+
+export type TCreateEmployeeGradePayload = TCreateEmployeeCategoryPayload
+
+export type TCreateEmployeeDesignationPayload = TCreateEmployeeCategoryPayload
