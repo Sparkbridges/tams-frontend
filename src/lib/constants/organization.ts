@@ -242,3 +242,24 @@ export const reportDateOptions = [
     description: 'Select a custom date range',
   },
 ]
+
+export const systemSettingsOptions = [
+  {
+    label: 'Account',
+    value: 'account-settings',
+    description: 'Account related settings',
+    image: '/images/svg/account.svg',
+  },
+  {
+    label: 'Roles and Permissions',
+    value: 'roles-and-permissions-settings',
+    description: 'Roles and Permissions related settings',
+    image: '/images/svg/roles.svg',
+  },
+  {
+    label: 'Employee',
+    value: 'employee-settings',
+    description: 'Employee related settings',
+    image: '/images/svg/employees.svg',
+  },
+]

@@ -15,6 +15,10 @@ import type {
   TFetchArchivedOrganizationEmployeesParams,
   TFetchCountriesResponse,
   TFetchDepartmentsAssignedToBranchResponse,
+  TFetchEmployeeCategoriesParams,
+  TFetchEmployeeDesignationsParams,
+  TFetchEmployeeGradesParams,
+  TFetchEmployeeTypesParams,
   TFetchOrganizationAllEmployeesParams,
   TFetchOrganizationBranchesParams,
   TFetchOrganizationBranchesResponse,
@@ -589,41 +593,63 @@ export const useGetBanks = <TSelected>(
 
 export const useGetEmployeeTypes = <TSelected>(
   select?: (data: TGetEmployeeTypesResponse) => TSelected,
+  queryParams?: TFetchEmployeeTypesParams,
 ) => {
   return useQuery({
-    queryKey: [ENDPOINTS.employeeTypes],
-    queryFn: () => organizationClient.getEmployeeTypes(),
+    queryKey: [ENDPOINTS.employeeTypes, queryParams],
+    queryFn: () => organizationClient.getEmployeeTypes(queryParams),
     select,
   })
 }
 
 export const useGetEmployeeDesignations = <TSelected>(
   select?: (data: TGetEmployeeDesignationsResponse) => TSelected,
+  queryParams?: TFetchEmployeeDesignationsParams,
 ) => {
   return useQuery({
-    queryKey: [ENDPOINTS.employeeDesignations],
-    queryFn: () => organizationClient.getEmployeeDesignations(),
+    queryKey: [ENDPOINTS.employeeDesignations, queryParams],
+    queryFn: () => organizationClient.getEmployeeDesignations(queryParams),
     select,
   })
 }
 
 export const useGetEmployeeGrades = <TSelected>(
   select?: (data: TGetEmployeeGradesResponse) => TSelected,
+  queryParams?: TFetchEmployeeGradesParams,
 ) => {
   return useQuery({
-    queryKey: [ENDPOINTS.employeeGrades],
-    queryFn: () => organizationClient.getEmployeeGrades(),
+    queryKey: [ENDPOINTS.employeeGrades, queryParams],
+    queryFn: () => organizationClient.getEmployeeGrades(queryParams),
     select,
   })
 }
 
 export const useGetEmployeeCategories = <TSelected>(
   select?: (data: TGetEmployeeCategoriesResponse) => TSelected,
+  queryParams?: TFetchEmployeeCategoriesParams,
 ) => {
   return useQuery({
-    queryKey: [ENDPOINTS.employeeCategories],
-    queryFn: () => organizationClient.getEmployeeCategories(),
+    queryKey: [ENDPOINTS.employeeCategories, queryParams],
+    queryFn: () => organizationClient.getEmployeeCategories(queryParams),
     select,
+  })
+}
+
+export const useDeleteEmployeeCategory = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (categoryId: number) =>
+      organizationClient.deleteEmployeeCategory(categoryId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.employeeCategories],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Employee category deleted successfully',
+        color: 'green',
+      })
+    },
   })
 }
 
