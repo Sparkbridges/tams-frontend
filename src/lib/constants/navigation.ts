@@ -4,6 +4,7 @@ import {
   ChartLineUpIcon,
   FolderUserIcon,
   MoneyWavyIcon,
+  SlidersHorizontalIcon,
   SquaresFourIcon,
   UsersThreeIcon,
   WarehouseIcon,
@@ -44,6 +45,16 @@ export const pageHeaderNav: Record<
     title: 'Reports',
     icon: ChartLineUpIcon,
     description: 'Manage organization users reports',
+  },
+  'system-settings': {
+    title: 'System settings',
+    icon: SlidersHorizontalIcon,
+    description: 'Manage organization system settings',
+  },
+  'employee-settings': {
+    title: 'Employee settings',
+    icon: UsersThreeIcon,
+    description: 'Manage employee related system settings',
   },
 }
 
@@ -94,7 +105,7 @@ export const adminNavigation: TamsNavigation[] = [
       {
         id: 13,
         name: 'System settings',
-        url: 'system-settings',
+        url: '/system-settings',
       },
     ],
   },
