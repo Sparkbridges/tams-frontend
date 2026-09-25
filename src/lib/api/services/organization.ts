@@ -4,7 +4,11 @@ import type {
   TArchivedEmployeeResponse,
   TCreateBranchPayload,
   TCreateDepartmentPayload,
+  TCreateEmployeeCategoryPayload,
+  TCreateEmployeeDesignationPayload,
+  TCreateEmployeeGradePayload,
   TCreateEmployeeReportsPayload,
+  TCreateEmployeeTypePayload,
   TCreateTeamPayload,
   TDeleteBulkOrganizationBranchPayload,
   TDeleteOrganizationDepartmentPayload,
@@ -43,6 +47,10 @@ import type {
   TTeamResponse,
   TUpdateBranchPayload,
   TUpdateDepartmentPayload,
+  TUpdateEmployeeCategoryPayload,
+  TUpdateEmployeeDesignationPayload,
+  TUpdateEmployeeGradePayload,
+  TUpdateEmployeeTypePayload,
   TUpdateTeamPayload,
   TUploadEmployeeImagePayload,
   TValidateEmployeeDataPayload,
@@ -647,6 +655,204 @@ export const useDeleteEmployeeCategory = () => {
       notifications.show({
         title: 'Success',
         message: 'Employee category deleted successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useDeleteEmployeeType = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (typeId: number) =>
+      organizationClient.deleteEmployeeType(typeId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.employeeTypes],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Employee type deleted successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useDeleteEmployeeGrade = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (gradeId: number) =>
+      organizationClient.deleteEmployeeGrade(gradeId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.employeeGrades],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Employee grade deleted successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useDeleteEmployeeDesignation = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (designationId: number) =>
+      organizationClient.deleteEmployeeDesignation(designationId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.employeeDesignations],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Employee designation deleted successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useUpdateEmployeeGrade = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TUpdateEmployeeGradePayload) =>
+      organizationClient.updateEmployeeGrade(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.employeeGrades],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Employee grade updated successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useUpdateEmployeeDesignation = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TUpdateEmployeeDesignationPayload) =>
+      organizationClient.updateEmployeeDesignation(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.employeeDesignations],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Employee designation updated successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useUpdateEmployeeCategory = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TUpdateEmployeeCategoryPayload) =>
+      organizationClient.updateEmployeeCategory(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.employeeCategories],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Employee category updated successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useUpdateEmployeeType = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TUpdateEmployeeTypePayload) =>
+      organizationClient.updateEmployeeType(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.employeeTypes],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Employee type updated successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useCreateEmployeeCategory = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TCreateEmployeeCategoryPayload) =>
+      organizationClient.createEmployeeCategory(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.employeeCategories],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Employee category created successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useCreateEmployeeType = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TCreateEmployeeTypePayload) =>
+      organizationClient.createEmployeeType(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.employeeTypes],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Employee type created successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useCreateEmployeeGrade = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TCreateEmployeeGradePayload) =>
+      organizationClient.createEmployeeGrade(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.employeeGrades],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Employee grade created successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useCreateEmployeeDesignation = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TCreateEmployeeDesignationPayload) =>
+      organizationClient.createEmployeeDesignation(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.employeeDesignations],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Employee designation created successfully',
         color: 'green',
       })
     },

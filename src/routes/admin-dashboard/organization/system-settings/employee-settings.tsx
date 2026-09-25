@@ -4,7 +4,7 @@ import type { TamsMenuItem, TTamsTabs } from '#/lib'
 import { useMemo, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { Divider, Group } from '@mantine/core'
-import { PlusIcon } from '@phosphor-icons/react'
+import { FilePlusIcon, PlusIcon } from '@phosphor-icons/react'
 import TamsButtonDropdown from '#/components/molecules/dropdown/TamsButtonDropdown'
 
 export const Route = createFileRoute(
@@ -24,6 +24,7 @@ function RouteComponent() {
   const [activeTab, setActiveTab] = useState<
     'types' | 'designation' | 'category' | 'grades' | null
   >('types')
+  const [createType, setCreateType] = useState('')
 
   const [tabCounts, setTabCounts] = useState<{ [key: string]: number }>({
     types: 0,
@@ -43,19 +44,16 @@ function RouteComponent() {
         label: 'Employee Designation',
         value: 'designation',
         value2: tabCounts.designation,
-        color2: 'red',
       },
       {
         label: 'Employee Category',
         value: 'category',
         value2: tabCounts.category,
-        color2: 't-purple',
       },
       {
         label: 'Employee Grades',
         value: 'grades',
         value2: tabCounts.grades,
-        color2: 'gray',
       },
     ],
     [tabCounts],
@@ -63,10 +61,30 @@ function RouteComponent() {
 
   const dropdownOptions = useMemo(
     (): TamsMenuItem[] => [
-      { label: 'Employee Type', type: 'item' },
-      { label: 'Employee Designation', type: 'item' },
-      { label: 'Employee Category', type: 'item' },
-      { label: 'Employee Grade', type: 'item' },
+      {
+        label: 'Employee Type',
+        type: 'item',
+        onClick: () => setCreateType('types'),
+        icon: FilePlusIcon,
+      },
+      {
+        label: 'Employee Designation',
+        type: 'item',
+        onClick: () => setCreateType('designation'),
+        icon: FilePlusIcon,
+      },
+      {
+        label: 'Employee Category',
+        type: 'item',
+        onClick: () => setCreateType('category'),
+        icon: FilePlusIcon,
+      },
+      {
+        label: 'Employee Grade',
+        type: 'item',
+        onClick: () => setCreateType('grades'),
+        icon: FilePlusIcon,
+      },
     ],
     [],
   )
@@ -76,6 +94,7 @@ function RouteComponent() {
         {pageHeader()}
         <Group gap="md">
           <TamsButtonDropdown
+            width={250}
             btnText="Add new"
             size="md"
             leftSection={<PlusIcon />}
@@ -99,6 +118,8 @@ function RouteComponent() {
         <OrganizationEmployeeSettingsTable
           setTabCounts={setTabCounts}
           activeTab={activeTab}
+          createType={createType}
+          setCreateType={setCreateType}
         />
       </div>
     </main>
