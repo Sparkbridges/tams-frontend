@@ -50,6 +50,10 @@ import type {
   TCreateEmployeeReportsPayload,
   TFetchEmployeeReportsResponse,
   TFetchDepartmentsAssignedToBranchResponse,
+  TFetchEmployeeTypesParams,
+  TFetchEmployeeDesignationsParams,
+  TFetchEmployeeGradesParams,
+  TFetchEmployeeCategoriesParams,
 } from '#/lib/types'
 import { paramsSerializer } from '#/lib/utils'
 import type {
@@ -587,47 +591,81 @@ const organizationClient = {
   },
 
   /**
-   * Description - Get the list of employee types.
+   * Description - Get the list of employee types
+   * @param queryParams - Optional query parameters for fetching employee types.
    * @returns Data fetched from `/organization/employees/settings/types`, or an error if the API call fails.
    * @throws {Error} If the request fails.
    */
-  getEmployeeTypes: async () => {
+  getEmployeeTypes: async (queryParams?: TFetchEmployeeTypesParams) => {
     return await Client.get<TGetEmployeeTypesResponse>(
       `${ENDPOINTS.employeeTypes}`,
+      {
+        params: queryParams,
+      },
     )
   },
 
   /**
    * Description - Get the list of employee designations.
+   * @param queryParams - Optional query parameters for fetching employee designations.
    * @returns Data fetched from `/organization/employees/settings/designations`, or an error if the API call fails.
    * @throws {Error} If the request fails.
    */
-  getEmployeeDesignations: async () => {
+  getEmployeeDesignations: async (
+    queryParams?: TFetchEmployeeDesignationsParams,
+  ) => {
     return await Client.get<TGetEmployeeDesignationsResponse>(
       `${ENDPOINTS.employeeDesignations}`,
+      {
+        params: queryParams,
+      },
     )
   },
 
   /**
    * Description - Get the list of employee grades.
+   * @param queryParams - Optional query parameters for fetching employee grades.
    * @returns Data fetched from `/organization/employees/settings/grades`, or an error if the API call fails.
    * @throws {Error} If the request fails.
    */
-  getEmployeeGrades: async () => {
+  getEmployeeGrades: async (queryParams?: TFetchEmployeeGradesParams) => {
     return await Client.get<TGetEmployeeGradesResponse>(
       `${ENDPOINTS.employeeGrades}`,
+      {
+        params: queryParams,
+      },
     )
   },
 
   /**
    * Description - Get the list of employee categories.
+   * @param queryParams - Optional query parameters for fetching employee categories.
    * @returns Data fetched from `/organization/employees/settings/categories`, or an error if the API call fails.
    * @throws {Error} If the request fails.
    */
-  getEmployeeCategories: async () => {
+  getEmployeeCategories: async (
+    queryParams?: TFetchEmployeeCategoriesParams,
+  ) => {
     return await Client.get<TGetEmployeeCategoriesResponse>(
       `${ENDPOINTS.employeeCategories}`,
+      {
+        params: queryParams,
+      },
     )
+  },
+
+  /**
+   * Description - Delete an employee category.
+   * @param categoryId The ID of the employee category to delete.
+   * @returns Data fetched from `/organization/employees/settings/categories/:category_id`, or an error if the API call fails.
+   * @throws {Error} If the request fails.  
+   */
+  deleteEmployeeCategory: async (categoryId: number) => {
+    return await Client.delete(`${ENDPOINTS.employeeCategories}`, {
+      params: {
+        id: categoryId,
+      },
+    })
   },
 
   /**

@@ -27,6 +27,9 @@ import { Route as AdminDashboardOrganizationDepartmentPathlessLayoutRouteImport 
 import { Route as AdminDashboardOrganizationEmployeesIndexRouteImport } from './routes/admin-dashboard/organization/employees/index'
 import { Route as AdminDashboardOrganizationEmployeesPathlessLayoutRouteImport } from './routes/admin-dashboard/organization/employees/_pathlessLayout'
 import { Route as AdminDashboardOrganizationReportsIndexRouteImport } from './routes/admin-dashboard/organization/reports/index'
+import { Route as AdminDashboardOrganizationSystemSettingsIndexRouteImport } from './routes/admin-dashboard/organization/system-settings/index'
+import { Route as AdminDashboardOrganizationSystemSettingsAccountRouteImport } from './routes/admin-dashboard/organization/system-settings/account'
+import { Route as AdminDashboardOrganizationSystemSettingsEmployeeSettingsRouteImport } from './routes/admin-dashboard/organization/system-settings/employee-settings'
 import { Route as AdminDashboardOrganizationTeamsIndexRouteImport } from './routes/admin-dashboard/organization/teams/index'
 import { Route as AdminDashboardOrganizationTeamsPathlessLayoutRouteImport } from './routes/admin-dashboard/organization/teams/_pathlessLayout'
 import { Route as AdminDashboardOrganizationBranchPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/organization/branch/_pathlessLayout.create'
@@ -137,6 +140,24 @@ const AdminDashboardOrganizationReportsIndexRoute =
     path: '/organization/reports/',
     getParentRoute: () => AdminDashboardRouteRoute,
   } as any)
+const AdminDashboardOrganizationSystemSettingsIndexRoute =
+  AdminDashboardOrganizationSystemSettingsIndexRouteImport.update({
+    id: '/organization/system-settings/',
+    path: '/organization/system-settings/',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardOrganizationSystemSettingsAccountRoute =
+  AdminDashboardOrganizationSystemSettingsAccountRouteImport.update({
+    id: '/organization/system-settings/account',
+    path: '/organization/system-settings/account',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute =
+  AdminDashboardOrganizationSystemSettingsEmployeeSettingsRouteImport.update({
+    id: '/organization/system-settings/employee-settings',
+    path: '/organization/system-settings/employee-settings',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
 const AdminDashboardOrganizationTeamsIndexRoute =
   AdminDashboardOrganizationTeamsIndexRouteImport.update({
     id: '/organization/teams/',
@@ -222,11 +243,14 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/organization/branch': typeof AdminDashboardOrganizationBranchPathlessLayoutRouteWithChildren
   '/admin-dashboard/organization/department': typeof AdminDashboardOrganizationDepartmentPathlessLayoutRouteWithChildren
   '/admin-dashboard/organization/employees': typeof AdminDashboardOrganizationEmployeesPathlessLayoutRouteWithChildren
+  '/admin-dashboard/organization/system-settings/account': typeof AdminDashboardOrganizationSystemSettingsAccountRoute
+  '/admin-dashboard/organization/system-settings/employee-settings': typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   '/admin-dashboard/organization/teams': typeof AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren
   '/admin-dashboard/organization/branch/': typeof AdminDashboardOrganizationBranchIndexRoute
   '/admin-dashboard/organization/department/': typeof AdminDashboardOrganizationDepartmentIndexRoute
   '/admin-dashboard/organization/employees/': typeof AdminDashboardOrganizationEmployeesIndexRoute
   '/admin-dashboard/organization/reports/': typeof AdminDashboardOrganizationReportsIndexRoute
+  '/admin-dashboard/organization/system-settings/': typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   '/admin-dashboard/organization/teams/': typeof AdminDashboardOrganizationTeamsIndexRoute
   '/admin-dashboard/organization/branch/create': typeof AdminDashboardOrganizationBranchPathlessLayoutCreateRoute
   '/admin-dashboard/organization/branch/edit': typeof AdminDashboardOrganizationBranchPathlessLayoutEditRoute
@@ -250,8 +274,11 @@ export interface FileRoutesByTo {
   '/admin-dashboard/organization/branch': typeof AdminDashboardOrganizationBranchIndexRoute
   '/admin-dashboard/organization/department': typeof AdminDashboardOrganizationDepartmentIndexRoute
   '/admin-dashboard/organization/employees': typeof AdminDashboardOrganizationEmployeesIndexRoute
+  '/admin-dashboard/organization/system-settings/account': typeof AdminDashboardOrganizationSystemSettingsAccountRoute
+  '/admin-dashboard/organization/system-settings/employee-settings': typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   '/admin-dashboard/organization/teams': typeof AdminDashboardOrganizationTeamsIndexRoute
   '/admin-dashboard/organization/reports': typeof AdminDashboardOrganizationReportsIndexRoute
+  '/admin-dashboard/organization/system-settings': typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   '/admin-dashboard/organization/branch/create': typeof AdminDashboardOrganizationBranchPathlessLayoutCreateRoute
   '/admin-dashboard/organization/branch/edit': typeof AdminDashboardOrganizationBranchPathlessLayoutEditRoute
   '/admin-dashboard/organization/department/create': typeof AdminDashboardOrganizationDepartmentPathlessLayoutCreateRoute
@@ -278,11 +305,14 @@ export interface FileRoutesById {
   '/admin-dashboard/organization/branch/_pathlessLayout': typeof AdminDashboardOrganizationBranchPathlessLayoutRouteWithChildren
   '/admin-dashboard/organization/department/_pathlessLayout': typeof AdminDashboardOrganizationDepartmentPathlessLayoutRouteWithChildren
   '/admin-dashboard/organization/employees/_pathlessLayout': typeof AdminDashboardOrganizationEmployeesPathlessLayoutRouteWithChildren
+  '/admin-dashboard/organization/system-settings/account': typeof AdminDashboardOrganizationSystemSettingsAccountRoute
+  '/admin-dashboard/organization/system-settings/employee-settings': typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   '/admin-dashboard/organization/teams/_pathlessLayout': typeof AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren
   '/admin-dashboard/organization/branch/': typeof AdminDashboardOrganizationBranchIndexRoute
   '/admin-dashboard/organization/department/': typeof AdminDashboardOrganizationDepartmentIndexRoute
   '/admin-dashboard/organization/employees/': typeof AdminDashboardOrganizationEmployeesIndexRoute
   '/admin-dashboard/organization/reports/': typeof AdminDashboardOrganizationReportsIndexRoute
+  '/admin-dashboard/organization/system-settings/': typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   '/admin-dashboard/organization/teams/': typeof AdminDashboardOrganizationTeamsIndexRoute
   '/admin-dashboard/organization/branch/_pathlessLayout/create': typeof AdminDashboardOrganizationBranchPathlessLayoutCreateRoute
   '/admin-dashboard/organization/branch/_pathlessLayout/edit': typeof AdminDashboardOrganizationBranchPathlessLayoutEditRoute
@@ -310,11 +340,14 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/branch'
     | '/admin-dashboard/organization/department'
     | '/admin-dashboard/organization/employees'
+    | '/admin-dashboard/organization/system-settings/account'
+    | '/admin-dashboard/organization/system-settings/employee-settings'
     | '/admin-dashboard/organization/teams'
     | '/admin-dashboard/organization/branch/'
     | '/admin-dashboard/organization/department/'
     | '/admin-dashboard/organization/employees/'
     | '/admin-dashboard/organization/reports/'
+    | '/admin-dashboard/organization/system-settings/'
     | '/admin-dashboard/organization/teams/'
     | '/admin-dashboard/organization/branch/create'
     | '/admin-dashboard/organization/branch/edit'
@@ -338,8 +371,11 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/branch'
     | '/admin-dashboard/organization/department'
     | '/admin-dashboard/organization/employees'
+    | '/admin-dashboard/organization/system-settings/account'
+    | '/admin-dashboard/organization/system-settings/employee-settings'
     | '/admin-dashboard/organization/teams'
     | '/admin-dashboard/organization/reports'
+    | '/admin-dashboard/organization/system-settings'
     | '/admin-dashboard/organization/branch/create'
     | '/admin-dashboard/organization/branch/edit'
     | '/admin-dashboard/organization/department/create'
@@ -365,11 +401,14 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/branch/_pathlessLayout'
     | '/admin-dashboard/organization/department/_pathlessLayout'
     | '/admin-dashboard/organization/employees/_pathlessLayout'
+    | '/admin-dashboard/organization/system-settings/account'
+    | '/admin-dashboard/organization/system-settings/employee-settings'
     | '/admin-dashboard/organization/teams/_pathlessLayout'
     | '/admin-dashboard/organization/branch/'
     | '/admin-dashboard/organization/department/'
     | '/admin-dashboard/organization/employees/'
     | '/admin-dashboard/organization/reports/'
+    | '/admin-dashboard/organization/system-settings/'
     | '/admin-dashboard/organization/teams/'
     | '/admin-dashboard/organization/branch/_pathlessLayout/create'
     | '/admin-dashboard/organization/branch/_pathlessLayout/edit'
@@ -517,6 +556,27 @@ declare module '@tanstack/react-router' {
       path: '/organization/reports'
       fullPath: '/admin-dashboard/organization/reports/'
       preLoaderRoute: typeof AdminDashboardOrganizationReportsIndexRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/organization/system-settings/': {
+      id: '/admin-dashboard/organization/system-settings/'
+      path: '/organization/system-settings'
+      fullPath: '/admin-dashboard/organization/system-settings/'
+      preLoaderRoute: typeof AdminDashboardOrganizationSystemSettingsIndexRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/organization/system-settings/account': {
+      id: '/admin-dashboard/organization/system-settings/account'
+      path: '/organization/system-settings/account'
+      fullPath: '/admin-dashboard/organization/system-settings/account'
+      preLoaderRoute: typeof AdminDashboardOrganizationSystemSettingsAccountRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/organization/system-settings/employee-settings': {
+      id: '/admin-dashboard/organization/system-settings/employee-settings'
+      path: '/organization/system-settings/employee-settings'
+      fullPath: '/admin-dashboard/organization/system-settings/employee-settings'
+      preLoaderRoute: typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRouteImport
       parentRoute: typeof AdminDashboardRouteRoute
     }
     '/admin-dashboard/organization/teams/': {
@@ -678,11 +738,14 @@ interface AdminDashboardRouteRouteChildren {
   AdminDashboardOrganizationBranchPathlessLayoutRoute: typeof AdminDashboardOrganizationBranchPathlessLayoutRouteWithChildren
   AdminDashboardOrganizationDepartmentPathlessLayoutRoute: typeof AdminDashboardOrganizationDepartmentPathlessLayoutRouteWithChildren
   AdminDashboardOrganizationEmployeesPathlessLayoutRoute: typeof AdminDashboardOrganizationEmployeesPathlessLayoutRouteWithChildren
+  AdminDashboardOrganizationSystemSettingsAccountRoute: typeof AdminDashboardOrganizationSystemSettingsAccountRoute
+  AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute: typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   AdminDashboardOrganizationTeamsPathlessLayoutRoute: typeof AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren
   AdminDashboardOrganizationBranchIndexRoute: typeof AdminDashboardOrganizationBranchIndexRoute
   AdminDashboardOrganizationDepartmentIndexRoute: typeof AdminDashboardOrganizationDepartmentIndexRoute
   AdminDashboardOrganizationEmployeesIndexRoute: typeof AdminDashboardOrganizationEmployeesIndexRoute
   AdminDashboardOrganizationReportsIndexRoute: typeof AdminDashboardOrganizationReportsIndexRoute
+  AdminDashboardOrganizationSystemSettingsIndexRoute: typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   AdminDashboardOrganizationTeamsIndexRoute: typeof AdminDashboardOrganizationTeamsIndexRoute
   AdminDashboardOrganizationEmployeesDetailsIdRoute: typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
 }
@@ -697,6 +760,10 @@ const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
     AdminDashboardOrganizationDepartmentPathlessLayoutRouteWithChildren,
   AdminDashboardOrganizationEmployeesPathlessLayoutRoute:
     AdminDashboardOrganizationEmployeesPathlessLayoutRouteWithChildren,
+  AdminDashboardOrganizationSystemSettingsAccountRoute:
+    AdminDashboardOrganizationSystemSettingsAccountRoute,
+  AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute:
+    AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute,
   AdminDashboardOrganizationTeamsPathlessLayoutRoute:
     AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren,
   AdminDashboardOrganizationBranchIndexRoute:
@@ -707,6 +774,8 @@ const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
     AdminDashboardOrganizationEmployeesIndexRoute,
   AdminDashboardOrganizationReportsIndexRoute:
     AdminDashboardOrganizationReportsIndexRoute,
+  AdminDashboardOrganizationSystemSettingsIndexRoute:
+    AdminDashboardOrganizationSystemSettingsIndexRoute,
   AdminDashboardOrganizationTeamsIndexRoute:
     AdminDashboardOrganizationTeamsIndexRoute,
   AdminDashboardOrganizationEmployeesDetailsIdRoute:

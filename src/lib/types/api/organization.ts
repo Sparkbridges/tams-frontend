@@ -1,5 +1,11 @@
 import type { TGetApiResponse, TPostApiResponse } from './request.types'
 
+export type TBaseQueryParams = {
+  page: number
+  perPage: number
+  search_query?: string
+}
+
 export type TSearchOrganizationEmployees = {
   id: number
   pin: number
@@ -15,11 +21,7 @@ export type TSearchOrganizationEmployeesResponse = TGetApiResponse<
   TSearchOrganizationEmployees[]
 >
 
-export type TFetchOrganizationBranchesParams = {
-  page: number
-  perPage: number
-  search_query?: string
-}
+export type TFetchOrganizationBranchesParams = TBaseQueryParams
 
 export type TOrganizationBranch = {
   id: number
@@ -150,11 +152,7 @@ export type TFetchOrganizationDepartmentsResponse = TGetApiResponse<{
   total: number
 }>
 
-export type TFetchOrganizationDepartmentsParams = {
-  page: number
-  perPage: number
-  search_query?: string
-}
+export type TFetchOrganizationDepartmentsParams = TBaseQueryParams
 
 export type TDeleteOrganizationDepartmentPayload = {
   departmentIds: number[]
@@ -232,11 +230,7 @@ export type TTeam = {
 
 export type TTeamResponse = TGetApiResponse<{ results: TTeam[]; total: number }>
 
-export type TFetchOrganizationTeamsParams = {
-  page: number
-  perPage: number
-  search_query?: string
-}
+export type TFetchOrganizationTeamsParams = TBaseQueryParams
 
 export type TCreateTeamPayload = {
   branch_id: number
@@ -287,10 +281,7 @@ export type TEmployeeResponse = TGetApiResponse<{
   total: number
 }>
 
-export type TFetchOrganizationAllEmployeesParams = {
-  page: number
-  perPage: number
-  search_query?: string
+export type TFetchOrganizationAllEmployeesParams = TBaseQueryParams & {
   status?: string
 }
 export type TEmployeeCountResponse = TGetApiResponse<{
@@ -298,11 +289,7 @@ export type TEmployeeCountResponse = TGetApiResponse<{
   unarchived: number
 }>
 
-export type TFetchArchivedOrganizationEmployeesParams = {
-  page: number
-  perPage: number
-  search_query?: string
-}
+export type TFetchArchivedOrganizationEmployeesParams = TBaseQueryParams
 
 export type TArchivedEmployee = {
   id: number
@@ -729,3 +716,8 @@ export type TFetchDepartmentsAssignedToBranchResponse = TGetApiResponse<
     department_name: string
   }[]
 >
+
+export type TFetchEmployeeTypesParams = TBaseQueryParams
+export type TFetchEmployeeDesignationsParams = TBaseQueryParams
+export type TFetchEmployeeGradesParams = TBaseQueryParams
+export type TFetchEmployeeCategoriesParams = TBaseQueryParams
