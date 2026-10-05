@@ -5,6 +5,7 @@ type TamsModalProps = Modal.Props & {
   allowBlur?: boolean
   allowBackgroundOpacity?: number
   titleFontSize?: string | number
+  bodyClassName?: string
 }
 
 const TamsModal2 = ({ children, ...props }: TamsModalProps) => {
@@ -23,10 +24,13 @@ const TamsModal2 = ({ children, ...props }: TamsModalProps) => {
         <Modal.Overlay />
         <Modal.Content>
           <Modal.Header>
+            <div></div>
             <Modal.Title>{props.title}</Modal.Title>
             <Modal.CloseButton />
           </Modal.Header>
-          <Modal.Body className="px-0 pb-0">{children}</Modal.Body>
+          <Modal.Body className={props.bodyClassName ?? 'px-0 pb-0'}>
+            {children}
+          </Modal.Body>
         </Modal.Content>
       </Modal.Root>
     </>

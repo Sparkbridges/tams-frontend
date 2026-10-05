@@ -63,18 +63,16 @@ export const createEmployeeSchema = zodObjectSchema({
   first_name: stringSchema().nonempty('First name is required'),
   last_name: stringSchema().nonempty('Last name is required'),
   email: emailSchema(),
-  gender: enumSchema(GENDER_TYPES.map((gender) => gender.value) as string[]),
+  gender: enumSchema(GENDER_TYPES.map((gender) => gender.value)),
   date_of_birth: dateSchema2('Date of birth is required'),
   login_access: booleanSchema().optional().default(true),
   blood_group: enumSchema(
-    BLOOD_GROUP_TYPES.map((bloodGroup) => bloodGroup.value) as string[],
+    BLOOD_GROUP_TYPES.map((bloodGroup) => bloodGroup.value),
   ),
   nationality: stringSchema(),
-  religion: enumSchema(
-    RELIGION_TYPES.map((religion) => religion.value) as string[],
-  ),
+  religion: enumSchema(RELIGION_TYPES.map((religion) => religion.value)),
   marital_status: enumSchema(
-    MARITAL_STATUS_TYPES.map((status) => status.value) as string[],
+    MARITAL_STATUS_TYPES.map((status) => status.value),
   ),
   employee_type_id: numberSchema().nullable(),
   pin: numberSchema().nullable(),
@@ -86,9 +84,7 @@ export const createEmployeeSchema = zodObjectSchema({
   custom_employee_id: stringSchema().optional(),
   state: stringSchema().nonempty('State is required'),
   local_government: stringSchema().nonempty('Local government is required'),
-  genotype: enumSchema(
-    GENOTYPE_TYPES.map((genotype) => genotype.value) as string[],
-  ),
+  genotype: enumSchema(GENOTYPE_TYPES.map((genotype) => genotype.value)),
   mobile_number: intlPhoneSchema(),
   next_of_kin: stringSchema(),
   last_employment_date: dateSchema(),
@@ -106,7 +102,7 @@ export const createEmployeeSchema = zodObjectSchema({
   country: stringSchema().nonempty('Country is required'),
   city: stringSchema().nonempty('City is required'),
   salutation: enumSchema(
-    SALUTATION_TYPES.map((salutation) => salutation.value) as string[],
+    SALUTATION_TYPES.map((salutation) => salutation.value),
   ),
   address: stringSchema().nonempty('Address is required'),
   picture: createFileOrStringSchema({
@@ -123,7 +119,7 @@ export const createEmployeeSchema = zodObjectSchema({
   staff_id: stringSchema(),
   alt_mobile_number: intlPhoneSchema(true),
   means_of_identity: enumSchema(
-    IDENTITY_TYPES.map((identity) => identity.value) as string[],
+    IDENTITY_TYPES.map((identity) => identity.value),
   ),
   id_no: stringSchema().nonempty('ID Number is required'),
   id_expiration: dateSchema2('ID expiration date is required'),
@@ -146,3 +142,45 @@ export const updateEmployeeSchema = zodObjectSchema({
 export type TCreateEmployeePayload = z.infer<typeof createEmployeeSchema>
 
 export type TUpdateEmployeePayload = z.infer<typeof updateEmployeeSchema>
+
+export const editCompanySchema = zodObjectSchema({
+  company_name: stringSchema().nonempty('Company name is required'),
+  legal_name: stringSchema().nullable(),
+  slug: stringSchema().nonempty('Slug is required'),
+  company_logo: createFileOrStringSchema({
+    acceptedTypes: ['image/jpeg', 'image/png'],
+    maxSizeMB: 2,
+    required: false,
+  }),
+  contact_person_name: stringSchema().nonempty(
+    'Contact person name is required',
+  ),
+  contact_person_designation: stringSchema().nullable(),
+  company_phone_no: intlPhoneSchema(),
+  company_alt_phone_no: intlPhoneSchema(true),
+  email: emailSchema(),
+  website: stringSchema().nonempty('Website is required'),
+  address: stringSchema().nonempty('Address is required'),
+  city: numberSchema().optional(),
+  state: numberSchema().min(1, 'State is required'),
+  zip_code: stringSchema().nullable(),
+  country: numberSchema().min(1, 'Country is required'),
+  additional_info: stringSchema().nullable(),
+  currency_sign: stringSchema().nullable(),
+})
+
+export type TEditCompanyPayload = z.infer<typeof editCompanySchema>
+
+export const createPublicHolidaysSettingsSchema = zodObjectSchema({
+  national_public_holiday_ids: numberSchema(),
+  is_recurring: booleanSchema(),
+  send_email_notification: booleanSchema(),
+  name: stringSchema().optional(),
+  date: dateSchema().optional(),
+  holiday_type: stringSchema().nonempty('Holiday type is required'),
+})
+
+export const editPublicHolidaysSettingsSchema = zodObjectSchema({
+  ...createPublicHolidaysSettingsSchema.shape,
+  id: numberSchema().min(1, 'ID is required'),
+})

@@ -522,7 +522,7 @@ const useHandleEmployeeUpload = () => {
       {
         label: 'Delete Row',
         action: () =>
-          setValidatedRows((prev) => prev.filter((r) => r.id !== row.id)),
+          setValidatedRows((prev) => prev.filter((r) => r.row !== row.row)),
         color: 'red',
         icon: TrashIcon,
       },

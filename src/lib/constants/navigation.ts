@@ -3,6 +3,7 @@ import {
   CalendarDotsIcon,
   ChartLineUpIcon,
   FolderUserIcon,
+  LockKeyIcon,
   MoneyWavyIcon,
   SlidersHorizontalIcon,
   SquaresFourIcon,
@@ -55,6 +56,16 @@ export const pageHeaderNav: Record<
     title: 'Employee settings',
     icon: UsersThreeIcon,
     description: 'Manage employee related system settings',
+  },
+  'roles-and-permissions-settings': {
+    title: 'Roles and Permissions Settings',
+    icon: LockKeyIcon,
+    description: 'Manage roles and permissions within the organization',
+  },
+  'account-settings': {
+    title: 'Account settings',
+    icon: SlidersHorizontalIcon,
+    description: 'Manage organization account settings',
   },
 }
 

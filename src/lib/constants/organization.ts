@@ -65,6 +65,12 @@ export const EMERGENCY_CONTACT_RELATIONSHIP_TYPES: TLabelValueWithoutNull[] = [
   { label: 'Other', value: 'other' },
 ]
 
+export const CURRENCY_SIGNS: TLabelValueWithoutNull[] = [
+  { label: 'Naira', value: '₦' },
+  { label: 'Dollar', value: '$' },
+  { label: 'Euro', value: '€' },
+  { label: 'Pound', value: '£' },
+]
 export const reportsFilter: TReportFilter[] = [
   {
     label: 'Pin',
@@ -261,5 +267,16 @@ export const systemSettingsOptions = [
     value: 'employee-settings',
     description: 'Employee related settings',
     image: '/images/svg/employees.svg',
+  },
+]
+
+export const publicHolidaysSettingsOptions = [
+  {
+    label: 'National Holidays',
+    value: 'national',
+  },
+  {
+    label: 'Company Holidays',
+    value: 'company',
   },
 ]

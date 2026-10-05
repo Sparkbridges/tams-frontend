@@ -94,9 +94,42 @@ export const createEmployeeInitials = {
   emergency_contact_address: '',
 }
 
-
 export const editEmployeeInitials = {
   ...createEmployeeInitials,
   id: 0,
   picture: undefined as unknown as File | string | undefined,
+}
+
+export const editCompanyInitials = {
+  company_name: '',
+  legal_name: null,
+  slug: '',
+  company_logo: '',
+  contact_person_name: '',
+  contact_person_designation: null,
+  company_phone_no: '',
+  company_alt_phone_no: '',
+  email: '',
+  website: '',
+  address: '',
+  city: 0,
+  state: 0,
+  zip_code: null,
+  country: 160,
+  additional_info: null,
+  currency_sign: '₦',
+}
+
+export const createPublicHolidaysSettingsInitials = {
+  national_public_holiday_ids: 0,
+  is_recurring: false,
+  send_email_notification: true,
+  name: '',
+  date: null as unknown as Date,
+  holiday_type: '',
+}
+
+export const editPublicHolidaysSettingsInitials = {
+  ...createPublicHolidaysSettingsInitials,
+  id: 0,
 }

@@ -62,10 +62,27 @@ import type {
   TCreateEmployeeTypePayload,
   TCreateEmployeeGradePayload,
   TCreateEmployeeDesignationPayload,
+  TGetGroupPermissionsByModulesResponse,
+  TGetPermissionDetailsForRoleResponse,
+  TCreatePermissionSettingsPayload,
+  TCreatePermissionSettingsResponse,
+  TUpdatePermissionSettingsPayload,
+  TUpdatePermissionSettingsResponse,
+  TReassignRoleMembersResponse,
+  TReassignRoleMembersPayload,
+  TGetAccountSettingsResponse,
+  TUpdatePublicHolidaySettingsPayload,
+  TCreatePublicHolidaySettingsPayload,
+  TGetPublicHolidaySettingsResponse,
+  TGetPublicHolidaysSettingsParams,
+  TGetPublicHolidaySettingsDetailsResponse,
+  TGetPublicHolidayResponse,
+  TCancelPublicHolidaySettingsPayload,
 } from '#/lib/types'
 import { paramsSerializer } from '#/lib/utils'
 import type {
   TCreateEmployeePayload,
+  TEditCompanyPayload,
   TUpdateEmployeePayload,
 } from '#/lib/utils'
 import { ENDPOINTS } from './endpoints'
@@ -184,6 +201,23 @@ const organizationClient = {
    */
   fetchStates: async (params: { country_id: number }) => {
     return await Client.get<TFetchStatesResponse>(ENDPOINTS.states, { params })
+  },
+
+  /**
+   * Description - fetches cities
+   * @returns Data fetched from `/cities`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  fetchCities: async (params: { state_id: number }) => {
+    return await Client.get<
+      TGetApiResponse<
+        {
+          id: number
+          name: string
+          state_id: number
+        }[]
+      >
+    >(ENDPOINTS.cities, { params })
   },
 
   /**
@@ -831,6 +865,217 @@ const organizationClient = {
   fetchDepartmentsAssignedToBranch: async (branchId: number) => {
     return await Client.get<TFetchDepartmentsAssignedToBranchResponse>(
       `${ENDPOINTS.fetchDepartmentsAssignedToBranch.replace(':branch_id', String(branchId))}`,
+    )
+  },
+
+  /**
+   * Description - Fetch group permissions by modules.
+   * @returns Data fetched from `/organization/system-settings/group-permissions-by-modules`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  getGroupPermissionsByModules: async () => {
+    return await Client.get<TGetGroupPermissionsByModulesResponse>(
+      `${ENDPOINTS.organizationSystemSettingsGroupPermissionsByModules}`,
+    )
+  },
+
+  /**
+   * Description - fetch permission details for the current role by its ID.
+   * @param roleId The ID of the role.
+   * @returns Data fetched from `/organization/system-settings/roles/:role_id`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  getPermissionDetailsForRole: async (roleId: number) => {
+    return await Client.get<TGetPermissionDetailsForRoleResponse>(
+      `${ENDPOINTS.organizationSystemSettingsRoles}/${roleId}`,
+    )
+  },
+
+  /**
+   * Description - Create new permission settings.
+   * @param payload The payload containing the new permission settings.
+   * @returns Data fetched from `/organization/system-settings/roles`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  createPermissionSettings: async (
+    payload: TCreatePermissionSettingsPayload,
+  ) => {
+    return await Client.post<TCreatePermissionSettingsResponse>(
+      `${ENDPOINTS.organizationSystemSettingsRoles}`,
+      payload,
+    )
+  },
+
+  /**
+   * Description - update permission settings.
+   * @param payload The payload containing the updated permission settings.
+   * @returns Data fetched from `/organization/system-settings/roles`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  updatePermissionSettings: async (
+    payload: TUpdatePermissionSettingsPayload,
+  ) => {
+    return await Client.put<TUpdatePermissionSettingsResponse>(
+      `${ENDPOINTS.organizationSystemSettingsRoles}`,
+      payload,
+    )
+  },
+
+  /**
+   * Description - delete permission settings
+   * @param roleId The ID of the role to be deleted.
+   * @returns Data fetched from `/organization/system-settings/roles/:role_id`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  deletePermissionSettings: async (roleId: number) => {
+    return await Client.delete(`${ENDPOINTS.organizationSystemSettingsRoles}`, {
+      params: {
+        id: roleId,
+      },
+    })
+  },
+
+  /**
+   * Description - Reassign role members from one role to another.
+   * @param payload The payload containing the role reassignment details.
+   * @returns Data fetched from `/roles/reassign-members`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  reassignRoleMembers: async (payload: TReassignRoleMembersPayload) => {
+    return await Client.put<TReassignRoleMembersResponse>(
+      `${ENDPOINTS.reassignRoleMembers}`,
+      payload,
+    )
+  },
+
+  /**
+   * Description - Fetch organization system settings account settings.
+   * @returns Data fetched from `/organization/system-settings/account-settings`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  getAccountSettings: async () => {
+    return await Client.get<TGetAccountSettingsResponse>(
+      `${ENDPOINTS.organizationSystemSettingsAccountSettings}`,
+    )
+  },
+
+  /**
+   * Description - Update organization system settings account settings.
+   * @param payload The payload containing the updated account settings.
+   * @returns Data fetched from `/organization/system-settings/account-settings`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  updateAccountSettings: async (payload: TEditCompanyPayload) => {
+    return await Client.put(
+      `${ENDPOINTS.organizationSystemSettingsAccountSettings}`,
+      payload,
+    )
+  },
+
+  /**
+   * Description - Fetch public holiday settings.
+   * @returns Data fetched from `/organization/system-settings/public-holiday-settings`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  getPublicHolidaySettings: async (
+    params?: TGetPublicHolidaysSettingsParams,
+  ) => {
+    return await Client.get<TGetPublicHolidaySettingsResponse>(
+      `${ENDPOINTS.publicHolidaySettings}`,
+      { params },
+    )
+  },
+
+  /**
+   * Description - Get public holiday settings details.
+   * @param id The ID of the public holiday to fetch.
+   * @returns Data fetched from `/organization/system-settings/public-holiday-settings/{id}`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  getPublicHolidaySettingsDetails: async (id: number) => {
+    return await Client.get<TGetPublicHolidaySettingsDetailsResponse>(
+      `${ENDPOINTS.publicHolidaySettings}/${id}`,
+    )
+  },
+
+  /**
+   * Description - Update public holiday settings.
+   * @param payload The payload containing the updated public holiday settings.
+   * @returns Data fetched from `/organization/system-settings/public-holiday-settings`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  updatePublicHolidaySettings: async (
+    payload: TUpdatePublicHolidaySettingsPayload,
+  ) => {
+    const { id, ...restPayload } = payload
+    return await Client.put(
+      `${ENDPOINTS.publicHolidaySettings}/${id}`,
+      restPayload,
+    )
+  },
+
+  /**
+   * Description - Create a new public holiday.
+   * @param payload The payload containing the public holiday details.
+   * @returns Data fetched from `/organization/system-settings/public-holiday-settings`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  createPublicHolidaySettings: async (
+    payload: TCreatePublicHolidaySettingsPayload,
+  ) => {
+    return await Client.post(`${ENDPOINTS.publicHolidaySettings}`, payload)
+  },
+
+  /**
+   * Description - Delete a public holiday.
+   * @param payload The payload containing the ID of the public holiday to delete.
+   * @returns Data fetched from `/organization/system-settings/public-holiday-settings`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  deletePublicHolidaySettings: async (id: number) => {
+    return await Client.delete(`${ENDPOINTS.publicHolidaySettings}/${id}`)
+  },
+
+  /**
+   * Description - Fetch all public holidays.
+   * @returns Data fetched from `/organization/system-settings/public-holiday-settings`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  getAllPublicHolidays: async () => {
+    return await Client.get<TGetPublicHolidayResponse>(
+      `${ENDPOINTS.publicHolidays}`,
+    )
+  },
+
+  /**
+   * Description - Create custom public holiday settings.
+   * @returns Data fetched from `/organization/system-settings/public-holiday-settings/custom`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  createCustomPublicHolidaySettings: async (
+    payload: TCreatePublicHolidaySettingsPayload,
+  ) => {
+    return await Client.post<TPostApiResponse<[]>>(
+      `${ENDPOINTS.customPublicHolidaySettings}`,
+      payload,
+    )
+  },
+
+  /**
+   * Description - Cancel a public holiday.
+   * @param id The ID of the public holiday to cancel.
+   * @returns Data fetched from `/organization/system-settings/public-holiday-settings/:id/cancel`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  cancelPublicHolidaySettings: async (
+    payload: TCancelPublicHolidaySettingsPayload,
+  ) => {
+    return await Client.put(
+      `${ENDPOINTS.cancelPublicHolidaySettings}`.replace(
+        ':id',
+        payload.id.toString(),
+      ),
+      payload,
     )
   },
 }
