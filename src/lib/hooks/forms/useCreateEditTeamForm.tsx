@@ -125,7 +125,7 @@ const useCreateEditTeamForm = ({ type, teamId }: Props) => {
 
   const fields: TamsBy2ColsFormFields[] = [
     {
-      title: 'Department Information',
+      title: 'Team Information',
       fields: [
         {
           label: 'Team Name',

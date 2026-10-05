@@ -18,6 +18,7 @@ export const ENDPOINTS = {
   branchTypes: '/branch-types',
   countries: '/countries',
   states: '/states',
+  cities: '/cities',
   department: '/organization/departments',
   deleteDepartment: '/organization/departments/delete',
   teams: '/organization/teams',
@@ -44,6 +45,18 @@ export const ENDPOINTS = {
   fetchEmployeeReports: '/organization/reports/employees/fetch',
   fetchDepartmentsAssignedToBranch:
     '/organization/branches/:branch_id/departments',
+  organizationSystemSettingsGroupPermissionsByModules:
+    '/organization/system-settings/group-permissions-by-modules',
+  reassignRoleMembers: '/organization/system-settings/roles/reassign-members',
+  organizationSystemSettingsAccountSettings:
+    '/organization/system-settings/account-settings',
+  publicHolidaySettings:
+    '/organization/system-settings/public-holiday-settings',
+  publicHolidays: '/public-holidays',
+  customPublicHolidaySettings:
+    '/organization/system-settings/public-holiday-settings/custom',
+  cancelPublicHolidaySettings:
+    '/organization/system-settings/public-holiday-settings/:id/cancel',
 
   // payroll
   verifyAccountNumber:

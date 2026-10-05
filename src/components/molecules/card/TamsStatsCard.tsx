@@ -1,14 +1,6 @@
+import type { TStatsCard } from '#/lib'
 import { Paper, Skeleton, Text, ThemeIcon } from '@mantine/core'
-import type { Icon } from '@phosphor-icons/react'
 
-type TDashboardAnalytics = {
-  title: string
-  value: string | number
-  icon: Icon
-  color: string
-  description?: string
-  loading?: boolean
-}
 const TamsStatsCard = ({
   title,
   value,
@@ -16,11 +8,12 @@ const TamsStatsCard = ({
   color,
   description,
   loading,
-}: TDashboardAnalytics) => {
+  isFullWidth,
+}: TStatsCard & { isFullWidth?: boolean }) => {
   return (
     <Paper
       radius={'md'}
-      className="px-3 py-2 flex items-center justify-between"
+      className={`px-4 py-3 flex items-center justify-between ${isFullWidth ? 'flex-1' : ''}`}
     >
       <div className="space-y-0.5">
         <Text fw={600} size="sm" c={color}>

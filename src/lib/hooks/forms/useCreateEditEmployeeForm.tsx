@@ -123,7 +123,7 @@ const useCreateEditEmployeeForm = ({ type, employeeId }: Props) => {
       })),
   )
   const { data: employeeRoles } = useGetEmployeeRoles((data) =>
-    data.data.map((role) => ({
+    data.data.results.map((role) => ({
       label: role.name,
       value: role.id.toString(),
     })),

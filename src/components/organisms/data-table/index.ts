@@ -3,3 +3,4 @@ export { default as OrganizationDepartmentTable } from './OrganizationDepartment
 export { default as OrganizationTeamTable } from './OrganizationTeamTable'
 export { default as OrganizationEmployeeTable } from './OrganizationEmployeeTable'
 export { default as OrganizationEmployeeSettingsTable } from './OrganizationEmployeeSettingsTable'
+export { default as AccountSettingsPublicHolidayTable } from './AccountSettingsHolidaysTable'

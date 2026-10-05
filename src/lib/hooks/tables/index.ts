@@ -4,3 +4,4 @@ export { default as useOrganizationDepartmentTable } from './useOrganizationDepa
 export { default as useOrganizationTeamTable } from './useOrganizationTeamTable'
 export { default as useOrganizationEmployeeTable } from './useOrganizationEmployeesTable'
 export { default as useOrganizationEmployeeSettingsTable } from './useOrganizationEmployeeSettingsTable'
+export { default as useAccountSettingsHolidaysTable } from './useAccountSettingsHolidaysTable'

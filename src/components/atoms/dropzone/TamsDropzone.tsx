@@ -70,7 +70,7 @@ const TamsDropzone = (props: TamsDropzoneProps) => {
             </Text>
             <Text size="sm" c="dimmed" inline mt={7}>
               {props.description ??
-                'Attach as many files as you like, each file should not exceed 5mb'}
+                `Attach as many files as you like, each file should not exceed ${props.maxSize ? props.maxSize / 1024 ** 2 : 5}mb`}
             </Text>
             {props.error && (
               <Text size="sm" c="red" inline mt={7}>
@@ -96,9 +96,15 @@ const TamsDropzone = (props: TamsDropzoneProps) => {
                 <ThemeIcon variant="light" color="green">
                   <SealCheckIcon size={32} />
                 </ThemeIcon>
-                <div className='flex items-center gap-3'>
-                  <img src={file} alt={file} className="w-10 h-10 object-cover rounded-md mb-2" />
-                  <h4 className="font-semibold text-md">{file.slice(0, 40)}...</h4>
+                <div className="flex items-center gap-3">
+                  <img
+                    src={file}
+                    alt={file}
+                    className="w-10 h-10 object-cover rounded-md mb-2"
+                  />
+                  <h4 className="font-semibold truncate text-pretty text-sm">
+                    {file.slice(0, 30)}
+                  </h4>
                 </div>
                 <div className="ml-auto">
                   <ActionIcon
@@ -126,7 +132,9 @@ const TamsDropzone = (props: TamsDropzoneProps) => {
               </ThemeIcon>
               <div>
                 <div className="flex items-center gap-2 overflow-hidden">
-                  <h4 className="font-semibold overflow-hidden text-md">{file.name}</h4>
+                  <h4 className="font-semibold overflow-hidden text-md">
+                    {file.name}
+                  </h4>
                   {props.status === 'uploaded' && (
                     <Badge variant="light" color="green">
                       Ready to map
