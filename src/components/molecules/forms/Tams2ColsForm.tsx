@@ -10,7 +10,7 @@ import {
 import type { TamsBy2ColsFormFields } from '#/lib'
 import { Grid, Paper, Text } from '@mantine/core'
 import type { UseFormReturnType } from '@mantine/form'
-import { TamsPhoneInput, TamsSearchDropdown } from '../inputs'
+import { TamsPhoneInput, TamsSearchDropdown, TamsUrlInput } from '../inputs'
 import type { FileWithPath } from '@mantine/dropzone'
 
 type Props<T, TTransform = (values: T) => T> = {
@@ -84,6 +84,25 @@ const Tams2ColsForm = <T, TTransform = (values: T) => T>({
                         withAsterisk={subField.required}
                         data={subField.options}
                         searchable
+                      />
+                    </Grid.Col>
+                  )
+                }
+                if (subField.type == 'url') {
+                  return (
+                    <Grid.Col
+                      span={{ base: 12, md: 6, lg: subField.cols }}
+                      key={subField.name}
+                    >
+                      <TamsUrlInput
+                        label={subField.label}
+                        key={form.key(subField.name)}
+                        {...form.getInputProps(subField.name)}
+                        withAsterisk={subField.required}
+                        readOnly={subField.readonly}
+                        hidden={subField.hidden}
+                        disabled={subField.disabled}
+                        companySuffix={subField.suffix as string}
                       />
                     </Grid.Col>
                   )
@@ -176,15 +195,18 @@ const Tams2ColsForm = <T, TTransform = (values: T) => T>({
                     >
                       <TamsDropzone
                         title={subField.label}
+                        maxSize={subField.maxSize}
                         onDrop={(files) =>
                           form.setValues({
                             [subField.name]: files[0],
                           } as unknown as Partial<T>)
                         }
                         value={newValue ? [newValue] : []}
-                        onremove={()=> form.setValues({
-                          [subField.name]: undefined,
-                        } as unknown as Partial<T>)}
+                        onremove={() =>
+                          form.setValues({
+                            [subField.name]: undefined,
+                          } as unknown as Partial<T>)
+                        }
                         error={form.errors[subField.name] as string}
                       />
                     </Grid.Col>

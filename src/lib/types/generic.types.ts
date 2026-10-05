@@ -71,6 +71,7 @@ export type TFormFieldType =
   | 'date'
   | 'file'
   | 'switch'
+  | 'url'
 
 export type TamsBy2ColsFormField = {
   name: string
@@ -88,6 +89,8 @@ export type TamsBy2ColsFormField = {
   readonly?: boolean
   hidden?: boolean
   disabled?: boolean
+  suffix?: string
+  maxSize?: number
 }
 
 export type TamsBy2ColsFormFields = {

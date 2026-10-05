@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ENDPOINTS, organizationClient } from '../client'
 import type {
   TArchivedEmployeeResponse,
+  TCancelPublicHolidaySettingsPayload,
   TCreateBranchPayload,
   TCreateDepartmentPayload,
   TCreateEmployeeCategoryPayload,
@@ -9,6 +10,8 @@ import type {
   TCreateEmployeeGradePayload,
   TCreateEmployeeReportsPayload,
   TCreateEmployeeTypePayload,
+  TCreatePermissionSettingsPayload,
+  TCreatePublicHolidaySettingsPayload,
   TCreateTeamPayload,
   TDeleteBulkOrganizationBranchPayload,
   TDeleteOrganizationDepartmentPayload,
@@ -31,6 +34,7 @@ import type {
   TFetchOrganizationDepartmentsResponse,
   TFetchOrganizationTeamsParams,
   TFetchStatesResponse,
+  TGetApiResponse,
   TGetBanksResponse,
   TGetBranchDetailsResponse,
   TGetDepartmentDetailsResponse,
@@ -40,7 +44,13 @@ import type {
   TGetEmployeeRolesResponse,
   TGetEmployeeTypesResponse,
   TGetFieldsFromCsvPayload,
+  TGetGroupPermissionsByModulesResponse,
   TGetNextFreePinPayload,
+  TGetPublicHolidayResponse,
+  TGetPublicHolidaySettingsDetailsResponse,
+  TGetPublicHolidaySettingsResponse,
+  TGetPublicHolidaysSettingsParams,
+  TReassignRoleMembersPayload,
   TRestoreArchivedEmployeesPayload,
   TSearchOrganizationEmployeesResponse,
   TTeamDetailsResponse,
@@ -51,6 +61,8 @@ import type {
   TUpdateEmployeeDesignationPayload,
   TUpdateEmployeeGradePayload,
   TUpdateEmployeeTypePayload,
+  TUpdatePermissionSettingsPayload,
+  TUpdatePublicHolidaySettingsPayload,
   TUpdateTeamPayload,
   TUploadEmployeeImagePayload,
   TValidateEmployeeDataPayload,
@@ -58,6 +70,7 @@ import type {
 import { notifications } from '@mantine/notifications'
 import type {
   TCreateEmployeePayload,
+  TEditCompanyPayload,
   TUpdateEmployeePayload,
 } from '#/lib/utils'
 
@@ -195,6 +208,20 @@ export const useGetStates = <TSelected>(
     queryFn: () => organizationClient.fetchStates(params),
     select,
     enabled: !!params.country_id,
+  })
+}
+
+export const useGetCities = <TSelected>(
+  params: { state_id: number },
+  select?: (
+    data: TGetApiResponse<{ id: number; name: string; state_id: number }[]>,
+  ) => TSelected,
+) => {
+  return useQuery({
+    queryKey: [ENDPOINTS.cities, params],
+    queryFn: () => organizationClient.fetchCities(params),
+    select,
+    enabled: !!params.state_id,
   })
 }
 
@@ -938,5 +965,243 @@ export const useFetchDepartmentsAssignedToBranch = <TSelected>(
       organizationClient.fetchDepartmentsAssignedToBranch(branch_id as number),
     enabled: !!branch_id,
     select,
+  })
+}
+
+export const useFetchGroupPermissionsByModules = <TSelected>(
+  select?: (data: TGetGroupPermissionsByModulesResponse) => TSelected,
+) => {
+  return useQuery({
+    queryKey: [ENDPOINTS.organizationSystemSettingsGroupPermissionsByModules],
+    queryFn: () => organizationClient.getGroupPermissionsByModules(),
+    select,
+  })
+}
+
+export const useGetPermissionDetailsForRole = (roleId: number) => {
+  return useQuery({
+    queryKey: [ENDPOINTS.organizationSystemSettingsRoles, roleId],
+    queryFn: () => organizationClient.getPermissionDetailsForRole(roleId),
+    enabled: !!roleId,
+  })
+}
+
+export const useCreatePermissionSettings = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TCreatePermissionSettingsPayload) =>
+      organizationClient.createPermissionSettings(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.organizationSystemSettingsRoles],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Role created successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useUpdatePermissionSettings = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TUpdatePermissionSettingsPayload) =>
+      organizationClient.updatePermissionSettings(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.organizationSystemSettingsRoles],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Role changed successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useDeletePermissionSettings = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (roleId: number) =>
+      organizationClient.deletePermissionSettings(roleId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.organizationSystemSettingsRoles],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Role deleted successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useReassignRoleMembers = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TReassignRoleMembersPayload) =>
+      organizationClient.reassignRoleMembers(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.organizationSystemSettingsRoles],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Role members reassigned successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useGetAccountSettings = () => {
+  return useQuery({
+    queryKey: [ENDPOINTS.organizationSystemSettingsAccountSettings],
+    queryFn: () => organizationClient.getAccountSettings(),
+  })
+}
+
+export const useUpdateAccountSettings = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TEditCompanyPayload) =>
+      organizationClient.updateAccountSettings(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.organizationSystemSettingsAccountSettings],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Account settings updated successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useCreatePublicHolidaySettings = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TCreatePublicHolidaySettingsPayload) =>
+      organizationClient.createPublicHolidaySettings(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.publicHolidaySettings],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Public holiday created successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useGetPublicHolidaySettings = <TSelected>(
+  params?: TGetPublicHolidaysSettingsParams,
+  select?: (data: TGetPublicHolidaySettingsResponse) => TSelected,
+) => {
+  return useQuery({
+    queryKey: [ENDPOINTS.publicHolidaySettings, params],
+    queryFn: () => organizationClient.getPublicHolidaySettings(params),
+    select,
+  })
+}
+
+export const useGetPublicHolidaySettingsDetails = <TSelected>(
+  id: number,
+  select?: (data: TGetPublicHolidaySettingsDetailsResponse) => TSelected,
+) => {
+  return useQuery({
+    queryKey: [ENDPOINTS.publicHolidaySettings, id],
+    queryFn: () => organizationClient.getPublicHolidaySettingsDetails(id),
+    select,
+    enabled: !!id,
+  })
+}
+
+export const useDeletePublicHolidaySettings = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (id: number) =>
+      organizationClient.deletePublicHolidaySettings(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.publicHolidaySettings],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Public holiday deleted successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useUpdatePublicHolidaySettings = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TUpdatePublicHolidaySettingsPayload) =>
+      organizationClient.updatePublicHolidaySettings(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.publicHolidaySettings],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Public holiday updated successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useGetPublicHoliday = <TSelected>(
+  select?: (data: TGetPublicHolidayResponse) => TSelected,
+) => {
+  return useQuery({
+    queryKey: [ENDPOINTS.publicHolidays],
+    queryFn: organizationClient.getAllPublicHolidays,
+    select,
+  })
+}
+
+export const useCreateCustomPublicHolidaySettings = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TCreatePublicHolidaySettingsPayload) =>
+      organizationClient.createCustomPublicHolidaySettings(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.publicHolidaySettings],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Custom public holiday settings created successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useCancelPublicHolidaySettings = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TCancelPublicHolidaySettingsPayload) =>
+      organizationClient.cancelPublicHolidaySettings(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.publicHolidaySettings],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Public holiday cancelled successfully',
+        color: 'green',
+      })
+    },
   })
 }

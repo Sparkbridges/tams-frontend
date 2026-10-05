@@ -5,7 +5,8 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
 import type { MillifyOptions } from 'millify/dist/options'
-import type { TLabelValue } from '#/lib/types'
+import type { TGetPublicHolidaySettingsData, TLabelValue } from '#/lib/types'
+import type { Dayjs } from 'dayjs'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -49,6 +50,16 @@ export const getStatusColor = (status: string) => {
       return { variant: 'light', color: 'green' }
     case 'inactive':
       return { variant: 'light', color: 'red' }
+    case 'cancelled':
+      return { variant: 'light', color: 'orange' }
+    case 'pending':
+      return { variant: 'light', color: 'blue' }
+    case 'archived':
+      return { variant: 'light', color: 'gray' }
+    case 'completed':
+      return { variant: 'light', color: 'green' }
+    case 'scheduled':
+      return { variant: 'light', color: 'purple' }
     default:
       return { variant: 'subtle', color: 'gray' }
   }
@@ -146,3 +157,29 @@ export function autoMatch(
 }
 
 export const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
+
+export const resolvePhoneNumber = (phone: string) => {
+  if (!phone) return ''
+  return phone.at(0) != '+'
+    ? `+${phone}`
+    : phone.startsWith('+')
+      ? phone.replace(/^\+/, '')
+      : (phone.split('-')[1] ?? '')
+}
+
+export function getUpcomingHoliday(
+  holidays: TGetPublicHolidaySettingsData[],
+  fromDate: Dayjs = newDayjs(),
+): TGetPublicHolidaySettingsData {
+  const today = fromDate.startOf('day')
+
+  return (
+    holidays
+      ?.filter(
+        (h) =>
+          h.status !== 'cancelled' && !dayjs(h.date).isBefore(today, 'day'),
+      )
+      .sort((a, b) => dayjs(a.date).valueOf() - dayjs(b.date).valueOf())[0] ??
+    null
+  )
+}

@@ -125,8 +125,8 @@ const useCreateEditBranchForm = ({ type, branchId }: Props) => {
         })
         const state = statesi.data
           .find((s) => s.name === branchDetails.state)
-            ?.id.toString() as string
-          
+          ?.id.toString() as string
+
         const phone = branchDetails.branch_phone_no
           ? branchDetails.branch_phone_no.startsWith('+')
             ? branchDetails.branch_phone_no
@@ -269,7 +269,6 @@ const useCreateEditBranchForm = ({ type, branchId }: Props) => {
           }
           if (type === 'edit' && branchId) {
             const { search_branch_head, ...payload } = values
-            console.log('opp', payload)
             await updateOrganizationBranchAsync({
               ...payload,
               id: branchId,

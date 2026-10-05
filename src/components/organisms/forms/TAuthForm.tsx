@@ -1,4 +1,4 @@
-import { TamsButton, TamsTextInput } from '#/components'
+import { TamsButton, TamsTextInput, TamsUrlInput } from '#/components'
 import TamsPasswordInput from '#/components/atoms/forms/TamsPasswordInput'
 import type { AllLoginSchemaType } from '#/lib'
 import {
@@ -110,16 +110,11 @@ const TAuthForm = () => {
               Kindly input your company URL to proceed
             </p>
             <div>
-              <TamsTextInput
+              <TamsUrlInput
                 key={form.key('company_id')}
                 {...form.getInputProps('company_id')}
                 placeholder="Company Url"
-                className={'overflow-hidden'}
-                rightSection={
-                  <div className="mr-25 h-full flex rounded-r-md items-center bg-gray-100 px-3">
-                    .tams.com.ng
-                  </div>
-                }
+                companySuffix=".tams.com.ng"
               />
             </div>
           </Stepper.Step>

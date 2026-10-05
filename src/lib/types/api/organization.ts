@@ -1,3 +1,4 @@
+import type { AccountType } from '../enums'
 import type { TGetApiResponse, TPostApiResponse } from './request.types'
 
 export type TBaseQueryParams = {
@@ -688,7 +689,10 @@ export type TGetEmployeeRoles = {
   is_system: number
 }
 
-export type TGetEmployeeRolesResponse = TGetApiResponse<TGetEmployeeRoles[]>
+export type TGetEmployeeRolesResponse = TGetApiResponse<{
+  results: TGetEmployeeRoles[]
+  total: number
+}>
 
 export type TCreateEmployeeReportsPayload = {
   fetch_by: 'employee' | 'company' | 'branch' | 'department'
@@ -742,3 +746,200 @@ export type TCreateEmployeeTypePayload = TCreateEmployeeCategoryPayload
 export type TCreateEmployeeGradePayload = TCreateEmployeeCategoryPayload
 
 export type TCreateEmployeeDesignationPayload = TCreateEmployeeCategoryPayload
+
+export type TAllPermissions = {
+  id: number
+  label: string
+  group: string
+}
+
+export type TGetGroupPermissionsByModules = {
+  key: string
+  label: string
+  children: {
+    id: number
+    label: string
+    children?: {
+      id: number
+      label: string
+    }[]
+  }[]
+}
+
+export type TGetGroupPermissionsByModulesResponse = TGetApiResponse<{
+  allPermissions: TAllPermissions[]
+  permissionsTree: TGetGroupPermissionsByModules[]
+}>
+
+export type TGetPermissionDetailsForRoleResponse = TGetApiResponse<{
+  id: number
+  name: string
+  description: string | null
+  is_system: number
+  permission_ids: number[]
+  members: {
+    name: string
+    employee_id: number | null
+    user_id: number | null
+  }[]
+}>
+
+export type TMappedGetGroupPermissionsByModules = {
+  key: string
+  label: string
+  total?: number
+  activeCount?: number
+  children: {
+    id: number
+    label: string
+    isActive?: boolean
+    children?: {
+      id: number
+      label: string
+      isActive?: boolean
+    }[]
+  }[]
+}
+
+export type TCreatePermissionSettingsPayload = {
+  name: string
+  description: string
+  permissions: number[]
+}
+
+export type TUpdatePermissionSettingsPayload =
+  TCreatePermissionSettingsPayload & {
+    id: number
+  }
+
+export type TCreatePermissionSettingsResponse = TPostApiResponse<{
+  name: string
+  updated_at: string
+  id: number
+  guard_name: string
+  created_at: string
+  company_id: number
+  description: string | null
+}>
+
+export type TUpdatePermissionSettingsResponse = TPostApiResponse<{
+  name: string
+  updated_at: string
+  id: number
+  guard_name: string
+  created_at: string
+  company_id: number
+  station_id: number | null
+  deleted_at: string | null
+  description: string | null
+}>
+
+export type TReassignRoleMembersPayload = {
+  role_id: number
+  new_role_id: number
+  user_ids: number[]
+}
+
+export type TReassignRoleMembersResponse = TPostApiResponse<{
+  reassigned: number
+}>
+
+export type TGetAccountSettingsData = {
+  id: number
+  company_name: string
+  legal_name: string | null
+  slug: string
+  is_active: number
+  company_logo: string
+  company_type_id: number
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+  head_station_id: number
+  account_type: AccountType
+  expires_at: string
+  reseller_id: number | null
+  batch_id: number
+  company_id: number
+  contact_person_name: string
+  contact_person_designation: string | null
+  company_phone_no: string
+  company_alt_phone_no: string | null
+  fax: string | null
+  email: string
+  website: string
+  address: string
+  city: string
+  state: string
+  zip_code: string | null
+  country: string
+  additional_info: string | null
+  currency_sign: string
+  industry_id: number | null
+}
+
+export type TGetAccountSettingsResponse =
+  TGetApiResponse<TGetAccountSettingsData>
+
+export type TCreatePublicHolidaySettingsPayload = {
+  national_public_holiday_ids?: number[]
+  is_recurring: boolean
+  send_email_notification?: boolean
+  name?: string
+  date?: string
+}
+
+export type TUpdatePublicHolidaySettingsPayload =
+  TCreatePublicHolidaySettingsPayload & {
+    id: number
+  }
+
+export type TGetPublicHolidaySettingsData = {
+  id: number
+  national_public_holiday_id: number
+  status: string
+  is_recurring: boolean
+  send_email_notification: boolean
+  notification_sent_at: string | null
+  cancellation_reason: string | null
+  cancelled_at: string | null
+  created_at: string
+  updated_at: string
+  name: string
+  type: string
+  year: number
+  country_code: string
+  source: string
+  date: string
+}
+
+export type TGetPublicHolidaySettingsResponse = TGetApiResponse<{
+  results: TGetPublicHolidaySettingsData[]
+  total: number
+}>
+
+export type TGetPublicHolidaySettingsDetailsResponse =
+  TGetApiResponse<TGetPublicHolidaySettingsData>
+
+export type TGetPublicHolidaysSettingsParams = TBaseQueryParams & {
+  year?: number
+  status?: string
+}
+
+export type TGetPublicHolidayData = {
+  id: number
+  date: string
+  name: string
+  type: string
+  observed: boolean
+  country_code: string
+  year: number
+  synced_at: string
+}
+
+export type TGetPublicHolidayResponse = TGetApiResponse<TGetPublicHolidayData[]>
+
+export type TCancelPublicHolidaySettingsPayload = {
+  id: number
+  cancellation_reason?: string
+}

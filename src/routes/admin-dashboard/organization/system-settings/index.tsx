@@ -22,13 +22,13 @@ function RouteComponent() {
       <section className="flex items-center justify-between">
         {pageHeader()}
       </section>
-      <section className="mt-10 grid grid-cols-12 gap-5">
+      <section className="mt-10 grid grid-cols-4 lg:grid-cols-12 gap-5">
         {systemSettingsOptions.map((option) => (
           <Paper
             onClick={() => navigate({ to: `${option.value}` })}
             withBorder
             py="lg"
-            className="lg:col-span-4 text-center cursor-pointer hover:shadow-md hover:bg-primary/5 transition-shadow duration-300"
+            className="col-span-4 text-center cursor-pointer hover:shadow-md hover:bg-primary/5 transition-shadow duration-300"
             key={option.value}
           >
             <img
