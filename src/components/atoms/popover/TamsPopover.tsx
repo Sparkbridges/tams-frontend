@@ -1,7 +1,11 @@
 import { Popover } from '@mantine/core'
-import type { FloatingPosition, MantineShadow } from '@mantine/core'
+import type {
+  FloatingPosition,
+  MantineShadow,
+  PopoverProps,
+} from '@mantine/core'
 
-type TamsPopoverProps = {
+type TamsPopoverProps = PopoverProps & {
   width: number
   position: FloatingPosition
   children: React.ReactNode
@@ -14,9 +18,17 @@ const TamsPopover = ({
   children,
   trigger,
   shadow = 'md',
+  closeOnClickOutside = true,
+  ...others
 }: TamsPopoverProps) => {
   return (
-    <Popover width={width} position={position} shadow={shadow}>
+    <Popover
+      closeOnClickOutside={closeOnClickOutside}
+      width={width}
+      position={position}
+      shadow={shadow}
+      {...others}
+    >
       <Popover.Target>{trigger}</Popover.Target>
       <Popover.Dropdown className="p-1">{children}</Popover.Dropdown>
     </Popover>

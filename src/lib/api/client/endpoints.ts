@@ -58,6 +58,12 @@ export const ENDPOINTS = {
   cancelPublicHolidaySettings:
     '/organization/system-settings/public-holiday-settings/:id/cancel',
 
+  // hrm routes
+  getHrmExemptions: '/hrm/exemptions/view-all',
+  hrmExemptions: '/hrm/exemptions',
+  canApproveHrmExemption: '/hrm/exemptions/can/approve',
+  approveHrmExemption: '/hrm/exemptions/approve',
+
   // payroll
   verifyAccountNumber:
     '/payroll/payment-management/payments/verify-account-number',

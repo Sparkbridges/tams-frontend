@@ -7,6 +7,8 @@ import timezone from 'dayjs/plugin/timezone'
 import type { MillifyOptions } from 'millify/dist/options'
 import type { TGetPublicHolidaySettingsData, TLabelValue } from '#/lib/types'
 import type { Dayjs } from 'dayjs'
+import type { DatePickerPreset } from '@mantine/dates'
+import type { AxiosError } from 'axios'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -47,6 +49,7 @@ export const validateStepForms = <TSchema extends z.ZodObject<z.ZodRawShape>>(
 export const getStatusColor = (status: string) => {
   switch (status.toLowerCase()) {
     case 'active':
+    case 'approved':
       return { variant: 'light', color: 'green' }
     case 'inactive':
       return { variant: 'light', color: 'red' }
@@ -131,8 +134,19 @@ export const millifyValue = (
   return millify(value, DEFAULT_OPTIONS)
 }
 
-export function normalize(s: string) {
-  return s.replace(/[_-]/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase()
+export function normalizeStrings(s: string, type?: 'capitalize' | 'uppercase') {
+  const normalized = s
+    .replace(/[_-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase()
+  if (type === 'capitalize') {
+    return capitalize(normalized)
+  }
+  if (type === 'uppercase') {
+    return normalized.toUpperCase()
+  }
+  return normalized
 }
 
 export function autoMatch(
@@ -140,10 +154,10 @@ export function autoMatch(
   targetFields: TLabelValue[],
 ): TLabelValue[] {
   return headers.map((header) => {
-    const norm = normalize(header)
+    const norm = normalizeStrings(header)
     const match = targetFields.find((f) => {
-      const normLabel = normalize(f.label)
-      const normValue = normalize(f.value as string)
+      const normLabel = normalizeStrings(f.label)
+      const normValue = normalizeStrings(f.value as string)
       return (
         normLabel === norm ||
         normValue === norm ||
@@ -182,4 +196,78 @@ export function getUpcomingHoliday(
       .sort((a, b) => dayjs(a.date).valueOf() - dayjs(b.date).valueOf())[0] ??
     null
   )
+}
+
+export const getDatePresets = (
+  format?: string,
+): DatePickerPreset<'default' | 'range'>[] => {
+  const today = newDayjs()
+  const fmt = format ?? 'YYYY-MM-DD'
+
+  return [
+    {
+      label: 'Yesterday',
+      value: [
+        today.subtract(1, 'day').format(fmt),
+        today.subtract(1, 'day').format(fmt),
+      ],
+    },
+    { label: 'Today', value: [today.format(fmt), today.format(fmt)] },
+    {
+      label: 'Tomorrow',
+      value: [today.add(1, 'day').format(fmt), today.add(1, 'day').format(fmt)],
+    },
+    {
+      label: 'Next month',
+      value: [today.format(fmt), today.add(1, 'month').format(fmt)],
+    },
+    {
+      label: 'Next year',
+      value: [today.format(fmt), today.add(1, 'year').format(fmt)],
+    },
+    {
+      label: 'Last month',
+      value: [today.subtract(1, 'month').format(fmt), today.format(fmt)],
+    },
+    {
+      label: 'Last year',
+      value: [today.subtract(1, 'year').format(fmt), today.format(fmt)],
+    },
+  ]
+}
+
+const normalizeDate = (d: string | null | undefined, fmt: string) =>
+  d ? newDayjs(d).format(fmt) : null
+
+export function getPresetLabel(
+  dates: (string | null)[] | null | undefined,
+  fmt = 'YYYY-MM-DD',
+): string | null {
+  if (!dates || dates.length === 0) return null
+  const presets = getDatePresets()
+
+  const start = normalizeDate(dates[0], fmt)
+  // A single date is treated as a one-day range
+  const end = normalizeDate(dates[1] ?? dates[0], fmt)
+
+  if (!start || !end) return null // incomplete range
+
+  const match = presets.find((preset) => {
+    const [pStart, pEnd] = Array.isArray(preset.value)
+      ? preset.value
+      : [preset.value, preset.value]
+
+    return (
+      normalizeDate(pStart, fmt) === start && normalizeDate(pEnd, fmt) === end
+    )
+  })
+
+  return (match?.label as string) ?? 'custom range'
+}
+
+export const getErrorMessage = (error: any): string => {
+  const errorMessage =
+    (error as AxiosError<{ message: string }>)?.response?.data?.message ??
+    (error as Error).message
+  return errorMessage
 }
