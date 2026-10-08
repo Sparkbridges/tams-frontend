@@ -1,5 +1,6 @@
 import {
   TamsDateInput,
+  TamsDatePickerInput,
   TamsDropzone,
   TamsMultiSelect,
   TamsSelectInput,
@@ -159,6 +160,24 @@ const Tams2ColsForm = <T, TTransform = (values: T) => T>({
                         key={form.key(subField.name)}
                         {...form.getInputProps(subField.name)}
                         withAsterisk={subField.required}
+                        disabled={subField.disabled}
+                      />
+                    </Grid.Col>
+                  )
+                }
+                if (subField.type == 'date-picker-input') {
+                  return (
+                    <Grid.Col
+                      span={{ base: 12, md: 6, lg: subField.cols }}
+                      key={subField.name}
+                    >
+                      <TamsDatePickerInput
+                        label={subField.label}
+                        key={form.key(subField.name)}
+                        {...form.getInputProps(subField.name)}
+                        withAsterisk={subField.required}
+                        disabled={subField.disabled}
+                        type={subField.dateType}
                       />
                     </Grid.Col>
                   )

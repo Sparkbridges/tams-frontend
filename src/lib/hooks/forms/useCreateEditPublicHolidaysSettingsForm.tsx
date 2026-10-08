@@ -18,12 +18,12 @@ import type {
 import {
   createPublicHolidaysSettingsSchema,
   editPublicHolidaysSettingsSchema,
+  getErrorMessage,
   newDayjs,
 } from '#/lib/utils'
 import { notifications } from '@mantine/notifications'
 import useTamsForm from '../useTamsForm'
 import { useEffect, useState } from 'react'
-import type { AxiosError } from 'axios'
 
 type Props = {
   type: 'create' | 'edit'
@@ -255,9 +255,7 @@ const useCreateEditPublicHolidaysSettingsForm = ({
           }
           closeActionWidget()
         } catch (error) {
-          const errorMessage =
-            (error as AxiosError<{ message: string }>)?.response?.data
-              ?.message ?? (error as Error).message
+          const errorMessage = getErrorMessage(error)
           notifications.show({
             title: 'Error',
             message: errorMessage,

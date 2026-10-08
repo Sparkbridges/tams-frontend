@@ -133,3 +133,17 @@ export const editPublicHolidaysSettingsInitials = {
   ...createPublicHolidaysSettingsInitials,
   id: 0,
 }
+
+export const createHrmExemptionInitials = {
+  employee_id: 1,
+  employee_search: '',
+  exemption_type: '' as string,
+  exemption_date: [] as Date[],
+  reason: '',
+  branch_id: null as unknown as number,
+}
+
+export const editHrmExemptionInitials = {
+  ...createHrmExemptionInitials,
+  id: 0,
+}

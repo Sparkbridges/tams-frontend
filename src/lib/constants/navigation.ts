@@ -2,6 +2,7 @@ import {
   BuildingOfficeIcon,
   CalendarDotsIcon,
   ChartLineUpIcon,
+  ExcludeIcon,
   FolderUserIcon,
   LockKeyIcon,
   MoneyWavyIcon,
@@ -67,6 +68,11 @@ export const pageHeaderNav: Record<
     icon: SlidersHorizontalIcon,
     description: 'Manage organization account settings',
   },
+  exemption: {
+    title: 'Hrm Exemption',
+    icon: ExcludeIcon,
+    description: 'Manage HRM exemptions within the organization',
+  },
 }
 
 export const adminNavigation: TamsNavigation[] = [
@@ -128,12 +134,12 @@ export const adminNavigation: TamsNavigation[] = [
     children: [
       {
         id: 14,
-        name: 'Dashboard',
+        name: 'Overview',
         url: 'index',
       },
       {
         id: 8,
-        name: 'Exemption',
+        name: 'Exemptions',
         url: '/exemption',
       },
       {

@@ -33,7 +33,7 @@ const TamsTableFilter = ({
   return (
     <Combobox
       width={width}
-          position="bottom-end"
+      position="bottom-end"
       store={combobox}
       onOptionSubmit={(val) => {
         setSelectedItem(val)
@@ -51,7 +51,7 @@ const TamsTableFilter = ({
           <span className="font-medium ml-2">{selectedOption}</span>
         </TamsButton>
       </Combobox.Target>
-      <Combobox.Dropdown className='pb-3'>
+      <Combobox.Dropdown className="pb-3">
         <Combobox.Option
           className="flex items-center gap-2"
           value="all"

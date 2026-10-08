@@ -1,11 +1,9 @@
 import type { AccountType } from '../enums'
-import type { TGetApiResponse, TPostApiResponse } from './request.types'
-
-export type TBaseQueryParams = {
-  page: number
-  perPage: number
-  search_query?: string
-}
+import type {
+  TBaseQueryParams,
+  TGetApiResponse,
+  TPostApiResponse,
+} from './request.types'
 
 export type TSearchOrganizationEmployees = {
   id: number
