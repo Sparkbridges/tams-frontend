@@ -78,4 +78,20 @@ export const emptyStates = {
       icon: '/images/svg/file-search.svg',
     },
   ],
+
+  // hrm
+
+  hrmExemptions: [
+    {
+      title: 'No HRM Exemptions Found',
+      description: 'There are currently no HRM exemptions in the organization.',
+      icon: '/images/svg/no-data.svg',
+    },
+    {
+      title: 'No results found',
+      description:
+        "We couldn't find anything matching your search. Try adjusting your filters or searching with different keywords to see more results.",
+      icon: '/images/svg/file-search.svg',
+    },
+  ],
 }

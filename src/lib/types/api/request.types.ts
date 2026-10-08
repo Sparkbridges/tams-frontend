@@ -23,3 +23,9 @@ export type TPostApiResponse<T> = {
   message: string
   data: T
 }
+
+export type TBaseQueryParams = {
+  page: number
+  perPage: number
+  search_query?: string
+}

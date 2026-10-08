@@ -5,3 +5,5 @@ export { default as useOrganizationTeamTable } from './useOrganizationTeamTable'
 export { default as useOrganizationEmployeeTable } from './useOrganizationEmployeesTable'
 export { default as useOrganizationEmployeeSettingsTable } from './useOrganizationEmployeeSettingsTable'
 export { default as useAccountSettingsHolidaysTable } from './useAccountSettingsHolidaysTable'
+// hrm
+export { default as useHrmExemptionsTable } from './useHrmExemptionTable'

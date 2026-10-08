@@ -69,6 +69,7 @@ export type TFormFieldType =
   | 'search-dropdown'
   | 'multi-select'
   | 'date'
+  | 'date-picker-input'
   | 'file'
   | 'switch'
   | 'url'
@@ -91,6 +92,7 @@ export type TamsBy2ColsFormField = {
   disabled?: boolean
   suffix?: string
   maxSize?: number
+  dateType?: 'multiple' | 'range'
 }
 
 export type TamsBy2ColsFormFields = {
