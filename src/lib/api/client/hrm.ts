@@ -6,6 +6,15 @@ import type {
   TFetchHrmExemptionByIdResponse,
   TFetchHrmExemptionsParams,
   TFetchHrmExemptionsResponse,
+  TFetchHrmLeaveByIdResponse,
+  TFetchHrmLeavesParams,
+  TFetchHrmLeavesResponse,
+  TFetchHrmLeavesTypesResponse,
+  TDeleteLeavesPayload,
+  TFetchLeaveTypesByEmployeeIdResponse,
+  TTCreateHrmLeavePayload,
+  TTEditHrmLeavePayload,
+  TCreateHrmLeaveResponse,
 } from '#/lib/types'
 import type {
   TCreateHrmExemptionPayload,
@@ -85,6 +94,7 @@ const hrmClient = {
       `${ENDPOINTS.canApproveHrmExemption}`,
     )
   },
+
   /**
    * Description - approve an HRM exemption request.
    * @param payload The data for approving the exemption request.
@@ -93,6 +103,87 @@ const hrmClient = {
    */
   approveHrmExemption: async (payload: TApproveHrmExemptionPayload) => {
     return await Client.post(`${ENDPOINTS.approveHrmExemption}`, payload)
+  },
+
+  /**
+   * Description - fetch all Hrm Leaves request.
+   * @param params The query parameters for fetching HRM leaves.
+   * @returns Data fetched from `/hrm/leaves`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  fetchHrmLeaves: async (params: TFetchHrmLeavesParams) => {
+    return await Client.get<TFetchHrmLeavesResponse>(`${ENDPOINTS.hrmLeaves}`, {
+      params,
+    })
+  },
+
+  /**
+   * Description - fetch a specific HRM leave by ID.
+   * @param id The ID of the HRM leave to fetch.
+   * @returns Data fetched from `/hrm/leaves/{id}`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  fetchHrmLeaveById: async (id: number) => {
+    return await Client.get<TFetchHrmLeaveByIdResponse>(
+      `${ENDPOINTS.hrmLeaves}/${id}`,
+    )
+  },
+
+  /**
+   * Description - delete HRM leaves single and bulk records.
+   * @param payload The data for deleting the leaves.
+   * @returns Data fetched from `/hrm/leaves/delete`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  deleteLeaves: async (payload: TDeleteLeavesPayload) => {
+    return await Client.post(`${ENDPOINTS.deleteLeaves}`, payload)
+  },
+
+  /**
+   * Description - create new leave
+   * @param payload The data for creating the new leave.
+   * @returns Data fetched from `/hrm/leaves/create`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  createHrmLeave: async (payload: TTCreateHrmLeavePayload) => {
+    return await Client.post<TCreateHrmLeaveResponse>(
+      `${ENDPOINTS.hrmLeaves}`,
+      payload,
+    )
+  },
+
+  /**
+   * Description - update an existing leave
+   * @param payload the data for updating the existing leave.
+   * @returns Data fetched from `/hrm/leaves/update`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  updateHrmLeave: async ({ id, ...payload }: TTEditHrmLeavePayload) => {
+    return await Client.put(`${ENDPOINTS.hrmLeaves}/${id}`, payload)
+  },
+
+  /**
+   * Description - fetch HRM leave types by employee ID.
+   * @param employeeId The ID of the employee for whom to fetch leave types.
+   * @returns Data fetched from `/hrm/leave-types-by-employee?employee_id={employeeId}`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  fetchHrmLeaveTypesByEmployeeId: async (params: { employee_id: number }) => {
+    return await Client.get<TFetchLeaveTypesByEmployeeIdResponse>(
+      `${ENDPOINTS.getHrmLeaveTypeByEmployeeId}`,
+      { params },
+    )
+  },
+
+  /**
+   * Description - fetch all HRM leave types.
+   * @returns Data fetched from `/hrm/leaves/settings/leavetypes`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  fetchHrmLeaveTypes: async () => {
+    return await Client.get<TFetchHrmLeavesTypesResponse>(
+      `${ENDPOINTS.hrmLeaveTypes}`,
+    )
   },
 }
 

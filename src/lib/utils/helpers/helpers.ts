@@ -49,6 +49,7 @@ export const validateStepForms = <TSchema extends z.ZodObject<z.ZodRawShape>>(
 export const getStatusColor = (status: string) => {
   switch (status.toLowerCase()) {
     case 'active':
+      return { variant: 'dot', color: 'green' }
     case 'approved':
       return { variant: 'light', color: 'green' }
     case 'inactive':
@@ -60,7 +61,7 @@ export const getStatusColor = (status: string) => {
     case 'archived':
       return { variant: 'light', color: 'gray' }
     case 'completed':
-      return { variant: 'light', color: 'green' }
+      return { variant: 'filled', color: 'green' }
     case 'scheduled':
       return { variant: 'light', color: 'purple' }
     default:

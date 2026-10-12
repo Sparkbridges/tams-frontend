@@ -27,3 +27,24 @@ export const editHrmExemptionSchema = zodObjectSchema({
 })
 
 export type TEditHrmExemptionPayload = z.infer<typeof editHrmExemptionSchema>
+
+export const createHrmLeavesSchema = zodObjectSchema({
+  employee_id: numberSchema().min(1, 'Employee ID is required'),
+  employee_search: stringSchema().optional(),
+  handover_search: stringSchema().optional(),
+  leave_type_id: numberSchema().min(1, 'Leave type is required'),
+  date_range: dateSchema('Leave date is required')
+    .array()
+    .max(2, 'At most two leave dates are allowed'),
+  handover_to: numberSchema().min(1, 'Handover to is required'),
+  note: stringSchema().optional(),
+})
+
+export type TCreateHrmLeavesPayload = z.infer<typeof createHrmLeavesSchema>
+
+export const editHrmLeavesSchema = zodObjectSchema({
+  ...createHrmLeavesSchema.shape,
+  id: numberSchema().min(1, 'ID is required'),
+})
+
+export type TEditHrmLeavesPayload = z.infer<typeof editHrmLeavesSchema>

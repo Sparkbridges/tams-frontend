@@ -7,3 +7,4 @@ export { default as useOrganizationEmployeeSettingsTable } from './useOrganizati
 export { default as useAccountSettingsHolidaysTable } from './useAccountSettingsHolidaysTable'
 // hrm
 export { default as useHrmExemptionsTable } from './useHrmExemptionTable'
+export { default as useHrmLeaveTable } from './useHrmLeaveTable'

@@ -64,6 +64,12 @@ export const ENDPOINTS = {
   canApproveHrmExemption: '/hrm/exemptions/can/approve',
   approveHrmExemption: '/hrm/exemptions/approve',
 
+  // leave
+  hrmLeaves: '/hrm/leaves',
+  hrmLeaveTypes: '/hrm/leaves/settings/leavetypes',
+  deleteLeaves: '/hrm/leaves/delete',
+  getHrmLeaveTypeByEmployeeId: '/hrm/leave-types-by-employee',
+
   // payroll
   verifyAccountNumber:
     '/payroll/payment-management/payments/verify-account-number',

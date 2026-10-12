@@ -5,3 +5,4 @@ export { default as OrganizationEmployeeTable } from './OrganizationEmployeeTabl
 export { default as OrganizationEmployeeSettingsTable } from './OrganizationEmployeeSettingsTable'
 export { default as AccountSettingsPublicHolidayTable } from './AccountSettingsHolidaysTable'
 export { default as HrmExemptionTable } from './HrmExemptionTable'
+export { default as HrmLeaveTable } from './HrmLeaveTable'
