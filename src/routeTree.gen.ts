@@ -22,6 +22,7 @@ import { Route as AdminDashboardHrmIndexRouteImport } from './routes/admin-dashb
 import { Route as AdminDashboardOrganizationIndexRouteImport } from './routes/admin-dashboard/organization/index'
 import { Route as AdminDashboardHrmExemptionIndexRouteImport } from './routes/admin-dashboard/hrm/exemption/index'
 import { Route as AdminDashboardHrmExemptionPathlessLayoutRouteImport } from './routes/admin-dashboard/hrm/exemption/_pathlessLayout'
+import { Route as AdminDashboardHrmLeaveIndexRouteImport } from './routes/admin-dashboard/hrm/leave/index'
 import { Route as AdminDashboardOrganizationBranchIndexRouteImport } from './routes/admin-dashboard/organization/branch/index'
 import { Route as AdminDashboardOrganizationBranchPathlessLayoutRouteImport } from './routes/admin-dashboard/organization/branch/_pathlessLayout'
 import { Route as AdminDashboardOrganizationDepartmentIndexRouteImport } from './routes/admin-dashboard/organization/department/index'
@@ -37,6 +38,8 @@ import { Route as AdminDashboardOrganizationTeamsIndexRouteImport } from './rout
 import { Route as AdminDashboardOrganizationTeamsPathlessLayoutRouteImport } from './routes/admin-dashboard/organization/teams/_pathlessLayout'
 import { Route as AdminDashboardHrmExemptionPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/hrm/exemption/_pathlessLayout.create'
 import { Route as AdminDashboardHrmExemptionPathlessLayoutEditRouteImport } from './routes/admin-dashboard/hrm/exemption/_pathlessLayout.edit'
+import { Route as AdminDashboardHrmLeavePathlessLayoutCreateRouteImport } from './routes/admin-dashboard/hrm/leave/_pathlessLayout.create'
+import { Route as AdminDashboardHrmLeavePathlessLayoutEditRouteImport } from './routes/admin-dashboard/hrm/leave/_pathlessLayout.edit'
 import { Route as AdminDashboardOrganizationBranchPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/organization/branch/_pathlessLayout.create'
 import { Route as AdminDashboardOrganizationBranchPathlessLayoutEditRouteImport } from './routes/admin-dashboard/organization/branch/_pathlessLayout.edit'
 import { Route as AdminDashboardOrganizationDepartmentPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/organization/department/_pathlessLayout.create'
@@ -113,6 +116,12 @@ const AdminDashboardHrmExemptionPathlessLayoutRoute =
   AdminDashboardHrmExemptionPathlessLayoutRouteImport.update({
     id: '/hrm/exemption/_pathlessLayout',
     path: '/hrm/exemption',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardHrmLeaveIndexRoute =
+  AdminDashboardHrmLeaveIndexRouteImport.update({
+    id: '/hrm/leave/',
+    path: '/hrm/leave/',
     getParentRoute: () => AdminDashboardRouteRoute,
   } as any)
 const AdminDashboardOrganizationBranchIndexRoute =
@@ -207,6 +216,18 @@ const AdminDashboardHrmExemptionPathlessLayoutEditRoute =
     path: '/edit',
     getParentRoute: () => AdminDashboardHrmExemptionPathlessLayoutRoute,
   } as any)
+const AdminDashboardHrmLeavePathlessLayoutCreateRoute =
+  AdminDashboardHrmLeavePathlessLayoutCreateRouteImport.update({
+    id: '/hrm/leave/_pathlessLayout/create',
+    path: '/hrm/leave/create',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardHrmLeavePathlessLayoutEditRoute =
+  AdminDashboardHrmLeavePathlessLayoutEditRouteImport.update({
+    id: '/hrm/leave/_pathlessLayout/edit',
+    path: '/hrm/leave/edit',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
 const AdminDashboardOrganizationBranchPathlessLayoutCreateRoute =
   AdminDashboardOrganizationBranchPathlessLayoutCreateRouteImport.update({
     id: '/create',
@@ -286,6 +307,7 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/organization/system-settings/roles-and-permissions-settings': typeof AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute
   '/admin-dashboard/organization/teams': typeof AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren
   '/admin-dashboard/hrm/exemption/': typeof AdminDashboardHrmExemptionIndexRoute
+  '/admin-dashboard/hrm/leave/': typeof AdminDashboardHrmLeaveIndexRoute
   '/admin-dashboard/organization/branch/': typeof AdminDashboardOrganizationBranchIndexRoute
   '/admin-dashboard/organization/department/': typeof AdminDashboardOrganizationDepartmentIndexRoute
   '/admin-dashboard/organization/employees/': typeof AdminDashboardOrganizationEmployeesIndexRoute
@@ -294,6 +316,8 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/organization/teams/': typeof AdminDashboardOrganizationTeamsIndexRoute
   '/admin-dashboard/hrm/exemption/create': typeof AdminDashboardHrmExemptionPathlessLayoutCreateRoute
   '/admin-dashboard/hrm/exemption/edit': typeof AdminDashboardHrmExemptionPathlessLayoutEditRoute
+  '/admin-dashboard/hrm/leave/create': typeof AdminDashboardHrmLeavePathlessLayoutCreateRoute
+  '/admin-dashboard/hrm/leave/edit': typeof AdminDashboardHrmLeavePathlessLayoutEditRoute
   '/admin-dashboard/organization/branch/create': typeof AdminDashboardOrganizationBranchPathlessLayoutCreateRoute
   '/admin-dashboard/organization/branch/edit': typeof AdminDashboardOrganizationBranchPathlessLayoutEditRoute
   '/admin-dashboard/organization/department/create': typeof AdminDashboardOrganizationDepartmentPathlessLayoutCreateRoute
@@ -321,10 +345,13 @@ export interface FileRoutesByTo {
   '/admin-dashboard/organization/system-settings/employee-settings': typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   '/admin-dashboard/organization/system-settings/roles-and-permissions-settings': typeof AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute
   '/admin-dashboard/organization/teams': typeof AdminDashboardOrganizationTeamsIndexRoute
+  '/admin-dashboard/hrm/leave': typeof AdminDashboardHrmLeaveIndexRoute
   '/admin-dashboard/organization/reports': typeof AdminDashboardOrganizationReportsIndexRoute
   '/admin-dashboard/organization/system-settings': typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   '/admin-dashboard/hrm/exemption/create': typeof AdminDashboardHrmExemptionPathlessLayoutCreateRoute
   '/admin-dashboard/hrm/exemption/edit': typeof AdminDashboardHrmExemptionPathlessLayoutEditRoute
+  '/admin-dashboard/hrm/leave/create': typeof AdminDashboardHrmLeavePathlessLayoutCreateRoute
+  '/admin-dashboard/hrm/leave/edit': typeof AdminDashboardHrmLeavePathlessLayoutEditRoute
   '/admin-dashboard/organization/branch/create': typeof AdminDashboardOrganizationBranchPathlessLayoutCreateRoute
   '/admin-dashboard/organization/branch/edit': typeof AdminDashboardOrganizationBranchPathlessLayoutEditRoute
   '/admin-dashboard/organization/department/create': typeof AdminDashboardOrganizationDepartmentPathlessLayoutCreateRoute
@@ -357,6 +384,7 @@ export interface FileRoutesById {
   '/admin-dashboard/organization/system-settings/roles-and-permissions-settings': typeof AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute
   '/admin-dashboard/organization/teams/_pathlessLayout': typeof AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren
   '/admin-dashboard/hrm/exemption/': typeof AdminDashboardHrmExemptionIndexRoute
+  '/admin-dashboard/hrm/leave/': typeof AdminDashboardHrmLeaveIndexRoute
   '/admin-dashboard/organization/branch/': typeof AdminDashboardOrganizationBranchIndexRoute
   '/admin-dashboard/organization/department/': typeof AdminDashboardOrganizationDepartmentIndexRoute
   '/admin-dashboard/organization/employees/': typeof AdminDashboardOrganizationEmployeesIndexRoute
@@ -365,6 +393,8 @@ export interface FileRoutesById {
   '/admin-dashboard/organization/teams/': typeof AdminDashboardOrganizationTeamsIndexRoute
   '/admin-dashboard/hrm/exemption/_pathlessLayout/create': typeof AdminDashboardHrmExemptionPathlessLayoutCreateRoute
   '/admin-dashboard/hrm/exemption/_pathlessLayout/edit': typeof AdminDashboardHrmExemptionPathlessLayoutEditRoute
+  '/admin-dashboard/hrm/leave/_pathlessLayout/create': typeof AdminDashboardHrmLeavePathlessLayoutCreateRoute
+  '/admin-dashboard/hrm/leave/_pathlessLayout/edit': typeof AdminDashboardHrmLeavePathlessLayoutEditRoute
   '/admin-dashboard/organization/branch/_pathlessLayout/create': typeof AdminDashboardOrganizationBranchPathlessLayoutCreateRoute
   '/admin-dashboard/organization/branch/_pathlessLayout/edit': typeof AdminDashboardOrganizationBranchPathlessLayoutEditRoute
   '/admin-dashboard/organization/department/_pathlessLayout/create': typeof AdminDashboardOrganizationDepartmentPathlessLayoutCreateRoute
@@ -397,6 +427,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/roles-and-permissions-settings'
     | '/admin-dashboard/organization/teams'
     | '/admin-dashboard/hrm/exemption/'
+    | '/admin-dashboard/hrm/leave/'
     | '/admin-dashboard/organization/branch/'
     | '/admin-dashboard/organization/department/'
     | '/admin-dashboard/organization/employees/'
@@ -405,6 +436,8 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/teams/'
     | '/admin-dashboard/hrm/exemption/create'
     | '/admin-dashboard/hrm/exemption/edit'
+    | '/admin-dashboard/hrm/leave/create'
+    | '/admin-dashboard/hrm/leave/edit'
     | '/admin-dashboard/organization/branch/create'
     | '/admin-dashboard/organization/branch/edit'
     | '/admin-dashboard/organization/department/create'
@@ -432,10 +465,13 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/employee-settings'
     | '/admin-dashboard/organization/system-settings/roles-and-permissions-settings'
     | '/admin-dashboard/organization/teams'
+    | '/admin-dashboard/hrm/leave'
     | '/admin-dashboard/organization/reports'
     | '/admin-dashboard/organization/system-settings'
     | '/admin-dashboard/hrm/exemption/create'
     | '/admin-dashboard/hrm/exemption/edit'
+    | '/admin-dashboard/hrm/leave/create'
+    | '/admin-dashboard/hrm/leave/edit'
     | '/admin-dashboard/organization/branch/create'
     | '/admin-dashboard/organization/branch/edit'
     | '/admin-dashboard/organization/department/create'
@@ -467,6 +503,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/roles-and-permissions-settings'
     | '/admin-dashboard/organization/teams/_pathlessLayout'
     | '/admin-dashboard/hrm/exemption/'
+    | '/admin-dashboard/hrm/leave/'
     | '/admin-dashboard/organization/branch/'
     | '/admin-dashboard/organization/department/'
     | '/admin-dashboard/organization/employees/'
@@ -475,6 +512,8 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/teams/'
     | '/admin-dashboard/hrm/exemption/_pathlessLayout/create'
     | '/admin-dashboard/hrm/exemption/_pathlessLayout/edit'
+    | '/admin-dashboard/hrm/leave/_pathlessLayout/create'
+    | '/admin-dashboard/hrm/leave/_pathlessLayout/edit'
     | '/admin-dashboard/organization/branch/_pathlessLayout/create'
     | '/admin-dashboard/organization/branch/_pathlessLayout/edit'
     | '/admin-dashboard/organization/department/_pathlessLayout/create'
@@ -588,6 +627,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardHrmExemptionPathlessLayoutRouteImport
       parentRoute: typeof AdminDashboardRouteRoute
     }
+    '/admin-dashboard/hrm/leave/': {
+      id: '/admin-dashboard/hrm/leave/'
+      path: '/hrm/leave'
+      fullPath: '/admin-dashboard/hrm/leave/'
+      preLoaderRoute: typeof AdminDashboardHrmLeaveIndexRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
     '/admin-dashboard/organization/branch/': {
       id: '/admin-dashboard/organization/branch/'
       path: '/organization/branch'
@@ -692,6 +738,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin-dashboard/hrm/exemption/edit'
       preLoaderRoute: typeof AdminDashboardHrmExemptionPathlessLayoutEditRouteImport
       parentRoute: typeof AdminDashboardHrmExemptionPathlessLayoutRoute
+    }
+    '/admin-dashboard/hrm/leave/_pathlessLayout/create': {
+      id: '/admin-dashboard/hrm/leave/_pathlessLayout/create'
+      path: '/hrm/leave/create'
+      fullPath: '/admin-dashboard/hrm/leave/create'
+      preLoaderRoute: typeof AdminDashboardHrmLeavePathlessLayoutCreateRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/hrm/leave/_pathlessLayout/edit': {
+      id: '/admin-dashboard/hrm/leave/_pathlessLayout/edit'
+      path: '/hrm/leave/edit'
+      fullPath: '/admin-dashboard/hrm/leave/edit'
+      preLoaderRoute: typeof AdminDashboardHrmLeavePathlessLayoutEditRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
     }
     '/admin-dashboard/organization/branch/_pathlessLayout/create': {
       id: '/admin-dashboard/organization/branch/_pathlessLayout/create'
@@ -862,12 +922,15 @@ interface AdminDashboardRouteRouteChildren {
   AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute: typeof AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute
   AdminDashboardOrganizationTeamsPathlessLayoutRoute: typeof AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren
   AdminDashboardHrmExemptionIndexRoute: typeof AdminDashboardHrmExemptionIndexRoute
+  AdminDashboardHrmLeaveIndexRoute: typeof AdminDashboardHrmLeaveIndexRoute
   AdminDashboardOrganizationBranchIndexRoute: typeof AdminDashboardOrganizationBranchIndexRoute
   AdminDashboardOrganizationDepartmentIndexRoute: typeof AdminDashboardOrganizationDepartmentIndexRoute
   AdminDashboardOrganizationEmployeesIndexRoute: typeof AdminDashboardOrganizationEmployeesIndexRoute
   AdminDashboardOrganizationReportsIndexRoute: typeof AdminDashboardOrganizationReportsIndexRoute
   AdminDashboardOrganizationSystemSettingsIndexRoute: typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   AdminDashboardOrganizationTeamsIndexRoute: typeof AdminDashboardOrganizationTeamsIndexRoute
+  AdminDashboardHrmLeavePathlessLayoutCreateRoute: typeof AdminDashboardHrmLeavePathlessLayoutCreateRoute
+  AdminDashboardHrmLeavePathlessLayoutEditRoute: typeof AdminDashboardHrmLeavePathlessLayoutEditRoute
   AdminDashboardOrganizationEmployeesDetailsIdRoute: typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
 }
 
@@ -892,6 +955,7 @@ const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
   AdminDashboardOrganizationTeamsPathlessLayoutRoute:
     AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren,
   AdminDashboardHrmExemptionIndexRoute: AdminDashboardHrmExemptionIndexRoute,
+  AdminDashboardHrmLeaveIndexRoute: AdminDashboardHrmLeaveIndexRoute,
   AdminDashboardOrganizationBranchIndexRoute:
     AdminDashboardOrganizationBranchIndexRoute,
   AdminDashboardOrganizationDepartmentIndexRoute:
@@ -904,6 +968,10 @@ const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
     AdminDashboardOrganizationSystemSettingsIndexRoute,
   AdminDashboardOrganizationTeamsIndexRoute:
     AdminDashboardOrganizationTeamsIndexRoute,
+  AdminDashboardHrmLeavePathlessLayoutCreateRoute:
+    AdminDashboardHrmLeavePathlessLayoutCreateRoute,
+  AdminDashboardHrmLeavePathlessLayoutEditRoute:
+    AdminDashboardHrmLeavePathlessLayoutEditRoute,
   AdminDashboardOrganizationEmployeesDetailsIdRoute:
     AdminDashboardOrganizationEmployeesDetailsIdRoute,
 }
