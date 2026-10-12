@@ -2,6 +2,7 @@ import {
   BuildingOfficeIcon,
   CalendarDotsIcon,
   ChartLineUpIcon,
+  DoorOpenIcon,
   ExcludeIcon,
   FolderUserIcon,
   LockKeyIcon,
@@ -72,6 +73,11 @@ export const pageHeaderNav: Record<
     title: 'Hrm Exemption',
     icon: ExcludeIcon,
     description: 'Manage HRM exemptions within the organization',
+  },
+  leave: {
+    title: 'Hrm Leave',
+    icon: DoorOpenIcon,
+    description: 'Manage HRM leaves within the organization',
   },
 }
 

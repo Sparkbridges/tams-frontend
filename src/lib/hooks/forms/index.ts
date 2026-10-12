@@ -5,3 +5,4 @@ export { default as useCreateEditEmployeeForm } from './useCreateEditEmployeeFor
 export { default as useEditCompanyForm } from './useEditCompanyForm'
 export { default as useCreateEditPublicHolidaysForm } from './useCreateEditPublicHolidaysSettingsForm'
 export { default as useCreateEditHrmExemptionForm } from './useCreateEditHrmExemptionForm'
+export { default as useCreateEditHrmLeavesForm } from './useCreateEditHrmLeavesForm'

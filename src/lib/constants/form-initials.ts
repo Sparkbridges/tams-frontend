@@ -147,3 +147,18 @@ export const editHrmExemptionInitials = {
   ...createHrmExemptionInitials,
   id: 0,
 }
+
+export const createHrmLeavesInitials = {
+  employee_id: 0,
+  employee_search: '',
+  handover_search: '',
+  date_range: [] as Date[],
+  handover_to: 0,
+  leave_type_id: 0,
+  note: '',
+}
+
+export const editHrmLeavesInitials = {
+  ...createHrmLeavesInitials,
+  id: 0,
+}
