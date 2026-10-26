@@ -50,11 +50,14 @@ export const getStatusColor = (status: string) => {
   switch (status.toLowerCase()) {
     case 'active':
       return { variant: 'dot', color: 'green' }
+    case 'yes':
     case 'approved':
       return { variant: 'light', color: 'green' }
     case 'inactive':
+    case 'deactivated':
       return { variant: 'light', color: 'red' }
     case 'cancelled':
+    case 'no':
       return { variant: 'light', color: 'orange' }
     case 'pending':
       return { variant: 'light', color: 'blue' }
@@ -111,9 +114,12 @@ export const documentHelper = ({
 
 export const paramsSerializer = (params: Record<string, any>) =>
   Object.entries(params)
+    .filter(([, value]) => value !== undefined && value !== null)
     .flatMap(([key, value]) =>
       Array.isArray(value)
-        ? value.map((v) => `${key}[]=${encodeURIComponent(v)}`)
+        ? value
+            .filter((item) => item !== undefined && item !== null)
+            .map((item) => `${key}[]=${encodeURIComponent(item)}`)
         : `${key}=${encodeURIComponent(value)}`,
     )
     .join('&')
@@ -171,7 +177,8 @@ export function autoMatch(
   })
 }
 
-export const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
+export const capitalize = (s: string) =>
+  s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()
 
 export const resolvePhoneNumber = (phone: string) => {
   if (!phone) return ''

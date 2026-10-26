@@ -116,6 +116,11 @@ export type TFetchHrmLeavesParams = TBaseQueryParams & {
 
 export type TFetchHrmLeavesTypesData = {
   id: number
+  leaves: {
+    id: number
+    leave: string
+    status: string
+  }[]
   leave_name: string
   period_type: string
   weekend: string
@@ -132,6 +137,7 @@ export type TFetchHrmLeavesTypesData = {
   no_approvals: number
   requires_approval: number
   is_generic: number
+  is_active: number
   category_station_id: number | null
   gender: string | null
   is_paid: number
@@ -153,9 +159,10 @@ export type TFetchHrmLeavesTypesData = {
   }[]
 }
 
-export type TFetchHrmLeavesTypesResponse = TGetApiResponse<
-  TFetchHrmLeavesTypesData[]
->
+export type TFetchHrmLeavesTypesResponse = TGetApiResponse<{
+  results: TFetchHrmLeavesTypesData[]
+  total: number
+}>
 
 export type TFetchHrmLeaveByIdResponse = TGetApiResponse<TFetchHrmLeavesData>
 
@@ -223,3 +230,266 @@ type TCreateHrmLeaveResponseData = {
 
 export type TCreateHrmLeaveResponse =
   TPostApiResponse<TCreateHrmLeaveResponseData>
+
+export type TGenerateHrmReportsParams = {
+  fetch_by: string
+  fetch_by_id: number[]
+  columns?: string[]
+  start_date?: string
+  end_date?: string
+  page: number
+  perPage: number
+  year?: string
+  group_by?: 'leave_type' | 'employee'
+  leave_type_id?: number
+}
+
+export type TGenerateHrmReportsResponse = TGetApiResponse<{
+  results: {
+    pin: number
+    gender: string | null
+    email: string
+    name: string
+    employee_id: number
+    exemption_count: number
+  }[]
+  total: number
+}>
+
+// for leave type; group employee
+
+export type TFetchHrmLeaveReportsGroupByEmployeeData = {
+  reports: {
+    id: number
+    name: string
+    entitled_leaves: {
+      id: number
+      leave_type: string
+      entitlement: number
+      company_id: number
+      employee_id: number
+      pending_approval: number
+      scheduled: number
+      taken: number
+      balance: number
+    }[]
+  }[]
+  total: number
+}
+
+// for leave type; group leave
+export type TFetchHrmLeaveReportsGroupByLeaveData = {
+  total: number
+  leave_type_name: string
+  results: {
+    employee_id: number
+    company_id: number
+    pin: number
+    gender: string | null
+    name: string
+    station_id: number
+    department_id: number
+    employee_grade_id: number
+    id: number
+    leave_type_id: number
+    leave_type: string
+    entitlement: number
+    pending_approval: number
+    scheduled: number
+    taken: number
+    balance: number
+  }[]
+}
+
+export type TFetchHrmLeaveReportsResponse = TGetApiResponse<
+  | TFetchHrmLeaveReportsGroupByLeaveData
+  | TFetchHrmLeaveReportsGroupByEmployeeData
+>
+
+export type TUpdateHrmLeaveTypeStatusPayload = {
+  id: number
+  is_active: boolean
+}
+
+export type TReassignPendingLeavesPayload = {
+  leave_ids?: number[]
+  source_leave_type_id: number
+  target_leave_type_id: number
+}
+
+export type TFetchHrmLeaveTypeByIdResponse = TGetApiResponse<{
+  id: number
+  leave_name: string
+  period_type: string
+  weekend: string
+  applicable_days: number
+  note: string
+  is_vacation: number
+  company_id: number
+  created_at: string
+  updated_at: string
+  station_id: number
+  month_limit_before_deduction: 0
+  approval_type: null
+  category_type: string
+  no_approvals: number
+  requires_approval: number
+  is_generic: number
+  category_station_id: number
+  gender: string | null
+  is_paid: number
+  exclude_public_holidays: number
+  departments: number[]
+  employees: number[]
+  branch: {
+    id: number
+    station_name: string
+  }
+  employeeGrades: number[]
+}>
+
+export type TFetchHrmLeaveApproversData = {
+  id: number
+  description: string
+  approval_types: string
+  no_approvals: number
+  station_category_id: number
+  company_id: number
+  station_id: number
+  created_at: string
+  updated_at: string
+  category_type: string
+  departments: []
+  employees: {
+    id: number
+    employee_name: string
+  }[]
+  branches: []
+  employeeGrades: []
+  branch: {
+    id: number
+    station_name: string
+  }
+  approvalLevels: {
+    id: number
+    approval_person_id: number
+    company_id: number
+    station_id: number
+    approval_person_name: string
+    approval_person_email: string
+    approval_levelable_id: string
+    alt_approval_person_id: number | null
+    alt_approval_person: string
+  }[]
+}
+
+export type TFetchHrmLeaveApproversResponse = TGetApiResponse<{
+  total: number
+  results: TFetchHrmLeaveApproversData[]
+}>
+
+export type TFetchHrmLeaveApproversByIdData = {
+  id: number
+  description: string
+  approval_types: string
+  no_approvals: number
+  station_category_id: number
+  company_id: number
+  station_id: number
+  created_at: string
+  updated_at: string
+  category_type: string
+  departments: {
+    id: number
+    department_name: string
+  }[]
+  employeeGrades: {
+    id: number
+    grade_name: string
+  }[]
+  employees: {
+    id: number
+    employee_name: string
+  }[]
+  branches: {
+    id: number
+    station_name: string
+  }[]
+  branch: {
+    id: number
+    station_name: string
+  }
+  approvalLevels: {
+    id: number
+    approval_person_id: number
+    company_id: number
+    station_id: number
+    approval_person_name: string
+    approval_person_email: string
+    approval_levelable_id: string
+    alt_approval_person_id: number | null
+    alt_approval_person: string
+  }[]
+}
+
+export type TFetchHrmLeaveApproversByIdResponse =
+  TGetApiResponse<TFetchHrmLeaveApproversByIdData>
+
+export type TFetchHrmExemptionSettingsApprovals = {
+  id: number
+  name: string
+  approval_types: string
+  no_approvals: number
+  company_id: number
+  station_id: number
+  created_at: string
+  updated_at: string
+  category_type: string
+  category_station_id: string
+}
+
+export type TFetchHrmExemptionsApprovalsResponse = TGetApiResponse<{
+  results: TFetchHrmExemptionSettingsApprovals[]
+  total: number
+}>
+
+export type TFetchHrmExemptionsApprovalByIdData = {
+  id: number
+  name: string
+  approval_types: string
+  no_approvals: number
+  company_id: number
+  station_id: number
+  created_at: string
+  updated_at: string
+  category_type: string
+  category_station_id: string
+  station_name: null
+  employees: {
+    id: number
+    employee_name: string
+  }[]
+  approvalLevels: {
+    approval_person_id: number
+    alt_approval_person: string
+    approval_person_name: string
+    approval_person_email: string
+    approval_levelable_id: string
+    alt_approval_person_id: number | null
+  }[]
+  departments: {
+    id: number
+    department_name: string
+  }[]
+  employeeGrades: {
+    id: number
+    grade_name: string
+  }[]
+  branches: {
+    id: number
+    station_name: string
+  }[]
+}
+
+export type TFetchHrmExemptionsApprovalByIdResponse =
+  TGetApiResponse<TFetchHrmExemptionsApprovalByIdData>

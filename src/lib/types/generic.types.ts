@@ -30,7 +30,14 @@ export type TamsTableColumn = {
 
 export type TamsTableData = {
   [key: string | number]:
-    string | number | boolean | null | string[] | number[] | boolean[]
+    | string
+    | number
+    | boolean
+    | null
+    | string[]
+    | number[]
+    | boolean[]
+    | Record<string, any>[]
 }
 
 export type TamsActionPopoverOption = {
@@ -68,11 +75,13 @@ export type TFormFieldType =
   | 'textarea'
   | 'search-dropdown'
   | 'multi-select'
+  | 'multi-select-searchable'
   | 'date'
   | 'date-picker-input'
   | 'file'
   | 'switch'
   | 'url'
+  | 'list'
 
 export type TamsBy2ColsFormField = {
   name: string
@@ -93,10 +102,12 @@ export type TamsBy2ColsFormField = {
   suffix?: string
   maxSize?: number
   dateType?: 'multiple' | 'range'
+  listItems?: React.ReactNode
 }
 
 export type TamsBy2ColsFormFields = {
   title: string
+  description?: string
   fields: TamsBy2ColsFormField[]
 }
 

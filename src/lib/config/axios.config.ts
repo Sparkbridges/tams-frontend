@@ -7,6 +7,7 @@ import type {
 import { useTamsStore } from '../store'
 import { notifications } from '@mantine/notifications'
 import { getRouter } from '#/router'
+import { getErrorMessage } from '../utils'
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
@@ -20,7 +21,7 @@ const api = axios.create({
   }, */
 })
 
-let count = 0;
+let count = 0
 
 /*
 let refreshPromise: Promise<void> | null = null
@@ -84,6 +85,14 @@ api.interceptors.response.use(
         })
       }
       getRouter().navigate({ to: '/login' })
+      return Promise.reject(error)
+    }
+    if (error.response?.status !== 401) {
+      notifications.show({
+        title: 'Error',
+        message: getErrorMessage(error),
+        color: 'red',
+      })
       return Promise.reject(error)
     }
 

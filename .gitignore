@@ -14,6 +14,7 @@ todos.json
 
 # Logs
 logs
+!src/routes/admin-dashboard/attendance/devices/transactions/logs/
 *.log
 npm-debug.log*
 yarn-debug.log*

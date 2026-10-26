@@ -184,3 +184,22 @@ export const editPublicHolidaysSettingsSchema = zodObjectSchema({
   ...createPublicHolidaysSettingsSchema.shape,
   id: numberSchema().min(1, 'ID is required'),
 })
+
+export const inviteEmployeeSchema = zodObjectSchema({
+  first_name: stringSchema().nonempty('First name is required'),
+  last_name: stringSchema().nonempty('Last name is required'),
+  email: emailSchema().nonempty('Email is required'),
+  roles: numberSchema().array().min(1, 'Role is required'),
+  pin: numberSchema().min(1, 'PIN is required'),
+  branch_id: numberSchema().min(1, 'Branch is required'),
+  department_id: numberSchema().min(1, 'Department is required'),
+  employee_type_id: numberSchema().min(1, 'Employee type is required'),
+  employee_designation_id: numberSchema().min(
+    1,
+    'Employee designation is required',
+  ),
+  employee_grade_id: numberSchema().min(1, 'Employee grade is required'),
+  employee_category_id: numberSchema().min(1, 'Employee category is required'),
+})
+
+export type TInviteEmployeesPayload = z.infer<typeof inviteEmployeeSchema>

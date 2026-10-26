@@ -1,14 +1,22 @@
-import { OrganizationEmployeeTable, TamsButton, TamsTabs } from '#/components'
-import { UploadEmployeeModal } from '#/components/organisms/modals'
+import { OrganizationEmployeeTable, TamsTabs } from '#/components'
+import TamsButtonDropdown from '#/components/molecules/dropdown/TamsButtonDropdown'
+import {
+  UploadEmployeeModal,
+  InviteEmployeeModal,
+} from '#/components/organisms/modals'
 import {
   documentHelper,
   useFetchOrganizationEmployeesCount,
   useGetPageHeader,
 } from '#/lib'
-import type { TTamsTabs } from '#/lib'
+import type { TamsMenuItem, TTamsTabs } from '#/lib'
 import { Divider, Group } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { PlusIcon, UploadSimpleIcon } from '@phosphor-icons/react'
+import {
+  PaperPlaneTiltIcon,
+  PlusIcon,
+  UploadSimpleIcon,
+} from '@phosphor-icons/react'
 import { createFileRoute } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 
@@ -36,6 +44,12 @@ function RouteComponent() {
     isUploadEmployeeModalOpen,
     { open: openUploadEmployeeModal, close: closeUploadEmployeeModal },
   ] = useDisclosure(false)
+
+  const [
+    inviteEmployeeModalOpen,
+    { open: openInviteEmployeeModal, close: closeInviteEmployeeModal },
+  ] = useDisclosure(false)
+
   const [tabValue, setTabValue] = useState<string | null>('all')
 
   const tabOptions: TTamsTabs[] = useMemo(
@@ -54,30 +68,41 @@ function RouteComponent() {
     ],
     [employeesCount],
   )
+
+  const buttonDropdownOptions: TamsMenuItem[] = [
+    {
+      label: 'Add Employee Manually',
+      type: 'item',
+      onClick: () =>
+        navigate({
+          to: `/admin-dashboard/organization/employees/create`,
+        }),
+      icon: PlusIcon,
+    },
+    {
+      label: 'Upload Employees',
+      type: 'item',
+      onClick: openUploadEmployeeModal,
+      icon: UploadSimpleIcon,
+    },
+    {
+      label: 'Invite Employee',
+      type: 'item',
+      onClick: openInviteEmployeeModal,
+      icon: PaperPlaneTiltIcon,
+    },
+  ]
   return (
     <main>
       <section className="flex items-center justify-between">
         {pageHeader()}
         <Group gap="md">
-          <TamsButton
-            variant="default"
-            leftSection={<UploadSimpleIcon />}
+          <TamsButtonDropdown
+            width={250}
             size="md"
-            onClick={openUploadEmployeeModal}
-          >
-            Upload Employees
-          </TamsButton>
-          <TamsButton
-            size="md"
-            leftSection={<PlusIcon />}
-            onClick={() =>
-              navigate({
-                to: `/admin-dashboard/organization/employees/create`,
-              })
-            }
-          >
-            New Employee
-          </TamsButton>
+            options={buttonDropdownOptions}
+            btnText="Add Employee"
+          />
         </Group>
       </section>
       <Divider mt="lg" />
@@ -94,6 +119,10 @@ function RouteComponent() {
       <UploadEmployeeModal
         opened={isUploadEmployeeModalOpen}
         onClose={closeUploadEmployeeModal}
+      />
+      <InviteEmployeeModal
+        opened={inviteEmployeeModalOpen}
+        onClose={closeInviteEmployeeModal}
       />
     </main>
   )

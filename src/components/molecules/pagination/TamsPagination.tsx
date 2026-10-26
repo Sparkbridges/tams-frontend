@@ -1,5 +1,5 @@
 import { TamsButton, TamsNumberInput } from '#/components/atoms'
-import { Pagination } from '@mantine/core'
+import { Divider, Pagination } from '@mantine/core'
 import { useState } from 'react'
 
 type TamsPaginationProps = {
@@ -18,6 +18,8 @@ const TamsPagination = ({
   const [gotoPage, setGotoPage] = useState<number>(page)
   return (
     <div className="flex items-center justify-center gap-10">
+      <p className="text-sm text-gray-900 text-pretty">Total: {total ?? 0}</p>
+      <Divider orientation="vertical" />
       <Pagination
         total={numberOfPages}
         size="md"
