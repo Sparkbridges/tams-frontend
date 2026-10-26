@@ -79,6 +79,27 @@ export const pageHeaderNav: Record<
     icon: DoorOpenIcon,
     description: 'Manage HRM leaves within the organization',
   },
+  'hrm-reports': {
+    title: 'Hrm Reports',
+    icon: ChartLineUpIcon,
+    description: 'Manage HRM reports within the organization',
+  },
+  'hrm-settings': {
+    title: 'Hrm System Settings',
+    icon: SlidersHorizontalIcon,
+    description: 'Manage HRM system settings within the organization',
+  },
+  'leaves-settings': {
+    title: 'Hrm Leaves Settings',
+    icon: DoorOpenIcon,
+    description: 'Manage HRM leaves settings within the organization',
+  },
+  'exemptions-settings': {
+    title: 'Hrm Exemptions Approvals Settings',
+    icon: ExcludeIcon,
+    description:
+      'Manage HRM exemptions settings approvals within the organization',
+  },
 }
 
 export const adminNavigation: TamsNavigation[] = [
@@ -156,7 +177,12 @@ export const adminNavigation: TamsNavigation[] = [
       {
         id: 16,
         name: 'Reports',
-        url: '/reports',
+        url: '/hrm-reports',
+      },
+      {
+        id: 190,
+        name: 'Settings',
+        url: '/hrm-settings',
       },
       ...(import.meta.env.NODE_ENV !== 'production'
         ? [
@@ -188,22 +214,22 @@ export const adminNavigation: TamsNavigation[] = [
       {
         id: 22,
         name: 'Scheduler',
-        url: '/admin/attendance/scheduler',
+        url: '/scheduler',
       },
       {
         id: 23,
         name: 'Devices',
-        url: '/admin/attendance/devices',
+        url: '/devices',
       },
       {
         id: 25,
         name: 'Overtime',
-        url: '/admin/attendance/overtime',
+        url: '/overtime',
       },
       {
         id: 24,
         name: 'Reports',
-        url: '/admin/attendance/reports',
+        url: '/attendance-reports',
       },
     ],
   },

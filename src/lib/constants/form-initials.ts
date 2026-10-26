@@ -162,3 +162,74 @@ export const editHrmLeavesInitials = {
   ...createHrmLeavesInitials,
   id: 0,
 }
+
+export const createHrmLeaveTypeInitials = {
+  leave_name: '',
+  period_type: 'Day' as string,
+  weekend: [] as string[],
+  exclude_public_holidays: false,
+  applicable_days: 0,
+  note: '',
+  is_generic: 1,
+  is_paid: true,
+  gender: 'male' as string,
+  isGenderBased: false, // not included
+  isApplicableToAllBranches: true,
+  departments: [] as number[],
+  grades: [] as number[],
+  employees: [] as number[],
+  category_type: 'all_users',
+  branch_id: null as unknown as number,
+  employee_query: '',
+}
+
+export const editHrmLeaveTypeInitials = {
+  ...createHrmLeaveTypeInitials,
+  id: 0,
+}
+
+export const createHrmLeaveApproverInitials = {
+  description: '',
+  approval_types: '',
+  category_type: '' as any,
+  employees: [] as number[],
+  branch_id: null,
+  no_approvals: 0,
+  departments: [] as number[],
+  grades: [] as number[],
+  employee_query: '',
+  branches: [] as number[],
+}
+
+export const editHrmLeaveApproverInitials = {
+  ...createHrmLeaveApproverInitials,
+  id: 0,
+}
+
+export const createEditHrmExemptionApproverInitials = {
+  name: '',
+  approval_types: '',
+  category_type: '' as any,
+  employees: [] as number[],
+  category_branch_id: 0,
+  no_approvals: 0,
+  departments: [] as number[],
+  grades: [] as number[],
+  employee_query: '',
+  branches: [] as number[],
+  id: 0,
+}
+
+export const inviteEmployeeInitials = {
+  branch_id: 0,
+  department_id: 0,
+  employee_type_id: 0,
+  employee_designation_id: 0,
+  employee_grade_id: 0,
+  employee_category_id: 0,
+  first_name: '',
+  last_name: '',
+  email: '',
+  roles: [],
+  pin: 0,
+}

@@ -78,7 +78,7 @@ const useHrmLeaveTable = () => {
   )
 
   const { data: leaveTypes } = useGetHrmLeaveTypes((data) =>
-    data.data.map((i) => ({
+    data.data.results.map((i) => ({
       label: i.leave_name?.toLowerCase(),
       value: i.id.toString(),
     })),

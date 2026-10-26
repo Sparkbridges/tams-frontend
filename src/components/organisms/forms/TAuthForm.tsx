@@ -114,7 +114,7 @@ const TAuthForm = () => {
                 key={form.key('company_id')}
                 {...form.getInputProps('company_id')}
                 placeholder="Company Url"
-                companySuffix=".tams.com.ng"
+                companysuffix=".tams.com.ng"
               />
             </div>
           </Stepper.Step>

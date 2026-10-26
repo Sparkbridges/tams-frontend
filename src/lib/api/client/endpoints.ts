@@ -1,4 +1,10 @@
 export const ENDPOINTS = {
+  attendanceDevices: '/attendance/devices',
+  attendanceWorkshifts: '/attendance/shift/workshift',
+  attendanceShiftTypes: '/attendance/shift/settings/shift-type',
+  attendanceCalendar: '/attendance/shift/calendar',
+  attendanceRoster: '/attendance/shift/roster',
+  attendanceSettings: '/attendance/settings',
   // auth
   verifyCompanyUrl: '/auth/company/verify',
   login: '/auth/login',
@@ -11,7 +17,7 @@ export const ENDPOINTS = {
   // attendance
   fetchAttendanceDashboardPunctuality: '/attendance/dashboard/punctuality',
 
-  // organization routes
+  // -------------- organization routes ---------------------------------
   searchOrganizationEmployees: '/organization/employees/search',
   branches: '/organization/branches',
   deleteBulkBranches: '/organization/branches/delete',
@@ -57,18 +63,28 @@ export const ENDPOINTS = {
     '/organization/system-settings/public-holiday-settings/custom',
   cancelPublicHolidaySettings:
     '/organization/system-settings/public-holiday-settings/:id/cancel',
+  inviteEmployees: '/organization/employees/invite',
 
-  // hrm routes
+  // ------------------------- hrm routes ----------------------------------------
   getHrmExemptions: '/hrm/exemptions/view-all',
   hrmExemptions: '/hrm/exemptions',
   canApproveHrmExemption: '/hrm/exemptions/can/approve',
   approveHrmExemption: '/hrm/exemptions/approve',
-
   // leave
   hrmLeaves: '/hrm/leaves',
   hrmLeaveTypes: '/hrm/leaves/settings/leavetypes',
+  updateLeaveTypesStatus: '/hrm/leaves/settings/leavetypes/:id/status',
+  reassignPendingLeaves: '/hrm/leaves/reassign-pending',
   deleteLeaves: '/hrm/leaves/delete',
   getHrmLeaveTypeByEmployeeId: '/hrm/leave-types-by-employee',
+  // reports
+  fetchHrmReports: '/hrm/reports/generate-exemption-usage-reports',
+  fetchHrmLeaveReports: '/hrm/reports/generate-leave-usage-reports',
+  // hrm leave approvers
+  hrmLeaveApprovers: '/hrm/leaves/settings/approversettings',
+
+  // exemptions settings
+  hrmExemptionsSettingsApprovals: '/hrm/exemptions/settings/approvals',
 
   // payroll
   verifyAccountNumber:
