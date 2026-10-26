@@ -107,4 +107,45 @@ export const emptyStates = {
       icon: '/images/svg/file-search.svg',
     },
   ],
+  hrmExemptionsSettings: [
+    {
+      title: 'No Leaves Exemptions settings Found',
+      description:
+        'There are currently no leaves exemptions in the organization.',
+      icon: '/images/svg/no-data.svg',
+    },
+    {
+      title: 'No results found',
+      description:
+        "We couldn't find anything matching your search. Try adjusting your filters or searching with different keywords to see more results.",
+      icon: '/images/svg/file-search.svg',
+    },
+  ],
+  hrmLeaveTypeSettings: [
+    {
+      title: 'No Leaves type settings Found',
+      description: 'There are currently no leaves type in the organization.',
+      icon: '/images/svg/no-data.svg',
+    },
+    {
+      title: 'No results found',
+      description:
+        "We couldn't find anything matching your search. Try adjusting your filters or searching with different keywords to see more results.",
+      icon: '/images/svg/file-search.svg',
+    },
+  ],
+  hrmLeaveApproversSettings: [
+    {
+      title: 'No Leaves approvers settings Found',
+      description:
+        'There are currently no leaves approvers in the organization.',
+      icon: '/images/svg/no-data.svg',
+    },
+    {
+      title: 'No results found',
+      description:
+        "We couldn't find anything matching your search. Try adjusting your filters or searching with different keywords to see more results.",
+      icon: '/images/svg/file-search.svg',
+    },
+  ],
 }

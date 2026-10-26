@@ -1,2 +1,6 @@
 export { default as UploadEmployeeModal } from './UploadEmployeeModal'
 export { default as CreatePublicHolidaySettingsModal } from './CreatePublicHolidaysSettingsModal'
+export { default as CreateLeaveTypeModal } from './CreateHrmLeaveTypeModal'
+export { default as CreateHrmLeaveApproverModal } from './CreateHrmLeaveApproverModal'
+export { default as CreateExemptionApproverModal } from './CreateHrmExemptionsApproverModal'
+export { default as InviteEmployeeModal } from './InviteEmployeeModal'

@@ -71,6 +71,7 @@ import { notifications } from '@mantine/notifications'
 import type {
   TCreateEmployeePayload,
   TEditCompanyPayload,
+  TInviteEmployeesPayload,
   TUpdateEmployeePayload,
 } from '#/lib/utils'
 
@@ -1200,6 +1201,24 @@ export const useCancelPublicHolidaySettings = () => {
       notifications.show({
         title: 'Success',
         message: 'Public holiday cancelled successfully',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useInviteEmployee = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (payload: TInviteEmployeesPayload) =>
+      organizationClient.inviteEmployees(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.inviteEmployees],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Employees invited successfully',
         color: 'green',
       })
     },

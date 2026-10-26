@@ -103,7 +103,7 @@ const Tams2ColsForm = <T, TTransform = (values: T) => T>({
                         readOnly={subField.readonly}
                         hidden={subField.hidden}
                         disabled={subField.disabled}
-                        companySuffix={subField.suffix as string}
+                        companysuffix={subField.suffix as string}
                       />
                     </Grid.Col>
                   )

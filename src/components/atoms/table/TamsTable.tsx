@@ -173,7 +173,7 @@ const TamsTable = ({
               </Table.Td>
             )
           }
-          if (column.accessor === 'status') {
+          if (['status', 'isPaid'].includes(column.accessor)) {
             const statusObject = getStatusColor(row[column.accessor] as string)
             return (
               <Table.Td key={i}>
@@ -182,7 +182,7 @@ const TamsTable = ({
                   color={statusObject.color}
                   size="sm"
                 >
-                  {row[column.accessor]}
+                  {row[column.accessor] as string}
                 </Badge>
               </Table.Td>
             )
@@ -192,7 +192,7 @@ const TamsTable = ({
           }
           return (
             <Table.Td miw={column.width} key={i}>
-              {row[column.accessor]}
+              {row[column.accessor] as string}
             </Table.Td>
           )
         })}

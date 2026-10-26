@@ -2,6 +2,7 @@ import {
   TamsDateInput,
   TamsDropzone,
   TamsMultiSelect,
+  TamsNumberInput,
   TamsSelectInput,
   TamsSwitchInput,
   TamsTextArea,
@@ -30,15 +31,16 @@ const Tams2ColsForm2 = <T, TTransform = (values: T) => T>({
         className={`${rightSection ? 'lg:col-span-8 col-span-12' : 'col-span-12'} space-y-5`}
       >
         {fields.map((field) => (
-          <Paper
-            key={field.title}
-            p={'lg'}
-            withBorder
-            className="col-span-2 lg:col-span-7"
-          >
-            <Text mb={16} fw={600}>
-              {field.title}
-            </Text>
+          <Paper key={field.title} p={'lg'} withBorder className="">
+            <div className="mb-5 space-y-1">
+              <Text fw={600}>{field.title}</Text>
+              {field.description && (
+                <Text size="xs" c="dimmed">
+                  {field.description}
+                </Text>
+              )}
+            </div>
+
             <Grid>
               {field.fields.map((subField) => {
                 if (subField.type == 'text') {
@@ -59,6 +61,27 @@ const Tams2ColsForm2 = <T, TTransform = (values: T) => T>({
                     </Grid.Col>
                   )
                 }
+                if (subField.type == 'number') {
+                  return (
+                    <Grid.Col
+                      span={{ base: 12, md: 6, lg: subField.cols }}
+                      key={subField.name}
+                    >
+                      <TamsNumberInput
+                        label={subField.label}
+                        key={form.key(subField.name)}
+                        {...form.getInputProps(subField.name)}
+                        withAsterisk={subField.required}
+                        readOnly={subField.readonly}
+                        hidden={subField.hidden}
+                        disabled={subField.disabled}
+                        allowDecimal={false}
+                        min={0}
+                        allowNegative={false}
+                      />
+                    </Grid.Col>
+                  )
+                }
                 if (subField.type == 'url') {
                   return (
                     <Grid.Col
@@ -73,7 +96,7 @@ const Tams2ColsForm2 = <T, TTransform = (values: T) => T>({
                         readOnly={subField.readonly}
                         hidden={subField.hidden}
                         disabled={subField.disabled}
-                        companySuffix={subField.suffix as string}
+                        companysuffix={subField.suffix as string}
                       />
                     </Grid.Col>
                   )
@@ -109,6 +132,37 @@ const Tams2ColsForm2 = <T, TTransform = (values: T) => T>({
                         withAsterisk={subField.required}
                         data={subField.options}
                         searchable
+                      />
+                    </Grid.Col>
+                  )
+                }
+                if (subField.type == 'multi-select-searchable') {
+                  return (
+                    <Grid.Col
+                      span={{ base: 12, md: 6, lg: subField.cols }}
+                      key={subField.name}
+                    >
+                      <TamsMultiSelect
+                        label={subField.label}
+                        key={form.key(subField.name)}
+                        {...form.getInputProps(subField.name)}
+                        withAsterisk={subField.required}
+                        data={subField.options}
+                        searchable
+                        searchValue={
+                          (
+                            form.getValues() as unknown as Record<
+                              string,
+                              string | undefined
+                            >
+                          )[subField.alias as string]
+                        }
+                        onSearchChange={(value) =>
+                          form.setFieldValue(
+                            subField.alias as string,
+                            value as any,
+                          )
+                        }
                       />
                     </Grid.Col>
                   )
@@ -184,6 +238,16 @@ const Tams2ColsForm2 = <T, TTransform = (values: T) => T>({
                         })}
                         withAsterisk={subField.required}
                       />
+                    </Grid.Col>
+                  )
+                }
+                if (subField.type == 'list') {
+                  return (
+                    <Grid.Col
+                      span={{ base: 12, lg: subField.cols }}
+                      key={subField.name}
+                    >
+                      {subField.listItems}
                     </Grid.Col>
                   )
                 }
@@ -318,7 +382,7 @@ const Tams2ColsForm2 = <T, TTransform = (values: T) => T>({
                           readOnly={subField.readonly}
                           hidden={subField.hidden}
                           disabled={subField.disabled}
-                          companySuffix={subField.suffix as string}
+                          companysuffix={subField.suffix as string}
                         />
                       </Grid.Col>
                     )
@@ -516,7 +580,7 @@ const Tams2ColsForm2 = <T, TTransform = (values: T) => T>({
                         readOnly={subField.readonly}
                         hidden={subField.hidden}
                         disabled={subField.disabled}
-                        companySuffix={subField.suffix as string}
+                        companysuffix={subField.suffix as string}
                       />
                     </Grid.Col>
                   )

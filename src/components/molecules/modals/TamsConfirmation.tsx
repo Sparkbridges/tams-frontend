@@ -36,7 +36,9 @@ const TamsConfirmation = ({
         <Text mb={10} fw={700} fz={24}>
           {title}
         </Text>
-        <Text color="dimmed">{message}</Text>
+        <Text color="dimmed" className="whitespace-pre-line">
+          {message}
+        </Text>
         {content && <div>{content}</div>}
       </section>
       <Divider my="lg" />

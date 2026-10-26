@@ -319,7 +319,7 @@ export default function PersonnelPdfDocument({
                       ]}
                       key={c.accessor + index}
                     >
-                      {r[c.accessor]}
+                      {r[c.accessor] as string}
                     </Text>
                   )
                 }
@@ -328,7 +328,7 @@ export default function PersonnelPdfDocument({
                     style={[s.cellMono, { width: 100 / columns.length + '%' }]}
                     key={c.accessor + index}
                   >
-                    {r[c.accessor]}
+                    {r[c.accessor] as string}
                   </Text>
                 )
               })}

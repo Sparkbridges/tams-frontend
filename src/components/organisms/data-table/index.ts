@@ -6,3 +6,5 @@ export { default as OrganizationEmployeeSettingsTable } from './OrganizationEmpl
 export { default as AccountSettingsPublicHolidayTable } from './AccountSettingsHolidaysTable'
 export { default as HrmExemptionTable } from './HrmExemptionTable'
 export { default as HrmLeaveTable } from './HrmLeaveTable'
+export { default as HrmLeaveSettingsTable } from './HrmLeaveSettingsTable'
+export { default as HrmExemptionSettingsTable } from './HrmExemptionSettingsTable'

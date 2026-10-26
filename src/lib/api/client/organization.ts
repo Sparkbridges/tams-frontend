@@ -83,6 +83,7 @@ import { paramsSerializer } from '#/lib/utils'
 import type {
   TCreateEmployeePayload,
   TEditCompanyPayload,
+  TInviteEmployeesPayload,
   TUpdateEmployeePayload,
 } from '#/lib/utils'
 import { ENDPOINTS } from './endpoints'
@@ -107,7 +108,7 @@ const organizationClient = {
    * @throws {Error} If the request fails.
    */
   fetchOrganizationBranches: async (
-    params: TFetchOrganizationBranchesParams,
+    params?: TFetchOrganizationBranchesParams,
   ) => {
     return await Client.get<TFetchOrganizationBranchesResponse>(
       ENDPOINTS.branches,
@@ -1077,6 +1078,16 @@ const organizationClient = {
       ),
       payload,
     )
+  },
+
+  /**
+   * Description - Invite employees to the organization.
+   * @param payload The payload containing the employee invitation details.
+   * @returns Data fetched from `/organization/employees/invite`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  inviteEmployees: async (payload: TInviteEmployeesPayload) => {
+    return await Client.post(`${ENDPOINTS.inviteEmployees}`, payload)
   },
 }
 export default organizationClient

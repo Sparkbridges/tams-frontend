@@ -8,3 +8,5 @@ export { default as useAccountSettingsHolidaysTable } from './useAccountSettings
 // hrm
 export { default as useHrmExemptionsTable } from './useHrmExemptionTable'
 export { default as useHrmLeaveTable } from './useHrmLeaveTable'
+export { default as useHrmLeaveSettingsTable } from './useHrmLeaveSettingsTable'
+export { default as useHrmExemptionsSettingsTable } from './useHrmExemptionSettingsTable'
