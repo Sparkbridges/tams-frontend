@@ -2,6 +2,7 @@ import { HeadContent, Outlet, createRootRoute } from '@tanstack/react-router'
 import { Notifications } from '@mantine/notifications'
 
 import '../styles/css/styles.css'
+import '@mantine/schedule/styles.css'
 import { MantineProvider } from '@mantine/core'
 import { theme } from '#/styles/theme/theme.config'
 import { QueryProvider } from '#/lib'

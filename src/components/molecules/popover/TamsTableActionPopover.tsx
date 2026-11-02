@@ -19,20 +19,23 @@ const TamsTableActionPopover = ({ data }: TamsTableActionPopoverProps) => {
         </ActionIcon>
       }
     >
-      {data.map((item: TamsActionPopoverOption, index: number) => (
-        <div
-          style={{ color: item.color }}
-          className="hover:bg-gray-100 cursor-pointer flex items-center p-2 text-sm font-medium gap-1"
-          onClick={(e) => {
-            e.stopPropagation()
-            item.action()
-          }}
-          key={index}
-        >
-          {item.icon && <item.icon className="mr-2" />}
-          {item.label}
-        </div>
-      ))}
+      {data.map(
+        (item: TamsActionPopoverOption, index: number) =>
+          !item.hidden && (
+            <div
+              style={{ color: item.color }}
+              className="hover:bg-gray-100 cursor-pointer flex items-center p-2 text-sm font-medium gap-1"
+              onClick={(e) => {
+                e.stopPropagation()
+                item.action()
+              }}
+              key={index}
+            >
+              {item.icon && <item.icon className="mr-2" />}
+              {item.label}
+            </div>
+          ),
+      )}
     </TamsPopover>
   )
 }

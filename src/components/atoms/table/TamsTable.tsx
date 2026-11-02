@@ -304,10 +304,12 @@ const TamsTable = ({
           <Paper
             shadow="lg"
             withBorder
-            className="flex py-2 px-4 gap-5 items-center rounded-lg fixed left-1/2 z-30 bottom-5 -translate-x-1/2"
+            className="flex py-2 px-4 gap-5 w-auto max-w-3xl items-center rounded-lg fixed left-1/2 z-30 bottom-5 -translate-x-1/2"
             style={styles}
           >
-            <p>{selection.size} items selected</p>
+            <p className="font-medium text-sm">
+              {selection.size} items selected
+            </p>
             <Divider orientation="vertical" />
             <Group gap={20}>
               <TamsButton

@@ -2,7 +2,7 @@ import { Breadcrumbs, ThemeIcon } from '@mantine/core'
 import { Link, useLocation } from '@tanstack/react-router'
 import { pageHeaderNav } from '../constants'
 
-const useGetPageHeader = () => {
+const useGetPageHeader = (options?: { key?: string; title?: string }) => {
   const { pathname } = useLocation()
 
   const items = pathname
@@ -25,7 +25,7 @@ const useGetPageHeader = () => {
     })
 
   const title = pathname.split('/')[pathname.split('/').length - 1]
-  const pageobject = pageHeaderNav[title]
+  const pageobject = pageHeaderNav[options?.key ?? title]
 
   const pageHeader = () => {
     if (!pageobject) return null
@@ -37,7 +37,9 @@ const useGetPageHeader = () => {
             {pageobject.icon && <pageobject.icon size={30} />}
           </ThemeIcon>
           <div>
-            <h1 className="text-3xl font-bold">{pageobject.title}</h1>
+            <h1 className="text-3xl font-bold">
+              {options?.title ?? pageobject.title}
+            </h1>
             <p className="text-sm text-gray-600">{pageobject.description}</p>
           </div>
         </div>

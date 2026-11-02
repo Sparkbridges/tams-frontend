@@ -67,6 +67,7 @@ const Tams2ColsForm = <T, TTransform = (values: T) => T>({
                         {...form.getInputProps(subField.name)}
                         withAsterisk={subField.required}
                         data={subField.options}
+                        disabled={subField.disabled}
                         searchable
                       />
                     </Grid.Col>

@@ -28,7 +28,7 @@ const TamsActionWidget = ({
       {(styles) => (
         <div
           style={styles}
-          className="bg-neutrals px-5 py-2 gap-x-16 fixed top-0 left-0 z-999 w-full flex items-center"
+          className="bg-neutrals px-5 py-2 gap-x-16 fixed top-0 left-0 z-380 w-full flex items-center"
         >
           <TTextBrand className="block w-36" />
           <div className="flex items-center space-x-1 text-white">
