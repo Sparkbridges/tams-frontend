@@ -1,10 +1,4 @@
 export const ENDPOINTS = {
-  attendanceDevices: '/attendance/devices',
-  attendanceWorkshifts: '/attendance/shift/workshift',
-  attendanceShiftTypes: '/attendance/shift/settings/shift-type',
-  attendanceCalendar: '/attendance/shift/calendar',
-  attendanceRoster: '/attendance/shift/roster',
-  attendanceSettings: '/attendance/settings',
   // auth
   verifyCompanyUrl: '/auth/company/verify',
   login: '/auth/login',
@@ -85,6 +79,23 @@ export const ENDPOINTS = {
 
   // exemptions settings
   hrmExemptionsSettingsApprovals: '/hrm/exemptions/settings/approvals',
+
+  // ----------------- attendance ----------------------------
+  attendanceReportGenerate: '/attendance/reports/:type/generate-v2',
+  attendanceReportDownload: '/attendance/reports/:type/download-v2',
+  attendanceDevices: '/attendance/devices',
+  attendanceDeviceTypes: '/attendance/devices/types',
+  attendanceDeviceUsers: '/attendance/devices/users',
+  attendanceUsersTransfer: `/attendance/devices/commands/users-transfer`,
+  attendanceUsersBulkTransfer: `/attendance/devices/commands/users/bulk-transfer`,
+  attendanceDeviceTransactions: '/attendance/devices/transactions',
+  attendanceWorkshifts: '/attendance/shift/workshift',
+  attendanceShiftTypes: '/attendance/shift/settings/shift-type',
+  attendanceCalendar: '/attendance/shift/calendar',
+  attendanceSchedules: '/attendance/shift/schedules-v2',
+  attendanceWorkshiftAssignments: '/attendance/shift/workshift/assign-v2',
+  attendanceRoster: '/attendance/shift/roster',
+  attendanceSettings: '/attendance/settings',
 
   // payroll
   verifyAccountNumber:
