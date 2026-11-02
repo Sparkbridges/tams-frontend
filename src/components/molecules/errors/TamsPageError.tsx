@@ -15,17 +15,25 @@ const errors = {
       'An unexpected error occurred. Please try again later or contact support if the problem persists.',
     code: 500,
   },
+  '403': {
+    title: 'Access denied',
+    description:
+      'You do not have permission to view this page. Please contact your administrator if you believe this is an error.',
+    code: 403,
+  },
 }
 type TamsPageErrorProps = {
-  type: '404' | '500'
+  type: '404' | '500' | '403'
 }
 export default function TamsPageError({ type }: TamsPageErrorProps) {
-    const { title, description, code } = errors[type]
-    const router = useRouter()
+  const { title, description, code } = errors[type]
+  const router = useRouter()
   return (
     <Container className={classes.root}>
       <div className={classes.inner}>
-        <Text className='absolute text-[362px] font-extrabold top-1/6 -translate-y-1/6 left-1/2 text-gray-400 -translate-x-1/2'>{code}</Text>
+        <Text className="absolute text-[362px] font-extrabold top-1/6 -translate-y-1/6 left-1/2 text-gray-400 -translate-x-1/2">
+          {code}
+        </Text>
         <div className={classes.content}>
           <Title className={classes.title}>{title}</Title>
           <Text
@@ -37,7 +45,13 @@ export default function TamsPageError({ type }: TamsPageErrorProps) {
             {description}
           </Text>
           <Group justify="center">
-            <Button size='lg' radius={'xl'} onClick={() => router.history.back()}>Take me back</Button>
+            <Button
+              size="lg"
+              radius={'xl'}
+              onClick={() => router.history.back()}
+            >
+              Take me back
+            </Button>
           </Group>
         </div>
       </div>

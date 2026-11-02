@@ -1,12 +1,18 @@
 import { TamsButton } from '#/components/atoms'
-import { Combobox, Divider, Radio, useCombobox } from '@mantine/core'
+import {
+  Combobox,
+  Divider,
+  Radio,
+  ScrollArea,
+  useCombobox,
+} from '@mantine/core'
 import { SlidersHorizontalIcon } from '@phosphor-icons/react'
 
 type Props = {
   label: string
   selectedOption: string | undefined
   setSelectedItem: (val: string) => void
-  data: { label: string; value: string }[]
+  data?: { label: string; value: string }[]
   width?: string | number
 }
 
@@ -20,7 +26,7 @@ const TamsTableFilter = ({
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   })
-  const options = data.map((item) => (
+  const options = data?.map((item) => (
     <Combobox.Option
       className="flex items-center gap-2"
       value={item.value}
@@ -52,16 +58,20 @@ const TamsTableFilter = ({
         </TamsButton>
       </Combobox.Target>
       <Combobox.Dropdown className="pb-3">
-        <Combobox.Option
-          className="flex items-center gap-2"
-          value="all"
-          key="all"
-        >
-          <Radio checked={selectedOption === 'all'} />
-          All
-        </Combobox.Option>
-        <Divider my={'sm'} />
-        {options}
+        <Combobox.Options>
+          <ScrollArea.Autosize type="scroll" mah={300}>
+            <Combobox.Option
+              className="flex items-center gap-2"
+              value="all"
+              key="all"
+            >
+              <Radio checked={selectedOption === 'all'} />
+              All
+            </Combobox.Option>
+            <Divider my={'sm'} />
+            {options}
+          </ScrollArea.Autosize>
+        </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
   )

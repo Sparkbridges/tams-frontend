@@ -45,6 +45,7 @@ export type TamsActionPopoverOption = {
   action: () => void
   color: MantineColor
   icon?: Icon
+  hidden?: boolean
 }
 
 export type TamsTableEmptyState = {

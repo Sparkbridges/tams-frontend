@@ -19,12 +19,13 @@ import { Route as AdminDashboardIndexRouteImport } from './routes/admin-dashboar
 import { Route as EssIndexRouteImport } from './routes/ess/index'
 import { Route as authPathlessLayoutLoginRouteImport } from './routes/(auth)/_pathlessLayout/login'
 import { Route as AdminDashboardAttendanceIndexRouteImport } from './routes/admin-dashboard/attendance/index'
+import { Route as AdminDashboardAttendanceAttendanceReportsRouteImport } from './routes/admin-dashboard/attendance/attendance-reports'
+import { Route as AdminDashboardAttendanceSchedulerRouteImport } from './routes/admin-dashboard/attendance/scheduler'
 import { Route as AdminDashboardAttendanceWorkshiftRouteImport } from './routes/admin-dashboard/attendance/workshift'
 import { Route as AdminDashboardHrmIndexRouteImport } from './routes/admin-dashboard/hrm/index'
 import { Route as AdminDashboardOrganizationIndexRouteImport } from './routes/admin-dashboard/organization/index'
 import { Route as AdminDashboardAttendanceDevicesIndexRouteImport } from './routes/admin-dashboard/attendance/devices/index'
-import { Route as AdminDashboardAttendanceDevicesCreateRouteImport } from './routes/admin-dashboard/attendance/devices/create'
-import { Route as AdminDashboardAttendanceDevicesUserTransferRouteImport } from './routes/admin-dashboard/attendance/devices/user-transfer'
+import { Route as AdminDashboardAttendanceDevicesPathlessLayoutRouteImport } from './routes/admin-dashboard/attendance/devices/_pathlessLayout'
 import { Route as AdminDashboardAttendanceWorkshiftIndexRouteImport } from './routes/admin-dashboard/attendance/workshift/index'
 import { Route as AdminDashboardAttendanceWorkshiftCalendarRouteImport } from './routes/admin-dashboard/attendance/workshift/calendar'
 import { Route as AdminDashboardAttendanceWorkshiftCreateRouteImport } from './routes/admin-dashboard/attendance/workshift/create'
@@ -49,8 +50,8 @@ import { Route as AdminDashboardOrganizationSystemSettingsEmployeeSettingsRouteI
 import { Route as AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRouteImport } from './routes/admin-dashboard/organization/system-settings/roles-and-permissions-settings'
 import { Route as AdminDashboardOrganizationTeamsIndexRouteImport } from './routes/admin-dashboard/organization/teams/index'
 import { Route as AdminDashboardOrganizationTeamsPathlessLayoutRouteImport } from './routes/admin-dashboard/organization/teams/_pathlessLayout'
-import { Route as AdminDashboardAttendanceDevicesEditIdRouteImport } from './routes/admin-dashboard/attendance/devices/edit/$id'
-import { Route as AdminDashboardAttendanceDevicesTransactionsIndexRouteImport } from './routes/admin-dashboard/attendance/devices/transactions/index'
+import { Route as AdminDashboardAttendanceDevicesPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/attendance/devices/_pathlessLayout.create'
+import { Route as AdminDashboardAttendanceDevicesPathlessLayoutEditRouteImport } from './routes/admin-dashboard/attendance/devices/_pathlessLayout.edit'
 import { Route as AdminDashboardAttendanceWorkshiftAssignEmployeeIdRouteImport } from './routes/admin-dashboard/attendance/workshift/assign-employee/$id'
 import { Route as AdminDashboardAttendanceWorkshiftDetailsIdRouteImport } from './routes/admin-dashboard/attendance/workshift/details/$id'
 import { Route as AdminDashboardAttendanceWorkshiftEditIdRouteImport } from './routes/admin-dashboard/attendance/workshift/edit/$id'
@@ -70,7 +71,6 @@ import { Route as AdminDashboardOrganizationEmployeesPathlessLayoutEditRouteImpo
 import { Route as AdminDashboardOrganizationEmployeesDetailsIdRouteImport } from './routes/admin-dashboard/organization/employees/details/$id'
 import { Route as AdminDashboardOrganizationTeamsPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/organization/teams/_pathlessLayout.create'
 import { Route as AdminDashboardOrganizationTeamsPathlessLayoutEditRouteImport } from './routes/admin-dashboard/organization/teams/_pathlessLayout.edit'
-import { Route as AdminDashboardAttendanceDevicesTransactionsLogsIdRouteImport } from './routes/admin-dashboard/attendance/devices/transactions/logs/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -123,6 +123,18 @@ const AdminDashboardAttendanceIndexRoute =
     path: '/attendance/',
     getParentRoute: () => AdminDashboardRouteRoute,
   } as any)
+const AdminDashboardAttendanceAttendanceReportsRoute =
+  AdminDashboardAttendanceAttendanceReportsRouteImport.update({
+    id: '/attendance/attendance-reports',
+    path: '/attendance/attendance-reports',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardAttendanceSchedulerRoute =
+  AdminDashboardAttendanceSchedulerRouteImport.update({
+    id: '/attendance/scheduler',
+    path: '/attendance/scheduler',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
 const AdminDashboardAttendanceWorkshiftRoute =
   AdminDashboardAttendanceWorkshiftRouteImport.update({
     id: '/attendance/workshift',
@@ -146,16 +158,10 @@ const AdminDashboardAttendanceDevicesIndexRoute =
     path: '/attendance/devices/',
     getParentRoute: () => AdminDashboardRouteRoute,
   } as any)
-const AdminDashboardAttendanceDevicesCreateRoute =
-  AdminDashboardAttendanceDevicesCreateRouteImport.update({
-    id: '/attendance/devices/create',
-    path: '/attendance/devices/create',
-    getParentRoute: () => AdminDashboardRouteRoute,
-  } as any)
-const AdminDashboardAttendanceDevicesUserTransferRoute =
-  AdminDashboardAttendanceDevicesUserTransferRouteImport.update({
-    id: '/attendance/devices/user-transfer',
-    path: '/attendance/devices/user-transfer',
+const AdminDashboardAttendanceDevicesPathlessLayoutRoute =
+  AdminDashboardAttendanceDevicesPathlessLayoutRouteImport.update({
+    id: '/attendance/devices/_pathlessLayout',
+    path: '/attendance/devices',
     getParentRoute: () => AdminDashboardRouteRoute,
   } as any)
 const AdminDashboardAttendanceWorkshiftIndexRoute =
@@ -304,17 +310,17 @@ const AdminDashboardOrganizationTeamsPathlessLayoutRoute =
     path: '/organization/teams',
     getParentRoute: () => AdminDashboardRouteRoute,
   } as any)
-const AdminDashboardAttendanceDevicesEditIdRoute =
-  AdminDashboardAttendanceDevicesEditIdRouteImport.update({
-    id: '/attendance/devices/edit/$id',
-    path: '/attendance/devices/edit/$id',
-    getParentRoute: () => AdminDashboardRouteRoute,
+const AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute =
+  AdminDashboardAttendanceDevicesPathlessLayoutCreateRouteImport.update({
+    id: '/create',
+    path: '/create',
+    getParentRoute: () => AdminDashboardAttendanceDevicesPathlessLayoutRoute,
   } as any)
-const AdminDashboardAttendanceDevicesTransactionsIndexRoute =
-  AdminDashboardAttendanceDevicesTransactionsIndexRouteImport.update({
-    id: '/attendance/devices/transactions/',
-    path: '/attendance/devices/transactions/',
-    getParentRoute: () => AdminDashboardRouteRoute,
+const AdminDashboardAttendanceDevicesPathlessLayoutEditRoute =
+  AdminDashboardAttendanceDevicesPathlessLayoutEditRouteImport.update({
+    id: '/edit',
+    path: '/edit',
+    getParentRoute: () => AdminDashboardAttendanceDevicesPathlessLayoutRoute,
   } as any)
 const AdminDashboardAttendanceWorkshiftAssignEmployeeIdRoute =
   AdminDashboardAttendanceWorkshiftAssignEmployeeIdRouteImport.update({
@@ -434,12 +440,6 @@ const AdminDashboardOrganizationTeamsPathlessLayoutEditRoute =
     path: '/edit',
     getParentRoute: () => AdminDashboardOrganizationTeamsPathlessLayoutRoute,
   } as any)
-const AdminDashboardAttendanceDevicesTransactionsLogsIdRoute =
-  AdminDashboardAttendanceDevicesTransactionsLogsIdRouteImport.update({
-    id: '/attendance/devices/transactions/logs/$id',
-    path: '/attendance/devices/transactions/logs/$id',
-    getParentRoute: () => AdminDashboardRouteRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -450,12 +450,13 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/': typeof AdminDashboardIndexRoute
   '/ess/': typeof EssIndexRoute
   '/login': typeof authPathlessLayoutLoginRoute
+  '/admin-dashboard/attendance/attendance-reports': typeof AdminDashboardAttendanceAttendanceReportsRoute
+  '/admin-dashboard/attendance/scheduler': typeof AdminDashboardAttendanceSchedulerRoute
   '/admin-dashboard/attendance/workshift': typeof AdminDashboardAttendanceWorkshiftRouteWithChildren
   '/admin-dashboard/attendance/': typeof AdminDashboardAttendanceIndexRoute
   '/admin-dashboard/hrm/': typeof AdminDashboardHrmIndexRoute
   '/admin-dashboard/organization/': typeof AdminDashboardOrganizationIndexRoute
-  '/admin-dashboard/attendance/devices/create': typeof AdminDashboardAttendanceDevicesCreateRoute
-  '/admin-dashboard/attendance/devices/user-transfer': typeof AdminDashboardAttendanceDevicesUserTransferRoute
+  '/admin-dashboard/attendance/devices': typeof AdminDashboardAttendanceDevicesPathlessLayoutRouteWithChildren
   '/admin-dashboard/attendance/workshift/calendar': typeof AdminDashboardAttendanceWorkshiftCalendarRoute
   '/admin-dashboard/attendance/workshift/create': typeof AdminDashboardAttendanceWorkshiftCreateRoute
   '/admin-dashboard/attendance/workshift/roster': typeof AdminDashboardAttendanceWorkshiftRosterRoute
@@ -481,7 +482,8 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/organization/reports/': typeof AdminDashboardOrganizationReportsIndexRoute
   '/admin-dashboard/organization/system-settings/': typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   '/admin-dashboard/organization/teams/': typeof AdminDashboardOrganizationTeamsIndexRoute
-  '/admin-dashboard/attendance/devices/edit/$id': typeof AdminDashboardAttendanceDevicesEditIdRoute
+  '/admin-dashboard/attendance/devices/create': typeof AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute
+  '/admin-dashboard/attendance/devices/edit': typeof AdminDashboardAttendanceDevicesPathlessLayoutEditRoute
   '/admin-dashboard/attendance/workshift/assign-employee/$id': typeof AdminDashboardAttendanceWorkshiftAssignEmployeeIdRoute
   '/admin-dashboard/attendance/workshift/details/$id': typeof AdminDashboardAttendanceWorkshiftDetailsIdRoute
   '/admin-dashboard/attendance/workshift/edit/$id': typeof AdminDashboardAttendanceWorkshiftEditIdRoute
@@ -500,9 +502,7 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/organization/employees/details/$id': typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
   '/admin-dashboard/organization/teams/create': typeof AdminDashboardOrganizationTeamsPathlessLayoutCreateRoute
   '/admin-dashboard/organization/teams/edit': typeof AdminDashboardOrganizationTeamsPathlessLayoutEditRoute
-  '/admin-dashboard/attendance/devices/transactions/': typeof AdminDashboardAttendanceDevicesTransactionsIndexRoute
   '/admin-dashboard/attendance/workshift/settings/': typeof AdminDashboardAttendanceWorkshiftSettingsIndexRoute
-  '/admin-dashboard/attendance/devices/transactions/logs/$id': typeof AdminDashboardAttendanceDevicesTransactionsLogsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -511,11 +511,12 @@ export interface FileRoutesByTo {
   '/admin-dashboard': typeof AdminDashboardIndexRoute
   '/ess': typeof EssIndexRoute
   '/login': typeof authPathlessLayoutLoginRoute
+  '/admin-dashboard/attendance/attendance-reports': typeof AdminDashboardAttendanceAttendanceReportsRoute
+  '/admin-dashboard/attendance/scheduler': typeof AdminDashboardAttendanceSchedulerRoute
   '/admin-dashboard/attendance': typeof AdminDashboardAttendanceIndexRoute
   '/admin-dashboard/hrm': typeof AdminDashboardHrmIndexRoute
   '/admin-dashboard/organization': typeof AdminDashboardOrganizationIndexRoute
-  '/admin-dashboard/attendance/devices/create': typeof AdminDashboardAttendanceDevicesCreateRoute
-  '/admin-dashboard/attendance/devices/user-transfer': typeof AdminDashboardAttendanceDevicesUserTransferRoute
+  '/admin-dashboard/attendance/devices': typeof AdminDashboardAttendanceDevicesIndexRoute
   '/admin-dashboard/attendance/workshift/calendar': typeof AdminDashboardAttendanceWorkshiftCalendarRoute
   '/admin-dashboard/attendance/workshift/create': typeof AdminDashboardAttendanceWorkshiftCreateRoute
   '/admin-dashboard/attendance/workshift/roster': typeof AdminDashboardAttendanceWorkshiftRosterRoute
@@ -529,14 +530,14 @@ export interface FileRoutesByTo {
   '/admin-dashboard/organization/system-settings/employee-settings': typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   '/admin-dashboard/organization/system-settings/roles-and-permissions-settings': typeof AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute
   '/admin-dashboard/organization/teams': typeof AdminDashboardOrganizationTeamsIndexRoute
-  '/admin-dashboard/attendance/devices': typeof AdminDashboardAttendanceDevicesIndexRoute
   '/admin-dashboard/attendance/workshift': typeof AdminDashboardAttendanceWorkshiftIndexRoute
   '/admin-dashboard/hrm/hrm-reports': typeof AdminDashboardHrmHrmReportsIndexRoute
   '/admin-dashboard/hrm/hrm-settings': typeof AdminDashboardHrmHrmSettingsIndexRoute
   '/admin-dashboard/hrm/leave': typeof AdminDashboardHrmLeaveIndexRoute
   '/admin-dashboard/organization/reports': typeof AdminDashboardOrganizationReportsIndexRoute
   '/admin-dashboard/organization/system-settings': typeof AdminDashboardOrganizationSystemSettingsIndexRoute
-  '/admin-dashboard/attendance/devices/edit/$id': typeof AdminDashboardAttendanceDevicesEditIdRoute
+  '/admin-dashboard/attendance/devices/create': typeof AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute
+  '/admin-dashboard/attendance/devices/edit': typeof AdminDashboardAttendanceDevicesPathlessLayoutEditRoute
   '/admin-dashboard/attendance/workshift/assign-employee/$id': typeof AdminDashboardAttendanceWorkshiftAssignEmployeeIdRoute
   '/admin-dashboard/attendance/workshift/details/$id': typeof AdminDashboardAttendanceWorkshiftDetailsIdRoute
   '/admin-dashboard/attendance/workshift/edit/$id': typeof AdminDashboardAttendanceWorkshiftEditIdRoute
@@ -555,9 +556,7 @@ export interface FileRoutesByTo {
   '/admin-dashboard/organization/employees/details/$id': typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
   '/admin-dashboard/organization/teams/create': typeof AdminDashboardOrganizationTeamsPathlessLayoutCreateRoute
   '/admin-dashboard/organization/teams/edit': typeof AdminDashboardOrganizationTeamsPathlessLayoutEditRoute
-  '/admin-dashboard/attendance/devices/transactions': typeof AdminDashboardAttendanceDevicesTransactionsIndexRoute
   '/admin-dashboard/attendance/workshift/settings': typeof AdminDashboardAttendanceWorkshiftSettingsIndexRoute
-  '/admin-dashboard/attendance/devices/transactions/logs/$id': typeof AdminDashboardAttendanceDevicesTransactionsLogsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -570,12 +569,13 @@ export interface FileRoutesById {
   '/admin-dashboard/': typeof AdminDashboardIndexRoute
   '/ess/': typeof EssIndexRoute
   '/(auth)/_pathlessLayout/login': typeof authPathlessLayoutLoginRoute
+  '/admin-dashboard/attendance/attendance-reports': typeof AdminDashboardAttendanceAttendanceReportsRoute
+  '/admin-dashboard/attendance/scheduler': typeof AdminDashboardAttendanceSchedulerRoute
   '/admin-dashboard/attendance/workshift': typeof AdminDashboardAttendanceWorkshiftRouteWithChildren
   '/admin-dashboard/attendance/': typeof AdminDashboardAttendanceIndexRoute
   '/admin-dashboard/hrm/': typeof AdminDashboardHrmIndexRoute
   '/admin-dashboard/organization/': typeof AdminDashboardOrganizationIndexRoute
-  '/admin-dashboard/attendance/devices/create': typeof AdminDashboardAttendanceDevicesCreateRoute
-  '/admin-dashboard/attendance/devices/user-transfer': typeof AdminDashboardAttendanceDevicesUserTransferRoute
+  '/admin-dashboard/attendance/devices/_pathlessLayout': typeof AdminDashboardAttendanceDevicesPathlessLayoutRouteWithChildren
   '/admin-dashboard/attendance/workshift/calendar': typeof AdminDashboardAttendanceWorkshiftCalendarRoute
   '/admin-dashboard/attendance/workshift/create': typeof AdminDashboardAttendanceWorkshiftCreateRoute
   '/admin-dashboard/attendance/workshift/roster': typeof AdminDashboardAttendanceWorkshiftRosterRoute
@@ -601,7 +601,8 @@ export interface FileRoutesById {
   '/admin-dashboard/organization/reports/': typeof AdminDashboardOrganizationReportsIndexRoute
   '/admin-dashboard/organization/system-settings/': typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   '/admin-dashboard/organization/teams/': typeof AdminDashboardOrganizationTeamsIndexRoute
-  '/admin-dashboard/attendance/devices/edit/$id': typeof AdminDashboardAttendanceDevicesEditIdRoute
+  '/admin-dashboard/attendance/devices/_pathlessLayout/create': typeof AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute
+  '/admin-dashboard/attendance/devices/_pathlessLayout/edit': typeof AdminDashboardAttendanceDevicesPathlessLayoutEditRoute
   '/admin-dashboard/attendance/workshift/assign-employee/$id': typeof AdminDashboardAttendanceWorkshiftAssignEmployeeIdRoute
   '/admin-dashboard/attendance/workshift/details/$id': typeof AdminDashboardAttendanceWorkshiftDetailsIdRoute
   '/admin-dashboard/attendance/workshift/edit/$id': typeof AdminDashboardAttendanceWorkshiftEditIdRoute
@@ -620,9 +621,7 @@ export interface FileRoutesById {
   '/admin-dashboard/organization/employees/details/$id': typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
   '/admin-dashboard/organization/teams/_pathlessLayout/create': typeof AdminDashboardOrganizationTeamsPathlessLayoutCreateRoute
   '/admin-dashboard/organization/teams/_pathlessLayout/edit': typeof AdminDashboardOrganizationTeamsPathlessLayoutEditRoute
-  '/admin-dashboard/attendance/devices/transactions/': typeof AdminDashboardAttendanceDevicesTransactionsIndexRoute
   '/admin-dashboard/attendance/workshift/settings/': typeof AdminDashboardAttendanceWorkshiftSettingsIndexRoute
-  '/admin-dashboard/attendance/devices/transactions/logs/$id': typeof AdminDashboardAttendanceDevicesTransactionsLogsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -635,12 +634,13 @@ export interface FileRouteTypes {
     | '/admin-dashboard/'
     | '/ess/'
     | '/login'
+    | '/admin-dashboard/attendance/attendance-reports'
+    | '/admin-dashboard/attendance/scheduler'
     | '/admin-dashboard/attendance/workshift'
     | '/admin-dashboard/attendance/'
     | '/admin-dashboard/hrm/'
     | '/admin-dashboard/organization/'
-    | '/admin-dashboard/attendance/devices/create'
-    | '/admin-dashboard/attendance/devices/user-transfer'
+    | '/admin-dashboard/attendance/devices'
     | '/admin-dashboard/attendance/workshift/calendar'
     | '/admin-dashboard/attendance/workshift/create'
     | '/admin-dashboard/attendance/workshift/roster'
@@ -666,7 +666,8 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/reports/'
     | '/admin-dashboard/organization/system-settings/'
     | '/admin-dashboard/organization/teams/'
-    | '/admin-dashboard/attendance/devices/edit/$id'
+    | '/admin-dashboard/attendance/devices/create'
+    | '/admin-dashboard/attendance/devices/edit'
     | '/admin-dashboard/attendance/workshift/assign-employee/$id'
     | '/admin-dashboard/attendance/workshift/details/$id'
     | '/admin-dashboard/attendance/workshift/edit/$id'
@@ -685,9 +686,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/employees/details/$id'
     | '/admin-dashboard/organization/teams/create'
     | '/admin-dashboard/organization/teams/edit'
-    | '/admin-dashboard/attendance/devices/transactions/'
     | '/admin-dashboard/attendance/workshift/settings/'
-    | '/admin-dashboard/attendance/devices/transactions/logs/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -696,11 +695,12 @@ export interface FileRouteTypes {
     | '/admin-dashboard'
     | '/ess'
     | '/login'
+    | '/admin-dashboard/attendance/attendance-reports'
+    | '/admin-dashboard/attendance/scheduler'
     | '/admin-dashboard/attendance'
     | '/admin-dashboard/hrm'
     | '/admin-dashboard/organization'
-    | '/admin-dashboard/attendance/devices/create'
-    | '/admin-dashboard/attendance/devices/user-transfer'
+    | '/admin-dashboard/attendance/devices'
     | '/admin-dashboard/attendance/workshift/calendar'
     | '/admin-dashboard/attendance/workshift/create'
     | '/admin-dashboard/attendance/workshift/roster'
@@ -714,14 +714,14 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/employee-settings'
     | '/admin-dashboard/organization/system-settings/roles-and-permissions-settings'
     | '/admin-dashboard/organization/teams'
-    | '/admin-dashboard/attendance/devices'
     | '/admin-dashboard/attendance/workshift'
     | '/admin-dashboard/hrm/hrm-reports'
     | '/admin-dashboard/hrm/hrm-settings'
     | '/admin-dashboard/hrm/leave'
     | '/admin-dashboard/organization/reports'
     | '/admin-dashboard/organization/system-settings'
-    | '/admin-dashboard/attendance/devices/edit/$id'
+    | '/admin-dashboard/attendance/devices/create'
+    | '/admin-dashboard/attendance/devices/edit'
     | '/admin-dashboard/attendance/workshift/assign-employee/$id'
     | '/admin-dashboard/attendance/workshift/details/$id'
     | '/admin-dashboard/attendance/workshift/edit/$id'
@@ -740,9 +740,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/employees/details/$id'
     | '/admin-dashboard/organization/teams/create'
     | '/admin-dashboard/organization/teams/edit'
-    | '/admin-dashboard/attendance/devices/transactions'
     | '/admin-dashboard/attendance/workshift/settings'
-    | '/admin-dashboard/attendance/devices/transactions/logs/$id'
   id:
     | '__root__'
     | '/'
@@ -754,12 +752,13 @@ export interface FileRouteTypes {
     | '/admin-dashboard/'
     | '/ess/'
     | '/(auth)/_pathlessLayout/login'
+    | '/admin-dashboard/attendance/attendance-reports'
+    | '/admin-dashboard/attendance/scheduler'
     | '/admin-dashboard/attendance/workshift'
     | '/admin-dashboard/attendance/'
     | '/admin-dashboard/hrm/'
     | '/admin-dashboard/organization/'
-    | '/admin-dashboard/attendance/devices/create'
-    | '/admin-dashboard/attendance/devices/user-transfer'
+    | '/admin-dashboard/attendance/devices/_pathlessLayout'
     | '/admin-dashboard/attendance/workshift/calendar'
     | '/admin-dashboard/attendance/workshift/create'
     | '/admin-dashboard/attendance/workshift/roster'
@@ -785,7 +784,8 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/reports/'
     | '/admin-dashboard/organization/system-settings/'
     | '/admin-dashboard/organization/teams/'
-    | '/admin-dashboard/attendance/devices/edit/$id'
+    | '/admin-dashboard/attendance/devices/_pathlessLayout/create'
+    | '/admin-dashboard/attendance/devices/_pathlessLayout/edit'
     | '/admin-dashboard/attendance/workshift/assign-employee/$id'
     | '/admin-dashboard/attendance/workshift/details/$id'
     | '/admin-dashboard/attendance/workshift/edit/$id'
@@ -804,9 +804,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/employees/details/$id'
     | '/admin-dashboard/organization/teams/_pathlessLayout/create'
     | '/admin-dashboard/organization/teams/_pathlessLayout/edit'
-    | '/admin-dashboard/attendance/devices/transactions/'
     | '/admin-dashboard/attendance/workshift/settings/'
-    | '/admin-dashboard/attendance/devices/transactions/logs/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -890,6 +888,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardAttendanceIndexRouteImport
       parentRoute: typeof AdminDashboardRouteRoute
     }
+    '/admin-dashboard/attendance/attendance-reports': {
+      id: '/admin-dashboard/attendance/attendance-reports'
+      path: '/attendance/attendance-reports'
+      fullPath: '/admin-dashboard/attendance/attendance-reports'
+      preLoaderRoute: typeof AdminDashboardAttendanceAttendanceReportsRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/attendance/scheduler': {
+      id: '/admin-dashboard/attendance/scheduler'
+      path: '/attendance/scheduler'
+      fullPath: '/admin-dashboard/attendance/scheduler'
+      preLoaderRoute: typeof AdminDashboardAttendanceSchedulerRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
     '/admin-dashboard/attendance/workshift': {
       id: '/admin-dashboard/attendance/workshift'
       path: '/attendance/workshift'
@@ -918,18 +930,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardAttendanceDevicesIndexRouteImport
       parentRoute: typeof AdminDashboardRouteRoute
     }
-    '/admin-dashboard/attendance/devices/create': {
-      id: '/admin-dashboard/attendance/devices/create'
-      path: '/attendance/devices/create'
-      fullPath: '/admin-dashboard/attendance/devices/create'
-      preLoaderRoute: typeof AdminDashboardAttendanceDevicesCreateRouteImport
-      parentRoute: typeof AdminDashboardRouteRoute
-    }
-    '/admin-dashboard/attendance/devices/user-transfer': {
-      id: '/admin-dashboard/attendance/devices/user-transfer'
-      path: '/attendance/devices/user-transfer'
-      fullPath: '/admin-dashboard/attendance/devices/user-transfer'
-      preLoaderRoute: typeof AdminDashboardAttendanceDevicesUserTransferRouteImport
+    '/admin-dashboard/attendance/devices/_pathlessLayout': {
+      id: '/admin-dashboard/attendance/devices/_pathlessLayout'
+      path: '/attendance/devices'
+      fullPath: '/admin-dashboard/attendance/devices'
+      preLoaderRoute: typeof AdminDashboardAttendanceDevicesPathlessLayoutRouteImport
       parentRoute: typeof AdminDashboardRouteRoute
     }
     '/admin-dashboard/attendance/workshift/': {
@@ -1100,19 +1105,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardOrganizationTeamsPathlessLayoutRouteImport
       parentRoute: typeof AdminDashboardRouteRoute
     }
-    '/admin-dashboard/attendance/devices/edit/$id': {
-      id: '/admin-dashboard/attendance/devices/edit/$id'
-      path: '/attendance/devices/edit/$id'
-      fullPath: '/admin-dashboard/attendance/devices/edit/$id'
-      preLoaderRoute: typeof AdminDashboardAttendanceDevicesEditIdRouteImport
-      parentRoute: typeof AdminDashboardRouteRoute
+    '/admin-dashboard/attendance/devices/_pathlessLayout/create': {
+      id: '/admin-dashboard/attendance/devices/_pathlessLayout/create'
+      path: '/create'
+      fullPath: '/admin-dashboard/attendance/devices/create'
+      preLoaderRoute: typeof AdminDashboardAttendanceDevicesPathlessLayoutCreateRouteImport
+      parentRoute: typeof AdminDashboardAttendanceDevicesPathlessLayoutRoute
     }
-    '/admin-dashboard/attendance/devices/transactions/': {
-      id: '/admin-dashboard/attendance/devices/transactions/'
-      path: '/attendance/devices/transactions'
-      fullPath: '/admin-dashboard/attendance/devices/transactions/'
-      preLoaderRoute: typeof AdminDashboardAttendanceDevicesTransactionsIndexRouteImport
-      parentRoute: typeof AdminDashboardRouteRoute
+    '/admin-dashboard/attendance/devices/_pathlessLayout/edit': {
+      id: '/admin-dashboard/attendance/devices/_pathlessLayout/edit'
+      path: '/edit'
+      fullPath: '/admin-dashboard/attendance/devices/edit'
+      preLoaderRoute: typeof AdminDashboardAttendanceDevicesPathlessLayoutEditRouteImport
+      parentRoute: typeof AdminDashboardAttendanceDevicesPathlessLayoutRoute
     }
     '/admin-dashboard/attendance/workshift/assign-employee/$id': {
       id: '/admin-dashboard/attendance/workshift/assign-employee/$id'
@@ -1247,13 +1252,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardOrganizationTeamsPathlessLayoutEditRouteImport
       parentRoute: typeof AdminDashboardOrganizationTeamsPathlessLayoutRoute
     }
-    '/admin-dashboard/attendance/devices/transactions/logs/$id': {
-      id: '/admin-dashboard/attendance/devices/transactions/logs/$id'
-      path: '/attendance/devices/transactions/logs/$id'
-      fullPath: '/admin-dashboard/attendance/devices/transactions/logs/$id'
-      preLoaderRoute: typeof AdminDashboardAttendanceDevicesTransactionsLogsIdRouteImport
-      parentRoute: typeof AdminDashboardRouteRoute
-    }
   }
 }
 
@@ -1297,6 +1295,24 @@ const AdminDashboardAttendanceWorkshiftRouteChildren: AdminDashboardAttendanceWo
 const AdminDashboardAttendanceWorkshiftRouteWithChildren =
   AdminDashboardAttendanceWorkshiftRoute._addFileChildren(
     AdminDashboardAttendanceWorkshiftRouteChildren,
+  )
+
+interface AdminDashboardAttendanceDevicesPathlessLayoutRouteChildren {
+  AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute: typeof AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute
+  AdminDashboardAttendanceDevicesPathlessLayoutEditRoute: typeof AdminDashboardAttendanceDevicesPathlessLayoutEditRoute
+}
+
+const AdminDashboardAttendanceDevicesPathlessLayoutRouteChildren: AdminDashboardAttendanceDevicesPathlessLayoutRouteChildren =
+  {
+    AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute:
+      AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute,
+    AdminDashboardAttendanceDevicesPathlessLayoutEditRoute:
+      AdminDashboardAttendanceDevicesPathlessLayoutEditRoute,
+  }
+
+const AdminDashboardAttendanceDevicesPathlessLayoutRouteWithChildren =
+  AdminDashboardAttendanceDevicesPathlessLayoutRoute._addFileChildren(
+    AdminDashboardAttendanceDevicesPathlessLayoutRouteChildren,
   )
 
 interface AdminDashboardHrmExemptionPathlessLayoutRouteChildren {
@@ -1391,12 +1407,13 @@ const AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren =
 
 interface AdminDashboardRouteRouteChildren {
   AdminDashboardIndexRoute: typeof AdminDashboardIndexRoute
+  AdminDashboardAttendanceAttendanceReportsRoute: typeof AdminDashboardAttendanceAttendanceReportsRoute
+  AdminDashboardAttendanceSchedulerRoute: typeof AdminDashboardAttendanceSchedulerRoute
   AdminDashboardAttendanceWorkshiftRoute: typeof AdminDashboardAttendanceWorkshiftRouteWithChildren
   AdminDashboardAttendanceIndexRoute: typeof AdminDashboardAttendanceIndexRoute
   AdminDashboardHrmIndexRoute: typeof AdminDashboardHrmIndexRoute
   AdminDashboardOrganizationIndexRoute: typeof AdminDashboardOrganizationIndexRoute
-  AdminDashboardAttendanceDevicesCreateRoute: typeof AdminDashboardAttendanceDevicesCreateRoute
-  AdminDashboardAttendanceDevicesUserTransferRoute: typeof AdminDashboardAttendanceDevicesUserTransferRoute
+  AdminDashboardAttendanceDevicesPathlessLayoutRoute: typeof AdminDashboardAttendanceDevicesPathlessLayoutRouteWithChildren
   AdminDashboardHrmExemptionPathlessLayoutRoute: typeof AdminDashboardHrmExemptionPathlessLayoutRouteWithChildren
   AdminDashboardHrmHrmSettingsExemptionsSettingsRoute: typeof AdminDashboardHrmHrmSettingsExemptionsSettingsRoute
   AdminDashboardHrmHrmSettingsLeavesSettingsRoute: typeof AdminDashboardHrmHrmSettingsLeavesSettingsRoute
@@ -1418,25 +1435,24 @@ interface AdminDashboardRouteRouteChildren {
   AdminDashboardOrganizationReportsIndexRoute: typeof AdminDashboardOrganizationReportsIndexRoute
   AdminDashboardOrganizationSystemSettingsIndexRoute: typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   AdminDashboardOrganizationTeamsIndexRoute: typeof AdminDashboardOrganizationTeamsIndexRoute
-  AdminDashboardAttendanceDevicesEditIdRoute: typeof AdminDashboardAttendanceDevicesEditIdRoute
   AdminDashboardHrmLeavePathlessLayoutCreateRoute: typeof AdminDashboardHrmLeavePathlessLayoutCreateRoute
   AdminDashboardHrmLeavePathlessLayoutEditRoute: typeof AdminDashboardHrmLeavePathlessLayoutEditRoute
   AdminDashboardOrganizationEmployeesDetailsIdRoute: typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
-  AdminDashboardAttendanceDevicesTransactionsIndexRoute: typeof AdminDashboardAttendanceDevicesTransactionsIndexRoute
-  AdminDashboardAttendanceDevicesTransactionsLogsIdRoute: typeof AdminDashboardAttendanceDevicesTransactionsLogsIdRoute
 }
 
 const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
   AdminDashboardIndexRoute: AdminDashboardIndexRoute,
+  AdminDashboardAttendanceAttendanceReportsRoute:
+    AdminDashboardAttendanceAttendanceReportsRoute,
+  AdminDashboardAttendanceSchedulerRoute:
+    AdminDashboardAttendanceSchedulerRoute,
   AdminDashboardAttendanceWorkshiftRoute:
     AdminDashboardAttendanceWorkshiftRouteWithChildren,
   AdminDashboardAttendanceIndexRoute: AdminDashboardAttendanceIndexRoute,
   AdminDashboardHrmIndexRoute: AdminDashboardHrmIndexRoute,
   AdminDashboardOrganizationIndexRoute: AdminDashboardOrganizationIndexRoute,
-  AdminDashboardAttendanceDevicesCreateRoute:
-    AdminDashboardAttendanceDevicesCreateRoute,
-  AdminDashboardAttendanceDevicesUserTransferRoute:
-    AdminDashboardAttendanceDevicesUserTransferRoute,
+  AdminDashboardAttendanceDevicesPathlessLayoutRoute:
+    AdminDashboardAttendanceDevicesPathlessLayoutRouteWithChildren,
   AdminDashboardHrmExemptionPathlessLayoutRoute:
     AdminDashboardHrmExemptionPathlessLayoutRouteWithChildren,
   AdminDashboardHrmHrmSettingsExemptionsSettingsRoute:
@@ -1476,18 +1492,12 @@ const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
     AdminDashboardOrganizationSystemSettingsIndexRoute,
   AdminDashboardOrganizationTeamsIndexRoute:
     AdminDashboardOrganizationTeamsIndexRoute,
-  AdminDashboardAttendanceDevicesEditIdRoute:
-    AdminDashboardAttendanceDevicesEditIdRoute,
   AdminDashboardHrmLeavePathlessLayoutCreateRoute:
     AdminDashboardHrmLeavePathlessLayoutCreateRoute,
   AdminDashboardHrmLeavePathlessLayoutEditRoute:
     AdminDashboardHrmLeavePathlessLayoutEditRoute,
   AdminDashboardOrganizationEmployeesDetailsIdRoute:
     AdminDashboardOrganizationEmployeesDetailsIdRoute,
-  AdminDashboardAttendanceDevicesTransactionsIndexRoute:
-    AdminDashboardAttendanceDevicesTransactionsIndexRoute,
-  AdminDashboardAttendanceDevicesTransactionsLogsIdRoute:
-    AdminDashboardAttendanceDevicesTransactionsLogsIdRoute,
 }
 
 const AdminDashboardRouteRouteWithChildren =

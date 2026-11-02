@@ -2,6 +2,7 @@ import {
   BuildingOfficeIcon,
   CalendarDotsIcon,
   ChartLineUpIcon,
+  DevicesIcon,
   DoorOpenIcon,
   ExcludeIcon,
   FolderUserIcon,
@@ -69,6 +70,8 @@ export const pageHeaderNav: Record<
     icon: SlidersHorizontalIcon,
     description: 'Manage organization account settings',
   },
+
+  // hrm module
   exemption: {
     title: 'Hrm Exemption',
     icon: ExcludeIcon,
@@ -99,6 +102,29 @@ export const pageHeaderNav: Record<
     icon: ExcludeIcon,
     description:
       'Manage HRM exemptions settings approvals within the organization',
+  },
+
+  // attendance module
+  'attendance-reports': {
+    title: 'Attendance Reports',
+    icon: ChartLineUpIcon,
+    description:
+      'Generate attendance reports, inspect records and export results',
+  },
+  workshift: {
+    title: 'Attendance Workshifts',
+    icon: CalendarDotsIcon,
+    description: 'Manage weekly workshifts, assignments and employee calendars',
+  },
+  devices: {
+    title: 'Attendance Devices',
+    icon: DevicesIcon,
+    description: 'Manage attendance devices within the organization',
+  },
+  scheduler: {
+    title: 'Attendance Scheduler',
+    icon: CalendarDotsIcon,
+    description: 'Preview and assign employee schedules for specific dates',
   },
 }
 

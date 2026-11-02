@@ -10,3 +10,6 @@ export { default as ReassignLeaveRequestToLeaveTypes } from './ReassignLeaveRequ
 export { default as EditHrmLeaveTypesSettingsDrawer } from './EditHrmLeaveTypesSettingsDrawer'
 export { default as EditHrmLeaveApproverSettingsDrawer } from './EditHrmLeaveApproverSettingsDrawer'
 export { default as EditHrmExemptionApproverSettingsDrawer } from './EditHrmExemptionsApproverSettingsDrawer'
+export { default as AttendanceDeviceDetailDrawer } from './AttendanceDeviceDetailDrawer'
+export { default as AttendanceWorkshiftDetailDrawer } from './AttendanceWorkshiftDetailDrawer'
+export { default as AttendanceReportDetailDrawer } from './AttendanceReportDetailDrawer'
