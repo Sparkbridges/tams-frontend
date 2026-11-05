@@ -62,22 +62,23 @@ function RouteComponent() {
     {
       label: 'Exemptions',
       icon: NotePencilIcon,
-      href: '/admin-dashboard/exemptions',
+      href: '/admin-dashboard/hrm/exemption',
     },
     {
       label: 'Leave',
       icon: CalendarXIcon,
-      href: '/admin-dashboard/leave',
+      href: '/admin-dashboard/hrm/leave',
     },
     {
       label: 'Loans',
       icon: BankIcon,
       href: '/admin-dashboard/loans',
+      disabled: true,
     },
     {
       label: 'Settings',
       icon: GearIcon,
-      href: '/admin-dashboard/settings',
+      href: '/admin-dashboard/organization/system-settings',
     },
   ]
   return (
@@ -128,7 +129,9 @@ function RouteComponent() {
               <CakeIcon size={20} />
             </div>
             <div>
-              <p className=" font-semibold">0 Birthdays</p>
+              <p className=" font-semibold">
+                {employeeHomeDetails?.data?.birthdays?.length} Birthdays
+              </p>
               <p className="text-sm opacity-80">Celebrants Today</p>
             </div>
           </div>
@@ -137,7 +140,10 @@ function RouteComponent() {
               <ConfettiIcon size={20} />
             </div>
             <div>
-              <p className=" font-semibold">0 Anniversaries</p>
+              <p className=" font-semibold">
+                {employeeHomeDetails?.data?.work_anniversaries?.length}{' '}
+                Anniversaries
+              </p>
               <p className="text-sm opacity-80">Work Anniversaries</p>
             </div>
           </div>
@@ -175,8 +181,10 @@ function RouteComponent() {
               {quickLinks.map((link, index) => (
                 <div
                   key={index}
-                  onClick={() => handleQuickLinkClick(link.href)}
-                  className="border cursor-pointer bg-[#F9FAFC] border-[#C2C6D7] rounded-md p-5 flex flex-col items-center justify-center space-y-3"
+                  onClick={() =>
+                    link.disabled ? null : handleQuickLinkClick(link.href)
+                  }
+                  className={`border ${link.disabled ? 'opacity-40 cursor-not-allowed' : 'bg-[#F9FAFC] cursor-pointer'}  border-[#C2C6D7] rounded-md p-5 flex flex-col items-center justify-center space-y-3`}
                 >
                   {<link.icon className="text-primary" size={42} />}
                   <span>{link.label}</span>
