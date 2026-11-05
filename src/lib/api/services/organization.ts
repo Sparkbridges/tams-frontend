@@ -74,6 +74,86 @@ import type {
   TInviteEmployeesPayload,
   TUpdateEmployeePayload,
 } from '#/lib/utils'
+import { useTamsStore } from '#/lib/store'
+
+export function useOrganizationAccess() {
+  const user = useTamsStore((state) => state.user)
+  return {
+    canViewBranches: user?.permissions.includes('view all stations') ?? false,
+    canViewBranchDetail:
+      user?.permissions.includes('view single station') ?? false,
+    canCreateBranch: user?.permissions.includes('create station') ?? false,
+    canEditBranch: user?.permissions.includes('edit station') ?? false,
+    canDeleteBranch: user?.permissions.includes('delete station') ?? false,
+
+    canViewDepartments:
+      user?.permissions.includes('view all departments') ?? false,
+    canViewDepartmentDetail:
+      user?.permissions.includes('view single department') ?? false,
+    canCreateDepartment:
+      user?.permissions.includes('create department') ?? false,
+    canEditDepartment: user?.permissions.includes('edit department') ?? false,
+    canDeleteDepartment:
+      user?.permissions.includes('delete department') ?? false,
+
+    canViewTeams: user?.permissions.includes('view all teams') ?? false,
+    canViewTeamDetail:
+      user?.permissions.includes('view employees in team') ?? false,
+    canCreateTeam: user?.permissions.includes('create team') ?? false,
+    canEditTeam: user?.permissions.includes('edit team') ?? false,
+    canDeleteTeam: user?.permissions.includes('delete team') ?? false,
+
+    canViewEmployees: user?.permissions.includes('view all employees') ?? false,
+    canCreateEmployee: user?.permissions.includes('create employee') ?? false,
+    canEditEmployee: user?.permissions.includes('edit employee') ?? false,
+    canDeleteEmployee:
+      user?.permissions.includes('hard delete employee') ?? false,
+    canArchiveEmployee:
+      user?.permissions.includes('soft delete employee') ?? false,
+    canActivateEmployee:
+      user?.permissions.includes('activate employees') ?? false,
+    canDeactivateEmployees:
+      user?.permissions.includes('deactivate employees') ?? false,
+    canImportEmployees: user?.permissions.includes('import employees') ?? false,
+
+    canViewEmployeeReports:
+      user?.permissions.includes('view employees reports') ?? false,
+
+    canViewAccountSettings: user?.permissions.includes('view backend') ?? false,
+
+    canCreateEmployeeTypes:
+      user?.permissions.includes('create employee type') ?? false,
+    canEditEmployeeTypes:
+      user?.permissions.includes('update employee type') ?? false,
+    canDeleteEmployeeTypes:
+      user?.permissions.includes('delete employee type') ?? false,
+
+    canCreateEmployeeCategories:
+      user?.permissions.includes('create employee category') ?? false,
+    canEditEmployeeCategories:
+      user?.permissions.includes('update employee category') ?? false,
+    canDeleteEmployeeCategories:
+      user?.permissions.includes('delete employee category') ?? false,
+
+    canCreateEmployeeDesignations:
+      user?.permissions.includes('create employee designation') ?? false,
+    canEditEmployeeDesignations:
+      user?.permissions.includes('update employee designation') ?? false,
+    canDeleteEmployeeDesignations:
+      user?.permissions.includes('delete employee designation') ?? false,
+
+    canCreateEmployeeGrades:
+      user?.permissions.includes('create grade') ?? false,
+    canEditEmployeeGrades: user?.permissions.includes('edit grade') ?? false,
+    canDeleteEmployeeGrades:
+      user?.permissions.includes('delete grade') ?? false,
+
+    canViewRoles: user?.permissions.includes('view roles') ?? false,
+    canCreateRoles: user?.permissions.includes('create role') ?? false,
+    canEditRoles: user?.permissions.includes('edit role') ?? false,
+    canDeleteRoles: user?.permissions.includes('delete role') ?? false,
+  }
+}
 
 export const useSearchOrganizationEmployees = <TSelected>(
   queryParams: {

@@ -27,28 +27,30 @@ const TamsButtonDropdown = ({
       </Menu.Target>
 
       <Menu.Dropdown>
-        {options.map((option, index) => {
-          if (option.type === 'divider') {
-            return <Menu.Divider key={index} />
-          }
-          if (option.type === 'item') {
-            return (
-              <Menu.Item
-                className="py-2"
-                key={index}
-                color={option.color}
-                leftSection={
-                  option.icon ? <option.icon size={14} /> : undefined
-                }
-                disabled={option.disabled}
-                onClick={option.onClick}
-              >
-                {option.label}
-              </Menu.Item>
-            )
-          }
-          return null
-        })}
+        {options
+          .filter((item) => !item.hidden)
+          .map((option, index) => {
+            if (option.type === 'divider') {
+              return <Menu.Divider key={index} />
+            }
+            if (option.type === 'item') {
+              return (
+                <Menu.Item
+                  className="py-2"
+                  key={index}
+                  color={option.color}
+                  leftSection={
+                    option.icon ? <option.icon size={14} /> : undefined
+                  }
+                  disabled={option.disabled}
+                  onClick={option.onClick}
+                >
+                  {option.label}
+                </Menu.Item>
+              )
+            }
+            return null
+          })}
       </Menu.Dropdown>
     </Menu>
   )

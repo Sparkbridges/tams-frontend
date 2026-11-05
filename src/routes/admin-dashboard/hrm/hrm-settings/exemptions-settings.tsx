@@ -2,8 +2,9 @@ import {
   CreateExemptionApproverModal,
   HrmExemptionSettingsTable,
   TamsButton,
+  TamsPageError,
 } from '#/components'
-import { useGetPageHeader } from '#/lib'
+import { useGetPageHeader, useHrmAccess } from '#/lib'
 import { useDisclosure } from '@mantine/hooks'
 import { PlusIcon } from '@phosphor-icons/react'
 import { createFileRoute } from '@tanstack/react-router'
@@ -17,10 +18,14 @@ export const Route = createFileRoute(
 function RouteComponent() {
   const { pageHeader } = useGetPageHeader()
 
+  const { canViewExemptions } = useHrmAccess()
+
   const [
     openedExemptionsModal,
     { open: openExemptionsModal, close: closeExemptionsModal },
   ] = useDisclosure(false)
+
+  if (!canViewExemptions) return <TamsPageError type="403" />
   return (
     <main>
       <section className="flex items-center justify-between">
@@ -31,7 +36,7 @@ function RouteComponent() {
           leftSection={<PlusIcon />}
           onClick={openExemptionsModal}
         >
-          Add Exemption
+          Add Exemption Setting
         </TamsButton>
       </section>
 

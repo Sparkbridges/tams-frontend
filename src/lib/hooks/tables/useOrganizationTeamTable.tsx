@@ -2,6 +2,7 @@ import { TamsTableActionPopover } from '#/components/molecules'
 import {
   useDeleteOrganizationTeam,
   useFetchOrganizationTeams,
+  useOrganizationAccess,
 } from '#/lib/api'
 import type {
   TamsActionPopoverOption,
@@ -16,6 +17,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 
 const useOrganizationTeamTable = () => {
+  const { canEditTeam, canDeleteTeam } = useOrganizationAccess()
   const [tableData, setTableData] = useState<TamsTableData[]>()
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(0)
@@ -80,7 +82,6 @@ const useOrganizationTeamTable = () => {
         setSelectedIds([])
       }
       closeConfirmation()
-     
     } catch (error) {
       console.error('Failed to delete organization team', error)
       notifications.show({
@@ -103,6 +104,7 @@ const useOrganizationTeamTable = () => {
         }),
       color: '',
       icon: PenIcon,
+      hidden: !canEditTeam,
     },
     {
       label: 'Delete',
@@ -112,6 +114,7 @@ const useOrganizationTeamTable = () => {
       },
       color: 'red',
       icon: TrashIcon,
+      hidden: !canDeleteTeam,
     },
   ]
   const columns: TamsTableColumn[] = [

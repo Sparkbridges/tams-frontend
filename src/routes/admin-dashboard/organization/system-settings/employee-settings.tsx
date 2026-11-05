@@ -1,5 +1,5 @@
 import { OrganizationEmployeeSettingsTable, TamsTabs } from '#/components'
-import { documentHelper, useGetPageHeader } from '#/lib'
+import { documentHelper, useGetPageHeader, useOrganizationAccess } from '#/lib'
 import type { TamsMenuItem, TTamsTabs } from '#/lib'
 import { useMemo, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
@@ -20,6 +20,12 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
+  const {
+    canCreateEmployeeTypes,
+    canCreateEmployeeCategories,
+    canCreateEmployeeDesignations,
+    canCreateEmployeeGrades,
+  } = useOrganizationAccess()
   const { pageHeader } = useGetPageHeader()
   const [activeTab, setActiveTab] = useState<
     'types' | 'designation' | 'category' | 'grades' | null
@@ -66,24 +72,28 @@ function RouteComponent() {
         type: 'item',
         onClick: () => setCreateType('types'),
         icon: FilePlusIcon,
+        hidden: !canCreateEmployeeTypes,
       },
       {
         label: 'Employee Designation',
         type: 'item',
         onClick: () => setCreateType('designation'),
         icon: FilePlusIcon,
+        hidden: !canCreateEmployeeDesignations,
       },
       {
         label: 'Employee Category',
         type: 'item',
         onClick: () => setCreateType('category'),
         icon: FilePlusIcon,
+        hidden: !canCreateEmployeeCategories,
       },
       {
         label: 'Employee Grade',
         type: 'item',
         onClick: () => setCreateType('grades'),
         icon: FilePlusIcon,
+        hidden: !canCreateEmployeeGrades,
       },
     ],
     [],

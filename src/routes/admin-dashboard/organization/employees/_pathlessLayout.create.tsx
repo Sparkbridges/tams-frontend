@@ -2,8 +2,9 @@ import {
   CreateEditEmployeeForm,
   TamsBanner,
   TamsGoBackNavigation,
+  TamsPageError,
 } from '#/components'
-import { documentHelper } from '#/lib'
+import { documentHelper, useOrganizationAccess } from '#/lib'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute(
@@ -19,6 +20,8 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
+  const { canCreateEmployee } = useOrganizationAccess()
+  if (!canCreateEmployee) return <TamsPageError type="403" />
   return (
     <div className="space-y-4 px-7">
       <TamsGoBackNavigation label="Back to Employees" />

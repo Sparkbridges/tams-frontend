@@ -5,6 +5,7 @@ import {
   useCanApproveHrmExemption,
   useDeleteHrmExemptions,
   useGetHrmExemptions,
+  useHrmAccess,
 } from '#/lib/api'
 import { emptyStates } from '#/lib/constants'
 import type {
@@ -28,6 +29,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useMemo, useState } from 'react'
 
 const useHrmExemptionTable = () => {
+  const { canEditExemptions, canDeleteExemptions } = useHrmAccess()
   const [tableData, setTableData] = useState<TamsTableData[]>()
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(0)
@@ -154,6 +156,7 @@ const useHrmExemptionTable = () => {
               }),
             color: '',
             icon: PenIcon,
+            hidden: !canEditExemptions,
           },
           {
             label: 'Approve',
@@ -174,6 +177,7 @@ const useHrmExemptionTable = () => {
       },
       color: 'red',
       icon: TrashIcon,
+      hidden: !canDeleteExemptions,
     },
   ]
   const columns: TamsTableColumn[] = [

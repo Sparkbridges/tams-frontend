@@ -3,9 +3,10 @@ import {
   CreateLeaveTypeModal,
   HrmLeaveSettingsTable,
   TamsButton,
+  TamsPageError,
   TamsTabs,
 } from '#/components'
-import { useGetPageHeader } from '#/lib'
+import { useGetPageHeader, useHrmAccess } from '#/lib'
 import type { TTamsTabs } from '#/lib'
 import { Divider } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
@@ -20,6 +21,7 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
+  const { canViewLeaveSetting } = useHrmAccess()
   const { pageHeader } = useGetPageHeader()
   const [activeTab, setActiveTab] = useState<
     'leave_type' | 'leave_approver' | null
@@ -47,6 +49,7 @@ function RouteComponent() {
     ],
     [],
   )
+  if (!canViewLeaveSetting) return <TamsPageError type="403" />
   return (
     <main>
       <section className="flex items-center justify-between">

@@ -1,5 +1,5 @@
-import { OrganizationPermissions } from '#/components'
-import { documentHelper, useGetPageHeader } from '#/lib'
+import { OrganizationPermissions, TamsPageError } from '#/components'
+import { documentHelper, useGetPageHeader, useOrganizationAccess } from '#/lib'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute(
@@ -16,6 +16,9 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const { pageHeader } = useGetPageHeader()
+  const { canViewRoles } = useOrganizationAccess()
+
+  if (!canViewRoles) return <TamsPageError type="403" />
   return (
     <main>
       <section className="flex items-center justify-between">
