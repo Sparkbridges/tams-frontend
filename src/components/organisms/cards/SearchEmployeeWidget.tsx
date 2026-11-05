@@ -24,7 +24,7 @@ const SearchEmployeeWidget = () => {
   const handleEmployeeClick = (employee: Record<string, any>) => {
     const prevRecentlyViewed = [
       employee,
-      ...recentlyViewed.filter((e) => e.id !== employee.id),
+      ...recentlyViewed.filter((e) => e.value !== employee.value),
     ]
     localStorage.setItem(
       'recentlyViewedEmployees',
@@ -32,15 +32,20 @@ const SearchEmployeeWidget = () => {
     )
     navigate({
       to: '/admin-dashboard/organization/employees/details/$id',
-      params: { id: employee.id },
+      params: { id: employee.value },
     })
   }
-    
-    const handleRemoveRecentlyViewed = (employeeId: string) => {
-      const updatedRecentlyViewed = recentlyViewed.filter((e) => e.id !== employeeId)
-      setRecentlyViewed(updatedRecentlyViewed)
-      localStorage.setItem('recentlyViewedEmployees', JSON.stringify(updatedRecentlyViewed))
-    }
+
+  const handleRemoveRecentlyViewed = (employeeId: string) => {
+    const updatedRecentlyViewed = recentlyViewed.filter(
+      (e) => e.value !== employeeId,
+    )
+    setRecentlyViewed(updatedRecentlyViewed)
+    localStorage.setItem(
+      'recentlyViewedEmployees',
+      JSON.stringify(updatedRecentlyViewed),
+    )
+  }
   const { data: employees, isFetching } = useSearchOrganizationEmployees(
     {
       query: searchQuery,
@@ -59,7 +64,7 @@ const SearchEmployeeWidget = () => {
           leftSection={(<MagnifyingGlassIcon />) as React.ReactNode}
           dropdownclassname="bg-night"
           dropdownitemclassname="hover:bg-midnight"
-          onOptionSelect={(item)=> handleEmployeeClick(item)}
+          onOptionSelect={(item) => handleEmployeeClick(item)}
           size="lg"
           value={searchQuery}
           loading={isFetching}
@@ -83,8 +88,13 @@ const SearchEmployeeWidget = () => {
       <div className="flex space-x-4">
         {recentlyViewed.map((employee) => (
           <div
-            onClick={() => handleEmployeeClick(employee)}
-            key={employee.id}
+            onClick={() =>
+              navigate({
+                to: '/admin-dashboard/organization/employees/details/$id',
+                params: { id: employee.value },
+              })
+            }
+            key={employee.value}
             className="flex flex-col items-center relative cursor-pointer"
           >
             <TamsAvatar
@@ -93,7 +103,9 @@ const SearchEmployeeWidget = () => {
               color="initials"
             />
             <span className="text-xs mt-1 text-surface-variant">
-              {employee.label?.length > 9 ? employee.label.slice(0, 10) + '...' : employee.label}
+              {employee.label?.length > 9
+                ? employee.label.slice(0, 10) + '...'
+                : employee.label}
             </span>
             <ActionIcon
               variant="subtle"

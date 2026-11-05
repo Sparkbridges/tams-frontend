@@ -12,7 +12,6 @@ import { validateStepForms } from '#/lib/utils/helpers/helpers'
 import { Paper, Stepper } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { ArrowLeftIcon } from '@phosphor-icons/react'
-import type { AxiosError } from 'axios'
 import { useEffect } from 'react'
 
 const TAuthForm = () => {
@@ -36,14 +35,12 @@ const TAuthForm = () => {
   })
 
   useEffect(() => {
-    form.setInitialValues({
+    const values = {
       ...form.getValues(),
       company_id: companyDetails?.slug || '',
-    })
-    form.setValues({
-      ...form.getValues(),
-      company_id: companyDetails?.slug || '',
-    })
+    }
+    form.setInitialValues(values)
+    form.setValues(values)
   }, [companyDetails])
 
   const goBackAction = () => {
@@ -60,18 +57,7 @@ const TAuthForm = () => {
         setCompanyDetails(response.data)
         handleNext()
       } catch (error) {
-        const axiosError = error as AxiosError & {
-          response?: {
-            data?: {
-              message: string
-            }
-          }
-        }
-        notifications.show({
-          title: axiosError.response?.data?.message || 'An error occurred',
-          message: axiosError.message,
-          color: 'red',
-        })
+        console.error(error)
       }
     }
   }
