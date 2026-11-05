@@ -1,4 +1,8 @@
-import { OrganizationEmployeeTable, TamsTabs } from '#/components'
+import {
+  OrganizationEmployeeTable,
+  TamsPageError,
+  TamsTabs,
+} from '#/components'
 import TamsButtonDropdown from '#/components/molecules/dropdown/TamsButtonDropdown'
 import {
   UploadEmployeeModal,
@@ -8,6 +12,7 @@ import {
   documentHelper,
   useFetchOrganizationEmployeesCount,
   useGetPageHeader,
+  useOrganizationAccess,
 } from '#/lib'
 import type { TamsMenuItem, TTamsTabs } from '#/lib'
 import { Divider, Group } from '@mantine/core'
@@ -33,6 +38,8 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
+  const { canViewEmployees, canCreateEmployee, canImportEmployees } =
+    useOrganizationAccess()
   const { pageHeader } = useGetPageHeader()
   const navigate = Route.useNavigate()
 
@@ -78,20 +85,24 @@ function RouteComponent() {
           to: `/admin-dashboard/organization/employees/create`,
         }),
       icon: PlusIcon,
+      hidden: !canCreateEmployee,
     },
     {
       label: 'Upload Employees',
       type: 'item',
       onClick: openUploadEmployeeModal,
       icon: UploadSimpleIcon,
+      hidden: !canImportEmployees,
     },
     {
       label: 'Invite Employee',
       type: 'item',
       onClick: openInviteEmployeeModal,
       icon: PaperPlaneTiltIcon,
+      hidden: !canCreateEmployee,
     },
   ]
+  if (!canViewEmployees) return <TamsPageError type="403" />
   return (
     <main>
       <section className="flex items-center justify-between">

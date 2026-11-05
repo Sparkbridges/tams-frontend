@@ -5,6 +5,7 @@ import {
   useDeleteHrmLeaves,
   useGetHrmLeaves,
   useGetHrmLeaveTypes,
+  useHrmAccess,
 } from '#/lib/api'
 import { emptyStates } from '#/lib/constants'
 import type {
@@ -23,6 +24,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useMemo, useState } from 'react'
 
 const useHrmLeaveTable = () => {
+  const { canEditLeaves, canDeleteLeaves } = useHrmAccess()
   const [tableData, setTableData] = useState<TamsTableData[]>()
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(0)
@@ -165,6 +167,7 @@ const useHrmLeaveTable = () => {
               }),
             color: '',
             icon: PenIcon,
+            hidden: !canEditLeaves,
           },
           /* {
             label: 'Approve',
@@ -185,6 +188,7 @@ const useHrmLeaveTable = () => {
       },
       color: 'red',
       icon: TrashIcon,
+      hidden: !canDeleteLeaves,
     },
   ]
   const columns: TamsTableColumn[] = [

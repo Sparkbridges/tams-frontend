@@ -1,5 +1,5 @@
-import { HrmExemptionTable, TamsButton } from '#/components'
-import { documentHelper, useGetPageHeader } from '#/lib'
+import { HrmExemptionTable, TamsButton, TamsPageError } from '#/components'
+import { documentHelper, useGetPageHeader, useHrmAccess } from '#/lib'
 import { PlusIcon } from '@phosphor-icons/react'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 
@@ -14,21 +14,26 @@ export const Route = createFileRoute('/admin-dashboard/hrm/exemption/')({
 })
 
 function RouteComponent() {
+  const { canViewExemptions, canCreateExemptions } = useHrmAccess()
   const { pageHeader } = useGetPageHeader()
   const navigate = useNavigate()
+
+  if (!canViewExemptions) return <TamsPageError type="403" />
   return (
     <main>
       <section className="flex items-center justify-between">
         {pageHeader()}
-        <TamsButton
-          onClick={() =>
-            navigate({ to: '/admin-dashboard/hrm/exemption/create' })
-          }
-          size="md"
-          leftSection={<PlusIcon />}
-        >
-          Add Exemption
-        </TamsButton>
+        {canCreateExemptions && (
+          <TamsButton
+            onClick={() =>
+              navigate({ to: '/admin-dashboard/hrm/exemption/create' })
+            }
+            size="md"
+            leftSection={<PlusIcon />}
+          >
+            Add Exemption
+          </TamsButton>
+        )}
       </section>
       <div className="mt-10">
         <HrmExemptionTable />

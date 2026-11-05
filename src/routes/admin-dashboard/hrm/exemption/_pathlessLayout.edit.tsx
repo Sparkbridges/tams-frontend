@@ -2,8 +2,9 @@ import {
   CreateEditHrmExemptionForm,
   TamsBanner,
   TamsGoBackNavigation,
+  TamsPageError,
 } from '#/components'
-import { documentHelper, numberSchema } from '#/lib'
+import { documentHelper, numberSchema, useHrmAccess } from '#/lib'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 
@@ -26,6 +27,9 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const { exemptionId } = Route.useSearch()
+  const { canEditExemptions } = useHrmAccess()
+
+  if (!canEditExemptions) return <TamsPageError type="403" />
   return (
     <div className="space-y-4 px-7">
       <TamsGoBackNavigation label="Back to Exemptions" />

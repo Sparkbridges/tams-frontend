@@ -33,6 +33,35 @@ import type {
   TEditHrmLeaveApproverPayload,
   TEditHrmLeaveTypePayload,
 } from '#/lib/utils'
+import { useTamsStore } from '#/lib/store'
+
+export const useHrmAccess = () => {
+  const user = useTamsStore((state) => state.user)
+  return {
+    canViewExemptions: user?.permissions?.includes(
+      'view all exemption requests',
+    ),
+    canEditExemptions: user?.permissions?.includes('edit exemption request'),
+    canDeleteExemptions: user?.permissions?.includes(
+      'delete exemption request',
+    ),
+    canCreateExemptions: user?.permissions?.includes(
+      'create exemption request',
+    ),
+
+    canViewLeaves: user?.permissions?.includes('view all leave requests'),
+    canEditLeaves: user?.permissions?.includes('edit leave request'),
+    canDeleteLeaves: user?.permissions?.includes('delete leave request'),
+    canCreateLeaves: user?.permissions?.includes('create leave request'),
+
+    canViewExemptionDetail: user?.permissions?.includes(
+      'view exemption request detail',
+    ),
+    canViewLeaveSetting: user?.permissions?.includes('view all leave types'),
+
+    canViewHrmReports: user?.permissions?.includes('view workforce report'),
+  }
+}
 
 export const useGetHrmExemptions = <TSelected>(
   params: TFetchHrmExemptionsParams,

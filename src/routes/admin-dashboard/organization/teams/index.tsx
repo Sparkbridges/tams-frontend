@@ -1,5 +1,5 @@
-import { OrganizationTeamTable, TamsButton } from '#/components'
-import { documentHelper, useGetPageHeader } from '#/lib'
+import { OrganizationTeamTable, TamsButton, TamsPageError } from '#/components'
+import { documentHelper, useGetPageHeader, useOrganizationAccess } from '#/lib'
 import { Group } from '@mantine/core'
 import { PlusIcon } from '@phosphor-icons/react'
 import { createFileRoute } from '@tanstack/react-router'
@@ -17,6 +17,9 @@ export const Route = createFileRoute('/admin-dashboard/organization/teams/')({
 function RouteComponent() {
   const { pageHeader } = useGetPageHeader()
   const navigate = Route.useNavigate()
+  const { canCreateTeam } = useOrganizationAccess()
+
+  if (!canCreateTeam) return <TamsPageError type="403" />
   return (
     <main>
       <section className="flex items-center justify-between">
