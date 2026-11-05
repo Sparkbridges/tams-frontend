@@ -1,6 +1,6 @@
 import type { TRecentActivityHistories } from '#/lib'
 import { Divider, Paper, ActionIcon, Badge } from '@mantine/core'
-import { EyeIcon } from '@phosphor-icons/react'
+import { EyeIcon, SignInIcon } from '@phosphor-icons/react'
 
 type RecentActivityCardProps = {
   data?: TRecentActivityHistories[]
@@ -15,21 +15,44 @@ const RecentActivityCard = ({ data }: RecentActivityCardProps) => {
       <Divider my="sm" />
       <div className="px-5 space-y-2">
         {data?.map((item, index) => {
+          const isLoginActivity = item.description
+            .toLowerCase()
+            .match(/log.*in/)
+          const isLogoutActivity = item.description
+            .toLowerCase()
+            .match(/log.*out/)
           return (
             <div
-              className="border bg-primary/5 text-sm gap-2 rounded-sm border-primary/10 px-3 py-2 flex items-center"
+              className="border bg-primary/5 text-sm gap-2 rounded-sm border-primary/10 px-5 py-2.5 flex items-center"
               key={index}
             >
-              <ActionIcon variant="light">
-                <EyeIcon />
+              <ActionIcon
+                color={
+                  isLoginActivity ? 'green' : isLogoutActivity ? 'red' : ''
+                }
+                variant="light"
+              >
+                {isLoginActivity || isLogoutActivity ? (
+                  <SignInIcon />
+                ) : (
+                  <EyeIcon />
+                )}
               </ActionIcon>
-              <p>
-                <span className="font-semibold">
-                  {item.causer_details.name}
-                </span>{' '}
-                {item.description}
-              </p>
-              <Badge variant='outline' className="ml-auto">Viewed</Badge>
+              <div>
+                <p>
+                  <span className="font-semibold">
+                    {item.causer_details.name}
+                  </span>{' '}
+                  {item.description}
+                </p>
+                <p className="text-xs text-gray-800 mt-px">
+                  {item.readable_date}
+                </p>
+              </div>
+
+              <Badge variant="outline" className="ml-auto">
+                Viewed
+              </Badge>
             </div>
           )
         })}

@@ -24,14 +24,14 @@ const WorkForcePulseCard = ({ data }: TWorkForcePulseCardItem) => {
       {
         id: 1,
         name: 'Present Employees',
-        value: data?.present_employees?.length || 400,
+        value: data?.present_employees?.length || 0,
         color: 't-blue.3',
         type: 'present',
       },
       {
         id: 2,
         name: 'Absent Employees',
-        value: data?.absent_employees?.length || 240,
+        value: data?.absent_employees?.length || 0,
         color: '#f43f5e',
         type: 'absent',
       },
@@ -105,7 +105,7 @@ const WorkForcePulseCard = ({ data }: TWorkForcePulseCardItem) => {
           <DonutChart className="z-10" data={list} />
           <div className="text-center absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <span className="block font-title-lg font-bold text-on-surface">
-              {data?.present_employees?.length || 400}
+              {data?.present_employees?.length || 0}
             </span>
             <span className="block text-xs text-on-surface-variant uppercase tracking-wide">
               Present
@@ -355,32 +355,6 @@ export default {
           this.loading = false;
           this.$notification.error(error.message);
         });
-    },
-
-    getProfilePicture(picture) {
-      return picture !== null && picture !== ""
-        ? picture
-        : "/img/no-profile-pic.jpg";
-    },
-    toggleOpen(id) {
-      const activity = this.recentActivity.find(x => x.id === id);
-      if (!activity) {
-        return;
-      }
-      this.recentActivity.forEach(x => {
-        activity.active = !activity.active;
-        const panel = this.$refs[`activity-body-${id}`][0];
-        if (x.id === id) {
-          // const panel = this.$refs[`activity-body-${id}`][0];
-          if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
-          } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-          }
-        } else {
-          x.active = false;
-        }
-      });
     },
   },
 };
