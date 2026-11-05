@@ -3,6 +3,7 @@ import {
   useDeleteBulkOrganizationBranch,
   useDeleteOrganizationBranch,
   useFetchOrganizationBranches,
+  useOrganizationAccess,
 } from '#/lib/api'
 import type {
   TamsActionPopoverOption,
@@ -17,6 +18,8 @@ import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 
 const useOrganizationBranchTable = () => {
+  const { canDeleteBranch, canEditBranch, canViewBranchDetail } =
+    useOrganizationAccess()
   const [tableData, setTableData] = useState<TamsTableData[]>()
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(0)
@@ -25,9 +28,7 @@ const useOrganizationBranchTable = () => {
   const [selectedBranchId, setSelectedBranchId] = useState<
     string | number | null
   >(null)
-  const [selectedBranchIds, setSelectedBranchIds] = useState<
-    number[]
-  >([])
+  const [selectedBranchIds, setSelectedBranchIds] = useState<number[]>([])
   const [
     openedConfirmation,
     { open: openConfirmation, close: closeConfirmation },
@@ -60,6 +61,7 @@ const useOrganizationBranchTable = () => {
   const navigate = useNavigate()
 
   const handleRowClick = (row: TamsTableData) => {
+    if (!canViewBranchDetail) return
     setSelectedBranchId(row.id as number)
     openDetailDrawer()
   }
@@ -104,6 +106,7 @@ const useOrganizationBranchTable = () => {
         }),
       color: '',
       icon: PenIcon,
+      hidden: !canEditBranch,
     },
     {
       label: 'Delete',
@@ -113,6 +116,7 @@ const useOrganizationBranchTable = () => {
       },
       color: 'red',
       icon: TrashIcon,
+      hidden: !canDeleteBranch,
     },
   ]
   const columns: TamsTableColumn[] = [
@@ -209,7 +213,7 @@ const useOrganizationBranchTable = () => {
     isDeletingBulk,
     openedBulkDeleteConfirmation,
     handleCloseBulkDelete,
-    selectedBranchIds
+    selectedBranchIds,
   }
 }
 

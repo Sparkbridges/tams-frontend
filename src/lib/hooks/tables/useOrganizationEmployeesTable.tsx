@@ -6,6 +6,7 @@ import {
   useDeleteArchivedOrganizationEmployees,
   useFetchArchivedOrganizationEmployees,
   useFetchOrganizationAllEmployees,
+  useOrganizationAccess,
   useRestoreArchivedOrganizationEmployees,
 } from '#/lib/api'
 import { emptyStates } from '#/lib/constants'
@@ -34,6 +35,13 @@ type Props = {
   activeTab: string | null
 }
 const useOrganizationEmployeeTable = ({ activeTab }: Props) => {
+  const {
+    canEditEmployee,
+    canActivateEmployee,
+    canArchiveEmployee,
+    canDeactivateEmployees,
+    canDeleteEmployee,
+  } = useOrganizationAccess()
   const navigate = useNavigate()
   const [tableData, setTableData] = useState<TamsTableData[]>()
   const [page, setPage] = useState(1)
@@ -311,12 +319,14 @@ const useOrganizationEmployeeTable = ({ activeTab }: Props) => {
                 }),
               color: 'blue',
               icon: PenIcon,
+              hidden: !canEditEmployee,
             },
             {
               label: 'Archive',
               action: () => handleAction(row.id as number, 'archive', 'single'),
               color: 'gray',
               icon: ArchiveIcon,
+              hidden: !canArchiveEmployee,
             },
             ...(row.status === 'Active'
               ? [
@@ -326,6 +336,7 @@ const useOrganizationEmployeeTable = ({ activeTab }: Props) => {
                       handleAction(row.id as number, 'deactivate', 'single'),
                     color: 'red',
                     icon: XCircleIcon,
+                    hidden: !canDeactivateEmployees,
                   },
                 ]
               : [
@@ -335,6 +346,7 @@ const useOrganizationEmployeeTable = ({ activeTab }: Props) => {
                       handleAction(row.id as number, 'activate', 'single'),
                     color: 'green',
                     icon: CheckCircleIcon,
+                    hidden: !canActivateEmployee,
                   },
                 ]),
           ]
@@ -344,12 +356,14 @@ const useOrganizationEmployeeTable = ({ activeTab }: Props) => {
               action: () => handleAction(row.id as number, 'restore', 'single'),
               color: 'green',
               icon: ArrowCounterClockwiseIcon,
+              hidden: !canActivateEmployee,
             },
             {
               label: 'Delete',
               action: () => handleAction(row.id as number, 'delete', 'single'),
               color: 'red',
               icon: TrashIcon,
+              hidden: !canDeleteEmployee,
             },
           ]
 

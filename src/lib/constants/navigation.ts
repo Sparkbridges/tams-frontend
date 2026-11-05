@@ -247,11 +247,15 @@ export const adminNavigation: TamsNavigation[] = [
         name: 'Devices',
         url: '/devices',
       },
-      {
-        id: 25,
-        name: 'Overtime',
-        url: '/overtime',
-      },
+      ...(import.meta.env.NODE_ENV !== 'production'
+        ? [
+            {
+              id: 25,
+              name: 'Overtime',
+              url: '/overtime',
+            },
+          ]
+        : []),
       {
         id: 24,
         name: 'Reports',
@@ -262,18 +266,18 @@ export const adminNavigation: TamsNavigation[] = [
   {
     id: 9,
     name: 'Performance',
-    url: '/admin/performance',
+    url: '/performance',
     img: ChartLineUpIcon,
     children: [
       {
         id: 91,
-        name: 'Dashboard',
-        url: '/admin/performance/dashboard',
+        name: 'Overview',
+        url: 'index',
       },
       {
         id: 92,
         name: 'Performance Appraisal',
-        url: '/admin/performance/appraisal',
+        url: '/appraisal',
       },
       {
         id: 93,

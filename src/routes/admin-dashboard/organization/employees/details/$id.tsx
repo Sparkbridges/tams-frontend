@@ -1,6 +1,10 @@
 import { TamsAvatar, TamsSpinner } from '#/components'
-import { TamsGoBackNavigation } from '#/components/molecules'
-import { documentHelper, useFetchOrganizationAllEmployeeDetails } from '#/lib'
+import { TamsGoBackNavigation, TamsPageError } from '#/components/molecules'
+import {
+  documentHelper,
+  useFetchOrganizationAllEmployeeDetails,
+  useOrganizationAccess,
+} from '#/lib'
 import { newDayjs } from '#/lib/utils'
 import {
   ActionIcon,
@@ -80,6 +84,7 @@ const DetailRow = ({
 )
 
 function RouteComponent() {
+  const { canViewEmployees } = useOrganizationAccess()
   const { id } = Route.useParams()
   const {
     data: employee,
@@ -93,7 +98,7 @@ function RouteComponent() {
   const fullName = employee
     ? `${employee.first_name} ${employee.last_name}`.trim()
     : ''
-
+  if (!canViewEmployees) return <TamsPageError type="403" />
   return (
     <main className="space-y-4 px-7">
       <TamsGoBackNavigation label="Back to Employees" />

@@ -2,6 +2,7 @@ import {
   AccountSettingsPublicHolidayTable,
   EditCompanyForm,
   TamsButton,
+  TamsPageError,
   TamsStatsCard,
   TamsTabs,
 } from '#/components'
@@ -11,6 +12,7 @@ import {
   newDayjs,
   useGetPageHeader,
   useGetPublicHolidaySettings,
+  useOrganizationAccess,
 } from '#/lib'
 import type {
   TGetPublicHolidaySettingsData,
@@ -36,6 +38,7 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
+  const { canViewAccountSettings } = useOrganizationAccess()
   const { pageHeader } = useGetPageHeader()
   const [activeTab, setActiveTab] = useState<
     'company' | 'public_holiday' | null
@@ -88,6 +91,8 @@ function RouteComponent() {
       },
     ]
   }, [publicHolidaySettings, loadingPublicHolidaySettings])
+
+  if (!canViewAccountSettings) return <TamsPageError type="403" />
 
   return (
     <main>

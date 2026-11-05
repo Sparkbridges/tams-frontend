@@ -17,6 +17,7 @@ export type TamsMenuItem = {
   onClick?: () => void
   disabled?: boolean
   color?: MantineColor
+  hidden?: boolean
 }
 
 export type TamsTableColumn = {

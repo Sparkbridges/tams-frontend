@@ -1,5 +1,5 @@
-import { AllUserReports } from '#/components'
-import { documentHelper, useGetPageHeader } from '#/lib'
+import { AllUserReports, TamsPageError } from '#/components'
+import { documentHelper, useGetPageHeader, useOrganizationAccess } from '#/lib'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/admin-dashboard/organization/reports/')({
@@ -14,6 +14,9 @@ export const Route = createFileRoute('/admin-dashboard/organization/reports/')({
 
 function RouteComponent() {
   const { pageHeader } = useGetPageHeader()
+  const { canViewEmployeeReports } = useOrganizationAccess()
+
+  if (!canViewEmployeeReports) return <TamsPageError type="403" />
   return (
     <main>
       <section className="flex items-center justify-between">

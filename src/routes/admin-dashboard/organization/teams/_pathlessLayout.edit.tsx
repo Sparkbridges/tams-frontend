@@ -1,6 +1,6 @@
-import { TamsBanner, TamsGoBackNavigation } from '#/components'
+import { TamsBanner, TamsGoBackNavigation, TamsPageError } from '#/components'
 import CreateEditTeamForm from '#/components/organisms/forms/CreateEditTeamForm'
-import { documentHelper, numberSchema } from '#/lib'
+import { documentHelper, numberSchema, useOrganizationAccess } from '#/lib'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 
@@ -23,6 +23,8 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const { teamId } = Route.useSearch()
+  const { canEditTeam } = useOrganizationAccess()
+  if (!canEditTeam) return <TamsPageError type="403" />
   return (
     <div className="space-y-4 px-7">
       <TamsGoBackNavigation label="Back to Teams" />

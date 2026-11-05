@@ -4,6 +4,7 @@ import {
   useFetchGroupPermissionsByModules,
   useGetEmployeeRoles,
   useGetPermissionDetailsForRole,
+  useOrganizationAccess,
 } from '#/lib'
 import type { TMappedGetGroupPermissionsByModules } from '#/lib'
 import { Accordion, CheckIcon, Divider, Skeleton } from '@mantine/core'
@@ -23,6 +24,8 @@ import { TamsConfirmation } from '#/components/molecules'
 import { notifications } from '@mantine/notifications'
 
 const OrganizationPermissions = () => {
+  const { canCreateRoles, canEditRoles, canDeleteRoles } =
+    useOrganizationAccess()
   const [accordionValue, setAccordionValue] = useState<string[]>([])
   const [selectedId, setSelectedId] = useState<number>()
   const [
@@ -164,42 +167,48 @@ const OrganizationPermissions = () => {
         title="Organization Permissions"
         actions={
           <div className="flex gap-2">
-            <TamsButton
-              leftSection={<PenIcon />}
-              disabled={Number(permissionDetailsForRole?.data?.is_system) > 0}
-              radius="xl"
-              size="md"
-              variant="subtle"
-              onClick={() => handleCreateEdit('edit')}
-            >
-              Edit Role
-            </TamsButton>
+            {canEditRoles && (
+              <TamsButton
+                leftSection={<PenIcon />}
+                disabled={Number(permissionDetailsForRole?.data?.is_system) > 0}
+                radius="xl"
+                size="md"
+                variant="subtle"
+                onClick={() => handleCreateEdit('edit')}
+              >
+                Edit Role
+              </TamsButton>
+            )}
             <Divider orientation="vertical" />
-            <TamsButton
-              leftSection={<TrashIcon />}
-              disabled={Number(permissionDetailsForRole?.data?.is_system) > 0}
-              radius="xl"
-              color="red"
-              onClick={handleDelete}
-              size="md"
-              variant="subtle"
-            >
-              Delete Role
-            </TamsButton>
+            {canDeleteRoles && (
+              <TamsButton
+                leftSection={<TrashIcon />}
+                disabled={Number(permissionDetailsForRole?.data?.is_system) > 0}
+                radius="xl"
+                color="red"
+                onClick={handleDelete}
+                size="md"
+                variant="subtle"
+              >
+                Delete Role
+              </TamsButton>
+            )}
           </div>
         }
         setSelectedId={setSelectedId}
         columnData={employeeRoles}
         columnButton={
-          <TamsButton
-            leftSection={<UserCircleIcon />}
-            radius="xl"
-            size="md"
-            fullWidth
-            onClick={() => handleCreateEdit('create')}
-          >
-            Add Role
-          </TamsButton>
+          canCreateRoles && (
+            <TamsButton
+              leftSection={<UserCircleIcon />}
+              radius="xl"
+              size="md"
+              fullWidth
+              onClick={() => handleCreateEdit('create')}
+            >
+              Add Role
+            </TamsButton>
+          )
         }
         content={
           <div>

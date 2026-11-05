@@ -134,9 +134,11 @@ const useCreateEditEmployeeForm = ({ type, employeeId }: Props) => {
         const countryId = countries?.find(
           (c) => c.label === String(employee.country),
         )?.value
-        const statesi = await organizationClient.fetchStates({
-          country_id: Number(countryId),
-        })
+        const statesi = countryId
+          ? await organizationClient.fetchStates({
+              country_id: Number(countryId),
+            })
+          : { data: [] }
         const state = statesi.data
           .find((s) => s.name === employee.state)
           ?.id.toString() as string
