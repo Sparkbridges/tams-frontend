@@ -6,6 +6,7 @@ import {
 } from '#/components'
 import {
   documentHelper,
+  genericGreetingByWeekDay,
   // useFetchAttendanceDashboardPunctuality,
   useFetchEmployeeHomeDetails,
   useTamsStore,
@@ -36,7 +37,7 @@ export const Route = createFileRoute('/admin-dashboard/')({
 })
 
 function RouteComponent() {
-  const { activeBranch } = useTamsStore()
+  const { activeBranch, user } = useTamsStore()
   const navigate = useNavigate()
   const { data: employeeHomeDetails } = useFetchEmployeeHomeDetails()
 
@@ -104,10 +105,15 @@ function RouteComponent() {
           <section className="flex justify-between items-center w-full">
             <div>
               <h2 className="font-bold text-3xl text-gray-800">
-                Welcome, Admin
+                Welcome back, {user?.name?.split(' ')[0]}
               </h2>
               <Text c="dimmed" className=" text-sm mt-1">
-                It is another day to be great!!!
+                {
+                  genericGreetingByWeekDay[
+                    employeeHomeDetails?.data
+                      ?.day as keyof typeof genericGreetingByWeekDay
+                  ]
+                }
               </Text>
             </div>
             <div className="bg-primary/5 border border-primary/20 rounded-lg px-4 py-3 flex items-center space-x-3 backdrop-blur-sm">

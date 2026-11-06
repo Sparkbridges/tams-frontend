@@ -46,7 +46,7 @@ const RecentActivityCard = ({ data }: RecentActivityCardProps) => {
                   {item.description}
                 </p>
                 <p className="text-xs text-gray-800 mt-px">
-                  {item.readable_date}
+                  {item.readable_date} at {item.readable_time}
                 </p>
               </div>
 

@@ -15,6 +15,7 @@ const mocks = vi.hoisted(() => ({
   file: vi.fn(),
   refetch: vi.fn(),
   writeFile: vi.fn(),
+  jsonToSheet: vi.fn(),
   show: vi.fn(),
 }))
 vi.mock('#/router', () => ({ getRouter: vi.fn() }))
@@ -51,7 +52,7 @@ vi.mock('xlsx', () => ({
   utils: {
     book_new: () => ({}),
     book_append_sheet: vi.fn(),
-    json_to_sheet: vi.fn(),
+    json_to_sheet: mocks.jsonToSheet,
   },
   writeFile: mocks.writeFile,
 }))
@@ -91,7 +92,16 @@ const result = {
       },
     ],
     total: 25,
-    warnings: ['Source calculation limitation'],
+    warnings: [
+      {
+        code: 'source_values_passthrough',
+        message: 'Source calculation limitation',
+      },
+      {
+        code: 'active_employees_only',
+        message: 'Only active employees are included',
+      },
+    ],
   },
 }
 function mount(filters?: AttendanceReportParams) {
@@ -140,19 +150,28 @@ describe('attendance report UI', () => {
     )
   })
   it('shows report warnings and opens record details on row click', async () => {
-    mount(params)
-    expect(
-      screen.getByText('Source calculation limitation'),
-    ).toBeInTheDocument()
-    await userEvent.click(screen.getByText('Ada'))
-    expect(screen.getByRole('dialog')).toHaveTextContent(
-      'Attendance report details',
-    )
-    expect(screen.getByRole('dialog')).toHaveTextContent('Not available')
-    await userEvent.keyboard('{Escape}')
-    await waitFor(() =>
-      expect(screen.queryByRole('dialog')).not.toBeInTheDocument(),
-    )
+    const consoleError = vi.spyOn(console, 'error')
+    try {
+      mount(params)
+      expect(
+        screen.getByText('Source calculation limitation'),
+      ).toBeInTheDocument()
+      expect(
+        screen.getByText('Only active employees are included'),
+      ).toBeInTheDocument()
+      expect(consoleError).not.toHaveBeenCalled()
+      await userEvent.click(screen.getByText('Ada'))
+      expect(screen.getByRole('dialog')).toHaveTextContent(
+        'Attendance report details',
+      )
+      expect(screen.getByRole('dialog')).toHaveTextContent('Not available')
+      await userEvent.keyboard('{Escape}')
+      await waitFor(() =>
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument(),
+      )
+    } finally {
+      consoleError.mockRestore()
+    }
   })
   it('requires a branch and recipients when filtering by department', async () => {
     const change = mount()
@@ -195,6 +214,12 @@ describe('attendance report UI', () => {
       expect(mocks.generate).toHaveBeenCalledWith({ ...params, page: 'all' }),
     )
     expect(mocks.writeFile).toHaveBeenCalled()
+    expect(mocks.jsonToSheet).toHaveBeenCalledWith(
+      expect.arrayContaining([
+        { Field: 'Warning', Value: 'Source calculation limitation' },
+        { Field: 'Warning', Value: 'Only active employees are included' },
+      ]),
+    )
   })
   it('surfaces export failures and does not report success', async () => {
     mocks.generate.mockRejectedValue(

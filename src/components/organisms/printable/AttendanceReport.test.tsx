@@ -7,7 +7,16 @@ describe('attendance report PDF', () => {
       title: 'Attendance Summary',
       period: '2026-11-01 to 2026-11-30',
       generatedBy: 'Test Administrator',
-      warnings: ['Historical scope uses current employee records.'],
+      warnings: [
+        {
+          code: 'active_employees_only',
+          message: 'Historical scope uses current employee records.',
+        },
+        {
+          code: 'source_values_passthrough',
+          message: 'Source calculation limitation.',
+        },
+      ],
       columns: [
         { value: 'name', label: 'Employee' },
         { value: 'hours_worked', label: 'Hours worked' },
