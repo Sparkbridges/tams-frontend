@@ -123,7 +123,7 @@ export default function useHandleAttendanceReports(
             { Field: 'Grouping', Value: params.group_by },
             ...(response.data.warnings ?? []).map((warning) => ({
               Field: 'Warning',
-              Value: warning,
+              Value: warning.message,
             })),
           ]),
           'Report information',

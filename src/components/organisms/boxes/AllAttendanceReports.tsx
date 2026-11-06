@@ -93,22 +93,32 @@ export default function AllAttendanceReports({
         />
       </SimpleGrid>
       <Alert color="blue">
-        {state.definition?.description} A blank or missing shift is not
-        automatically an off day or absence. Historical scope uses current
-        employee and branch records.
+        <p className="text-xs">
+          {state.definition?.description} A blank or missing shift is not
+          automatically an off day or absence. Historical scope uses current
+          employee and branch records.
+        </p>
       </Alert>
       {params.type === 'summary' && (
         <Alert color="yellow">
-          Absent days is the source attendance total. Approved leave on absent
-          dates is shown separately; it is not subtracted from that total. These
-          counts overlap and must not be added together.
+          <p className="text-xs">
+            Absent days is the source attendance total. Approved leave on absent
+            dates is shown separately; it is not subtracted from that total.
+            These counts overlap and must not be added together.
+          </p>
         </Alert>
       )}
-      {state.query.data?.data.warnings?.map((warning) => (
-        <Alert key={warning} color="yellow">
-          {warning}
-        </Alert>
-      ))}
+
+      {Array.isArray(state?.query?.data?.data?.warnings) &&
+        state?.query?.data?.data?.warnings?.length > 0 && (
+          <Alert color="yellow">
+            <ul className="list-disc list-inside text-xs">
+              {state.query.data?.data.warnings?.map((warning) => (
+                <li key={warning.code}>{warning.message}</li>
+              ))}
+            </ul>
+          </Alert>
+        )}
       {state.query.isError ? (
         <AttendanceQueryError
           error={state.query.error}
