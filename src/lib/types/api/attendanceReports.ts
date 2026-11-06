@@ -35,10 +35,14 @@ export type AttendanceReportParams = {
 }
 
 export type AttendanceReportRecord = Record<string, unknown>
+export type AttendanceReportWarning = {
+  code: string
+  message: string
+}
 export type AttendanceReportData = {
   results: AttendanceReportRecord[]
   total: number
-  warnings?: string[]
+  warnings?: AttendanceReportWarning[]
 }
 export type AttendanceReportResponse = TGetApiResponse<AttendanceReportData>
 

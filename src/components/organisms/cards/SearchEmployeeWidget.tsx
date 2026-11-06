@@ -114,7 +114,7 @@ const SearchEmployeeWidget = () => {
               className="absolute top-0 right-0"
               onClick={(e) => {
                 e.stopPropagation()
-                handleRemoveRecentlyViewed(employee.id)
+                handleRemoveRecentlyViewed(employee.value)
               }}
             >
               <XIcon />
