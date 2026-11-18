@@ -157,7 +157,8 @@ export function useOrganizationAccess() {
 
 export const useSearchOrganizationEmployees = <TSelected>(
   queryParams: {
-    query: string
+    query?: string
+    branch_id?: number
   },
   select?: (data: TSearchOrganizationEmployeesResponse) => TSelected,
 ) => {
@@ -399,7 +400,7 @@ export const useDeleteOrganizationTeam = () => {
 }
 
 export const useFetchOrganizationTeams = <TSelected>(
-  params: TFetchOrganizationTeamsParams,
+  params?: TFetchOrganizationTeamsParams,
   select?: (data: TTeamResponse) => TSelected,
 ) => {
   return useQuery({

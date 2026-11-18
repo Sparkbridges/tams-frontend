@@ -1,7 +1,9 @@
 import z from 'zod'
 import { isValidPhoneNumber } from 'libphonenumber-js'
 
-export const stringSchema = () => z.string()
+export const stringSchema = () => z.string().trim()
+
+export const urlsSchema = (message = 'Must be a valid URL') => z.url(message)
 
 export const emailSchema = () => z.email('Please enter a valid email address')
 
@@ -27,12 +29,12 @@ export const passwordSchema = () =>
     .string()
     .min(8, 'Password must be at least 8 characters')
     .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-    .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+    // .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
     .regex(/[0-9]/, 'Password must contain at least one number')
-    .regex(
+/* .regex(
       /[^a-zA-Z0-9]/,
       'Password must contain at least one special character',
-    )
+    ) */
 
 export const enumSchema = <T extends string[]>(list: T) => z.enum(list)
 

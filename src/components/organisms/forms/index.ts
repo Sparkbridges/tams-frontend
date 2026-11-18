@@ -8,3 +8,5 @@ export { default as CreateEditHrmExemptionForm } from './CreateEditHrmExemptionF
 export { default as CreateEditHrmLeavesForm } from './CreateEditHrmLeavesForm'
 export { default as CreateEditAttendanceDeviceForm } from './CreateEditAttendanceDeviceForm'
 export { default as AttendanceReportForm } from './AttendanceReportForm'
+export { default as CreateEditPerformanceTrainingForm } from './CreateEditPerformanceTrainingForm'
+export { default as CreateEditPerformanceTaskManagementForm } from './CreateEditPerformanceTaskMgtProjectForm'

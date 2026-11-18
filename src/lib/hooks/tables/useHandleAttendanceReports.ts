@@ -39,6 +39,7 @@ export default function useHandleAttendanceReports(
 ) {
   const allowed = useAttendanceReportAccess()
   const user = useTamsStore((state) => state.user)
+  const companyDetails = useTamsStore((state) => state.companyDetails)
   const query = useAttendanceReport(params ?? null)
   const [selectedRow, setSelectedRow] = useState<AttendanceReportRecord | null>(
     null,
@@ -139,6 +140,14 @@ export default function useHandleAttendanceReports(
           rows: records,
           columns,
           warnings: response.data.warnings,
+          company: companyDetails ?? undefined,
+          scope: [
+            `${params.fetch_by}: ${params.fetch_by_id === 'all' ? 'All accessible' : params.fetch_by_id.join(', ')}`,
+            ...(params.branch_id && params.branch_id !== 'all'
+              ? [`Branches: ${params.branch_id.join(', ')}`]
+              : []),
+          ].join(' / '),
+          grouping: params.group_by,
         })
         downloadBlob(blob, filename)
       }

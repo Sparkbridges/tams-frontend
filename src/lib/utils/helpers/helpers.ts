@@ -59,6 +59,7 @@ export const getStatusColor = (status: string) => {
       return { variant: 'light', color: 'red' }
     case 'cancelled':
     case 'no':
+    case 'abandoned':
       return { variant: 'light', color: 'orange' }
     case 'pending':
       return { variant: 'light', color: 'blue' }

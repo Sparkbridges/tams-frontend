@@ -5,3 +5,4 @@ export { default as CreateHrmLeaveApproverModal } from './CreateHrmLeaveApprover
 export { default as CreateExemptionApproverModal } from './CreateHrmExemptionsApproverModal'
 export { default as InviteEmployeeModal } from './InviteEmployeeModal'
 export { default as AttendanceUsersDeviceModal } from './AttendanceUsersDeviceModal'
+export { default as CreateEditKanbanTask } from './CreateEditKanbanTask'

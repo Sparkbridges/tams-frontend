@@ -42,11 +42,14 @@ const useDownloadAs = ({ filename }: ExportToPDFResult) => {
     XLSX.writeFile(wb, name)
   }
 
-  async function downloadPdf(blob: Blob) {
+  async function downloadPdf(
+    blob: Blob,
+    name = 'personnel-biometrics-report.pdf',
+  ) {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'personnel-biometrics-report.pdf'
+    a.download = name
     a.click()
     URL.revokeObjectURL(url)
   }

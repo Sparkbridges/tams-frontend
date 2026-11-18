@@ -1,14 +1,18 @@
 import {
   BuildingOfficeIcon,
   CalendarDotsIcon,
+  ChalkboardTeacherIcon,
   ChartLineUpIcon,
+  ClipboardTextIcon,
   DevicesIcon,
   DoorOpenIcon,
   ExcludeIcon,
+  FingerprintIcon,
   FolderUserIcon,
   LockKeyIcon,
   MoneyWavyIcon,
   SlidersHorizontalIcon,
+  SpeedometerIcon,
   SquaresFourIcon,
   UsersThreeIcon,
   WarehouseIcon,
@@ -125,6 +129,40 @@ export const pageHeaderNav: Record<
     title: 'Attendance Scheduler',
     icon: CalendarDotsIcon,
     description: 'Preview and assign employee schedules for specific dates',
+  },
+
+  // performance module
+  'performance-reports': {
+    title: 'Performance Reports',
+    icon: ChartLineUpIcon,
+    description:
+      'Generate appraisal scorecard reports and inspect performance areas',
+  },
+  'performance-settings': {
+    title: 'Performance System Settings',
+    icon: SlidersHorizontalIcon,
+    description: 'Manage performance system settings within the organization',
+  },
+  'appraisal-settings': {
+    title: 'Performance Appraisal Settings',
+    icon: SpeedometerIcon,
+    description:
+      'Manage performance appraisal settings within the organization',
+  },
+  training: {
+    title: 'Performance Training',
+    icon: ChalkboardTeacherIcon,
+    description: 'Manage performance training within the organization',
+  },
+  'task-management': {
+    title: 'Performance Task Management',
+    icon: ClipboardTextIcon,
+    description: 'Manage tasks within the organization',
+  },
+  board: {
+    title: 'Project Kanban Board',
+    icon: FingerprintIcon,
+    description: 'View and manage tasks on the project kanban board',
   },
 }
 
@@ -282,22 +320,27 @@ export const adminNavigation: TamsNavigation[] = [
       {
         id: 93,
         name: 'Feedback',
-        url: '/admin/performance/feedback',
-      },
-      {
-        id: 94,
-        name: 'Reports',
-        url: '/admin/performance/report',
+        url: '/feedback',
       },
       {
         id: 95,
         name: 'Task Management',
-        url: '/admin/performance/task-management',
+        url: '/task-management',
       },
       {
         id: 96,
         name: 'Training',
-        url: '/admin/performance/training',
+        url: '/training',
+      },
+      {
+        id: 94,
+        name: 'Reports',
+        url: '/report',
+      },
+      {
+        id: 97,
+        name: 'Settings',
+        url: '/performance-settings',
       },
     ],
   },

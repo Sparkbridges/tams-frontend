@@ -97,7 +97,20 @@ export const ENDPOINTS = {
   attendanceRoster: '/attendance/shift/roster',
   attendanceSettings: '/attendance/settings',
 
-  // payroll
+  // ----------------------performance-----------------------------------
+  performanceAppraisalGeneralSettings: '/hrm/appraisals/settings/general',
+  performanceAppraisalGradingSettings: '/hrm/appraisals/settings/grades',
+  performanceAppraisalAppraisers: '/hrm/appraisals/settings/appraisers',
+  performanceTrainings: '/hrm/trainings',
+  performanceTrainingApproval: 'hrm/trainings/:id/approval',
+  performanceTaskProjects: '/hrm/projects',
+  updateProjectStatus: '/hrm/projects/update-project-status/:id',
+
+  projectKanbanTaskStatus: '/hrm/projects/task-status',
+  projectKanbanTasks: '/hrm/projects/tasks',
+  tasksByProjectId: '/hrm/projects/tasks/get-tasks-by-project',
+
+  // --------------------------payroll-----------------------------------
   verifyAccountNumber:
     '/payroll/payment-management/payments/verify-account-number',
 }

@@ -9,7 +9,7 @@ import {
   TamsTextInput,
 } from '#/components/atoms'
 import type { TamsBy2ColsFormFields } from '#/lib'
-import { Grid, Paper, Text } from '@mantine/core'
+import { Checkbox, Grid, Paper, Text } from '@mantine/core'
 import type { UseFormReturnType } from '@mantine/form'
 import { TamsPhoneInput, TamsSearchDropdown, TamsUrlInput } from '../inputs'
 import type { FileWithPath } from '@mantine/dropzone'
@@ -43,6 +43,7 @@ const Tams2ColsForm2 = <T, TTransform = (values: T) => T>({
 
             <Grid>
               {field.fields.map((subField) => {
+                if (subField.hidden) return null
                 if (subField.type == 'text') {
                   return (
                     <Grid.Col
@@ -115,6 +116,22 @@ const Tams2ColsForm2 = <T, TTransform = (values: T) => T>({
                         data={subField.options}
                         searchable
                         disabled={subField.disabled}
+                      />
+                    </Grid.Col>
+                  )
+                }
+                if (subField.type == 'checkbox') {
+                  return (
+                    <Grid.Col
+                      span={{ base: 12, md: 6, lg: subField.cols }}
+                      key={subField.name}
+                    >
+                      <Checkbox
+                        label={subField.label}
+                        key={form.key(subField.name)}
+                        {...form.getInputProps(subField.name, {
+                          type: 'checkbox',
+                        })}
                       />
                     </Grid.Col>
                   )

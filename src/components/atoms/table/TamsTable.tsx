@@ -10,7 +10,6 @@ import {
   Center,
   Checkbox,
   Divider,
-  EmptyState,
   Group,
   Paper,
   Skeleton,
@@ -26,7 +25,7 @@ import {
   CaretUpDownIcon,
   CaretUpIcon,
 } from '@phosphor-icons/react'
-import { TamsPagination } from '#/components/molecules'
+import { TamsEmptyState, TamsPagination } from '#/components/molecules'
 import classes from '#/styles/css/modules/Table.module.css'
 
 type TamsTableProps = {
@@ -50,6 +49,7 @@ type TamsTableProps = {
   disablePagination?: boolean
   disableSearch?: boolean
   withHeaders?: boolean
+  header?: React.ReactNode
 }
 
 type ThProps = {
@@ -99,6 +99,7 @@ const TamsTable = ({
   disablePagination,
   disableSearch,
   withHeaders = true,
+  header,
 }: TamsTableProps) => {
   const {
     newData,
@@ -202,8 +203,8 @@ const TamsTable = ({
   const isLoadingContent = () => {
     return new Array(limit).fill(0).map((_, index) => (
       <Table.Tr key={index}>
-        {columns.map((column) => (
-          <Table.Td key={column.accessor}>
+        {columns.map((__, j) => (
+          <Table.Td key={j}>
             <Skeleton height={14} width="100%" />
           </Table.Td>
         ))}
@@ -225,35 +226,7 @@ const TamsTable = ({
     return rows()
   }
 
-  const emptyState = (
-    <EmptyState className="flex items-center justify-center" h={300}>
-      <EmptyState.Indicator>
-        {typeof empty?.icon === 'string' ? (
-          <img
-            className="object-cover"
-            src={empty.icon}
-            alt="empty state icon"
-            height={150}
-            width={150}
-          />
-        ) : (
-          empty?.icon && <empty.icon />
-        )}
-      </EmptyState.Indicator>
-      <EmptyState.Title>{empty?.title ?? 'No results found'}</EmptyState.Title>
-      <EmptyState.Description>
-        {empty?.description ??
-          "We couldn't find anything matching your search. Try adjusting your filters or searching with different keywords to see more results."}
-      </EmptyState.Description>
-      <EmptyState.Actions>
-        {empty?.actions?.map((action, i) => (
-          <TamsButton key={i} variant="default" onClick={action.onClick}>
-            {action.label}
-          </TamsButton>
-        ))}
-      </EmptyState.Actions>
-    </EmptyState>
-  )
+  const emptyState = <TamsEmptyState empty={empty} />
 
   return (
     <>
@@ -272,6 +245,8 @@ const TamsTable = ({
               placeholder={placeholder ?? 'Search...'}
             />
           )}
+          {header}
+
           {filters}
         </div>
         <Table.ScrollContainer minWidth={650}>

@@ -75,10 +75,11 @@ export function useAttendanceReportGrades(enabled: boolean) {
   })
 }
 
-export function useAttendanceReportBranches() {
+export function useAttendanceReportBranches(enabled = true) {
   const scope = useAttendanceScope()
   return useQuery({
     queryKey: ['attendance-reports', scope, 'branches'],
+    enabled,
     queryFn: () =>
       fetchReportOptions((page) =>
         organizationClient.fetchOrganizationBranches({ page, perPage: 100 }),

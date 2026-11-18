@@ -36,7 +36,7 @@ const useHandleAttendanceDevice = ({ activeTab }: Props) => {
   const [stateFilter, setStateFilter] = useState<'online' | 'offline' | 'all'>(
     'all',
   )
-  const [deviceFilter, setDeviceFilter] = useState<string>('all')
+  const [deviceFilter, setDeviceFilter] = useState<string | undefined>('all')
   const [command, setCommand] = useState<'reboot' | 'check' | null>(null)
   const [selectedRow, setSelectedRow] = useState<TamsTableData | null>(null)
   const [selectedIds, setSelectedIds] = useState<number[]>([])
