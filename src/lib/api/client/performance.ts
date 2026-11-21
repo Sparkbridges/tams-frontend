@@ -27,6 +27,12 @@ import type {
   TCreateProjectKanbanTaskResponse,
   TCreateTasksByProjectIdResponse,
   TMoveProjectKanbanTaskPayload,
+  TCreateProjectKanbanStatusPayload,
+  TUpdateProjectKanbanStatusPayload,
+  TDeleteProjectKanbanStatusPayload,
+  TUpdateProjectKanbanTaskPayload,
+  TDeleteProjectKanbanTaskPayload,
+  TFetchProjectKanbanTaskResponse,
 } from '#/lib/types/api/performance'
 import type { TGetApiResponse } from '#/lib/types/api/request.types'
 import type {
@@ -385,6 +391,24 @@ export const performanceClient = {
       data,
     ),
 
+  fetchProjectKanbanTask: (id: number, projectId: number) =>
+    Client.get<TFetchProjectKanbanTaskResponse>(
+      `${ENDPOINTS.projectKanbanTasks}/${id}`,
+      { params: { project_id: projectId } },
+    ),
+
+  updateProjectKanbanTask: (data: TUpdateProjectKanbanTaskPayload) =>
+    Client.put<TGetApiResponse<unknown>>(
+      `${ENDPOINTS.projectKanbanTasks}/${data.id}`,
+      data,
+    ),
+
+  deleteProjectKanbanTask: (data: TDeleteProjectKanbanTaskPayload) =>
+    Client.delete<TGetApiResponse<unknown>>(
+      `${ENDPOINTS.projectKanbanTasks}/${data.id}`,
+      { data },
+    ),
+
   /**
    * Description - fetch all project kanban statuses.
    * @param project_id - The ID of the project to fetch Kanban statuses for.
@@ -397,6 +421,23 @@ export const performanceClient = {
         params,
       },
     ),
+
+  createProjectKanbanStatus: (data: TCreateProjectKanbanStatusPayload) =>
+    Client.post<TGetApiResponse<unknown>>(
+      ENDPOINTS.projectKanbanTaskStatus,
+      data,
+    ),
+
+  updateProjectKanbanStatus: (data: TUpdateProjectKanbanStatusPayload) =>
+    Client.put<TGetApiResponse<unknown>>(
+      ENDPOINTS.projectKanbanTaskStatus,
+      data,
+    ),
+
+  deleteProjectKanbanStatus: (data: TDeleteProjectKanbanStatusPayload) =>
+    Client.delete<TGetApiResponse<unknown>>(ENDPOINTS.projectKanbanTaskStatus, {
+      data,
+    }),
 
   /**
    * Description - Fetch all tasks associated with a ProjectId

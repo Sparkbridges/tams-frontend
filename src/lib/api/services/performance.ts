@@ -22,6 +22,11 @@ import type {
   TFetchPerformanceTaskProjectByIdResponse,
   TFetchProjectKanbanStatusesResponse,
   TCreateTasksByProjectIdResponse,
+  TCreateProjectKanbanStatusPayload,
+  TUpdateProjectKanbanStatusPayload,
+  TDeleteProjectKanbanStatusPayload,
+  TUpdateProjectKanbanTaskPayload,
+  TDeleteProjectKanbanTaskPayload,
 } from '#/lib/types/api/performance'
 import { notifications } from '@mantine/notifications'
 import { useTamsStore } from '#/lib/store'
@@ -418,6 +423,23 @@ export const useFetchProjectKanbanStatuses = <TSelected>(
   })
 }
 
+export const useFetchProjectKanbanTask = (
+  id: number,
+  projectId: number,
+  enabled = true,
+) => {
+  return useQuery({
+    queryKey: [ENDPOINTS.projectKanbanTasks, id, projectId],
+    queryFn: () => performanceClient.fetchProjectKanbanTask(id, projectId),
+    enabled:
+      enabled &&
+      Number.isSafeInteger(id) &&
+      id > 0 &&
+      Number.isSafeInteger(projectId) &&
+      projectId > 0,
+  })
+}
+
 export const useFetchProjectKanbanTasks = (
   params: TFetchProjectKanbanTasksParams,
 ) => {
@@ -456,6 +478,121 @@ export const useFetchTasksByProjectId = <TSelected>(
     queryKey: [ENDPOINTS.tasksByProjectId, params],
     queryFn: () => performanceClient.fetchTasksByProjectId(params),
     select,
+  })
+}
+
+export const useCreateProjectKanbanStatus = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: TCreateProjectKanbanStatusPayload) =>
+      performanceClient.createProjectKanbanStatus(data),
+    onSuccess: async (_response, data) => {
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: [
+            ENDPOINTS.projectKanbanTasks,
+            { project_id: data.project_id },
+          ],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: [ENDPOINTS.projectKanbanTaskStatus],
+        }),
+      ])
+      notifications.show({
+        title: 'Success',
+        message: 'Task column created successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useUpdateProjectKanbanStatus = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: TUpdateProjectKanbanStatusPayload) =>
+      performanceClient.updateProjectKanbanStatus(data),
+    onSuccess: async (_response, data) => {
+      await queryClient.invalidateQueries({
+        queryKey: [
+          ENDPOINTS.projectKanbanTasks,
+          { project_id: data.project_id },
+        ],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Task column updated successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useDeleteProjectKanbanStatus = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: TDeleteProjectKanbanStatusPayload) =>
+      performanceClient.deleteProjectKanbanStatus(data),
+    onSuccess: async (_response, data) => {
+      await queryClient.invalidateQueries({
+        queryKey: [
+          ENDPOINTS.projectKanbanTasks,
+          { project_id: data.project_id },
+        ],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Task column deleted successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useUpdateProjectKanbanTask = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: TUpdateProjectKanbanTaskPayload) =>
+      performanceClient.updateProjectKanbanTask(data),
+    onSuccess: async (_response, data) => {
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: [
+            ENDPOINTS.projectKanbanTasks,
+            { project_id: data.project_id },
+          ],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: [ENDPOINTS.projectKanbanTasks, data.id],
+        }),
+      ])
+      notifications.show({
+        title: 'Success',
+        message: 'Project Kanban task updated successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useDeleteProjectKanbanTask = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: TDeleteProjectKanbanTaskPayload) =>
+      performanceClient.deleteProjectKanbanTask(data),
+    onSuccess: async (_response, data) => {
+      await queryClient.invalidateQueries({
+        queryKey: [
+          ENDPOINTS.projectKanbanTasks,
+          { project_id: data.project_id },
+        ],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Project Kanban task deleted successfully.',
+        color: 'green',
+      })
+    },
   })
 }
 

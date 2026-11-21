@@ -28,3 +28,11 @@ export const performanceAssignmentCategories = [
   { label: 'Employee', value: 'employees' },
   { label: 'Grade', value: 'grade' },
 ]
+
+export const columnColors = {
+  1: 'bg-red-400',
+  2: 'bg-blue-400',
+  3: 'bg-amber-400',
+  4: 'bg-green-600',
+  5: 'bg-gray-400',
+}

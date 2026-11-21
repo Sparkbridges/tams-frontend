@@ -2,6 +2,7 @@ import {
   useCreateProjectKanbanTask,
   useFetchProjectKanbanStatuses,
   useFetchTasksByProjectId,
+  useUpdateProjectKanbanTask,
 } from '#/lib/api'
 import {
   createKanbanTaskInitials,
@@ -10,12 +11,13 @@ import {
 import type { TamsBy2ColsFormFields } from '#/lib/types'
 import { capitalize } from '#/lib/utils'
 import useTamsForm from '../useTamsForm'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   createPerformanceTaskManagementTaskSchema,
   editPerformanceTaskManagementTaskSchema,
 } from '#/lib/utils/schema/performance.schema'
 import type { TCreatePerformanceTaskManagementTaskPayload } from '#/lib/utils/schema/performance.schema'
+import type { TProjectKanbanTask } from '#/lib/types/api/performance'
 import {
   KanbanIssueTypes,
   KanbanTaskPriority,
@@ -24,9 +26,11 @@ import {
 type Props = {
   type: 'create' | 'edit'
   id?: number
+  initialTask?: TProjectKanbanTask | null
   closeActionWidget: () => void
   employeesFromTeams: { label: string; value: string }[] | undefined
   projectId: number
+  opened: boolean
 }
 
 const useCreateEditKanbanTaskForm = ({
@@ -34,6 +38,9 @@ const useCreateEditKanbanTaskForm = ({
   closeActionWidget,
   employeesFromTeams,
   projectId,
+  id,
+  initialTask,
+  opened,
 }: Props) => {
   const [isDirty, setIsDirty] = useState(false)
 
@@ -84,52 +91,43 @@ const useCreateEditKanbanTaskForm = ({
   )
 
   const createProjectKanbanTaskMutation = useCreateProjectKanbanTask()
+  const updateProjectKanbanTaskMutation = useUpdateProjectKanbanTask()
 
-  /*  useEffect(() => {
-    const initializeForm = async () => {
-      if (id && hrmLeaveApproverDetailsData) {
-        const initials = {
-          id: hrmLeaveApproverDetailsData.id,
-          name: hrmLeaveApproverDetailsData.name,
-          approval_types: hrmLeaveApproverDetailsData.approval_types,
-          category_type: hrmLeaveApproverDetailsData.category_type as
-            'employees' | 'department' | 'station_grade' | 'branch',
-          employees: hrmLeaveApproverDetailsData.employees?.map(
-            (employee) => employee.id,
-          ),
-          category_branch_id: hrmLeaveApproverDetailsData.station_id,
-          no_approvals: hrmLeaveApproverDetailsData.no_approvals,
-          departments: hrmLeaveApproverDetailsData.departments?.map(
-            (department) => department.id,
-          ),
-          grades: hrmLeaveApproverDetailsData.employeeGrades?.map(
-            (grade) => grade.id,
-          ),
-          branches: hrmLeaveApproverDetailsData.branches?.map(
-            (branch) => branch.id,
-          ),
-          approver_details:
-            hrmLeaveApproverDetailsData.approvalLevels?.map((level) => ({
-              approver_person_id: level.approval_person_id,
-              alt_approver_person_id: level.alt_approval_person_id,
-              searchValue: level.approval_person_name,
-              searchValueAlt: level.alt_approval_person,
-            })) ?? [],
-        }
-        form.initialize(initials as any)
-        form.setValues(initials as any)
-      }
+  useEffect(() => {
+    if (type === 'create' && opened) {
+      console.log('resetting form', initialTask)
+      form.reset()
+      setIsDirty(false)
     }
-    initializeForm()
-  }, [hrmLeaveApproverDetailsData, id])
- */
-  /* (alias) const editKanbanTaskInitials: {
- id: number;
-} */
+
+    if (type === 'edit' && id && initialTask && opened) {
+      const vals = {
+        id,
+        project_id: projectId,
+        title: initialTask.title,
+        description: initialTask.description,
+        priority: initialTask.priority,
+        issue_type: initialTask.issue_type,
+        status_id: initialTask.status_id,
+        start_date: initialTask.start_date
+          ? new Date(initialTask.start_date)
+          : new Date(),
+        due_date: initialTask.due_date
+          ? new Date(initialTask.due_date)
+          : new Date(),
+        is_sub_task: Boolean(initialTask.parent_task_id),
+        parent_task_id: initialTask.parent_task_id ?? undefined,
+        actors: initialTask.actors.map((actor) => actor.employee_id),
+      }
+      form.setValues(vals)
+      setIsDirty(false)
+    }
+  }, [initialTask, id, projectId, type, opened])
+
   const isSubTask = form.useWatchValue('is_sub_task')
   const fields: TamsBy2ColsFormFields[] = [
     {
-      title: 'Leave type Information',
+      title: 'Task type Information',
       fields: [
         {
           label: 'Task title',
@@ -231,12 +229,28 @@ const useCreateEditKanbanTaskForm = ({
             form.reset()
             closeActionWidget()
           }
-          /* if (type === 'edit' && id) {
-            await updateHrmExemptionApproverMutation.mutateAsync({
-              id: payloadId,
-              ...restPayload,
+          if (type === 'edit' && id) {
+            const startDate = restPayload.start_date as Date | string | null
+            const dueDate = restPayload.due_date as Date | string | null
+            await updateProjectKanbanTaskMutation.mutateAsync({
+              id,
+              project_id: projectId,
+              title: restPayload.title,
+              description: restPayload.description,
+              priority: restPayload.priority,
+              issue_type: restPayload.issue_type,
+              actors: restPayload.actors,
+              parent_task_id: restPayload.parent_task_id ?? null,
+              start_date:
+                startDate instanceof Date
+                  ? startDate.toISOString()
+                  : (startDate ?? undefined),
+              due_date:
+                dueDate instanceof Date
+                  ? dueDate.toISOString()
+                  : (dueDate ?? undefined),
             })
-          } */
+          }
           closeActionWidget()
         } catch (error) {
           console.error(error)

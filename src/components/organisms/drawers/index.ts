@@ -14,3 +14,4 @@ export { default as EditHrmExemptionApproverSettingsDrawer } from './EditHrmExem
 export { default as AttendanceDeviceDetailDrawer } from './AttendanceDeviceDetailDrawer'
 export { default as AttendanceWorkshiftDetailDrawer } from './AttendanceWorkshiftDetailDrawer'
 export { default as AttendanceReportDetailDrawer } from './AttendanceReportDetailDrawer'
+export { default as KanbanTaskDetailDrawer } from './KanbanTaskDetailDrawer'

@@ -351,7 +351,106 @@ export type TFetchProjectKanbanTasksParams = {
 export type TProjectKanbanTask = {
   id: number
   title: string
+  description: string
+  project_id: number
+  priority: KanbanTaskPriority
+  file_url: string | null
+  issue_type: KanbanIssueTypes
   status_id: number
+  start_date: string | null
+  due_date: string | null
+  created_by_id: number
+  company_id: number
+  created_at: string
+  updated_at: string
+  parent_task_id: null
+  subtasks: (TProjectKanbanTask & {
+    status: {
+      id: number
+      name: string
+      project_id: number
+      created_at: string
+      updated_at: string
+      system_key: string
+      sort_order: number
+    }
+  })[]
+  actors: {
+    id: number
+    task_id: number
+    employee_id: number
+    created_at: string
+    updated_at: string
+    employee: {
+      id: number
+      first_name: string
+      last_name: string
+      email: string
+      date_of_birth: string
+      gender: string
+      blood_group: string
+      nationality: string
+      religion: string
+      marital_status: string
+      show_in_organogram: number
+      employee_type_id: number | null
+      employee_category_id: number | null
+      employee_designation_id: number | null
+      employee_grade_id: number
+      pin: number
+      user_id: number
+      company_id: number
+      station_id: number
+      department_id: number
+      pay_package_id: null
+      is_active: number
+      appointment_date: string
+      created_at: string
+      updated_at: string
+      custom_employee_id: null
+      state: string
+      local_government: null
+      genotype: null
+      custom_fields: null
+      mobile_number: string
+      next_of_kin: null
+      last_employment_date: null
+      last_employer: null
+      guarantor_name: null
+      guarantor_phone_number: null
+      last_qualification: null
+      qualification_date: null
+      qualification_document: null
+      bank_name: null
+      account_number: null
+      account_type: null
+      deleted_at: null
+      country: 'Nigeria'
+      city: 'san fransico'
+      account_name: null
+      salutation: 'mr'
+      address: '281 Greenoaks Drive'
+      picture: null
+      bank_id: null
+      bank_branch: null
+      pension_fund_administrator: null
+      rsa_pin: null
+      tax_id: null
+      staff_id: null
+      tax_location: null
+      mobile_number2: null
+      alt_mobile_number: null
+      means_of_identity: null
+      id_no: null
+      id_expiration: null
+      emergency_contact_name: null
+      emergency_contact_rel: null
+      emergency_contact_no: null
+      emergency_contact_address: null
+      bank_code: null
+      recipient_code: null
+    }
+  }[]
 }
 
 export type TMoveProjectKanbanTaskPayload = {
@@ -381,13 +480,49 @@ export type TFetchProjectKanbanStatuses = {
   project_id: number
   created_at: string
   updated_at: string
-  system_key: string
+  system_key: string | null
   sort_order: number
 }
 
 export type TFetchProjectKanbanStatusesResponse = TGetApiResponse<
   TFetchProjectKanbanStatuses[]
 >
+
+export type TCreateProjectKanbanStatusPayload = {
+  name: string
+  project_id: number
+}
+
+export type TUpdateProjectKanbanStatusPayload =
+  TCreateProjectKanbanStatusPayload & {
+    id: number
+  }
+
+export type TDeleteProjectKanbanStatusPayload = {
+  id: number
+  project_id: number
+}
+
+export type TUpdateProjectKanbanTaskPayload = {
+  id: number
+  project_id: number
+  title?: string
+  description?: string
+  priority?: KanbanTaskPriority
+  start_date?: string
+  due_date?: string
+  actors?: number[]
+  issue_type?: KanbanIssueTypes
+  parent_task_id?: number | null
+}
+
+export type TDeleteProjectKanbanTaskPayload = {
+  id: number
+  project_id: number
+}
+
+export type TFetchProjectKanbanTaskResponse =
+  TGetApiResponse<TProjectKanbanTask>
 
 export enum KanbanIssueTypes {
   fix = 'fix',
