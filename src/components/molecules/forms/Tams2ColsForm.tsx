@@ -3,6 +3,7 @@ import {
   TamsDatePickerInput,
   TamsDropzone,
   TamsMultiSelect,
+  TamsNumberInput,
   TamsSelectInput,
   TamsSwitchInput,
   TamsTextArea,
@@ -37,6 +38,9 @@ const Tams2ColsForm = <T, TTransform = (values: T) => T>({
           <Paper p={'lg'} withBorder className="col-span-2 lg:col-span-7">
             <Grid>
               {field.fields.map((subField) => {
+                if (subField.hidden) {
+                  return null
+                }
                 if (subField.type == 'text') {
                   return (
                     <Grid.Col
@@ -51,6 +55,7 @@ const Tams2ColsForm = <T, TTransform = (values: T) => T>({
                         readOnly={subField.readonly}
                         hidden={subField.hidden}
                         disabled={subField.disabled}
+                        description={subField.description}
                       />
                     </Grid.Col>
                   )
@@ -86,6 +91,60 @@ const Tams2ColsForm = <T, TTransform = (values: T) => T>({
                         withAsterisk={subField.required}
                         data={subField.options}
                         searchable
+                      />
+                    </Grid.Col>
+                  )
+                }
+                if (subField.type == 'number') {
+                  return (
+                    <Grid.Col
+                      span={{ base: 12, md: 6, lg: subField.cols }}
+                      key={subField.name}
+                    >
+                      <TamsNumberInput
+                        label={subField.label}
+                        key={form.key(subField.name)}
+                        {...form.getInputProps(subField.name)}
+                        withAsterisk={subField.required}
+                        readOnly={subField.readonly}
+                        hidden={subField.hidden}
+                        disabled={subField.disabled}
+                        allowDecimal={false}
+                        min={0}
+                        allowNegative={false}
+                        max={subField.maxNumber}
+                        description={subField.description}
+                      />
+                    </Grid.Col>
+                  )
+                }
+                if (subField.type == 'multi-select-searchable') {
+                  return (
+                    <Grid.Col
+                      span={{ base: 12, md: 6, lg: subField.cols }}
+                      key={subField.name}
+                    >
+                      <TamsMultiSelect
+                        label={subField.label}
+                        key={form.key(subField.name)}
+                        {...form.getInputProps(subField.name)}
+                        withAsterisk={subField.required}
+                        data={subField.options}
+                        searchable
+                        searchValue={
+                          (
+                            form.getValues() as unknown as Record<
+                              string,
+                              string | undefined
+                            >
+                          )[subField.alias as string]
+                        }
+                        onSearchChange={(value) =>
+                          form.setFieldValue(
+                            subField.alias as string,
+                            value as any,
+                          )
+                        }
                       />
                     </Grid.Col>
                   )

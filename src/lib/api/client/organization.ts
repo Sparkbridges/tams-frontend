@@ -95,10 +95,13 @@ const organizationClient = {
    * @returns Data fetched from `/organization/employees/search`, or an error if the API call fails.
    * @throws {Error} If the request fails.
    */
-  searchOrganizationEmployees: async (queryParams: { query: string }) => {
+  searchOrganizationEmployees: async (params: {
+    query?: string
+    branch_id?: number
+  }) => {
     return await Client.get<TSearchOrganizationEmployeesResponse>(
       ENDPOINTS.searchOrganizationEmployees,
-      { params: queryParams },
+      { params },
     )
   },
 
@@ -307,7 +310,7 @@ const organizationClient = {
    * @returns Data fetched from `/organization/teams`, or an error if the API call fails.
    * @throws {Error} If the request fails.
    */
-  fetchOrganizationTeams: async (params: TFetchOrganizationTeamsParams) => {
+  fetchOrganizationTeams: async (params?: TFetchOrganizationTeamsParams) => {
     return await Client.get<TTeamResponse>(ENDPOINTS.teams, { params })
   },
 

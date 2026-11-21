@@ -1,7 +1,9 @@
 import z from 'zod'
 import { isValidPhoneNumber } from 'libphonenumber-js'
 
-export const stringSchema = () => z.string()
+export const stringSchema = () => z.string().trim()
+
+export const urlsSchema = (message = 'Must be a valid URL') => z.url(message)
 
 export const emailSchema = () => z.email('Please enter a valid email address')
 

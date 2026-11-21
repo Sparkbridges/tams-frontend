@@ -97,7 +97,7 @@ const useCreateEditHrmExemptionApproverForm = ({
   )
 
   const { data: organizationEmployeesData } = useSearchOrganizationEmployees(
-    { query: form.getValues()['employee_query'] as string },
+    { query: form.getValues()['employee_query'] },
     (data) =>
       data.data.map((employee) => ({
         value: employee.id.toString(),
@@ -108,8 +108,7 @@ const useCreateEditHrmExemptionApproverForm = ({
   const { data: organizationEmployeesDataForListItems } =
     useSearchOrganizationEmployees(
       {
-        query: form.getValues()?.approver_details?.[listIndex]
-          ?.searchValue as string,
+        query: form.getValues()?.approver_details?.[listIndex]?.searchValue,
       },
       (data) =>
         data.data.map((employee) => ({
@@ -121,8 +120,7 @@ const useCreateEditHrmExemptionApproverForm = ({
   const { data: organizationEmployeesDataForListItemsAlt } =
     useSearchOrganizationEmployees(
       {
-        query: form.getValues()?.approver_details?.[listIndex]
-          ?.searchValueAlt as string,
+        query: form.getValues()?.approver_details?.[listIndex]?.searchValueAlt,
       },
       (data) =>
         data.data.map((employee) => ({

@@ -229,7 +229,9 @@ export type TTeam = {
 
 export type TTeamResponse = TGetApiResponse<{ results: TTeam[]; total: number }>
 
-export type TFetchOrganizationTeamsParams = TBaseQueryParams
+export type TFetchOrganizationTeamsParams = TBaseQueryParams & {
+  branch_id?: number
+}
 
 export type TCreateTeamPayload = {
   branch_id: number

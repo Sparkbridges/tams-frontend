@@ -5,16 +5,26 @@ import { DotsThreeIcon } from '@phosphor-icons/react'
 
 type TamsTableActionPopoverProps = {
   data: TamsActionPopoverOption[]
+  variant?: 'light' | 'transparent' | 'subtle' | 'outline'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 }
 
-const TamsTableActionPopover = ({ data }: TamsTableActionPopoverProps) => {
+const TamsTableActionPopover = ({
+  data,
+  variant,
+  size,
+}: TamsTableActionPopoverProps) => {
   return (
     <TamsPopover
       width={200}
       position="bottom-end"
       shadow="md"
       trigger={
-        <ActionIcon onClick={(e) => e.stopPropagation()} variant="transparent">
+        <ActionIcon
+          onClick={(e) => e.stopPropagation()}
+          variant={variant ?? 'transparent'}
+          size={size ?? 'md'}
+        >
           <DotsThreeIcon size={32} />
         </ActionIcon>
       }

@@ -14,3 +14,9 @@ export { default as useHrmExemptionsSettingsTable } from './useHrmExemptionSetti
 // attendance
 export { default as useHandleAttendanceDevice } from './useHandleAttendanceDevice'
 export { default as useHandleAttendanceReports } from './useHandleAttendanceReports'
+
+// performance appraisal
+export { default as usePerformanceAppraisalGGSettings } from './usePerformanceAppraisalGGSettings'
+export { default as usePerformanceTraining } from './usePerformanceTraining'
+export { default as usePerformanceTaskProjects } from './usePerformanceTaskProjects'
+export { default as useHandleProjectKanban } from './useHandleProjectKanban'
