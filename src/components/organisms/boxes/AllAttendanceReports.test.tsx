@@ -17,6 +17,7 @@ const mocks = vi.hoisted(() => ({
   writeFile: vi.fn(),
   jsonToSheet: vi.fn(),
   show: vi.fn(),
+  pdf: vi.fn(),
 }))
 vi.mock('#/router', () => ({ getRouter: vi.fn() }))
 vi.mock('#/lib/api/services/attendanceReports', () => ({
@@ -43,7 +44,13 @@ vi.mock('#/lib/api/client/attendanceReports', () => ({
 }))
 vi.mock('#/lib/store', () => ({
   useTamsStore: (selector: (value: unknown) => unknown) =>
-    selector({ user: { employee: { first_name: 'Ada', last_name: 'Admin' } } }),
+    selector({
+      user: { employee: { first_name: 'Ada', last_name: 'Admin' } },
+      companyDetails: {
+        legal_name: 'Example Company',
+        company_logo: '/logo.png',
+      },
+    }),
 }))
 vi.mock('@mantine/notifications', () => ({
   notifications: { show: mocks.show },
@@ -57,7 +64,7 @@ vi.mock('xlsx', () => ({
   writeFile: mocks.writeFile,
 }))
 vi.mock('../printable/AttendanceReport', () => ({
-  generateAttendancePdf: vi.fn(),
+  generateAttendancePdf: mocks.pdf,
 }))
 
 const params: AttendanceReportParams = {
@@ -128,6 +135,7 @@ beforeEach(() => {
     refetch: mocks.refetch,
   })
   mocks.generate.mockResolvedValue(result)
+  mocks.pdf.mockResolvedValue(new Blob(['pdf'], { type: 'application/pdf' }))
 })
 afterEach(cleanup)
 
@@ -237,6 +245,54 @@ describe('attendance report UI', () => {
       ),
     )
     expect(mocks.writeFile).not.toHaveBeenCalled()
+  })
+  it('passes company branding, selected scope, grouping and all-record warnings to the PDF export', async () => {
+    const createUrl = vi
+      .spyOn(URL, 'createObjectURL')
+      .mockReturnValue('blob:test')
+    const revokeUrl = vi
+      .spyOn(URL, 'revokeObjectURL')
+      .mockImplementation(() => {})
+    const click = vi
+      .spyOn(HTMLAnchorElement.prototype, 'click')
+      .mockImplementation(() => {})
+    try {
+      const filters = {
+        ...params,
+        fetch_by: 'department' as const,
+        fetch_by_id: [5],
+        branch_id: [2],
+      }
+      mount(filters)
+      await userEvent.click(screen.getByRole('button', { name: /Export/ }))
+      await userEvent.click(screen.getByText('Export all as PDF'))
+      await waitFor(() =>
+        expect(mocks.pdf).toHaveBeenCalledWith(
+          expect.objectContaining({
+            company: {
+              legal_name: 'Example Company',
+              company_logo: '/logo.png',
+            },
+            generatedBy: 'Ada Admin',
+            scope: 'department: 5 / Branches: 2',
+            grouping: 'employee',
+            warnings: result.data.warnings,
+            rows: [
+              expect.objectContaining({
+                name: 'Ada',
+                hours_worked: '00:00:00',
+              }),
+            ],
+          }),
+        ),
+      )
+      expect(mocks.generate).toHaveBeenCalledWith({ ...filters, page: 'all' })
+      expect(click).toHaveBeenCalled()
+    } finally {
+      createUrl.mockRestore()
+      revokeUrl.mockRestore()
+      click.mockRestore()
+    }
   })
   it('blocks report access when the required report permission is missing', () => {
     mocks.access.mockReturnValue([])

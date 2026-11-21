@@ -4,6 +4,7 @@ import type { UseFormReturnType } from '@mantine/form'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
+import RelativeTime from 'dayjs/plugin/relativeTime'
 import type { MillifyOptions } from 'millify/dist/options'
 import type { TGetPublicHolidaySettingsData, TLabelValue } from '#/lib/types'
 import type { Dayjs } from 'dayjs'
@@ -12,6 +13,7 @@ import type { AxiosError } from 'axios'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
+dayjs.extend(RelativeTime)
 const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone
 
 export const newDayjs = (date?: string | Date) => dayjs(date).tz(userTz)
@@ -59,6 +61,7 @@ export const getStatusColor = (status: string) => {
       return { variant: 'light', color: 'red' }
     case 'cancelled':
     case 'no':
+    case 'abandoned':
       return { variant: 'light', color: 'orange' }
     case 'pending':
       return { variant: 'light', color: 'blue' }

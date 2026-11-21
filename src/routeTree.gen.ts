@@ -25,6 +25,7 @@ import { Route as AdminDashboardAttendanceWorkshiftRouteImport } from './routes/
 import { Route as AdminDashboardHrmIndexRouteImport } from './routes/admin-dashboard/hrm/index'
 import { Route as AdminDashboardOrganizationIndexRouteImport } from './routes/admin-dashboard/organization/index'
 import { Route as AdminDashboardPerformanceIndexRouteImport } from './routes/admin-dashboard/performance/index'
+import { Route as AdminDashboardPerformanceReportRouteImport } from './routes/admin-dashboard/performance/report'
 import { Route as AdminDashboardAttendanceDevicesIndexRouteImport } from './routes/admin-dashboard/attendance/devices/index'
 import { Route as AdminDashboardAttendanceDevicesPathlessLayoutRouteImport } from './routes/admin-dashboard/attendance/devices/_pathlessLayout'
 import { Route as AdminDashboardAttendanceWorkshiftIndexRouteImport } from './routes/admin-dashboard/attendance/workshift/index'
@@ -52,6 +53,12 @@ import { Route as AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSet
 import { Route as AdminDashboardOrganizationTeamsIndexRouteImport } from './routes/admin-dashboard/organization/teams/index'
 import { Route as AdminDashboardOrganizationTeamsPathlessLayoutRouteImport } from './routes/admin-dashboard/organization/teams/_pathlessLayout'
 import { Route as AdminDashboardPerformanceAppraisalIndexRouteImport } from './routes/admin-dashboard/performance/appraisal/index'
+import { Route as AdminDashboardPerformancePerformanceSettingsIndexRouteImport } from './routes/admin-dashboard/performance/performance-settings/index'
+import { Route as AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRouteImport } from './routes/admin-dashboard/performance/performance-settings/appraisal-settings'
+import { Route as AdminDashboardPerformanceTaskManagementIndexRouteImport } from './routes/admin-dashboard/performance/task-management/index'
+import { Route as AdminDashboardPerformanceTaskManagementPathlessLayoutRouteImport } from './routes/admin-dashboard/performance/task-management/_pathlessLayout'
+import { Route as AdminDashboardPerformanceTrainingIndexRouteImport } from './routes/admin-dashboard/performance/training/index'
+import { Route as AdminDashboardPerformanceTrainingPathlessLayoutRouteImport } from './routes/admin-dashboard/performance/training/_pathlessLayout'
 import { Route as AdminDashboardAttendanceDevicesPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/attendance/devices/_pathlessLayout.create'
 import { Route as AdminDashboardAttendanceDevicesPathlessLayoutEditRouteImport } from './routes/admin-dashboard/attendance/devices/_pathlessLayout.edit'
 import { Route as AdminDashboardAttendanceWorkshiftAssignEmployeeIdRouteImport } from './routes/admin-dashboard/attendance/workshift/assign-employee/$id'
@@ -73,6 +80,11 @@ import { Route as AdminDashboardOrganizationEmployeesPathlessLayoutEditRouteImpo
 import { Route as AdminDashboardOrganizationEmployeesDetailsIdRouteImport } from './routes/admin-dashboard/organization/employees/details/$id'
 import { Route as AdminDashboardOrganizationTeamsPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/organization/teams/_pathlessLayout.create'
 import { Route as AdminDashboardOrganizationTeamsPathlessLayoutEditRouteImport } from './routes/admin-dashboard/organization/teams/_pathlessLayout.edit'
+import { Route as AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/performance/task-management/_pathlessLayout.create'
+import { Route as AdminDashboardPerformanceTaskManagementPathlessLayoutEditRouteImport } from './routes/admin-dashboard/performance/task-management/_pathlessLayout.edit'
+import { Route as AdminDashboardPerformanceTrainingPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/performance/training/_pathlessLayout.create'
+import { Route as AdminDashboardPerformanceTrainingPathlessLayoutEditRouteImport } from './routes/admin-dashboard/performance/training/_pathlessLayout.edit'
+import { Route as AdminDashboardPerformanceTaskManagementPathlessLayoutBoardIdRouteImport } from './routes/admin-dashboard/performance/task-management/_pathlessLayout.board.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -158,6 +170,12 @@ const AdminDashboardPerformanceIndexRoute =
   AdminDashboardPerformanceIndexRouteImport.update({
     id: '/performance/',
     path: '/performance/',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardPerformanceReportRoute =
+  AdminDashboardPerformanceReportRouteImport.update({
+    id: '/performance/report',
+    path: '/performance/report',
     getParentRoute: () => AdminDashboardRouteRoute,
   } as any)
 const AdminDashboardAttendanceDevicesIndexRoute =
@@ -324,6 +342,44 @@ const AdminDashboardPerformanceAppraisalIndexRoute =
     path: '/performance/appraisal/',
     getParentRoute: () => AdminDashboardRouteRoute,
   } as any)
+const AdminDashboardPerformancePerformanceSettingsIndexRoute =
+  AdminDashboardPerformancePerformanceSettingsIndexRouteImport.update({
+    id: '/performance/performance-settings/',
+    path: '/performance/performance-settings/',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute =
+  AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRouteImport.update(
+    {
+      id: '/performance/performance-settings/appraisal-settings',
+      path: '/performance/performance-settings/appraisal-settings',
+      getParentRoute: () => AdminDashboardRouteRoute,
+    } as any,
+  )
+const AdminDashboardPerformanceTaskManagementIndexRoute =
+  AdminDashboardPerformanceTaskManagementIndexRouteImport.update({
+    id: '/performance/task-management/',
+    path: '/performance/task-management/',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardPerformanceTaskManagementPathlessLayoutRoute =
+  AdminDashboardPerformanceTaskManagementPathlessLayoutRouteImport.update({
+    id: '/performance/task-management/_pathlessLayout',
+    path: '/performance/task-management',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardPerformanceTrainingIndexRoute =
+  AdminDashboardPerformanceTrainingIndexRouteImport.update({
+    id: '/performance/training/',
+    path: '/performance/training/',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardPerformanceTrainingPathlessLayoutRoute =
+  AdminDashboardPerformanceTrainingPathlessLayoutRouteImport.update({
+    id: '/performance/training/_pathlessLayout',
+    path: '/performance/training',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
 const AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute =
   AdminDashboardAttendanceDevicesPathlessLayoutCreateRouteImport.update({
     id: '/create',
@@ -454,6 +510,43 @@ const AdminDashboardOrganizationTeamsPathlessLayoutEditRoute =
     path: '/edit',
     getParentRoute: () => AdminDashboardOrganizationTeamsPathlessLayoutRoute,
   } as any)
+const AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRoute =
+  AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRouteImport.update(
+    {
+      id: '/create',
+      path: '/create',
+      getParentRoute: () =>
+        AdminDashboardPerformanceTaskManagementPathlessLayoutRoute,
+    } as any,
+  )
+const AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute =
+  AdminDashboardPerformanceTaskManagementPathlessLayoutEditRouteImport.update({
+    id: '/edit',
+    path: '/edit',
+    getParentRoute: () =>
+      AdminDashboardPerformanceTaskManagementPathlessLayoutRoute,
+  } as any)
+const AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute =
+  AdminDashboardPerformanceTrainingPathlessLayoutCreateRouteImport.update({
+    id: '/create',
+    path: '/create',
+    getParentRoute: () => AdminDashboardPerformanceTrainingPathlessLayoutRoute,
+  } as any)
+const AdminDashboardPerformanceTrainingPathlessLayoutEditRoute =
+  AdminDashboardPerformanceTrainingPathlessLayoutEditRouteImport.update({
+    id: '/edit',
+    path: '/edit',
+    getParentRoute: () => AdminDashboardPerformanceTrainingPathlessLayoutRoute,
+  } as any)
+const AdminDashboardPerformanceTaskManagementPathlessLayoutBoardIdRoute =
+  AdminDashboardPerformanceTaskManagementPathlessLayoutBoardIdRouteImport.update(
+    {
+      id: '/board/$id',
+      path: '/board/$id',
+      getParentRoute: () =>
+        AdminDashboardPerformanceTaskManagementPathlessLayoutRoute,
+    } as any,
+  )
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -467,6 +560,7 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/attendance/attendance-reports': typeof AdminDashboardAttendanceAttendanceReportsRoute
   '/admin-dashboard/attendance/scheduler': typeof AdminDashboardAttendanceSchedulerRoute
   '/admin-dashboard/attendance/workshift': typeof AdminDashboardAttendanceWorkshiftRouteWithChildren
+  '/admin-dashboard/performance/report': typeof AdminDashboardPerformanceReportRoute
   '/admin-dashboard/attendance/': typeof AdminDashboardAttendanceIndexRoute
   '/admin-dashboard/hrm/': typeof AdminDashboardHrmIndexRoute
   '/admin-dashboard/organization/': typeof AdminDashboardOrganizationIndexRoute
@@ -485,6 +579,9 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/organization/system-settings/employee-settings': typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   '/admin-dashboard/organization/system-settings/roles-and-permissions-settings': typeof AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute
   '/admin-dashboard/organization/teams': typeof AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren
+  '/admin-dashboard/performance/performance-settings/appraisal-settings': typeof AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute
+  '/admin-dashboard/performance/task-management': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutRouteWithChildren
+  '/admin-dashboard/performance/training': typeof AdminDashboardPerformanceTrainingPathlessLayoutRouteWithChildren
   '/admin-dashboard/attendance/devices/': typeof AdminDashboardAttendanceDevicesIndexRoute
   '/admin-dashboard/attendance/workshift/': typeof AdminDashboardAttendanceWorkshiftIndexRoute
   '/admin-dashboard/hrm/exemption/': typeof AdminDashboardHrmExemptionIndexRoute
@@ -498,6 +595,9 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/organization/system-settings/': typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   '/admin-dashboard/organization/teams/': typeof AdminDashboardOrganizationTeamsIndexRoute
   '/admin-dashboard/performance/appraisal/': typeof AdminDashboardPerformanceAppraisalIndexRoute
+  '/admin-dashboard/performance/performance-settings/': typeof AdminDashboardPerformancePerformanceSettingsIndexRoute
+  '/admin-dashboard/performance/task-management/': typeof AdminDashboardPerformanceTaskManagementIndexRoute
+  '/admin-dashboard/performance/training/': typeof AdminDashboardPerformanceTrainingIndexRoute
   '/admin-dashboard/attendance/devices/create': typeof AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute
   '/admin-dashboard/attendance/devices/edit': typeof AdminDashboardAttendanceDevicesPathlessLayoutEditRoute
   '/admin-dashboard/attendance/workshift/assign-employee/$id': typeof AdminDashboardAttendanceWorkshiftAssignEmployeeIdRoute
@@ -518,7 +618,12 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/organization/employees/details/$id': typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
   '/admin-dashboard/organization/teams/create': typeof AdminDashboardOrganizationTeamsPathlessLayoutCreateRoute
   '/admin-dashboard/organization/teams/edit': typeof AdminDashboardOrganizationTeamsPathlessLayoutEditRoute
+  '/admin-dashboard/performance/task-management/create': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRoute
+  '/admin-dashboard/performance/task-management/edit': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute
+  '/admin-dashboard/performance/training/create': typeof AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute
+  '/admin-dashboard/performance/training/edit': typeof AdminDashboardPerformanceTrainingPathlessLayoutEditRoute
   '/admin-dashboard/attendance/workshift/settings/': typeof AdminDashboardAttendanceWorkshiftSettingsIndexRoute
+  '/admin-dashboard/performance/task-management/board/$id': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutBoardIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -529,6 +634,7 @@ export interface FileRoutesByTo {
   '/login': typeof authPathlessLayoutLoginRoute
   '/admin-dashboard/attendance/attendance-reports': typeof AdminDashboardAttendanceAttendanceReportsRoute
   '/admin-dashboard/attendance/scheduler': typeof AdminDashboardAttendanceSchedulerRoute
+  '/admin-dashboard/performance/report': typeof AdminDashboardPerformanceReportRoute
   '/admin-dashboard/attendance': typeof AdminDashboardAttendanceIndexRoute
   '/admin-dashboard/hrm': typeof AdminDashboardHrmIndexRoute
   '/admin-dashboard/organization': typeof AdminDashboardOrganizationIndexRoute
@@ -547,6 +653,9 @@ export interface FileRoutesByTo {
   '/admin-dashboard/organization/system-settings/employee-settings': typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   '/admin-dashboard/organization/system-settings/roles-and-permissions-settings': typeof AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute
   '/admin-dashboard/organization/teams': typeof AdminDashboardOrganizationTeamsIndexRoute
+  '/admin-dashboard/performance/performance-settings/appraisal-settings': typeof AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute
+  '/admin-dashboard/performance/task-management': typeof AdminDashboardPerformanceTaskManagementIndexRoute
+  '/admin-dashboard/performance/training': typeof AdminDashboardPerformanceTrainingIndexRoute
   '/admin-dashboard/attendance/workshift': typeof AdminDashboardAttendanceWorkshiftIndexRoute
   '/admin-dashboard/hrm/hrm-reports': typeof AdminDashboardHrmHrmReportsIndexRoute
   '/admin-dashboard/hrm/hrm-settings': typeof AdminDashboardHrmHrmSettingsIndexRoute
@@ -554,6 +663,7 @@ export interface FileRoutesByTo {
   '/admin-dashboard/organization/reports': typeof AdminDashboardOrganizationReportsIndexRoute
   '/admin-dashboard/organization/system-settings': typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   '/admin-dashboard/performance/appraisal': typeof AdminDashboardPerformanceAppraisalIndexRoute
+  '/admin-dashboard/performance/performance-settings': typeof AdminDashboardPerformancePerformanceSettingsIndexRoute
   '/admin-dashboard/attendance/devices/create': typeof AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute
   '/admin-dashboard/attendance/devices/edit': typeof AdminDashboardAttendanceDevicesPathlessLayoutEditRoute
   '/admin-dashboard/attendance/workshift/assign-employee/$id': typeof AdminDashboardAttendanceWorkshiftAssignEmployeeIdRoute
@@ -574,7 +684,12 @@ export interface FileRoutesByTo {
   '/admin-dashboard/organization/employees/details/$id': typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
   '/admin-dashboard/organization/teams/create': typeof AdminDashboardOrganizationTeamsPathlessLayoutCreateRoute
   '/admin-dashboard/organization/teams/edit': typeof AdminDashboardOrganizationTeamsPathlessLayoutEditRoute
+  '/admin-dashboard/performance/task-management/create': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRoute
+  '/admin-dashboard/performance/task-management/edit': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute
+  '/admin-dashboard/performance/training/create': typeof AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute
+  '/admin-dashboard/performance/training/edit': typeof AdminDashboardPerformanceTrainingPathlessLayoutEditRoute
   '/admin-dashboard/attendance/workshift/settings': typeof AdminDashboardAttendanceWorkshiftSettingsIndexRoute
+  '/admin-dashboard/performance/task-management/board/$id': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutBoardIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -590,6 +705,7 @@ export interface FileRoutesById {
   '/admin-dashboard/attendance/attendance-reports': typeof AdminDashboardAttendanceAttendanceReportsRoute
   '/admin-dashboard/attendance/scheduler': typeof AdminDashboardAttendanceSchedulerRoute
   '/admin-dashboard/attendance/workshift': typeof AdminDashboardAttendanceWorkshiftRouteWithChildren
+  '/admin-dashboard/performance/report': typeof AdminDashboardPerformanceReportRoute
   '/admin-dashboard/attendance/': typeof AdminDashboardAttendanceIndexRoute
   '/admin-dashboard/hrm/': typeof AdminDashboardHrmIndexRoute
   '/admin-dashboard/organization/': typeof AdminDashboardOrganizationIndexRoute
@@ -608,6 +724,9 @@ export interface FileRoutesById {
   '/admin-dashboard/organization/system-settings/employee-settings': typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   '/admin-dashboard/organization/system-settings/roles-and-permissions-settings': typeof AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute
   '/admin-dashboard/organization/teams/_pathlessLayout': typeof AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren
+  '/admin-dashboard/performance/performance-settings/appraisal-settings': typeof AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute
+  '/admin-dashboard/performance/task-management/_pathlessLayout': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutRouteWithChildren
+  '/admin-dashboard/performance/training/_pathlessLayout': typeof AdminDashboardPerformanceTrainingPathlessLayoutRouteWithChildren
   '/admin-dashboard/attendance/devices/': typeof AdminDashboardAttendanceDevicesIndexRoute
   '/admin-dashboard/attendance/workshift/': typeof AdminDashboardAttendanceWorkshiftIndexRoute
   '/admin-dashboard/hrm/exemption/': typeof AdminDashboardHrmExemptionIndexRoute
@@ -621,6 +740,9 @@ export interface FileRoutesById {
   '/admin-dashboard/organization/system-settings/': typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   '/admin-dashboard/organization/teams/': typeof AdminDashboardOrganizationTeamsIndexRoute
   '/admin-dashboard/performance/appraisal/': typeof AdminDashboardPerformanceAppraisalIndexRoute
+  '/admin-dashboard/performance/performance-settings/': typeof AdminDashboardPerformancePerformanceSettingsIndexRoute
+  '/admin-dashboard/performance/task-management/': typeof AdminDashboardPerformanceTaskManagementIndexRoute
+  '/admin-dashboard/performance/training/': typeof AdminDashboardPerformanceTrainingIndexRoute
   '/admin-dashboard/attendance/devices/_pathlessLayout/create': typeof AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute
   '/admin-dashboard/attendance/devices/_pathlessLayout/edit': typeof AdminDashboardAttendanceDevicesPathlessLayoutEditRoute
   '/admin-dashboard/attendance/workshift/assign-employee/$id': typeof AdminDashboardAttendanceWorkshiftAssignEmployeeIdRoute
@@ -641,7 +763,12 @@ export interface FileRoutesById {
   '/admin-dashboard/organization/employees/details/$id': typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
   '/admin-dashboard/organization/teams/_pathlessLayout/create': typeof AdminDashboardOrganizationTeamsPathlessLayoutCreateRoute
   '/admin-dashboard/organization/teams/_pathlessLayout/edit': typeof AdminDashboardOrganizationTeamsPathlessLayoutEditRoute
+  '/admin-dashboard/performance/task-management/_pathlessLayout/create': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRoute
+  '/admin-dashboard/performance/task-management/_pathlessLayout/edit': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute
+  '/admin-dashboard/performance/training/_pathlessLayout/create': typeof AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute
+  '/admin-dashboard/performance/training/_pathlessLayout/edit': typeof AdminDashboardPerformanceTrainingPathlessLayoutEditRoute
   '/admin-dashboard/attendance/workshift/settings/': typeof AdminDashboardAttendanceWorkshiftSettingsIndexRoute
+  '/admin-dashboard/performance/task-management/_pathlessLayout/board/$id': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutBoardIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -657,6 +784,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/attendance/attendance-reports'
     | '/admin-dashboard/attendance/scheduler'
     | '/admin-dashboard/attendance/workshift'
+    | '/admin-dashboard/performance/report'
     | '/admin-dashboard/attendance/'
     | '/admin-dashboard/hrm/'
     | '/admin-dashboard/organization/'
@@ -675,6 +803,9 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/employee-settings'
     | '/admin-dashboard/organization/system-settings/roles-and-permissions-settings'
     | '/admin-dashboard/organization/teams'
+    | '/admin-dashboard/performance/performance-settings/appraisal-settings'
+    | '/admin-dashboard/performance/task-management'
+    | '/admin-dashboard/performance/training'
     | '/admin-dashboard/attendance/devices/'
     | '/admin-dashboard/attendance/workshift/'
     | '/admin-dashboard/hrm/exemption/'
@@ -688,6 +819,9 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/'
     | '/admin-dashboard/organization/teams/'
     | '/admin-dashboard/performance/appraisal/'
+    | '/admin-dashboard/performance/performance-settings/'
+    | '/admin-dashboard/performance/task-management/'
+    | '/admin-dashboard/performance/training/'
     | '/admin-dashboard/attendance/devices/create'
     | '/admin-dashboard/attendance/devices/edit'
     | '/admin-dashboard/attendance/workshift/assign-employee/$id'
@@ -708,7 +842,12 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/employees/details/$id'
     | '/admin-dashboard/organization/teams/create'
     | '/admin-dashboard/organization/teams/edit'
+    | '/admin-dashboard/performance/task-management/create'
+    | '/admin-dashboard/performance/task-management/edit'
+    | '/admin-dashboard/performance/training/create'
+    | '/admin-dashboard/performance/training/edit'
     | '/admin-dashboard/attendance/workshift/settings/'
+    | '/admin-dashboard/performance/task-management/board/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -719,6 +858,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/admin-dashboard/attendance/attendance-reports'
     | '/admin-dashboard/attendance/scheduler'
+    | '/admin-dashboard/performance/report'
     | '/admin-dashboard/attendance'
     | '/admin-dashboard/hrm'
     | '/admin-dashboard/organization'
@@ -737,6 +877,9 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/employee-settings'
     | '/admin-dashboard/organization/system-settings/roles-and-permissions-settings'
     | '/admin-dashboard/organization/teams'
+    | '/admin-dashboard/performance/performance-settings/appraisal-settings'
+    | '/admin-dashboard/performance/task-management'
+    | '/admin-dashboard/performance/training'
     | '/admin-dashboard/attendance/workshift'
     | '/admin-dashboard/hrm/hrm-reports'
     | '/admin-dashboard/hrm/hrm-settings'
@@ -744,6 +887,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/reports'
     | '/admin-dashboard/organization/system-settings'
     | '/admin-dashboard/performance/appraisal'
+    | '/admin-dashboard/performance/performance-settings'
     | '/admin-dashboard/attendance/devices/create'
     | '/admin-dashboard/attendance/devices/edit'
     | '/admin-dashboard/attendance/workshift/assign-employee/$id'
@@ -764,7 +908,12 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/employees/details/$id'
     | '/admin-dashboard/organization/teams/create'
     | '/admin-dashboard/organization/teams/edit'
+    | '/admin-dashboard/performance/task-management/create'
+    | '/admin-dashboard/performance/task-management/edit'
+    | '/admin-dashboard/performance/training/create'
+    | '/admin-dashboard/performance/training/edit'
     | '/admin-dashboard/attendance/workshift/settings'
+    | '/admin-dashboard/performance/task-management/board/$id'
   id:
     | '__root__'
     | '/'
@@ -779,6 +928,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/attendance/attendance-reports'
     | '/admin-dashboard/attendance/scheduler'
     | '/admin-dashboard/attendance/workshift'
+    | '/admin-dashboard/performance/report'
     | '/admin-dashboard/attendance/'
     | '/admin-dashboard/hrm/'
     | '/admin-dashboard/organization/'
@@ -797,6 +947,9 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/employee-settings'
     | '/admin-dashboard/organization/system-settings/roles-and-permissions-settings'
     | '/admin-dashboard/organization/teams/_pathlessLayout'
+    | '/admin-dashboard/performance/performance-settings/appraisal-settings'
+    | '/admin-dashboard/performance/task-management/_pathlessLayout'
+    | '/admin-dashboard/performance/training/_pathlessLayout'
     | '/admin-dashboard/attendance/devices/'
     | '/admin-dashboard/attendance/workshift/'
     | '/admin-dashboard/hrm/exemption/'
@@ -810,6 +963,9 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/'
     | '/admin-dashboard/organization/teams/'
     | '/admin-dashboard/performance/appraisal/'
+    | '/admin-dashboard/performance/performance-settings/'
+    | '/admin-dashboard/performance/task-management/'
+    | '/admin-dashboard/performance/training/'
     | '/admin-dashboard/attendance/devices/_pathlessLayout/create'
     | '/admin-dashboard/attendance/devices/_pathlessLayout/edit'
     | '/admin-dashboard/attendance/workshift/assign-employee/$id'
@@ -830,7 +986,12 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/employees/details/$id'
     | '/admin-dashboard/organization/teams/_pathlessLayout/create'
     | '/admin-dashboard/organization/teams/_pathlessLayout/edit'
+    | '/admin-dashboard/performance/task-management/_pathlessLayout/create'
+    | '/admin-dashboard/performance/task-management/_pathlessLayout/edit'
+    | '/admin-dashboard/performance/training/_pathlessLayout/create'
+    | '/admin-dashboard/performance/training/_pathlessLayout/edit'
     | '/admin-dashboard/attendance/workshift/settings/'
+    | '/admin-dashboard/performance/task-management/_pathlessLayout/board/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -954,6 +1115,13 @@ declare module '@tanstack/react-router' {
       path: '/performance'
       fullPath: '/admin-dashboard/performance/'
       preLoaderRoute: typeof AdminDashboardPerformanceIndexRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/performance/report': {
+      id: '/admin-dashboard/performance/report'
+      path: '/performance/report'
+      fullPath: '/admin-dashboard/performance/report'
+      preLoaderRoute: typeof AdminDashboardPerformanceReportRouteImport
       parentRoute: typeof AdminDashboardRouteRoute
     }
     '/admin-dashboard/attendance/devices/': {
@@ -1145,6 +1313,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardPerformanceAppraisalIndexRouteImport
       parentRoute: typeof AdminDashboardRouteRoute
     }
+    '/admin-dashboard/performance/performance-settings/': {
+      id: '/admin-dashboard/performance/performance-settings/'
+      path: '/performance/performance-settings'
+      fullPath: '/admin-dashboard/performance/performance-settings/'
+      preLoaderRoute: typeof AdminDashboardPerformancePerformanceSettingsIndexRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/performance/performance-settings/appraisal-settings': {
+      id: '/admin-dashboard/performance/performance-settings/appraisal-settings'
+      path: '/performance/performance-settings/appraisal-settings'
+      fullPath: '/admin-dashboard/performance/performance-settings/appraisal-settings'
+      preLoaderRoute: typeof AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/performance/task-management/': {
+      id: '/admin-dashboard/performance/task-management/'
+      path: '/performance/task-management'
+      fullPath: '/admin-dashboard/performance/task-management/'
+      preLoaderRoute: typeof AdminDashboardPerformanceTaskManagementIndexRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/performance/task-management/_pathlessLayout': {
+      id: '/admin-dashboard/performance/task-management/_pathlessLayout'
+      path: '/performance/task-management'
+      fullPath: '/admin-dashboard/performance/task-management'
+      preLoaderRoute: typeof AdminDashboardPerformanceTaskManagementPathlessLayoutRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/performance/training/': {
+      id: '/admin-dashboard/performance/training/'
+      path: '/performance/training'
+      fullPath: '/admin-dashboard/performance/training/'
+      preLoaderRoute: typeof AdminDashboardPerformanceTrainingIndexRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/performance/training/_pathlessLayout': {
+      id: '/admin-dashboard/performance/training/_pathlessLayout'
+      path: '/performance/training'
+      fullPath: '/admin-dashboard/performance/training'
+      preLoaderRoute: typeof AdminDashboardPerformanceTrainingPathlessLayoutRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
     '/admin-dashboard/attendance/devices/_pathlessLayout/create': {
       id: '/admin-dashboard/attendance/devices/_pathlessLayout/create'
       path: '/create'
@@ -1291,6 +1501,41 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin-dashboard/organization/teams/edit'
       preLoaderRoute: typeof AdminDashboardOrganizationTeamsPathlessLayoutEditRouteImport
       parentRoute: typeof AdminDashboardOrganizationTeamsPathlessLayoutRoute
+    }
+    '/admin-dashboard/performance/task-management/_pathlessLayout/create': {
+      id: '/admin-dashboard/performance/task-management/_pathlessLayout/create'
+      path: '/create'
+      fullPath: '/admin-dashboard/performance/task-management/create'
+      preLoaderRoute: typeof AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRouteImport
+      parentRoute: typeof AdminDashboardPerformanceTaskManagementPathlessLayoutRoute
+    }
+    '/admin-dashboard/performance/task-management/_pathlessLayout/edit': {
+      id: '/admin-dashboard/performance/task-management/_pathlessLayout/edit'
+      path: '/edit'
+      fullPath: '/admin-dashboard/performance/task-management/edit'
+      preLoaderRoute: typeof AdminDashboardPerformanceTaskManagementPathlessLayoutEditRouteImport
+      parentRoute: typeof AdminDashboardPerformanceTaskManagementPathlessLayoutRoute
+    }
+    '/admin-dashboard/performance/training/_pathlessLayout/create': {
+      id: '/admin-dashboard/performance/training/_pathlessLayout/create'
+      path: '/create'
+      fullPath: '/admin-dashboard/performance/training/create'
+      preLoaderRoute: typeof AdminDashboardPerformanceTrainingPathlessLayoutCreateRouteImport
+      parentRoute: typeof AdminDashboardPerformanceTrainingPathlessLayoutRoute
+    }
+    '/admin-dashboard/performance/training/_pathlessLayout/edit': {
+      id: '/admin-dashboard/performance/training/_pathlessLayout/edit'
+      path: '/edit'
+      fullPath: '/admin-dashboard/performance/training/edit'
+      preLoaderRoute: typeof AdminDashboardPerformanceTrainingPathlessLayoutEditRouteImport
+      parentRoute: typeof AdminDashboardPerformanceTrainingPathlessLayoutRoute
+    }
+    '/admin-dashboard/performance/task-management/_pathlessLayout/board/$id': {
+      id: '/admin-dashboard/performance/task-management/_pathlessLayout/board/$id'
+      path: '/board/$id'
+      fullPath: '/admin-dashboard/performance/task-management/board/$id'
+      preLoaderRoute: typeof AdminDashboardPerformanceTaskManagementPathlessLayoutBoardIdRouteImport
+      parentRoute: typeof AdminDashboardPerformanceTaskManagementPathlessLayoutRoute
     }
   }
 }
@@ -1445,11 +1690,51 @@ const AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren =
     AdminDashboardOrganizationTeamsPathlessLayoutRouteChildren,
   )
 
+interface AdminDashboardPerformanceTaskManagementPathlessLayoutRouteChildren {
+  AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRoute: typeof AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRoute
+  AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute: typeof AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute
+  AdminDashboardPerformanceTaskManagementPathlessLayoutBoardIdRoute: typeof AdminDashboardPerformanceTaskManagementPathlessLayoutBoardIdRoute
+}
+
+const AdminDashboardPerformanceTaskManagementPathlessLayoutRouteChildren: AdminDashboardPerformanceTaskManagementPathlessLayoutRouteChildren =
+  {
+    AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRoute:
+      AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRoute,
+    AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute:
+      AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute,
+    AdminDashboardPerformanceTaskManagementPathlessLayoutBoardIdRoute:
+      AdminDashboardPerformanceTaskManagementPathlessLayoutBoardIdRoute,
+  }
+
+const AdminDashboardPerformanceTaskManagementPathlessLayoutRouteWithChildren =
+  AdminDashboardPerformanceTaskManagementPathlessLayoutRoute._addFileChildren(
+    AdminDashboardPerformanceTaskManagementPathlessLayoutRouteChildren,
+  )
+
+interface AdminDashboardPerformanceTrainingPathlessLayoutRouteChildren {
+  AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute: typeof AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute
+  AdminDashboardPerformanceTrainingPathlessLayoutEditRoute: typeof AdminDashboardPerformanceTrainingPathlessLayoutEditRoute
+}
+
+const AdminDashboardPerformanceTrainingPathlessLayoutRouteChildren: AdminDashboardPerformanceTrainingPathlessLayoutRouteChildren =
+  {
+    AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute:
+      AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute,
+    AdminDashboardPerformanceTrainingPathlessLayoutEditRoute:
+      AdminDashboardPerformanceTrainingPathlessLayoutEditRoute,
+  }
+
+const AdminDashboardPerformanceTrainingPathlessLayoutRouteWithChildren =
+  AdminDashboardPerformanceTrainingPathlessLayoutRoute._addFileChildren(
+    AdminDashboardPerformanceTrainingPathlessLayoutRouteChildren,
+  )
+
 interface AdminDashboardRouteRouteChildren {
   AdminDashboardIndexRoute: typeof AdminDashboardIndexRoute
   AdminDashboardAttendanceAttendanceReportsRoute: typeof AdminDashboardAttendanceAttendanceReportsRoute
   AdminDashboardAttendanceSchedulerRoute: typeof AdminDashboardAttendanceSchedulerRoute
   AdminDashboardAttendanceWorkshiftRoute: typeof AdminDashboardAttendanceWorkshiftRouteWithChildren
+  AdminDashboardPerformanceReportRoute: typeof AdminDashboardPerformanceReportRoute
   AdminDashboardAttendanceIndexRoute: typeof AdminDashboardAttendanceIndexRoute
   AdminDashboardHrmIndexRoute: typeof AdminDashboardHrmIndexRoute
   AdminDashboardOrganizationIndexRoute: typeof AdminDashboardOrganizationIndexRoute
@@ -1465,6 +1750,9 @@ interface AdminDashboardRouteRouteChildren {
   AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute: typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute: typeof AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute
   AdminDashboardOrganizationTeamsPathlessLayoutRoute: typeof AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren
+  AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute: typeof AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute
+  AdminDashboardPerformanceTaskManagementPathlessLayoutRoute: typeof AdminDashboardPerformanceTaskManagementPathlessLayoutRouteWithChildren
+  AdminDashboardPerformanceTrainingPathlessLayoutRoute: typeof AdminDashboardPerformanceTrainingPathlessLayoutRouteWithChildren
   AdminDashboardAttendanceDevicesIndexRoute: typeof AdminDashboardAttendanceDevicesIndexRoute
   AdminDashboardHrmExemptionIndexRoute: typeof AdminDashboardHrmExemptionIndexRoute
   AdminDashboardHrmHrmReportsIndexRoute: typeof AdminDashboardHrmHrmReportsIndexRoute
@@ -1477,6 +1765,9 @@ interface AdminDashboardRouteRouteChildren {
   AdminDashboardOrganizationSystemSettingsIndexRoute: typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   AdminDashboardOrganizationTeamsIndexRoute: typeof AdminDashboardOrganizationTeamsIndexRoute
   AdminDashboardPerformanceAppraisalIndexRoute: typeof AdminDashboardPerformanceAppraisalIndexRoute
+  AdminDashboardPerformancePerformanceSettingsIndexRoute: typeof AdminDashboardPerformancePerformanceSettingsIndexRoute
+  AdminDashboardPerformanceTaskManagementIndexRoute: typeof AdminDashboardPerformanceTaskManagementIndexRoute
+  AdminDashboardPerformanceTrainingIndexRoute: typeof AdminDashboardPerformanceTrainingIndexRoute
   AdminDashboardHrmLeavePathlessLayoutCreateRoute: typeof AdminDashboardHrmLeavePathlessLayoutCreateRoute
   AdminDashboardHrmLeavePathlessLayoutEditRoute: typeof AdminDashboardHrmLeavePathlessLayoutEditRoute
   AdminDashboardOrganizationEmployeesDetailsIdRoute: typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
@@ -1490,6 +1781,7 @@ const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
     AdminDashboardAttendanceSchedulerRoute,
   AdminDashboardAttendanceWorkshiftRoute:
     AdminDashboardAttendanceWorkshiftRouteWithChildren,
+  AdminDashboardPerformanceReportRoute: AdminDashboardPerformanceReportRoute,
   AdminDashboardAttendanceIndexRoute: AdminDashboardAttendanceIndexRoute,
   AdminDashboardHrmIndexRoute: AdminDashboardHrmIndexRoute,
   AdminDashboardOrganizationIndexRoute: AdminDashboardOrganizationIndexRoute,
@@ -1516,6 +1808,12 @@ const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
     AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute,
   AdminDashboardOrganizationTeamsPathlessLayoutRoute:
     AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren,
+  AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute:
+    AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute,
+  AdminDashboardPerformanceTaskManagementPathlessLayoutRoute:
+    AdminDashboardPerformanceTaskManagementPathlessLayoutRouteWithChildren,
+  AdminDashboardPerformanceTrainingPathlessLayoutRoute:
+    AdminDashboardPerformanceTrainingPathlessLayoutRouteWithChildren,
   AdminDashboardAttendanceDevicesIndexRoute:
     AdminDashboardAttendanceDevicesIndexRoute,
   AdminDashboardHrmExemptionIndexRoute: AdminDashboardHrmExemptionIndexRoute,
@@ -1537,6 +1835,12 @@ const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
     AdminDashboardOrganizationTeamsIndexRoute,
   AdminDashboardPerformanceAppraisalIndexRoute:
     AdminDashboardPerformanceAppraisalIndexRoute,
+  AdminDashboardPerformancePerformanceSettingsIndexRoute:
+    AdminDashboardPerformancePerformanceSettingsIndexRoute,
+  AdminDashboardPerformanceTaskManagementIndexRoute:
+    AdminDashboardPerformanceTaskManagementIndexRoute,
+  AdminDashboardPerformanceTrainingIndexRoute:
+    AdminDashboardPerformanceTrainingIndexRoute,
   AdminDashboardHrmLeavePathlessLayoutCreateRoute:
     AdminDashboardHrmLeavePathlessLayoutCreateRoute,
   AdminDashboardHrmLeavePathlessLayoutEditRoute:

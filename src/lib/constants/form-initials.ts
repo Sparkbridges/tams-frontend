@@ -1,3 +1,5 @@
+import { KanbanIssueTypes, KanbanTaskPriority } from '../types/api/performance'
+
 export const loginFormInitials = {
   company_id: '',
   email: '',
@@ -232,4 +234,56 @@ export const inviteEmployeeInitials = {
   email: '',
   roles: [],
   pin: 0,
+}
+
+export const createPerformanceTrainingInitials = {
+  title: '',
+  duration_days: 0,
+  type: '',
+  description: '',
+  file_url: '',
+  is_generic: true,
+  branch_id: null,
+  assignment_category: '',
+  assignment_ids: [],
+  search_employee: undefined,
+}
+
+export const editPerformanceTrainingInitials = {
+  ...createPerformanceTrainingInitials,
+  id: 0,
+}
+
+export const createPerformanceTaskManagementProjectInitials = {
+  name: '',
+  description: '',
+  team_ids: [] as number[],
+  status: 'pending',
+  priority: 3,
+  date_from: null as unknown as Date,
+  date_to: null as unknown as Date,
+  branch_id: 0,
+}
+
+export const editPerformanceTaskManagementProjectInitials = {
+  ...createPerformanceTaskManagementProjectInitials,
+  id: 0,
+}
+
+export const createKanbanTaskInitials = {
+  project_id: 0,
+  title: '',
+  description: '',
+  priority: KanbanTaskPriority.medium,
+  issue_type: KanbanIssueTypes.task,
+  actors: [] as number[],
+  parent_task_id: undefined,
+  is_sub_task: false,
+  status_id: 1,
+  start_date: null as unknown as Date,
+  due_date: null as unknown as Date,
+}
+export const editKanbanTaskInitials = {
+  ...createKanbanTaskInitials,
+  id: 0,
 }

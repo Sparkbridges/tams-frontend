@@ -19,6 +19,8 @@
     "typecheck": "tsc --noEmit --pretty"
   },
   "dependencies": {
+    "@dnd-kit/helpers": "^0.5.3",
+    "@dnd-kit/react": "^0.5.3",
     "@mantine/charts": "^9.5.2",
     "@mantine/core": "^9.5.2",
     "@mantine/dates": "^9.5.2",

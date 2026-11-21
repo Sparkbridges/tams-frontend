@@ -1,5 +1,72 @@
 Welcome to your new TanStack Start app!
 
+## Performance training duration
+
+Click a training row or choose **View Details** to open its details drawer.
+It fetches the selected training by ID and displays its duration, type, status,
+content URL, assignment criteria, employee progress/scores and audit dates.
+The employee list and progress/scores are shown only for the `employees` assignment category.
+Loading and request errors are shown explicitly, with a retry action.
+
+React uses `duration_days`, a numeric whole-day count (1-2147483647).
+Vue continues using the separate legacy text `duration`. React requires a valid
+day count on create/edit; legacy records with null `duration_days` display
+"Not provided" and require an explicit day count when edited.
+Deploy the backend duration-days migrations before using the updated API.
+
+Run validation tests with
+`pnpm exec vitest run src/lib/utils/schema/performance.schema.test.ts`.
+
+## Performance appraisal settings
+
+Appraisal Settings supports searchable, paginated Appraisers and Approvers tabs.
+Use Add or Edit to configure assignment categories and ordered primary/alternate
+appraisers, or static/dynamic approvers with sequential/concurrent approval.
+Click a row or choose View Details to open the corresponding detail drawer.
+
+Delete requires confirmation. The backend rejects deletion when an existing
+appraisal group (including an archived group) references the setting and returns
+the blocking group's name. The confirmation stays open and displays the error;
+successful changes refresh the relevant list and details.
+
+Run the focused regression tests with:
+
+```sh
+pnpm exec vitest run src/lib/api/client/performance.test.ts src/lib/hooks/tables/usePerformanceAppraisalGGSettings.test.tsx src/components/organisms/modals/AppraisalPeopleSettingModal.test.tsx src/components/organisms/drawers/AppraisalPeopleSettingDetailDrawer.test.tsx
+```
+
+## Performance reports
+
+Performance Reports is available at `/admin-dashboard/performance/report` and
+requires `generate performance report`. It migrates the working Vue Appraisal
+Scorecards workflow, not the static appraisal/feedback report mockups.
+
+- Attendance-style report/column and workforce criteria panels; branch,
+  department, team, grade or employee scope, a year and employee grouping.
+- Validated criteria and pagination are stored in the URL. Refresh regenerates
+  the saved criteria; editing filters does not change the preview until Generate.
+- Only approved appraisals from ended appraisal groups are scorecards. Current
+  active workforce records determine employee scope. Employees with no matching
+  scorecards are retained; pagination totals count employees, not scorecards.
+- Click an employee for real scorecards, appraisal periods, scores, performance
+  areas, KPI categories and weighted subcategories in the shared drawer.
+- CSV/Excel/PDF exports include all employee pages and scorecard summary rows,
+  not just the preview. KPI hierarchies are inspected in the drawer. PDF reuses
+  the branded attendance layout with performance labels and year metadata.
+- Exports reject more than 10,000 employees or incomplete/duplicate pagination.
+  Numeric-page exports are not database snapshots; concurrent changes can still
+  affect results. Report and export failures are surfaced explicitly.
+
+Deploy the accompanying backend schema correction: `/hrm/appraisals/reports`
+accepts `perPage` (not `per_page`), supports grade scope and only implements
+employee grouping. Branch is required for department/team/grade scope.
+
+Regression tests:
+
+```sh
+pnpm exec vitest run src/lib/api/client/performanceReports.test.ts src/components/organisms/boxes/AllPerformanceReports.test.tsx
+```
+
 ## Admin Attendance migration
 
 ### Attendance reports
@@ -24,6 +91,14 @@ generated statistics, a shared table and an export dropdown. It uses
 - CSV, Excel and PDF exports request all matching groups, not just the preview
   page. Export limits/errors are surfaced rather than silently truncating data.
   PDFs use attendance-specific metadata and filenames without a fabricated auditor.
+
+Attendance PDFs follow the organization report's branded header, metadata cards,
+blue summary strip, alternating table rows and confidential page-number footer.
+Company branding is captured from the current workspace at export time. Scope,
+period and grouping describe the actual selected criteria; totals count exported
+records rather than implying unique employees. Wide attendance tables retain A3
+landscape pages, repeating column headers and unsplit rows. Source warnings remain
+visible; the layout does not assert audit verification or biometric synchronization.
 
 React uses `POST /attendance/reports/:type/generate-v2` and
 `POST /attendance/reports/:type/download-v2`. Deploy the accompanying backend

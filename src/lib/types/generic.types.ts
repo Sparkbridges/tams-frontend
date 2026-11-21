@@ -89,6 +89,7 @@ export type TamsBy2ColsFormField = {
   name: string
   label: string
   type: TFormFieldType
+  description?: string
   options?: {
     label: string
     value: string
@@ -105,6 +106,7 @@ export type TamsBy2ColsFormField = {
   maxSize?: number
   dateType?: 'multiple' | 'range'
   listItems?: React.ReactNode
+  maxNumber?: number
 }
 
 export type TamsBy2ColsFormFields = {
