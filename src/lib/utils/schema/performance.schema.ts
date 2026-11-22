@@ -47,6 +47,66 @@ export type TEditPerformanceTrainingPayload = z.infer<
   typeof editPerformanceTrainingSchema
 >
 
+export const createFeedbackSurveySchema = zodObjectSchema({
+  name: stringSchema().nonempty({ message: 'Feedback title is required' }),
+  description: stringSchema().nonempty({
+    message: 'Description is required',
+  }),
+  allow_participants_view_answers: booleanSchema(),
+  assign_to_category: enumSchema([
+    'employees',
+    'department',
+    'grade',
+    'branch',
+    'team',
+  ]),
+  assign_to_ids: z.array(z.string()),
+  apply_to_category: enumSchema([
+    'employees',
+    'department',
+    'grade',
+    'branch',
+    'team',
+  ]),
+  apply_to_ids: z.array(z.string()),
+  assign_search: stringSchema().optional(),
+  apply_search: stringSchema().optional(),
+  survey_questions: z.array(
+    z.object({
+      question: stringSchema(),
+      required: booleanSchema(),
+      type: enumSchema(['text', 'dropdown', 'multiple_choice', 'checkbox']),
+      type_value: z.array(z.string()).optional(),
+    }),
+  ),
+})
+
+export type TCreateFeedbackSurveyFormPayload = z.infer<
+  typeof createFeedbackSurveySchema
+>
+
+export const editFeedbackSurveySchema = zodObjectSchema({
+  ...createFeedbackSurveySchema.shape,
+  id: numberSchema().int().min(1, { message: 'ID must be a positive integer' }),
+})
+
+export const createAppraisalGroupSchema = zodObjectSchema({
+  id: numberSchema(),
+  name: stringSchema().nonempty({
+    message: 'Appraisal group name is required',
+  }),
+  description: stringSchema(),
+  appraisal_period_id: numberSchema().nullable(),
+  appraiser_settings_id: numberSchema().nullable(),
+  approver_settings_id: numberSchema().nullable(),
+  appraisal_year: numberSchema()
+    .int()
+    .min(2000, { message: 'Enter a valid appraisal year' }),
+  apply_grade_settings: booleanSchema(),
+  is_active: booleanSchema(),
+  performance_areas: z.array(z.unknown()),
+})
+
 export const createPerformanceTaskManagementProjectSchema = zodObjectSchema({
   name: stringSchema().nonempty({ message: 'Name is required' }),
   description: stringSchema(),
