@@ -33,6 +33,22 @@ import type {
   TUpdateProjectKanbanTaskPayload,
   TDeleteProjectKanbanTaskPayload,
   TFetchProjectKanbanTaskResponse,
+  TFetchFeedbackSurveysParams,
+  TFetchFeedbackSurveysResponse,
+  TFetchFeedbackSurveyResponse,
+  TFetchFeedbackAnswersResponse,
+  TFetchFeedbackAssignedResponse,
+  TFetchFeedbackAppliedResponse,
+  TFetchFeedbackCreatedResponse,
+  TCreateFeedbackSurveyPayload,
+  TUpdateFeedbackSurveyPayload,
+  TAnswerFeedbackPayload,
+  TDeleteFeedbackAnswerPayload,
+  TFetchAppraisalGroupsParams,
+  TFetchAppraisalGroupsResponse,
+  TAppraisalGroup,
+  TCreateAppraisalGroupPayload,
+  TUpdateAppraisalGroupPayload,
 } from '#/lib/types/api/performance'
 import type { TGetApiResponse } from '#/lib/types/api/request.types'
 import type {
@@ -225,6 +241,88 @@ export const performanceClient = {
       : Client.delete<TGetApiResponse<unknown>>(
           `${approverSettingsEndpoint}/${id}`,
         ),
+
+  fetchAppraisalGroups: (params: TFetchAppraisalGroupsParams) =>
+    Client.get<TFetchAppraisalGroupsResponse>(
+      ENDPOINTS.performanceAppraisalGroups,
+      { params },
+    ),
+  fetchArchivedAppraisalGroups: (params: TFetchAppraisalGroupsParams) =>
+    Client.get<TFetchAppraisalGroupsResponse>(
+      ENDPOINTS.performanceAppraisalArchives,
+      { params },
+    ),
+  fetchAppraisalGroup: (id: number) =>
+    Client.get<TGetApiResponse<TAppraisalGroup>>(
+      `${ENDPOINTS.performanceAppraisalGroups}/${id}`,
+    ),
+  fetchMyAppraisals: (params: TBaseQueryParams & { has_ended?: boolean }) =>
+    Client.get<TGetApiResponse<{ results: unknown[]; total: number }>>(
+      ENDPOINTS.myPerformanceAppraisals,
+      { params },
+    ),
+  fetchAppraiserAppraisals: (
+    params: TBaseQueryParams & { has_ended?: boolean },
+  ) =>
+    Client.get<TGetApiResponse<{ results: unknown[]; total: number }>>(
+      ENDPOINTS.appraiserPerformanceAppraisals,
+      { params },
+    ),
+  fetchAppraisalApprovals: (
+    params: TBaseQueryParams & { has_ended?: boolean },
+  ) =>
+    Client.get<TGetApiResponse<{ results: unknown[]; total: number }>>(
+      ENDPOINTS.performanceAppraisalApprovals,
+      { params },
+    ),
+  approveAppraisalRequests: (appraisal_id: number[]) =>
+    Client.post<TGetApiResponse<unknown>>(
+      `${ENDPOINTS.performanceAppraisalGroups}/approve`,
+      { appraisal_id },
+    ),
+  rejectAppraisalRequests: (appraisal_id: number[]) =>
+    Client.post<TGetApiResponse<unknown>>(
+      `${ENDPOINTS.performanceAppraisalGroups}/reject`,
+      { appraisal_id },
+    ),
+  createAppraisalGroup: (data: TCreateAppraisalGroupPayload) =>
+    Client.post<TGetApiResponse<TAppraisalGroup>>(
+      ENDPOINTS.performanceAppraisalGroups,
+      data,
+    ),
+  updateAppraisalGroup: (data: TUpdateAppraisalGroupPayload) =>
+    Client.put<TGetApiResponse<TAppraisalGroup>>(
+      ENDPOINTS.performanceAppraisalGroups,
+      data,
+    ),
+  initiateAppraisalGroup: (appraisal_group_id: number) =>
+    Client.post<TGetApiResponse<unknown>>(
+      ENDPOINTS.initiatePerformanceAppraisal,
+      { appraisal_group_id },
+    ),
+  endAppraisalGroup: (appraisal_group_id: number) =>
+    Client.post<TGetApiResponse<unknown>>(ENDPOINTS.endPerformanceAppraisal, {
+      appraisal_group_id,
+    }),
+  archiveAppraisalGroup: (id: number) =>
+    Client.delete<TGetApiResponse<unknown>>(
+      `${ENDPOINTS.performanceAppraisalGroups}/${id}`,
+    ),
+  bulkArchiveAppraisalGroups: (ids: number[]) =>
+    Client.delete<TGetApiResponse<unknown>>(
+      ENDPOINTS.performanceAppraisalGroups,
+      { data: { ids } },
+    ),
+  restoreAppraisalGroups: (ids: number[]) =>
+    Client.put<TGetApiResponse<unknown>>(
+      `${ENDPOINTS.performanceAppraisalGroups}/restore`,
+      { ids },
+    ),
+  permanentlyDeleteAppraisalGroups: (ids: number[]) =>
+    Client.delete<TGetApiResponse<unknown>>(
+      ENDPOINTS.performanceAppraisalArchives,
+      { data: { ids } },
+    ),
 
   /**
    * Description - Fetches the list of performance trainings.
@@ -448,4 +546,68 @@ export const performanceClient = {
     Client.get<TCreateTasksByProjectIdResponse>(ENDPOINTS.tasksByProjectId, {
       params,
     }),
+
+  fetchFeedbackSurveys: (params: TFetchFeedbackSurveysParams) =>
+    Client.get<TFetchFeedbackSurveysResponse>(ENDPOINTS.feedbackSurveys, {
+      params,
+    }),
+
+  fetchFeedbackSurvey: (id: number) =>
+    Client.get<TFetchFeedbackSurveyResponse>(
+      `${ENDPOINTS.feedbackSurveys}/${id}`,
+    ),
+
+  fetchFeedbackAnswers: (id: number) =>
+    Client.get<TFetchFeedbackAnswersResponse>(
+      `${ENDPOINTS.feedbackSurveys}/get-survey-answers`,
+      { params: { id } },
+    ),
+
+  createFeedbackSurvey: (data: TCreateFeedbackSurveyPayload) =>
+    Client.post<TGetApiResponse<unknown>>(ENDPOINTS.feedbackSurveys, data),
+
+  updateFeedbackSurvey: (data: TUpdateFeedbackSurveyPayload) =>
+    Client.put<TGetApiResponse<unknown>>(ENDPOINTS.feedbackSurveys, data),
+
+  archiveFeedbackSurvey: (id: number) =>
+    Client.post<TGetApiResponse<unknown>>(
+      `${ENDPOINTS.feedbackSurveys}/${id}/archive`,
+    ),
+
+  restoreFeedbackSurvey: (id: number) =>
+    Client.post<TGetApiResponse<unknown>>(
+      `${ENDPOINTS.feedbackSurveys}/${id}/restore`,
+    ),
+
+  deleteFeedbackSurvey: (id: number) =>
+    Client.delete<TGetApiResponse<unknown>>(
+      `${ENDPOINTS.feedbackSurveys}/${id}`,
+    ),
+
+  deleteFeedbackAnswers: (data: TDeleteFeedbackAnswerPayload) =>
+    Client.delete<TGetApiResponse<unknown>>(
+      `${ENDPOINTS.feedbackSurveys}/${data.id}/answers`,
+      { params: data },
+    ),
+
+  answerFeedbackSurvey: (data: TAnswerFeedbackPayload) =>
+    Client.post<TGetApiResponse<unknown>>(
+      `${ENDPOINTS.feedbackSurveys}/answer`,
+      data,
+    ),
+
+  fetchAssignedFeedbackSurveys: () =>
+    Client.get<TFetchFeedbackAssignedResponse>(
+      `${ENDPOINTS.feedbackSurveys}/assigned-to-me`,
+    ),
+
+  fetchAppliedFeedbackSurveys: () =>
+    Client.get<TFetchFeedbackAppliedResponse>(
+      `${ENDPOINTS.feedbackSurveys}/applied-to-me`,
+    ),
+
+  fetchCreatedFeedbackSurveys: () =>
+    Client.get<TFetchFeedbackCreatedResponse>(
+      `${ENDPOINTS.feedbackSurveys}/created-by-me`,
+    ),
 }

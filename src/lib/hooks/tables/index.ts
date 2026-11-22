@@ -20,3 +20,4 @@ export { default as usePerformanceAppraisalGGSettings } from './usePerformanceAp
 export { default as usePerformanceTraining } from './usePerformanceTraining'
 export { default as usePerformanceTaskProjects } from './usePerformanceTaskProjects'
 export { default as useHandleProjectKanban } from './useHandleProjectKanban'
+export { default as usePerformanceAppraisalGroups } from './usePerformanceAppraisalGroups'

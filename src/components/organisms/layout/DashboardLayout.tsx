@@ -2,7 +2,7 @@ import { TamsThemeSwitch, TBrand } from '#/components/molecules'
 import { AppShell, Burger, Divider, Group } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import classes from '#/styles/css/modules/Dashboard.module.css'
-import { adminNavigation, USER_VIEW } from '#/lib'
+import { adminNavigation, essNavigation, USER_VIEW } from '#/lib'
 import { TamsNavLink } from '#/components/atoms'
 import { useLocation } from '@tanstack/react-router'
 import { useLayoutEffect, useState } from 'react'
@@ -23,7 +23,8 @@ const DashboardLayout = ({ children, viewType }: DashboardLayoutProps) => {
 
   const [navObject, setNavObj] = useState<Record<string, boolean>>({})
 
-  const navigation = viewType === USER_VIEW.ADMIN ? adminNavigation : []
+  const navigation =
+    viewType === USER_VIEW.ADMIN ? adminNavigation : essNavigation
 
   const parentRoute = viewType === USER_VIEW.ADMIN ? '/admin-dashboard' : '/ess'
 
@@ -103,52 +104,58 @@ const DashboardLayout = ({ children, viewType }: DashboardLayoutProps) => {
         <TBrand />
         <Divider my="md" />
         <div className="space-y-2 h-200 overflow-y-auto">
-          {navigation.map((navItem) => {
-            const path =
-              navItem.url === 'index'
-                ? parentRoute
-                : `${parentRoute}${navItem.url}`
+          {navigation
+            .filter((navItem) => !navItem.hide)
+            .map((navItem) => {
+              const path =
+                navItem.url === 'index'
+                  ? parentRoute
+                  : `${parentRoute}${navItem.url}`
 
-            if (navItem.children && navItem.children.length > 0) {
+              if (navItem.children && navItem.children.length > 0) {
+                return (
+                  <TamsNavLink
+                    key={navItem.id}
+                    childrenOffset={28}
+                    label={navItem.name}
+                    leftSection={navItem.img ? <navItem.img size={24} /> : null}
+                    to={path}
+                    activeProps={{ className: classes.navLinkActive }}
+                    opened={navObject[path] || false}
+                    onClick={() => handleChangeRoute(path)}
+                  >
+                    {navItem.children.map((child) => {
+                      const childPath =
+                        child.url === 'index' ? path : `${path}${child.url}`
+                      return (
+                        <TamsNavLink
+                          key={child.id}
+                          leftSection={
+                            child.img ? <child.img size={24} /> : null
+                          }
+                          label={child.name}
+                          to={childPath}
+                          activeOptions={{ exact: true }}
+                          activeProps={{
+                            className: classes.navLinkChildActive,
+                          }}
+                        />
+                      )
+                    })}
+                  </TamsNavLink>
+                )
+              }
               return (
                 <TamsNavLink
                   key={navItem.id}
-                  childrenOffset={28}
-                  label={navItem.name}
                   leftSection={navItem.img ? <navItem.img size={24} /> : null}
+                  label={navItem.name}
                   to={path}
+                  activeOptions={{ exact: true }}
                   activeProps={{ className: classes.navLinkActive }}
-                  opened={navObject[path] || false}
-                  onClick={() => handleChangeRoute(path)}
-                >
-                  {navItem.children.map((child) => {
-                    const childPath =
-                      child.url === 'index' ? path : `${path}${child.url}`
-                    return (
-                      <TamsNavLink
-                        key={child.id}
-                        leftSection={child.img ? <child.img size={24} /> : null}
-                        label={child.name}
-                        to={childPath}
-                        activeOptions={{ exact: true }}
-                        activeProps={{ className: classes.navLinkChildActive }}
-                      />
-                    )
-                  })}
-                </TamsNavLink>
+                />
               )
-            }
-            return (
-              <TamsNavLink
-                key={navItem.id}
-                leftSection={navItem.img ? <navItem.img size={24} /> : null}
-                label={navItem.name}
-                to={path}
-                activeOptions={{ exact: true }}
-                activeProps={{ className: classes.navLinkActive }}
-              />
-            )
-          })}
+            })}
         </div>
         <Divider className="sm:hidden" />
         <div className="sm:hidden">

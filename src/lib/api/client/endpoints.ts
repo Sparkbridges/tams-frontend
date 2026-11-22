@@ -101,6 +101,13 @@ export const ENDPOINTS = {
   performanceAppraisalGeneralSettings: '/hrm/appraisals/settings/general',
   performanceAppraisalGradingSettings: '/hrm/appraisals/settings/grades',
   performanceAppraisalAppraisers: '/hrm/appraisals/settings/appraisers',
+  performanceAppraisalGroups: '/hrm/appraisals',
+  performanceAppraisalArchives: '/hrm/appraisals/archives',
+  initiatePerformanceAppraisal: '/hrm/appraisals/initiate',
+  endPerformanceAppraisal: '/hrm/appraisals/end',
+  myPerformanceAppraisals: '/hrm/appraisals/self-appraisables',
+  appraiserPerformanceAppraisals: '/hrm/appraisals/appraiser-appraisables',
+  performanceAppraisalApprovals: '/hrm/appraisals/approvals',
   performanceTrainings: '/hrm/trainings',
   performanceTrainingApproval: 'hrm/trainings/:id/approval',
   performanceTaskProjects: '/hrm/projects',
@@ -108,6 +115,7 @@ export const ENDPOINTS = {
 
   projectKanbanTaskStatus: '/hrm/projects/task-status',
   projectKanbanTasks: '/hrm/projects/tasks',
+  feedbackSurveys: '/hrm/surveys',
   tasksByProjectId: '/hrm/projects/tasks/get-tasks-by-project',
 
   // --------------------------payroll-----------------------------------

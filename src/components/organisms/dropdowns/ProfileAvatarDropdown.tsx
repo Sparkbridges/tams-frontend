@@ -1,15 +1,21 @@
-import { TamsAvatar } from '#/components/atoms'
+import { TamsAvatar, TamsSwitchInput } from '#/components/atoms'
 import { useAuth, useTamsStore } from '#/lib'
 import type { TamsMenuItem } from '#/lib'
 import { Menu, Text, UnstyledButton, Group } from '@mantine/core'
-import { GearSixIcon, CaretDownIcon, SignOutIcon, PasswordIcon } from '@phosphor-icons/react'
-import { useNavigate } from '@tanstack/react-router'
+import {
+  GearSixIcon,
+  CaretDownIcon,
+  SignOutIcon,
+  PasswordIcon,
+} from '@phosphor-icons/react'
+import { useLocation, useNavigate } from '@tanstack/react-router'
 
 const ProfileAvatarDropdown = () => {
-  const user = useTamsStore((state) => state.user)
+  const { user, isAdmin, setIsAdmin } = useTamsStore((state) => state)
   const { handleLogout, loading } = useAuth()
 
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   const handleNavigateTo = (path: string) => navigate({ to: path })
 
@@ -35,6 +41,23 @@ const ProfileAvatarDropdown = () => {
       onClick: handleLogout,
     },
   ]
+
+  const handleSwitchToSelfService = (checked: boolean) => {
+    if (pathname.startsWith('/admin-dashboard')) {
+      localStorage.setItem('lastVisitedAdminPath', pathname)
+    }
+    if (pathname.startsWith('/ess')) {
+      localStorage.setItem('lastVisitedEssPath', pathname)
+    }
+    setIsAdmin(!checked)
+    navigate({
+      to: checked
+        ? localStorage.getItem('lastVisitedEssPath') || '/ess'
+        : localStorage.getItem('lastVisitedAdminPath') || '/admin-dashboard',
+    })
+  }
+
+  const canViewBackend = user?.permissions.includes('view backend')
   return (
     <Menu shadow="md" width={320}>
       <Menu.Target>
@@ -71,6 +94,19 @@ const ProfileAvatarDropdown = () => {
             </Text>
           </div>
         </Group>
+        <Menu.Divider />
+        {canViewBackend && (
+          <div className="px-3 py-2">
+            <TamsSwitchInput
+              label="Switch to Self service"
+              checked={!isAdmin}
+              onChange={(event) =>
+                handleSwitchToSelfService(event.currentTarget.checked)
+              }
+            />
+          </div>
+        )}
+
         <Menu.Divider />
 
         {options.map((option, index) => {

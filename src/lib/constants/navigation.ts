@@ -7,6 +7,7 @@ import {
   DevicesIcon,
   DoorOpenIcon,
   ExcludeIcon,
+  FilesIcon,
   FingerprintIcon,
   FolderUserIcon,
   LockKeyIcon,
@@ -14,6 +15,7 @@ import {
   SlidersHorizontalIcon,
   SpeedometerIcon,
   SquaresFourIcon,
+  TargetIcon,
   UsersThreeIcon,
   WarehouseIcon,
 } from '@phosphor-icons/react'
@@ -164,6 +166,16 @@ export const pageHeaderNav: Record<
     icon: FingerprintIcon,
     description: 'View and manage tasks on the project kanban board',
   },
+  feedback: {
+    title: 'Performance Feedback',
+    icon: TargetIcon,
+    description: 'View and manage feedback surveys within the organization',
+  },
+  appraisal: {
+    title: 'Performance Appraisal',
+    icon: FilesIcon,
+    description: 'View and manage appraisal groups within the organization',
+  },
 }
 
 export const adminNavigation: TamsNavigation[] = [
@@ -248,15 +260,6 @@ export const adminNavigation: TamsNavigation[] = [
         name: 'Settings',
         url: '/hrm-settings',
       },
-      ...(import.meta.env.NODE_ENV !== 'production'
-        ? [
-            {
-              id: 15,
-              name: 'Appraisal',
-              url: '/appraisal',
-            },
-          ]
-        : []),
     ],
   },
   {
@@ -314,7 +317,7 @@ export const adminNavigation: TamsNavigation[] = [
       },
       {
         id: 92,
-        name: 'Performance Appraisal',
+        name: 'Appraisal',
         url: '/appraisal',
       },
       {
@@ -427,32 +430,29 @@ export const adminNavigation: TamsNavigation[] = [
   },
 ]
 
-export const essNavigation = [
+export const essNavigation: TamsNavigation[] = [
   {
     id: 1,
     name: 'Home',
-    url: '/ess/home',
-    img: '/img/home-w.svg',
+    url: 'index',
+    img: SquaresFourIcon,
     hideSide: true,
     children: [],
   },
   {
     id: 99,
-    url: '/ess/change-password',
+    url: '/change-password',
     name: 'changePassword',
-    img: 'img/password.svg',
+    img: LockKeyIcon,
     hide: true,
     children: [
       {
         id: 130,
         name: 'Change Password',
         url: '',
-        img: '',
         hide: true,
       },
     ],
-    // hide: true,
-    // showSub: true
   },
   // {
   //   id: 2,
@@ -464,34 +464,34 @@ export const essNavigation = [
   {
     id: 3,
     name: 'HRM',
-    url: '/ess/hrm',
-    img: '/img/hrm.svg',
+    url: '/hrm',
+    img: UsersThreeIcon,
     children: [
       {
         id: 8,
         name: 'Exemption',
-        img: '/img/exemption-w.svg',
-        url: '/ess/hrm/exemption',
+        img: ExcludeIcon,
+        url: '/exemption',
       },
       {
         id: 9,
         name: 'Leave',
-        img: '/img/leave-w.svg',
-        url: '/ess/hrm/leave',
+        img: DoorOpenIcon,
+        url: '/leave',
       },
       {
         id: 16,
         name: 'Reports',
-        img: '/img/reports.svg',
-        url: '/ess/hrm/reports',
+        img: ChartLineUpIcon,
+        url: '/hrm-reports',
       },
       ...(process.env.NODE_ENV !== 'production'
         ? [
             {
               id: 15,
               name: 'Appraisal',
-              img: '/img/appraisal-w.svg',
-              url: '/ess/hrm/appraisal',
+              img: FilesIcon,
+              url: '/appraisal',
             },
           ]
         : []),
@@ -500,140 +500,137 @@ export const essNavigation = [
   {
     id: 4,
     name: 'Attendance',
-    url: '/ess/attendance',
-    img: '/img/attendance.svg',
+    url: '/attendance',
+    img: CalendarDotsIcon,
     children: [
       {
         id: 100,
         name: 'Calendar',
-        url: '/ess/attendance/calendar',
-        img: '/img/calendar-w.svg',
+        url: '/calendar',
+        img: CalendarDotsIcon,
       },
-
       {
         id: 132,
         name: 'Mobile Clocks',
-        url: '/ess/attendance/mobile-clocks',
-        img: '/img/mobile-clocks.svg',
+        url: '/mobile-clocks',
+        img: DevicesIcon,
       },
       {
         id: 102,
         name: 'Overtime',
-        url: '/ess/attendance/overtime',
-        img: '/img/overtime.svg',
+        url: '/overtime',
+        img: CalendarDotsIcon,
       },
       {
         id: 101,
         name: 'Reports',
-        url: '/ess/attendance/reports',
-        img: '/img/reports.svg',
+        url: '/reports',
+        img: ChartLineUpIcon,
       },
     ],
   },
   {
     id: 5,
     name: 'Payroll',
-    url: '/ess/payroll',
-    img: '/img/payroll.svg',
+    url: '/payroll',
+    img: MoneyWavyIcon,
     children: [
       {
         id: 40,
         name: 'Dashboard',
-        url: '/ess/payroll/dashboard',
-        img: '/img/dashboard-w.svg',
+        url: '/dashboard',
+        img: SquaresFourIcon,
       },
       {
         id: 41,
         name: 'Loan',
-        url: '/ess/payroll/loan',
-        img: '/img/loan.png',
+        url: '/loan',
+        img: MoneyWavyIcon,
       },
       {
         id: 42,
         name: 'Payslip',
-        url: '/ess/payroll/payslip',
-        img: '/img/pay-package.svg',
+        url: '/payslip',
+        img: FilesIcon,
       },
       {
         id: 44,
         name: 'Reports',
-        url: '/ess/payroll/report',
-        img: '/img/reports.svg',
+        url: '/report',
+        img: ChartLineUpIcon,
       },
     ],
   },
   {
     id: 9,
     name: 'Performance',
-    url: '/ess/performance',
-    img: '/img/performance.svg',
+    url: '/performance',
+    img: ChartLineUpIcon,
     children: [
       {
         id: 91,
         name: 'Dashboard',
-        url: '/ess/performance/dashboard',
-        img: '/img/dashboard-w.svg',
+        url: '/dashboard',
+        img: SquaresFourIcon,
       },
       {
         id: 92,
         name: 'Performance Appraisal',
-        url: '/ess/performance/appraisal',
-        img: '/img/appraisal.svg',
+        url: '/appraisal',
+        img: FilesIcon,
       },
       {
         id: 93,
         name: 'Feedback',
-        url: '/ess/performance/feedback',
-        img: '/img/feedback-w.svg',
+        url: '/feedback',
+        img: TargetIcon,
       },
       {
         id: 94,
         name: 'Task Management',
-        url: '/ess/performance/task-management',
-        img: '/img/task.svg',
+        url: '/task-management',
+        img: ClipboardTextIcon,
       },
       {
         id: 95,
         name: 'Training',
-        url: '/ess/performance/training',
-        img: '/img/training.svg',
+        url: '/training',
+        img: ChalkboardTeacherIcon,
       },
     ],
   },
   {
     id: 6,
     name: 'Canteen',
-    url: '/ess/canteen',
-    img: '/img/canteen.svg',
+    url: '/canteen',
+    img: BuildingOfficeIcon,
     children: [],
   },
   {
     id: 7,
     name: 'Support',
-    url: '/ess/support',
-    img: '/img/leave-w.svg',
+    url: '/support',
+    img: DoorOpenIcon,
     hide: true,
     children: [
       {
         id: 120,
         name: '',
         url: '',
-        img: '',
       },
     ],
   },
   {
     id: 12,
     name: 'Employees',
-    url: '/ess/profile',
-    img: '',
+    url: '/profile',
+    img: FolderUserIcon,
     hide: true,
     children: [
       {
         id: 600,
         name: 'Employees',
         url: '',
-        img: '',
         hide: true,
       },
     ],
@@ -642,8 +639,8 @@ export const essNavigation = [
   {
     id: 8,
     name: 'Activity History',
-    url: '/ess/activity-history',
-    img: '/img/time-history.svg',
+    url: '/activity-history',
+    img: FingerprintIcon,
     children: [],
   },
 ]

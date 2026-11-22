@@ -15,3 +15,4 @@ export { default as AttendanceDeviceDetailDrawer } from './AttendanceDeviceDetai
 export { default as AttendanceWorkshiftDetailDrawer } from './AttendanceWorkshiftDetailDrawer'
 export { default as AttendanceReportDetailDrawer } from './AttendanceReportDetailDrawer'
 export { default as KanbanTaskDetailDrawer } from './KanbanTaskDetailDrawer'
+export { default as FeedbackAnswersDetailDrawer } from './FeedbackAnswersDetailDrawer'

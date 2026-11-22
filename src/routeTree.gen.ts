@@ -53,12 +53,20 @@ import { Route as AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSet
 import { Route as AdminDashboardOrganizationTeamsIndexRouteImport } from './routes/admin-dashboard/organization/teams/index'
 import { Route as AdminDashboardOrganizationTeamsPathlessLayoutRouteImport } from './routes/admin-dashboard/organization/teams/_pathlessLayout'
 import { Route as AdminDashboardPerformanceAppraisalIndexRouteImport } from './routes/admin-dashboard/performance/appraisal/index'
+import { Route as AdminDashboardPerformanceAppraisalIdRouteImport } from './routes/admin-dashboard/performance/appraisal/$id'
+import { Route as AdminDashboardPerformanceAppraisalApprovalsRouteImport } from './routes/admin-dashboard/performance/appraisal/approvals'
+import { Route as AdminDashboardPerformanceAppraisalCreateRouteImport } from './routes/admin-dashboard/performance/appraisal/create'
+import { Route as AdminDashboardPerformanceAppraisalMyAppraisalRouteImport } from './routes/admin-dashboard/performance/appraisal/my-appraisal'
+import { Route as AdminDashboardPerformanceFeedbackIndexRouteImport } from './routes/admin-dashboard/performance/feedback/index'
+import { Route as AdminDashboardPerformanceFeedbackCreateRouteImport } from './routes/admin-dashboard/performance/feedback/create'
 import { Route as AdminDashboardPerformancePerformanceSettingsIndexRouteImport } from './routes/admin-dashboard/performance/performance-settings/index'
 import { Route as AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRouteImport } from './routes/admin-dashboard/performance/performance-settings/appraisal-settings'
 import { Route as AdminDashboardPerformanceTaskManagementIndexRouteImport } from './routes/admin-dashboard/performance/task-management/index'
 import { Route as AdminDashboardPerformanceTaskManagementPathlessLayoutRouteImport } from './routes/admin-dashboard/performance/task-management/_pathlessLayout'
 import { Route as AdminDashboardPerformanceTrainingIndexRouteImport } from './routes/admin-dashboard/performance/training/index'
 import { Route as AdminDashboardPerformanceTrainingPathlessLayoutRouteImport } from './routes/admin-dashboard/performance/training/_pathlessLayout'
+import { Route as EssPerformanceAppraisalIndexRouteImport } from './routes/ess/performance/appraisal/index'
+import { Route as EssPerformanceFeedbackIndexRouteImport } from './routes/ess/performance/feedback/index'
 import { Route as AdminDashboardAttendanceDevicesPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/attendance/devices/_pathlessLayout.create'
 import { Route as AdminDashboardAttendanceDevicesPathlessLayoutEditRouteImport } from './routes/admin-dashboard/attendance/devices/_pathlessLayout.edit'
 import { Route as AdminDashboardAttendanceWorkshiftAssignEmployeeIdRouteImport } from './routes/admin-dashboard/attendance/workshift/assign-employee/$id'
@@ -80,6 +88,8 @@ import { Route as AdminDashboardOrganizationEmployeesPathlessLayoutEditRouteImpo
 import { Route as AdminDashboardOrganizationEmployeesDetailsIdRouteImport } from './routes/admin-dashboard/organization/employees/details/$id'
 import { Route as AdminDashboardOrganizationTeamsPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/organization/teams/_pathlessLayout.create'
 import { Route as AdminDashboardOrganizationTeamsPathlessLayoutEditRouteImport } from './routes/admin-dashboard/organization/teams/_pathlessLayout.edit'
+import { Route as AdminDashboardPerformanceAppraisalEditIdRouteImport } from './routes/admin-dashboard/performance/appraisal/edit.$id'
+import { Route as AdminDashboardPerformanceFeedbackEditIdRouteImport } from './routes/admin-dashboard/performance/feedback/edit.$id'
 import { Route as AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/performance/task-management/_pathlessLayout.create'
 import { Route as AdminDashboardPerformanceTaskManagementPathlessLayoutEditRouteImport } from './routes/admin-dashboard/performance/task-management/_pathlessLayout.edit'
 import { Route as AdminDashboardPerformanceTrainingPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/performance/training/_pathlessLayout.create'
@@ -342,6 +352,42 @@ const AdminDashboardPerformanceAppraisalIndexRoute =
     path: '/performance/appraisal/',
     getParentRoute: () => AdminDashboardRouteRoute,
   } as any)
+const AdminDashboardPerformanceAppraisalIdRoute =
+  AdminDashboardPerformanceAppraisalIdRouteImport.update({
+    id: '/performance/appraisal/$id',
+    path: '/performance/appraisal/$id',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardPerformanceAppraisalApprovalsRoute =
+  AdminDashboardPerformanceAppraisalApprovalsRouteImport.update({
+    id: '/performance/appraisal/approvals',
+    path: '/performance/appraisal/approvals',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardPerformanceAppraisalCreateRoute =
+  AdminDashboardPerformanceAppraisalCreateRouteImport.update({
+    id: '/performance/appraisal/create',
+    path: '/performance/appraisal/create',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardPerformanceAppraisalMyAppraisalRoute =
+  AdminDashboardPerformanceAppraisalMyAppraisalRouteImport.update({
+    id: '/performance/appraisal/my-appraisal',
+    path: '/performance/appraisal/my-appraisal',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardPerformanceFeedbackIndexRoute =
+  AdminDashboardPerformanceFeedbackIndexRouteImport.update({
+    id: '/performance/feedback/',
+    path: '/performance/feedback/',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardPerformanceFeedbackCreateRoute =
+  AdminDashboardPerformanceFeedbackCreateRouteImport.update({
+    id: '/performance/feedback/create',
+    path: '/performance/feedback/create',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
 const AdminDashboardPerformancePerformanceSettingsIndexRoute =
   AdminDashboardPerformancePerformanceSettingsIndexRouteImport.update({
     id: '/performance/performance-settings/',
@@ -379,6 +425,18 @@ const AdminDashboardPerformanceTrainingPathlessLayoutRoute =
     id: '/performance/training/_pathlessLayout',
     path: '/performance/training',
     getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const EssPerformanceAppraisalIndexRoute =
+  EssPerformanceAppraisalIndexRouteImport.update({
+    id: '/performance/appraisal/',
+    path: '/performance/appraisal/',
+    getParentRoute: () => EssRouteRoute,
+  } as any)
+const EssPerformanceFeedbackIndexRoute =
+  EssPerformanceFeedbackIndexRouteImport.update({
+    id: '/performance/feedback/',
+    path: '/performance/feedback/',
+    getParentRoute: () => EssRouteRoute,
   } as any)
 const AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute =
   AdminDashboardAttendanceDevicesPathlessLayoutCreateRouteImport.update({
@@ -510,6 +568,18 @@ const AdminDashboardOrganizationTeamsPathlessLayoutEditRoute =
     path: '/edit',
     getParentRoute: () => AdminDashboardOrganizationTeamsPathlessLayoutRoute,
   } as any)
+const AdminDashboardPerformanceAppraisalEditIdRoute =
+  AdminDashboardPerformanceAppraisalEditIdRouteImport.update({
+    id: '/performance/appraisal/edit/$id',
+    path: '/performance/appraisal/edit/$id',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
+const AdminDashboardPerformanceFeedbackEditIdRoute =
+  AdminDashboardPerformanceFeedbackEditIdRouteImport.update({
+    id: '/performance/feedback/edit/$id',
+    path: '/performance/feedback/edit/$id',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
 const AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRoute =
   AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRouteImport.update(
     {
@@ -579,6 +649,11 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/organization/system-settings/employee-settings': typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   '/admin-dashboard/organization/system-settings/roles-and-permissions-settings': typeof AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute
   '/admin-dashboard/organization/teams': typeof AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren
+  '/admin-dashboard/performance/appraisal/$id': typeof AdminDashboardPerformanceAppraisalIdRoute
+  '/admin-dashboard/performance/appraisal/approvals': typeof AdminDashboardPerformanceAppraisalApprovalsRoute
+  '/admin-dashboard/performance/appraisal/create': typeof AdminDashboardPerformanceAppraisalCreateRoute
+  '/admin-dashboard/performance/appraisal/my-appraisal': typeof AdminDashboardPerformanceAppraisalMyAppraisalRoute
+  '/admin-dashboard/performance/feedback/create': typeof AdminDashboardPerformanceFeedbackCreateRoute
   '/admin-dashboard/performance/performance-settings/appraisal-settings': typeof AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute
   '/admin-dashboard/performance/task-management': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutRouteWithChildren
   '/admin-dashboard/performance/training': typeof AdminDashboardPerformanceTrainingPathlessLayoutRouteWithChildren
@@ -595,9 +670,12 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/organization/system-settings/': typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   '/admin-dashboard/organization/teams/': typeof AdminDashboardOrganizationTeamsIndexRoute
   '/admin-dashboard/performance/appraisal/': typeof AdminDashboardPerformanceAppraisalIndexRoute
+  '/admin-dashboard/performance/feedback/': typeof AdminDashboardPerformanceFeedbackIndexRoute
   '/admin-dashboard/performance/performance-settings/': typeof AdminDashboardPerformancePerformanceSettingsIndexRoute
   '/admin-dashboard/performance/task-management/': typeof AdminDashboardPerformanceTaskManagementIndexRoute
   '/admin-dashboard/performance/training/': typeof AdminDashboardPerformanceTrainingIndexRoute
+  '/ess/performance/appraisal/': typeof EssPerformanceAppraisalIndexRoute
+  '/ess/performance/feedback/': typeof EssPerformanceFeedbackIndexRoute
   '/admin-dashboard/attendance/devices/create': typeof AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute
   '/admin-dashboard/attendance/devices/edit': typeof AdminDashboardAttendanceDevicesPathlessLayoutEditRoute
   '/admin-dashboard/attendance/workshift/assign-employee/$id': typeof AdminDashboardAttendanceWorkshiftAssignEmployeeIdRoute
@@ -618,6 +696,8 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/organization/employees/details/$id': typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
   '/admin-dashboard/organization/teams/create': typeof AdminDashboardOrganizationTeamsPathlessLayoutCreateRoute
   '/admin-dashboard/organization/teams/edit': typeof AdminDashboardOrganizationTeamsPathlessLayoutEditRoute
+  '/admin-dashboard/performance/appraisal/edit/$id': typeof AdminDashboardPerformanceAppraisalEditIdRoute
+  '/admin-dashboard/performance/feedback/edit/$id': typeof AdminDashboardPerformanceFeedbackEditIdRoute
   '/admin-dashboard/performance/task-management/create': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRoute
   '/admin-dashboard/performance/task-management/edit': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute
   '/admin-dashboard/performance/training/create': typeof AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute
@@ -653,6 +733,11 @@ export interface FileRoutesByTo {
   '/admin-dashboard/organization/system-settings/employee-settings': typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   '/admin-dashboard/organization/system-settings/roles-and-permissions-settings': typeof AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute
   '/admin-dashboard/organization/teams': typeof AdminDashboardOrganizationTeamsIndexRoute
+  '/admin-dashboard/performance/appraisal/$id': typeof AdminDashboardPerformanceAppraisalIdRoute
+  '/admin-dashboard/performance/appraisal/approvals': typeof AdminDashboardPerformanceAppraisalApprovalsRoute
+  '/admin-dashboard/performance/appraisal/create': typeof AdminDashboardPerformanceAppraisalCreateRoute
+  '/admin-dashboard/performance/appraisal/my-appraisal': typeof AdminDashboardPerformanceAppraisalMyAppraisalRoute
+  '/admin-dashboard/performance/feedback/create': typeof AdminDashboardPerformanceFeedbackCreateRoute
   '/admin-dashboard/performance/performance-settings/appraisal-settings': typeof AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute
   '/admin-dashboard/performance/task-management': typeof AdminDashboardPerformanceTaskManagementIndexRoute
   '/admin-dashboard/performance/training': typeof AdminDashboardPerformanceTrainingIndexRoute
@@ -663,7 +748,10 @@ export interface FileRoutesByTo {
   '/admin-dashboard/organization/reports': typeof AdminDashboardOrganizationReportsIndexRoute
   '/admin-dashboard/organization/system-settings': typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   '/admin-dashboard/performance/appraisal': typeof AdminDashboardPerformanceAppraisalIndexRoute
+  '/admin-dashboard/performance/feedback': typeof AdminDashboardPerformanceFeedbackIndexRoute
   '/admin-dashboard/performance/performance-settings': typeof AdminDashboardPerformancePerformanceSettingsIndexRoute
+  '/ess/performance/appraisal': typeof EssPerformanceAppraisalIndexRoute
+  '/ess/performance/feedback': typeof EssPerformanceFeedbackIndexRoute
   '/admin-dashboard/attendance/devices/create': typeof AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute
   '/admin-dashboard/attendance/devices/edit': typeof AdminDashboardAttendanceDevicesPathlessLayoutEditRoute
   '/admin-dashboard/attendance/workshift/assign-employee/$id': typeof AdminDashboardAttendanceWorkshiftAssignEmployeeIdRoute
@@ -684,6 +772,8 @@ export interface FileRoutesByTo {
   '/admin-dashboard/organization/employees/details/$id': typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
   '/admin-dashboard/organization/teams/create': typeof AdminDashboardOrganizationTeamsPathlessLayoutCreateRoute
   '/admin-dashboard/organization/teams/edit': typeof AdminDashboardOrganizationTeamsPathlessLayoutEditRoute
+  '/admin-dashboard/performance/appraisal/edit/$id': typeof AdminDashboardPerformanceAppraisalEditIdRoute
+  '/admin-dashboard/performance/feedback/edit/$id': typeof AdminDashboardPerformanceFeedbackEditIdRoute
   '/admin-dashboard/performance/task-management/create': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRoute
   '/admin-dashboard/performance/task-management/edit': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute
   '/admin-dashboard/performance/training/create': typeof AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute
@@ -724,6 +814,11 @@ export interface FileRoutesById {
   '/admin-dashboard/organization/system-settings/employee-settings': typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   '/admin-dashboard/organization/system-settings/roles-and-permissions-settings': typeof AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute
   '/admin-dashboard/organization/teams/_pathlessLayout': typeof AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren
+  '/admin-dashboard/performance/appraisal/$id': typeof AdminDashboardPerformanceAppraisalIdRoute
+  '/admin-dashboard/performance/appraisal/approvals': typeof AdminDashboardPerformanceAppraisalApprovalsRoute
+  '/admin-dashboard/performance/appraisal/create': typeof AdminDashboardPerformanceAppraisalCreateRoute
+  '/admin-dashboard/performance/appraisal/my-appraisal': typeof AdminDashboardPerformanceAppraisalMyAppraisalRoute
+  '/admin-dashboard/performance/feedback/create': typeof AdminDashboardPerformanceFeedbackCreateRoute
   '/admin-dashboard/performance/performance-settings/appraisal-settings': typeof AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute
   '/admin-dashboard/performance/task-management/_pathlessLayout': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutRouteWithChildren
   '/admin-dashboard/performance/training/_pathlessLayout': typeof AdminDashboardPerformanceTrainingPathlessLayoutRouteWithChildren
@@ -740,9 +835,12 @@ export interface FileRoutesById {
   '/admin-dashboard/organization/system-settings/': typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   '/admin-dashboard/organization/teams/': typeof AdminDashboardOrganizationTeamsIndexRoute
   '/admin-dashboard/performance/appraisal/': typeof AdminDashboardPerformanceAppraisalIndexRoute
+  '/admin-dashboard/performance/feedback/': typeof AdminDashboardPerformanceFeedbackIndexRoute
   '/admin-dashboard/performance/performance-settings/': typeof AdminDashboardPerformancePerformanceSettingsIndexRoute
   '/admin-dashboard/performance/task-management/': typeof AdminDashboardPerformanceTaskManagementIndexRoute
   '/admin-dashboard/performance/training/': typeof AdminDashboardPerformanceTrainingIndexRoute
+  '/ess/performance/appraisal/': typeof EssPerformanceAppraisalIndexRoute
+  '/ess/performance/feedback/': typeof EssPerformanceFeedbackIndexRoute
   '/admin-dashboard/attendance/devices/_pathlessLayout/create': typeof AdminDashboardAttendanceDevicesPathlessLayoutCreateRoute
   '/admin-dashboard/attendance/devices/_pathlessLayout/edit': typeof AdminDashboardAttendanceDevicesPathlessLayoutEditRoute
   '/admin-dashboard/attendance/workshift/assign-employee/$id': typeof AdminDashboardAttendanceWorkshiftAssignEmployeeIdRoute
@@ -763,6 +861,8 @@ export interface FileRoutesById {
   '/admin-dashboard/organization/employees/details/$id': typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
   '/admin-dashboard/organization/teams/_pathlessLayout/create': typeof AdminDashboardOrganizationTeamsPathlessLayoutCreateRoute
   '/admin-dashboard/organization/teams/_pathlessLayout/edit': typeof AdminDashboardOrganizationTeamsPathlessLayoutEditRoute
+  '/admin-dashboard/performance/appraisal/edit/$id': typeof AdminDashboardPerformanceAppraisalEditIdRoute
+  '/admin-dashboard/performance/feedback/edit/$id': typeof AdminDashboardPerformanceFeedbackEditIdRoute
   '/admin-dashboard/performance/task-management/_pathlessLayout/create': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRoute
   '/admin-dashboard/performance/task-management/_pathlessLayout/edit': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute
   '/admin-dashboard/performance/training/_pathlessLayout/create': typeof AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute
@@ -803,6 +903,11 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/employee-settings'
     | '/admin-dashboard/organization/system-settings/roles-and-permissions-settings'
     | '/admin-dashboard/organization/teams'
+    | '/admin-dashboard/performance/appraisal/$id'
+    | '/admin-dashboard/performance/appraisal/approvals'
+    | '/admin-dashboard/performance/appraisal/create'
+    | '/admin-dashboard/performance/appraisal/my-appraisal'
+    | '/admin-dashboard/performance/feedback/create'
     | '/admin-dashboard/performance/performance-settings/appraisal-settings'
     | '/admin-dashboard/performance/task-management'
     | '/admin-dashboard/performance/training'
@@ -819,9 +924,12 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/'
     | '/admin-dashboard/organization/teams/'
     | '/admin-dashboard/performance/appraisal/'
+    | '/admin-dashboard/performance/feedback/'
     | '/admin-dashboard/performance/performance-settings/'
     | '/admin-dashboard/performance/task-management/'
     | '/admin-dashboard/performance/training/'
+    | '/ess/performance/appraisal/'
+    | '/ess/performance/feedback/'
     | '/admin-dashboard/attendance/devices/create'
     | '/admin-dashboard/attendance/devices/edit'
     | '/admin-dashboard/attendance/workshift/assign-employee/$id'
@@ -842,6 +950,8 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/employees/details/$id'
     | '/admin-dashboard/organization/teams/create'
     | '/admin-dashboard/organization/teams/edit'
+    | '/admin-dashboard/performance/appraisal/edit/$id'
+    | '/admin-dashboard/performance/feedback/edit/$id'
     | '/admin-dashboard/performance/task-management/create'
     | '/admin-dashboard/performance/task-management/edit'
     | '/admin-dashboard/performance/training/create'
@@ -877,6 +987,11 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/employee-settings'
     | '/admin-dashboard/organization/system-settings/roles-and-permissions-settings'
     | '/admin-dashboard/organization/teams'
+    | '/admin-dashboard/performance/appraisal/$id'
+    | '/admin-dashboard/performance/appraisal/approvals'
+    | '/admin-dashboard/performance/appraisal/create'
+    | '/admin-dashboard/performance/appraisal/my-appraisal'
+    | '/admin-dashboard/performance/feedback/create'
     | '/admin-dashboard/performance/performance-settings/appraisal-settings'
     | '/admin-dashboard/performance/task-management'
     | '/admin-dashboard/performance/training'
@@ -887,7 +1002,10 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/reports'
     | '/admin-dashboard/organization/system-settings'
     | '/admin-dashboard/performance/appraisal'
+    | '/admin-dashboard/performance/feedback'
     | '/admin-dashboard/performance/performance-settings'
+    | '/ess/performance/appraisal'
+    | '/ess/performance/feedback'
     | '/admin-dashboard/attendance/devices/create'
     | '/admin-dashboard/attendance/devices/edit'
     | '/admin-dashboard/attendance/workshift/assign-employee/$id'
@@ -908,6 +1026,8 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/employees/details/$id'
     | '/admin-dashboard/organization/teams/create'
     | '/admin-dashboard/organization/teams/edit'
+    | '/admin-dashboard/performance/appraisal/edit/$id'
+    | '/admin-dashboard/performance/feedback/edit/$id'
     | '/admin-dashboard/performance/task-management/create'
     | '/admin-dashboard/performance/task-management/edit'
     | '/admin-dashboard/performance/training/create'
@@ -947,6 +1067,11 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/employee-settings'
     | '/admin-dashboard/organization/system-settings/roles-and-permissions-settings'
     | '/admin-dashboard/organization/teams/_pathlessLayout'
+    | '/admin-dashboard/performance/appraisal/$id'
+    | '/admin-dashboard/performance/appraisal/approvals'
+    | '/admin-dashboard/performance/appraisal/create'
+    | '/admin-dashboard/performance/appraisal/my-appraisal'
+    | '/admin-dashboard/performance/feedback/create'
     | '/admin-dashboard/performance/performance-settings/appraisal-settings'
     | '/admin-dashboard/performance/task-management/_pathlessLayout'
     | '/admin-dashboard/performance/training/_pathlessLayout'
@@ -963,9 +1088,12 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/system-settings/'
     | '/admin-dashboard/organization/teams/'
     | '/admin-dashboard/performance/appraisal/'
+    | '/admin-dashboard/performance/feedback/'
     | '/admin-dashboard/performance/performance-settings/'
     | '/admin-dashboard/performance/task-management/'
     | '/admin-dashboard/performance/training/'
+    | '/ess/performance/appraisal/'
+    | '/ess/performance/feedback/'
     | '/admin-dashboard/attendance/devices/_pathlessLayout/create'
     | '/admin-dashboard/attendance/devices/_pathlessLayout/edit'
     | '/admin-dashboard/attendance/workshift/assign-employee/$id'
@@ -986,6 +1114,8 @@ export interface FileRouteTypes {
     | '/admin-dashboard/organization/employees/details/$id'
     | '/admin-dashboard/organization/teams/_pathlessLayout/create'
     | '/admin-dashboard/organization/teams/_pathlessLayout/edit'
+    | '/admin-dashboard/performance/appraisal/edit/$id'
+    | '/admin-dashboard/performance/feedback/edit/$id'
     | '/admin-dashboard/performance/task-management/_pathlessLayout/create'
     | '/admin-dashboard/performance/task-management/_pathlessLayout/edit'
     | '/admin-dashboard/performance/training/_pathlessLayout/create'
@@ -1313,6 +1443,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardPerformanceAppraisalIndexRouteImport
       parentRoute: typeof AdminDashboardRouteRoute
     }
+    '/admin-dashboard/performance/appraisal/$id': {
+      id: '/admin-dashboard/performance/appraisal/$id'
+      path: '/performance/appraisal/$id'
+      fullPath: '/admin-dashboard/performance/appraisal/$id'
+      preLoaderRoute: typeof AdminDashboardPerformanceAppraisalIdRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/performance/appraisal/approvals': {
+      id: '/admin-dashboard/performance/appraisal/approvals'
+      path: '/performance/appraisal/approvals'
+      fullPath: '/admin-dashboard/performance/appraisal/approvals'
+      preLoaderRoute: typeof AdminDashboardPerformanceAppraisalApprovalsRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/performance/appraisal/create': {
+      id: '/admin-dashboard/performance/appraisal/create'
+      path: '/performance/appraisal/create'
+      fullPath: '/admin-dashboard/performance/appraisal/create'
+      preLoaderRoute: typeof AdminDashboardPerformanceAppraisalCreateRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/performance/appraisal/my-appraisal': {
+      id: '/admin-dashboard/performance/appraisal/my-appraisal'
+      path: '/performance/appraisal/my-appraisal'
+      fullPath: '/admin-dashboard/performance/appraisal/my-appraisal'
+      preLoaderRoute: typeof AdminDashboardPerformanceAppraisalMyAppraisalRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/performance/feedback/': {
+      id: '/admin-dashboard/performance/feedback/'
+      path: '/performance/feedback'
+      fullPath: '/admin-dashboard/performance/feedback/'
+      preLoaderRoute: typeof AdminDashboardPerformanceFeedbackIndexRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/performance/feedback/create': {
+      id: '/admin-dashboard/performance/feedback/create'
+      path: '/performance/feedback/create'
+      fullPath: '/admin-dashboard/performance/feedback/create'
+      preLoaderRoute: typeof AdminDashboardPerformanceFeedbackCreateRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
     '/admin-dashboard/performance/performance-settings/': {
       id: '/admin-dashboard/performance/performance-settings/'
       path: '/performance/performance-settings'
@@ -1354,6 +1526,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin-dashboard/performance/training'
       preLoaderRoute: typeof AdminDashboardPerformanceTrainingPathlessLayoutRouteImport
       parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/ess/performance/appraisal/': {
+      id: '/ess/performance/appraisal/'
+      path: '/performance/appraisal'
+      fullPath: '/ess/performance/appraisal/'
+      preLoaderRoute: typeof EssPerformanceAppraisalIndexRouteImport
+      parentRoute: typeof EssRouteRoute
+    }
+    '/ess/performance/feedback/': {
+      id: '/ess/performance/feedback/'
+      path: '/performance/feedback'
+      fullPath: '/ess/performance/feedback/'
+      preLoaderRoute: typeof EssPerformanceFeedbackIndexRouteImport
+      parentRoute: typeof EssRouteRoute
     }
     '/admin-dashboard/attendance/devices/_pathlessLayout/create': {
       id: '/admin-dashboard/attendance/devices/_pathlessLayout/create'
@@ -1501,6 +1687,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin-dashboard/organization/teams/edit'
       preLoaderRoute: typeof AdminDashboardOrganizationTeamsPathlessLayoutEditRouteImport
       parentRoute: typeof AdminDashboardOrganizationTeamsPathlessLayoutRoute
+    }
+    '/admin-dashboard/performance/appraisal/edit/$id': {
+      id: '/admin-dashboard/performance/appraisal/edit/$id'
+      path: '/performance/appraisal/edit/$id'
+      fullPath: '/admin-dashboard/performance/appraisal/edit/$id'
+      preLoaderRoute: typeof AdminDashboardPerformanceAppraisalEditIdRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
+    '/admin-dashboard/performance/feedback/edit/$id': {
+      id: '/admin-dashboard/performance/feedback/edit/$id'
+      path: '/performance/feedback/edit/$id'
+      fullPath: '/admin-dashboard/performance/feedback/edit/$id'
+      preLoaderRoute: typeof AdminDashboardPerformanceFeedbackEditIdRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
     }
     '/admin-dashboard/performance/task-management/_pathlessLayout/create': {
       id: '/admin-dashboard/performance/task-management/_pathlessLayout/create'
@@ -1750,6 +1950,11 @@ interface AdminDashboardRouteRouteChildren {
   AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute: typeof AdminDashboardOrganizationSystemSettingsEmployeeSettingsRoute
   AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute: typeof AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute
   AdminDashboardOrganizationTeamsPathlessLayoutRoute: typeof AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren
+  AdminDashboardPerformanceAppraisalIdRoute: typeof AdminDashboardPerformanceAppraisalIdRoute
+  AdminDashboardPerformanceAppraisalApprovalsRoute: typeof AdminDashboardPerformanceAppraisalApprovalsRoute
+  AdminDashboardPerformanceAppraisalCreateRoute: typeof AdminDashboardPerformanceAppraisalCreateRoute
+  AdminDashboardPerformanceAppraisalMyAppraisalRoute: typeof AdminDashboardPerformanceAppraisalMyAppraisalRoute
+  AdminDashboardPerformanceFeedbackCreateRoute: typeof AdminDashboardPerformanceFeedbackCreateRoute
   AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute: typeof AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute
   AdminDashboardPerformanceTaskManagementPathlessLayoutRoute: typeof AdminDashboardPerformanceTaskManagementPathlessLayoutRouteWithChildren
   AdminDashboardPerformanceTrainingPathlessLayoutRoute: typeof AdminDashboardPerformanceTrainingPathlessLayoutRouteWithChildren
@@ -1765,12 +1970,15 @@ interface AdminDashboardRouteRouteChildren {
   AdminDashboardOrganizationSystemSettingsIndexRoute: typeof AdminDashboardOrganizationSystemSettingsIndexRoute
   AdminDashboardOrganizationTeamsIndexRoute: typeof AdminDashboardOrganizationTeamsIndexRoute
   AdminDashboardPerformanceAppraisalIndexRoute: typeof AdminDashboardPerformanceAppraisalIndexRoute
+  AdminDashboardPerformanceFeedbackIndexRoute: typeof AdminDashboardPerformanceFeedbackIndexRoute
   AdminDashboardPerformancePerformanceSettingsIndexRoute: typeof AdminDashboardPerformancePerformanceSettingsIndexRoute
   AdminDashboardPerformanceTaskManagementIndexRoute: typeof AdminDashboardPerformanceTaskManagementIndexRoute
   AdminDashboardPerformanceTrainingIndexRoute: typeof AdminDashboardPerformanceTrainingIndexRoute
   AdminDashboardHrmLeavePathlessLayoutCreateRoute: typeof AdminDashboardHrmLeavePathlessLayoutCreateRoute
   AdminDashboardHrmLeavePathlessLayoutEditRoute: typeof AdminDashboardHrmLeavePathlessLayoutEditRoute
   AdminDashboardOrganizationEmployeesDetailsIdRoute: typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
+  AdminDashboardPerformanceAppraisalEditIdRoute: typeof AdminDashboardPerformanceAppraisalEditIdRoute
+  AdminDashboardPerformanceFeedbackEditIdRoute: typeof AdminDashboardPerformanceFeedbackEditIdRoute
 }
 
 const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
@@ -1808,6 +2016,16 @@ const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
     AdminDashboardOrganizationSystemSettingsRolesAndPermissionsSettingsRoute,
   AdminDashboardOrganizationTeamsPathlessLayoutRoute:
     AdminDashboardOrganizationTeamsPathlessLayoutRouteWithChildren,
+  AdminDashboardPerformanceAppraisalIdRoute:
+    AdminDashboardPerformanceAppraisalIdRoute,
+  AdminDashboardPerformanceAppraisalApprovalsRoute:
+    AdminDashboardPerformanceAppraisalApprovalsRoute,
+  AdminDashboardPerformanceAppraisalCreateRoute:
+    AdminDashboardPerformanceAppraisalCreateRoute,
+  AdminDashboardPerformanceAppraisalMyAppraisalRoute:
+    AdminDashboardPerformanceAppraisalMyAppraisalRoute,
+  AdminDashboardPerformanceFeedbackCreateRoute:
+    AdminDashboardPerformanceFeedbackCreateRoute,
   AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute:
     AdminDashboardPerformancePerformanceSettingsAppraisalSettingsRoute,
   AdminDashboardPerformanceTaskManagementPathlessLayoutRoute:
@@ -1835,6 +2053,8 @@ const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
     AdminDashboardOrganizationTeamsIndexRoute,
   AdminDashboardPerformanceAppraisalIndexRoute:
     AdminDashboardPerformanceAppraisalIndexRoute,
+  AdminDashboardPerformanceFeedbackIndexRoute:
+    AdminDashboardPerformanceFeedbackIndexRoute,
   AdminDashboardPerformancePerformanceSettingsIndexRoute:
     AdminDashboardPerformancePerformanceSettingsIndexRoute,
   AdminDashboardPerformanceTaskManagementIndexRoute:
@@ -1847,6 +2067,10 @@ const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
     AdminDashboardHrmLeavePathlessLayoutEditRoute,
   AdminDashboardOrganizationEmployeesDetailsIdRoute:
     AdminDashboardOrganizationEmployeesDetailsIdRoute,
+  AdminDashboardPerformanceAppraisalEditIdRoute:
+    AdminDashboardPerformanceAppraisalEditIdRoute,
+  AdminDashboardPerformanceFeedbackEditIdRoute:
+    AdminDashboardPerformanceFeedbackEditIdRoute,
 }
 
 const AdminDashboardRouteRouteWithChildren =
@@ -1854,10 +2078,14 @@ const AdminDashboardRouteRouteWithChildren =
 
 interface EssRouteRouteChildren {
   EssIndexRoute: typeof EssIndexRoute
+  EssPerformanceAppraisalIndexRoute: typeof EssPerformanceAppraisalIndexRoute
+  EssPerformanceFeedbackIndexRoute: typeof EssPerformanceFeedbackIndexRoute
 }
 
 const EssRouteRouteChildren: EssRouteRouteChildren = {
   EssIndexRoute: EssIndexRoute,
+  EssPerformanceAppraisalIndexRoute: EssPerformanceAppraisalIndexRoute,
+  EssPerformanceFeedbackIndexRoute: EssPerformanceFeedbackIndexRoute,
 }
 
 const EssRouteRouteWithChildren = EssRouteRoute._addFileChildren(

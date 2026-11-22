@@ -27,6 +27,15 @@ import type {
   TDeleteProjectKanbanStatusPayload,
   TUpdateProjectKanbanTaskPayload,
   TDeleteProjectKanbanTaskPayload,
+  TFetchFeedbackSurveysParams,
+  TCreateFeedbackSurveyPayload,
+  TUpdateFeedbackSurveyPayload,
+  TAnswerFeedbackPayload,
+  TDeleteFeedbackAnswerPayload,
+  TFetchAppraisalGroupsParams,
+  TFetchAppraisalGroupsResponse,
+  TCreateAppraisalGroupPayload,
+  TUpdateAppraisalGroupPayload,
 } from '#/lib/types/api/performance'
 import { notifications } from '@mantine/notifications'
 import { useTamsStore } from '#/lib/store'
@@ -58,6 +67,20 @@ export function usePerformanceAccess() {
     canViewTaskManagement: user?.permissions.includes('get my tasks') ?? false,
     canCreateTaskManagement:
       user?.permissions.includes('create project task') ?? false,
+    canViewFeedback: user?.permissions.includes('get all surveys') ?? false,
+    canCreateFeedback: user?.permissions.includes('create surveys') ?? false,
+    canEditFeedback: user?.permissions.includes('get one survey') ?? false,
+    canAnswerFeedback: user?.permissions.includes('get one survey') ?? false,
+    canViewAppraisals:
+      user?.permissions.includes('get all appraisals') ?? false,
+    canCreateAppraisal: user?.permissions.includes('create appraisal') ?? false,
+    canUpdateAppraisal: user?.permissions.includes('update appraisal') ?? false,
+    canInitiateAppraisal:
+      user?.permissions.includes('initiate appraisals') ?? false,
+    canApproveAppraisal:
+      user?.permissions.includes('approve appraisals') ?? false,
+    canGradeAppraisal:
+      user?.permissions.includes('grade an appraisal') ?? false,
   }
 }
 
@@ -590,6 +613,398 @@ export const useDeleteProjectKanbanTask = () => {
       notifications.show({
         title: 'Success',
         message: 'Project Kanban task deleted successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useFetchFeedbackSurveys = (
+  params: TFetchFeedbackSurveysParams,
+) => {
+  return useQuery({
+    queryKey: [ENDPOINTS.feedbackSurveys, params],
+    queryFn: () => performanceClient.fetchFeedbackSurveys(params),
+  })
+}
+
+export const useFetchFeedbackSurvey = (id: number, enabled = true) => {
+  return useQuery({
+    queryKey: [ENDPOINTS.feedbackSurveys, id],
+    queryFn: () => performanceClient.fetchFeedbackSurvey(id),
+    enabled: enabled && Number.isSafeInteger(id) && id > 0,
+  })
+}
+
+export const useFetchFeedbackAnswers = (id: number, enabled = true) => {
+  return useQuery({
+    queryKey: [ENDPOINTS.feedbackSurveys, 'answers', id],
+    queryFn: () => performanceClient.fetchFeedbackAnswers(id),
+    enabled: enabled && Number.isSafeInteger(id) && id > 0,
+  })
+}
+
+export const useFetchAssignedFeedbackSurveys = () => {
+  return useQuery({
+    queryKey: [ENDPOINTS.feedbackSurveys, 'assigned-to-me'],
+    queryFn: () => performanceClient.fetchAssignedFeedbackSurveys(),
+  })
+}
+
+export const useFetchAppliedFeedbackSurveys = () => {
+  return useQuery({
+    queryKey: [ENDPOINTS.feedbackSurveys, 'applied-to-me'],
+    queryFn: () => performanceClient.fetchAppliedFeedbackSurveys(),
+  })
+}
+
+export const useFetchCreatedFeedbackSurveys = () => {
+  return useQuery({
+    queryKey: [ENDPOINTS.feedbackSurveys, 'created-by-me'],
+    queryFn: () => performanceClient.fetchCreatedFeedbackSurveys(),
+  })
+}
+
+const invalidateFeedbackQueries = async (
+  queryClient: ReturnType<typeof useQueryClient>,
+) => {
+  await queryClient.invalidateQueries({
+    queryKey: [ENDPOINTS.feedbackSurveys],
+  })
+}
+
+export const useCreateFeedbackSurvey = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: TCreateFeedbackSurveyPayload) =>
+      performanceClient.createFeedbackSurvey(data),
+    onSuccess: async () => {
+      await invalidateFeedbackQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Feedback survey created successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useUpdateFeedbackSurvey = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: TUpdateFeedbackSurveyPayload) =>
+      performanceClient.updateFeedbackSurvey(data),
+    onSuccess: async () => {
+      await invalidateFeedbackQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Feedback survey updated successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useArchiveFeedbackSurvey = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (id: number) => performanceClient.archiveFeedbackSurvey(id),
+    onSuccess: async () => {
+      await invalidateFeedbackQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Feedback survey archived successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useRestoreFeedbackSurvey = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (id: number) => performanceClient.restoreFeedbackSurvey(id),
+    onSuccess: async () => {
+      await invalidateFeedbackQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Feedback survey restored successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useDeleteFeedbackSurvey = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (id: number) => performanceClient.deleteFeedbackSurvey(id),
+    onSuccess: async () => {
+      await invalidateFeedbackQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Feedback survey permanently deleted.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useAnswerFeedbackSurvey = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: TAnswerFeedbackPayload) =>
+      performanceClient.answerFeedbackSurvey(data),
+    onSuccess: async () => {
+      await invalidateFeedbackQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Feedback submitted successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useFetchAppraisalGroups = <TSelected>(
+  params: TFetchAppraisalGroupsParams,
+  select?: (data: TFetchAppraisalGroupsResponse) => TSelected,
+  enabled = true,
+) =>
+  useQuery({
+    queryKey: [ENDPOINTS.performanceAppraisalGroups, params],
+    queryFn: () => performanceClient.fetchAppraisalGroups(params),
+    select,
+    enabled,
+  })
+
+export const useFetchArchivedAppraisalGroups = <TSelected>(
+  params: TFetchAppraisalGroupsParams,
+  select?: (data: TFetchAppraisalGroupsResponse) => TSelected,
+) =>
+  useQuery({
+    queryKey: [ENDPOINTS.performanceAppraisalArchives, params],
+    queryFn: () => performanceClient.fetchArchivedAppraisalGroups(params),
+    select,
+  })
+
+export const useFetchAppraisalGroup = (id: number, enabled = true) =>
+  useQuery({
+    queryKey: [ENDPOINTS.performanceAppraisalGroups, id],
+    queryFn: () => performanceClient.fetchAppraisalGroup(id),
+    enabled: enabled && Number.isSafeInteger(id) && id > 0,
+  })
+
+const invalidateAppraisalGroupQueries = async (
+  queryClient: ReturnType<typeof useQueryClient>,
+) => {
+  await Promise.all([
+    queryClient.invalidateQueries({
+      queryKey: [ENDPOINTS.performanceAppraisalGroups],
+    }),
+    queryClient.invalidateQueries({
+      queryKey: [ENDPOINTS.performanceAppraisalArchives],
+    }),
+  ])
+}
+
+export const useCreateAppraisalGroup = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: TCreateAppraisalGroupPayload) =>
+      performanceClient.createAppraisalGroup(data),
+    onSuccess: async () => {
+      await invalidateAppraisalGroupQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Appraisal group created successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useUpdateAppraisalGroup = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: TUpdateAppraisalGroupPayload) =>
+      performanceClient.updateAppraisalGroup(data),
+    onSuccess: async () => {
+      await invalidateAppraisalGroupQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Appraisal group updated successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useInitiateAppraisalGroup = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (appraisal_group_id: number) =>
+      performanceClient.initiateAppraisalGroup(appraisal_group_id),
+    onSuccess: async () => {
+      await invalidateAppraisalGroupQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Appraisal sent successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useEndAppraisalGroup = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (appraisal_group_id: number) =>
+      performanceClient.endAppraisalGroup(appraisal_group_id),
+    onSuccess: async () => {
+      await invalidateAppraisalGroupQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Appraisal session ended successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useArchiveAppraisalGroup = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (id: number) => performanceClient.archiveAppraisalGroup(id),
+    onSuccess: async () => {
+      await invalidateAppraisalGroupQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Appraisal group archived successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useBulkArchiveAppraisalGroups = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (ids: number[]) =>
+      performanceClient.bulkArchiveAppraisalGroups(ids),
+    onSuccess: async () => {
+      await invalidateAppraisalGroupQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Appraisal groups archived successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useRestoreAppraisalGroups = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (ids: number[]) =>
+      performanceClient.restoreAppraisalGroups(ids),
+    onSuccess: async () => {
+      await invalidateAppraisalGroupQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Appraisal groups restored successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useFetchMyAppraisals = (
+  params: TBaseQueryParams & { has_ended?: boolean },
+) =>
+  useQuery({
+    queryKey: [ENDPOINTS.myPerformanceAppraisals, params],
+    queryFn: () => performanceClient.fetchMyAppraisals(params),
+  })
+
+export const useFetchAppraiserAppraisals = (
+  params: TBaseQueryParams & { has_ended?: boolean },
+) =>
+  useQuery({
+    queryKey: [ENDPOINTS.appraiserPerformanceAppraisals, params],
+    queryFn: () => performanceClient.fetchAppraiserAppraisals(params),
+  })
+
+export const useFetchAppraisalApprovals = (
+  params: TBaseQueryParams & { has_ended?: boolean },
+) =>
+  useQuery({
+    queryKey: [ENDPOINTS.performanceAppraisalApprovals, params],
+    queryFn: () => performanceClient.fetchAppraisalApprovals(params),
+  })
+
+export const useApproveAppraisalRequests = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (appraisal_id: number[]) =>
+      performanceClient.approveAppraisalRequests(appraisal_id),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.performanceAppraisalApprovals],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Appraisal requests approved successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useRejectAppraisalRequests = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (appraisal_id: number[]) =>
+      performanceClient.rejectAppraisalRequests(appraisal_id),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.performanceAppraisalApprovals],
+      })
+      notifications.show({
+        title: 'Success',
+        message: 'Appraisal requests rejected successfully.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const usePermanentlyDeleteAppraisalGroups = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (ids: number[]) =>
+      performanceClient.permanentlyDeleteAppraisalGroups(ids),
+    onSuccess: async () => {
+      await invalidateAppraisalGroupQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Appraisal groups permanently deleted.',
+        color: 'green',
+      })
+    },
+  })
+}
+
+export const useDeleteFeedbackAnswers = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: TDeleteFeedbackAnswerPayload) =>
+      performanceClient.deleteFeedbackAnswers(data),
+    onSuccess: async () => {
+      await invalidateFeedbackQueries(queryClient)
+      notifications.show({
+        title: 'Success',
+        message: 'Feedback answers deleted successfully.',
         color: 'green',
       })
     },

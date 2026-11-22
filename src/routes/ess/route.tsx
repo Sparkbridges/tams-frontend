@@ -1,4 +1,5 @@
-import { handleAuthenticatedRoutesMiddleware } from '#/lib'
+import { DashboardLayout } from '#/components'
+import { handleAuthenticatedRoutesMiddleware, USER_VIEW } from '#/lib'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/ess')({
@@ -9,9 +10,8 @@ export const Route = createFileRoute('/ess')({
 
 function RouteComponent() {
   return (
-    <div>
-      ess hello
+    <DashboardLayout viewType={USER_VIEW.ESS}>
       <Outlet />
-    </div>
+    </DashboardLayout>
   )
 }

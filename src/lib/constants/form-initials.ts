@@ -254,6 +254,58 @@ export const editPerformanceTrainingInitials = {
   id: 0,
 }
 
+export const createFeedbackSurveyInitials = {
+  name: '',
+  description: '',
+  allow_participants_view_answers: false,
+  assign_to_category: 'employees',
+  assign_to_ids: [] as string[],
+  apply_to_category: 'employees',
+  apply_to_ids: [] as string[],
+  assign_search: '',
+  apply_search: '',
+  survey_questions: [
+    {
+      question: '',
+      required: true,
+      type: 'text' as const,
+      type_value: undefined as string[] | undefined,
+    },
+  ],
+}
+
+export const editFeedbackSurveyInitials = {
+  ...createFeedbackSurveyInitials,
+  id: 0,
+}
+
+export const createAppraisalGroupInitials = {
+  id: 0,
+  name: '',
+  description: '',
+  appraisal_period_id: null as number | null,
+  appraiser_settings_id: null as number | null,
+  approver_settings_id: null as number | null,
+  appraisal_year: new Date().getFullYear(),
+  apply_grade_settings: true,
+  is_active: true,
+  performance_areas: [
+    {
+      name: '',
+      weight: 100,
+      description: '',
+      kpi_categories: [
+        {
+          name: '',
+          weight: 100,
+          description: '',
+          kpi_sub_categories: [],
+        },
+      ],
+    },
+  ],
+}
+
 export const createPerformanceTaskManagementProjectInitials = {
   name: '',
   description: '',

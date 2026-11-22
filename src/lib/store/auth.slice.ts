@@ -37,6 +37,7 @@ export type TamsAuth = typeof initialState & {
     lastPageVisited: { path: string; params?: Record<string, any> } | null,
   ) => void
   setActiveBranch: (activeBranch: string | null) => void
+  setIsAdmin: (isAdmin: boolean) => void
 }
 
 export const createAuthSlice: StateCreator<TamsAuth, [], [], TamsAuth> = (
@@ -66,11 +67,12 @@ export const createAuthSlice: StateCreator<TamsAuth, [], [], TamsAuth> = (
           user: null,
           activeBranch: null,
         }
-    set(() => (payload))
+    set(() => payload)
   },
   setLastPageVisited: (lastPageVisited) => set(() => ({ lastPageVisited })),
   setActiveView: (activeView) => set(() => ({ activeView })),
   setActiveBranch: (activeBranch) => set(() => ({ activeBranch })),
+  setIsAdmin: (isAdmin) => set(() => ({ isAdmin })),
   initializeUser: async (user: TUser | null) => {
     if (user) {
       const isAdmin = user.permissions.includes('view backend')
