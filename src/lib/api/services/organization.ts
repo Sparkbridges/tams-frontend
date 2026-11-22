@@ -13,6 +13,7 @@ import type {
   TCreatePermissionSettingsPayload,
   TCreatePublicHolidaySettingsPayload,
   TCreateTeamPayload,
+  TDashboardFilterParams,
   TDeleteBulkOrganizationBranchPayload,
   TDeleteOrganizationDepartmentPayload,
   TDeleteOrganizationTeamPayload,
@@ -1303,5 +1304,58 @@ export const useInviteEmployee = () => {
         color: 'green',
       })
     },
+  })
+}
+
+export const useFetchOrganizationDashboardEntitiesCount = (
+  params?: TDashboardFilterParams,
+) => {
+  return useQuery({
+    queryKey: [ENDPOINTS.fetchOrganizationDashboardEntitiesCount, params],
+    queryFn: () =>
+      organizationClient.fetchOrganizationDashboardEntitiesCount(params),
+  })
+}
+
+export const useFetchOrganizationDashboardEmployeesMonthOnMonth = (
+  params?: TDashboardFilterParams,
+) => {
+  return useQuery({
+    queryKey: [
+      ENDPOINTS.fetchOrganizationDashboardEmployeesMonthOnMonth,
+      params,
+    ],
+    queryFn: () =>
+      organizationClient.fetchOrganizationDashboardEmployeesMonthOnMonth(
+        params,
+      ),
+  })
+}
+
+export const useFetchOrganizationDashboardEmployeesPerBranch = () => {
+  return useQuery({
+    queryKey: [ENDPOINTS.fetchOrganizationsDashboardEmployeePerBranch],
+    queryFn: organizationClient.fetchOrganizationDashboardEmployeesPerBranch,
+  })
+}
+
+export const useFetchOrganizationDashboardEmployeesPerDepartment = () => {
+  return useQuery({
+    queryKey: [ENDPOINTS.fetchOrganizationsDashboardEmployeePerDepartment],
+    queryFn:
+      organizationClient.fetchOrganizationDashboardEmployeesPerDepartment,
+  })
+}
+
+export const useFetchOrganizationDashboardEmployeesPerAgeGroup = (
+  params?: TDashboardFilterParams,
+) => {
+  return useQuery({
+    queryKey: [
+      ENDPOINTS.fetchOrganizationsDashboardEmployeePerAgeGroup,
+      params,
+    ],
+    queryFn: () =>
+      organizationClient.fetchOrganizationDashboardEmployeesPerAgeGroup(params),
   })
 }

@@ -9,6 +9,7 @@ const TamsStatsCard = ({
   description,
   loading,
   isFullWidth,
+  fontSize,
 }: TStatsCard & { isFullWidth?: boolean }) => {
   return (
     <Paper
@@ -20,7 +21,7 @@ const TamsStatsCard = ({
           {title}
         </Text>
         {!loading && value && (
-          <Text fz={28} fw={700} c={color}>
+          <Text fz={fontSize ?? 28} fw={700} c={color}>
             {value}
           </Text>
         )}

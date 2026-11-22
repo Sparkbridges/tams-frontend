@@ -59,6 +59,18 @@ export const ENDPOINTS = {
     '/organization/system-settings/public-holiday-settings/:id/cancel',
   inviteEmployees: '/organization/employees/invite',
 
+  // org dashboard routes
+  fetchOrganizationDashboardEntitiesCount:
+    '/organization/dashboard/entities_count',
+  fetchOrganizationDashboardEmployeesMonthOnMonth:
+    '/organization/dashboard/employees_month_on_month',
+  fetchOrganizationsDashboardEmployeePerBranch:
+    '/organization/dashboard/employees_per_branch',
+  fetchOrganizationsDashboardEmployeePerDepartment:
+    '/organization/dashboard/employees_per_department',
+  fetchOrganizationsDashboardEmployeePerAgeGroup:
+    '/organization/dashboard/employees_per_age_group',
+
   // ------------------------- hrm routes ----------------------------------------
   getHrmExemptions: '/hrm/exemptions/view-all',
   hrmExemptions: '/hrm/exemptions',

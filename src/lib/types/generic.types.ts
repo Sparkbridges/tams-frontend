@@ -149,4 +149,17 @@ export type TStatsCard = {
   color: MantineColor
   description?: string
   loading?: boolean
+  fontSize?: number
+}
+
+export type TDashboardFilters = {
+  branch: string
+  department: string
+  reporting_period: string | null
+}
+
+export type TDashboardFilterParams = {
+  branch_id: string | number
+  department_id: string | number
+  year: string | number
 }
