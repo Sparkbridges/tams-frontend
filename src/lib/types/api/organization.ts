@@ -943,3 +943,59 @@ export type TCancelPublicHolidaySettingsPayload = {
   id: number
   cancellation_reason?: string
 }
+
+export type TFetchOrganizationDashboardEntitiesCountResponse = TGetApiResponse<{
+  employees_count: {
+    number_of_active_employees: number
+    number_of_inactive_employees: number
+    total_employees: number
+  }
+  branch_count: number
+  department_count: number
+  team_count: number
+}>
+
+export type TFetchOrganizationDashboardEmployeesMonthOnMonthResponse =
+  TGetApiResponse<{
+    january: number
+    february: number
+    march: number
+    april: number
+    may: number
+    june: number
+    july: number
+    august: number
+    september: number
+    october: number
+    november: number
+    december: number
+  }>
+
+export type TFetchOrganizationDashboardEmployeesPerBranchResponse =
+  TGetApiResponse<
+    {
+      station_name: string
+      is_station_head: boolean
+      station_head: string | null
+      number_of_active_employees: number
+      number_of_inactive_employees: number
+      total_employees: number
+    }[]
+  >
+
+export type TFetchOrganizationDashboardEmployeesPerDepartmentResponse =
+  TGetApiResponse<
+    {
+      department_name: string
+      number_of_active_employees: number
+      number_of_inactive_employees: number
+      total_employees: number
+    }[]
+  >
+
+export type TFetchOrganizationDashboardEmployeesPerAgeGroupResponse =
+  TGetApiResponse<{
+    '18_to_30': number
+    '31_to_45': number
+    greater_than_45: number
+  }>

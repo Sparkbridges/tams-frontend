@@ -78,6 +78,12 @@ import type {
   TGetPublicHolidaySettingsDetailsResponse,
   TGetPublicHolidayResponse,
   TCancelPublicHolidaySettingsPayload,
+  TFetchOrganizationDashboardEntitiesCountResponse,
+  TDashboardFilterParams,
+  TFetchOrganizationDashboardEmployeesMonthOnMonthResponse,
+  TFetchOrganizationDashboardEmployeesPerBranchResponse,
+  TFetchOrganizationDashboardEmployeesPerDepartmentResponse,
+  TFetchOrganizationDashboardEmployeesPerAgeGroupResponse,
 } from '#/lib/types'
 import { paramsSerializer } from '#/lib/utils'
 import type {
@@ -1091,6 +1097,69 @@ const organizationClient = {
    */
   inviteEmployees: async (payload: TInviteEmployeesPayload) => {
     return await Client.post(`${ENDPOINTS.inviteEmployees}`, payload)
+  },
+
+  /**
+   * Description - Fetch organization dashboard entities count.
+   * @returns Data fetched from `/organization/dashboard/entities-count`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  fetchOrganizationDashboardEntitiesCount: async (
+    params?: TDashboardFilterParams,
+  ) => {
+    return await Client.get<TFetchOrganizationDashboardEntitiesCountResponse>(
+      `${ENDPOINTS.fetchOrganizationDashboardEntitiesCount}`,
+      { params },
+    )
+  },
+
+  /**
+   * Description - Fetch organization dashboard employees month-on-month.
+   * @returns Data fetched from `/organization/dashboard/employees_month_on_month`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  fetchOrganizationDashboardEmployeesMonthOnMonth: async (
+    params?: TDashboardFilterParams,
+  ) => {
+    return await Client.get<TFetchOrganizationDashboardEmployeesMonthOnMonthResponse>(
+      `${ENDPOINTS.fetchOrganizationDashboardEmployeesMonthOnMonth}`,
+      { params },
+    )
+  },
+
+  /**
+   * Description - fetch Organizations Employee Per Branch
+   * @returns Data fetched from `/organization/dashboard/employees_per_branch`
+   * @throws {Error} If the request fails.
+   */
+  fetchOrganizationDashboardEmployeesPerBranch: async () => {
+    return await Client.get<TFetchOrganizationDashboardEmployeesPerBranchResponse>(
+      `${ENDPOINTS.fetchOrganizationsDashboardEmployeePerBranch}`,
+    )
+  },
+
+  /**
+   * Description - fetch Organizations Employee Per Department
+   * @returns Data fetched from `/organization/dashboard/employees_per_department`
+   * @throws {Error} If the request fails.
+   */
+  fetchOrganizationDashboardEmployeesPerDepartment: async () => {
+    return await Client.get<TFetchOrganizationDashboardEmployeesPerDepartmentResponse>(
+      `${ENDPOINTS.fetchOrganizationsDashboardEmployeePerDepartment}`,
+    )
+  },
+  /**
+   * Description - fetch Organizations Employee Per Age Group
+   * @returns Data fetched from `/organization/dashboard/employees_per_age_group`
+   * @throws {Error} If the request fails.
+   */
+  fetchOrganizationDashboardEmployeesPerAgeGroup: async (
+    params?: TDashboardFilterParams,
+  ) => {
+    return await Client.get<TFetchOrganizationDashboardEmployeesPerAgeGroupResponse>(
+      `${ENDPOINTS.fetchOrganizationsDashboardEmployeePerAgeGroup}`,
+      { params },
+    )
   },
 }
 export default organizationClient
