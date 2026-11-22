@@ -10,3 +10,5 @@ export { default as CreateEditAttendanceDeviceForm } from './CreateEditAttendanc
 export { default as AttendanceReportForm } from './AttendanceReportForm'
 export { default as CreateEditPerformanceTrainingForm } from './CreateEditPerformanceTrainingForm'
 export { default as CreateEditPerformanceTaskManagementForm } from './CreateEditPerformanceTaskMgtProjectForm'
+export { default as CreateEditFeedbackSurveyForm } from './CreateEditFeedbackSurveyForm'
+export { default as CreateEditAppraisalGroupForm } from './CreateEditAppraisalGroupForm'

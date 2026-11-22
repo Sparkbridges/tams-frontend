@@ -210,4 +210,57 @@ export const emptyStates = {
       icon: '/images/svg/file-search.svg',
     },
   ],
+
+  feedback: [
+    {
+      title: 'No Feedback Found',
+      description:
+        'There are currently no feedback surveys in the organization.',
+      icon: '/images/svg/no-data.svg',
+    },
+    {
+      title: 'No results found',
+      description:
+        "We couldn't find anything matching your search. Try adjusting your filters or searching with different keywords to see more results.",
+      icon: '/images/svg/file-search.svg',
+    },
+  ],
+
+  archivedFeedback: [
+    {
+      title: 'No Archived Feedback Found',
+      description:
+        'There are currently no archived feedback surveys in the organization.',
+      icon: '/images/svg/no-data.svg',
+    },
+    {
+      title: 'No Archived Feedback Match Your Search',
+      description:
+        "We couldn't find any archived feedback surveys matching your search. Try adjusting your search or searching with different keywords.",
+      icon: '/images/svg/file-search.svg',
+    },
+  ],
+
+  appraisalGroups: [
+    {
+      title: 'No Appraisal Groups Found',
+      description:
+        'There are currently no appraisal groups in the organization.',
+      icon: '/images/svg/no-data.svg',
+    },
+    {
+      title: 'No results found',
+      description:
+        "We couldn't find anything matching your search. Try adjusting your filters or searching with different keywords to see more results.",
+      icon: '/images/svg/file-search.svg',
+    },
+  ],
+  archivedAppraisalGroups: [
+    {
+      title: 'No Archived Appraisal Groups Found',
+      description:
+        'There are currently no archived appraisal groups in the organization.',
+      icon: '/images/svg/no-data.svg',
+    },
+  ],
 }

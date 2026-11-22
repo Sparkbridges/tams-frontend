@@ -186,6 +186,89 @@ export type TSaveAppraisalPeopleSettingPayload =
       }
     }
 
+export type TAppraisalKpiSubCategory = {
+  id?: number
+  name: string
+  weight: number
+  description: string
+}
+
+export type TAppraisalKpiCategory = {
+  id?: number
+  name: string
+  weight: number
+  description: string
+  kpi_sub_categories: TAppraisalKpiSubCategory[]
+}
+
+export type TAppraisalPerformanceArea = {
+  id?: number
+  name: string
+  weight: number
+  description: string
+  kpi_categories: TAppraisalKpiCategory[]
+}
+
+export type TAppraisalGroup = {
+  id: number
+  company_id: number
+  station_id: number
+  name: string
+  description?: string
+  appraiser_settings_id: number
+  approver_settings_id: number
+  appraisal_period_id: number
+  appraisal_year: number
+  apply_grade_settings: boolean
+  is_active: boolean
+  has_ended: boolean
+  deleted_at?: string | null
+  created_at: string
+  updated_at: string
+  appraisalPeriod?: TAppraisalPeriod
+  performanceAreas?: TAppraisalPerformanceArea[]
+}
+
+export type TFetchAppraisalGroupsParams = TBaseQueryParams & {
+  search_query?: string
+  appraisal_period_id?: number
+}
+
+export type TFetchAppraisalGroupsResponse = TGetApiResponse<{
+  results: TAppraisalGroup[]
+  total: number
+}>
+
+export type TCreateAppraisalGroupPayload = {
+  name: string
+  description?: string
+  appraiser_settings_id: number
+  approver_settings_id: number
+  appraisal_period_id: number
+  appraisal_year: number
+  apply_grade_settings: boolean
+  is_active: boolean
+  performance_areas: TAppraisalPerformanceArea[]
+}
+
+export type TUpdateAppraisalGroupPayload =
+  | (TCreateAppraisalGroupPayload & { id: number })
+  | {
+      kind: 'approver'
+      id?: number
+      data: {
+        name: string
+        description: string
+        approval_type: AppraisalApprovalType
+        approver_persons: {
+          approver_person_id: number
+          approver_person_type: AppraisalPersonType
+          alt_approver_person_id?: number
+          alt_approver_person_type?: AppraisalPersonType
+        }[]
+      }
+    }
+
 export type TPerformanceTraining = {
   id: number
   company_id: number
@@ -523,6 +606,103 @@ export type TDeleteProjectKanbanTaskPayload = {
 
 export type TFetchProjectKanbanTaskResponse =
   TGetApiResponse<TProjectKanbanTask>
+
+export type TFeedbackQuestion = {
+  id: number
+  survey_id: number
+  company_id: number
+  question: string
+  required: boolean
+  type: 'text' | 'dropdown' | 'checkbox' | 'multiple_choice'
+  type_value?: string[] | string | null
+}
+
+export type TFeedbackEmployee = {
+  id: number
+  full_name: string
+}
+
+export type TFeedbackParticipant = {
+  id: number
+  employee_id: number
+  employee: TFeedbackEmployee
+}
+
+export type TFeedbackSurvey = {
+  id: number
+  name: string
+  description: string
+  allow_participants_view_answers: boolean
+  company_id: number
+  station_id: number
+  created_by_id: number
+  is_completed?: number | boolean
+  deleted_at?: string | null
+  created_at?: string
+  updated_at?: string
+  participants?: TFeedbackParticipant[]
+  questions?: TFeedbackQuestion[]
+  answers?: unknown[]
+  graders?: unknown[]
+}
+
+export type TFetchFeedbackSurveysParams = {
+  page: number
+  perPage: number
+  search_query?: string
+  archived?: boolean
+}
+
+export type TFetchFeedbackSurveysResponse = TGetApiResponse<{
+  results: TFeedbackSurvey[]
+  total: number
+}>
+
+export type TFetchFeedbackSurveyResponse = TGetApiResponse<TFeedbackSurvey>
+export type TFetchFeedbackAnswersResponse = TGetApiResponse<TFeedbackSurvey[]>
+export type TFetchFeedbackAssignedResponse = TGetApiResponse<TFeedbackSurvey[]>
+export type TFetchFeedbackAppliedResponse = TGetApiResponse<TFeedbackSurvey[]>
+export type TFetchFeedbackCreatedResponse = TGetApiResponse<TFeedbackSurvey[]>
+
+export type TFeedbackQuestionPayload = {
+  question: string
+  required: boolean
+  type: 'text' | 'dropdown' | 'checkbox' | 'multiple_choice'
+  type_value?: string[]
+}
+
+export type TCreateFeedbackSurveyPayload = {
+  name: string
+  description: string
+  allow_participants_view_answers: boolean
+  assign_to_category: 'employees' | 'department' | 'grade' | 'branch' | 'team'
+  assign_to_ids: number[]
+  apply_to_category: 'employees' | 'department' | 'grade' | 'branch' | 'team'
+  apply_to_ids: number[]
+  survey_questions: TFeedbackQuestionPayload[]
+}
+
+export type TUpdateFeedbackSurveyPayload = {
+  id: number
+  name: string
+  description: string
+  allow_participants_view_answers: boolean
+}
+
+export type TAnswerFeedbackPayload = {
+  survey_id: number
+  answered_for_id: number
+  question_answers: {
+    question_id: number
+    answer: unknown
+  }[]
+}
+
+export type TDeleteFeedbackAnswerPayload = {
+  id: number
+  answered_by_id: number
+  answered_for_id: number
+}
 
 export enum KanbanIssueTypes {
   fix = 'fix',

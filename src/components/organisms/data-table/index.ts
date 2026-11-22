@@ -11,3 +11,4 @@ export { default as HrmExemptionSettingsTable } from './HrmExemptionSettingsTabl
 export { default as AttendanceDeviceTable } from './AttendanceDevicesTable'
 export { default as PerformanceAppraisalGGSettings } from './PerformanceAppraisalGGSettings'
 export { default as PerformanceTrainingTable } from './PerformanceTrainingTable'
+export { default as PerformanceAppraisalTable } from './PerformanceAppraisalTable'

@@ -7,6 +7,7 @@ export type TamsNavigation = {
   url: string
   img?: Icon
   hide?: boolean
+  hideSide?: boolean
   children?: TamsNavigation[]
 }
 
