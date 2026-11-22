@@ -4,13 +4,13 @@ import {
   Accordion,
   Alert,
   Badge,
+  Divider,
   Group,
   Pagination,
   Paper,
   Select,
   Table,
   Text,
-  Title,
 } from '@mantine/core'
 import { YearPickerInput } from '@mantine/dates'
 import performanceReportsClient from '#/lib/api/client/performanceReports'
@@ -20,8 +20,10 @@ import { useTamsStore } from '#/lib/store'
 import type { PerformanceReportParams } from '#/lib/types/api/performanceReports'
 import { DashboardPanel, ScopeFilters } from './DashboardCommon'
 import type { DashboardScope } from './DashboardCommon'
+import { useGetPageHeader } from '#/lib'
 
 export default function PerformanceDashboard() {
+  const { pageHeader } = useGetPageHeader()
   const allowed = useTamsStore(
     (state) =>
       state.user?.permissions.includes('generate performance report') ?? false,
@@ -78,10 +80,8 @@ export default function PerformanceDashboard() {
   return (
     <main>
       <Paper withBorder p="md" radius="md" mb="md">
-        <Title order={2}>Performance Breakdown</Title>
-        <Text c="dimmed" size="sm" mb="md">
-          Approved scorecards from ended appraisal groups
-        </Text>
+        <div>{pageHeader()}</div>
+        <Divider my="md" />
         <Group align="end">
           <ScopeFilters
             scope={scope}
