@@ -1,5 +1,19 @@
 Welcome to your new TanStack Start app!
 
+## HRM, attendance and performance dashboards
+
+The HRM and attendance overview pages use the dashboard statistics APIs with
+managed-branch and department filters. HRM also filters by reporting year;
+attendance filters by date. Attendance department rates require the accompanying
+backend change, which also rejects departments without attendance IDs instead
+of displaying unfiltered branch statistics.
+
+The performance overview uses the scorecard report API and requires
+`generate performance report`. It displays approved scorecards from ended
+appraisal groups, paginated by employee. Team and department are alternative
+scopes; selecting a team clears the department. The dashboard metrics reflect
+the source APIs' current workforce definitions, not historical snapshots.
+
 ## Performance training duration
 
 Click a training row or choose **View Details** to open its details drawer.

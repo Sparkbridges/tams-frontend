@@ -1,7 +1,6 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
+import AttendanceDashboard from '#/components/organisms/dashboards/AttendanceDashboard'
 
 export const Route = createFileRoute('/admin-dashboard/attendance/')({
-  beforeLoad: () => {
-    throw redirect({ to: '/admin-dashboard/attendance/devices' })
-  },
+  component: AttendanceDashboard,
 })
