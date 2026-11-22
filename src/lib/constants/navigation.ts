@@ -81,7 +81,7 @@ export const pageHeaderNav: Record<
   // hrm module
   hrm: {
     title: 'HRM Overview',
-    icon: ChalkboardTeacherIcon,
+    icon: UsersThreeIcon,
     description: 'Overview of HRM activities within the organization',
   },
   exemption: {
@@ -119,7 +119,7 @@ export const pageHeaderNav: Record<
   // attendance module
   attendance: {
     title: 'Attendance Overview',
-    icon: ChalkboardTeacherIcon,
+    icon: CalendarDotsIcon,
     description: 'Overview of attendance activities within the organization',
   },
   'attendance-reports': {
@@ -147,12 +147,12 @@ export const pageHeaderNav: Record<
   // performance module
   performance: {
     title: 'Performance Overview',
-    icon: GaugeIcon,
+    icon: ChartLineUpIcon,
     description: 'Overview of performance activities within the organization',
   },
   'performance-reports': {
     title: 'Performance Reports',
-    icon: ChartLineUpIcon,
+    icon: GaugeIcon,
     description:
       'Generate appraisal scorecard reports and inspect performance areas',
   },
