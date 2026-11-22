@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { BarChart, DonutChart } from '@mantine/charts'
-import { Grid, Group, Paper, Text, Title } from '@mantine/core'
+import { Divider, Grid, Group, Paper, Text } from '@mantine/core'
 import { YearPickerInput } from '@mantine/dates'
 import { useHrmStatistic } from '#/lib/api/services/dashboardStatistics'
 import { DashboardPanel, DashboardStats, ScopeFilters } from './DashboardCommon'
 import type { DashboardScope } from './DashboardCommon'
+import { useGetPageHeader } from '#/lib'
 
 export default function HrmDashboard() {
+  const { pageHeader } = useGetPageHeader()
   const [scope, setScope] = useState<DashboardScope>({
     branch: 'all',
     department: 'all',
@@ -44,10 +46,8 @@ export default function HrmDashboard() {
   return (
     <main>
       <Paper withBorder p="md" radius="md" mb="md">
-        <Title order={2}>HRM Dashboard</Title>
-        <Text c="dimmed" size="sm" mb="md">
-          Workforce and leave overview
-        </Text>
+        <div>{pageHeader()}</div>
+        <Divider my="md" />
         <Group align="end">
           <ScopeFilters scope={scope} onChange={setScope} />
           <YearPickerInput
