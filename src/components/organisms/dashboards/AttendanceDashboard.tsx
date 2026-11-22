@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import dayjs from 'dayjs'
 import { BarChart } from '@mantine/charts'
-import { Grid, Group, Paper, Text, TextInput, Title } from '@mantine/core'
+import { Divider, Grid, Group, Paper, Text, TextInput } from '@mantine/core'
 import { useAttendanceStatistic } from '#/lib/api/services/dashboardStatistics'
 import { DashboardPanel, DashboardStats, ScopeFilters } from './DashboardCommon'
 import type { DashboardScope } from './DashboardCommon'
+import { useGetPageHeader } from '#/lib'
 
 export default function AttendanceDashboard() {
+  const { pageHeader } = useGetPageHeader()
   const [scope, setScope] = useState<DashboardScope>({
     branch: 'all',
     department: 'all',
@@ -47,10 +49,8 @@ export default function AttendanceDashboard() {
   return (
     <main>
       <Paper withBorder p="md" radius="md" mb="md">
-        <Title order={2}>Attendance Dashboard</Title>
-        <Text c="dimmed" size="sm" mb="md">
-          Attendance and device activity
-        </Text>
+        <div>{pageHeader()}</div>
+        <Divider my="md" />
         <Group align="end">
           <ScopeFilters scope={scope} onChange={setScope} />
           <TextInput

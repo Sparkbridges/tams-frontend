@@ -10,6 +10,7 @@ import {
   FilesIcon,
   FingerprintIcon,
   FolderUserIcon,
+  GaugeIcon,
   LockKeyIcon,
   MoneyWavyIcon,
   SlidersHorizontalIcon,
@@ -27,7 +28,7 @@ export const pageHeaderNav: Record<
   { title: string; icon?: Icon; description: string } | undefined
 > = {
   organization: {
-    title: 'Organization',
+    title: 'Organization Overview',
     icon: BuildingOfficeIcon,
     description: 'Manage the overall organization structure',
   },
@@ -78,6 +79,11 @@ export const pageHeaderNav: Record<
   },
 
   // hrm module
+  hrm: {
+    title: 'HRM Overview',
+    icon: ChalkboardTeacherIcon,
+    description: 'Overview of HRM activities within the organization',
+  },
   exemption: {
     title: 'Hrm Exemption',
     icon: ExcludeIcon,
@@ -111,6 +117,11 @@ export const pageHeaderNav: Record<
   },
 
   // attendance module
+  attendance: {
+    title: 'Attendance Overview',
+    icon: ChalkboardTeacherIcon,
+    description: 'Overview of attendance activities within the organization',
+  },
   'attendance-reports': {
     title: 'Attendance Reports',
     icon: ChartLineUpIcon,
@@ -134,6 +145,11 @@ export const pageHeaderNav: Record<
   },
 
   // performance module
+  performance: {
+    title: 'Performance Overview',
+    icon: GaugeIcon,
+    description: 'Overview of performance activities within the organization',
+  },
   'performance-reports': {
     title: 'Performance Reports',
     icon: ChartLineUpIcon,
