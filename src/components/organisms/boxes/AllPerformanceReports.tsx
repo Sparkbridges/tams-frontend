@@ -527,6 +527,12 @@ export default function AllPerformanceReports({
                 ]),
               ),
               scorecards_count: employee.scorecards.length,
+              status:
+                typeof employee.status === 'number'
+                  ? employee.status === 1
+                    ? 'active'
+                    : 'inactive'
+                  : (employee.status as string),
             }))}
             loading={query.isLoading}
             page={params.page}

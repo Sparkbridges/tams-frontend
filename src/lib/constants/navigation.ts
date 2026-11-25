@@ -1,4 +1,5 @@
 import {
+  BriefcaseIcon,
   BuildingOfficeIcon,
   CalendarDotsIcon,
   ChalkboardTeacherIcon,
@@ -6,17 +7,20 @@ import {
   ClipboardTextIcon,
   DevicesIcon,
   DoorOpenIcon,
+  EnvelopeIcon,
   ExcludeIcon,
   FilesIcon,
   FingerprintIcon,
   FolderUserIcon,
   GaugeIcon,
+  LeafIcon,
   LockKeyIcon,
   MoneyWavyIcon,
   SlidersHorizontalIcon,
   SpeedometerIcon,
   SquaresFourIcon,
   TargetIcon,
+  UsersIcon,
   UsersThreeIcon,
   WarehouseIcon,
 } from '@phosphor-icons/react'
@@ -173,7 +177,7 @@ export const pageHeaderNav: Record<
     description: 'Manage performance training within the organization',
   },
   'task-management': {
-    title: 'Performance Task Management',
+    title: 'Task Management',
     icon: ClipboardTextIcon,
     description: 'Manage tasks within the organization',
   },
@@ -183,7 +187,7 @@ export const pageHeaderNav: Record<
     description: 'View and manage tasks on the project kanban board',
   },
   feedback: {
-    title: 'Performance Feedback',
+    title: 'Feedback',
     icon: TargetIcon,
     description: 'View and manage feedback surveys within the organization',
   },
@@ -191,6 +195,38 @@ export const pageHeaderNav: Record<
     title: 'Performance Appraisal',
     icon: FilesIcon,
     description: 'View and manage appraisal groups within the organization',
+  },
+
+  // recruitment module
+  recruitment: {
+    title: 'Recruitment Overview',
+    icon: UsersIcon,
+    description: 'Overview of recruitment activities within the organization',
+  },
+  'recruitment-reports': {
+    title: 'Recruitment Reports',
+    icon: GaugeIcon,
+    description: 'Generate recruitment reports and inspect recruitment areas',
+  },
+  'recruitment-settings': {
+    title: 'Recruitment System Settings',
+    icon: SlidersHorizontalIcon,
+    description: 'Manage recruitment system settings within the organization',
+  },
+  'email-settings': {
+    title: 'Email Settings',
+    icon: EnvelopeIcon,
+    description: 'Manage recruitment email settings within the organization',
+  },
+  'talent-requisition': {
+    title: 'Talent Requisition',
+    icon: LeafIcon,
+    description: 'Manage talent requisitions within the organization',
+  },
+  'job-postings': {
+    title: 'Job Postings',
+    icon: BriefcaseIcon,
+    description: 'Manage job postings within the organization',
   },
 }
 
@@ -414,33 +450,33 @@ export const adminNavigation: TamsNavigation[] = [
   {
     id: 10,
     name: 'Recruitment',
-    url: '/admin/recruitment',
+    url: '/recruitment',
     img: FolderUserIcon,
     children: [
       {
         id: 101,
-        name: 'Dashboard',
-        url: '/admin/recruitment/dashboard',
+        name: 'Overview',
+        url: 'index',
       },
       {
         id: 102,
         name: 'Talent Requisition',
-        url: '/admin/recruitment/talent-requisition',
+        url: '/talent-requisition',
       },
       {
         id: 103,
         name: 'Job Posting',
-        url: '/admin/recruitment/job-posting',
+        url: '/job-postings',
       },
       {
         id: 104,
         name: 'Applicant Tracking System',
-        url: '/admin/recruitment/tracking',
+        url: '/tracking',
       },
       {
         id: 105,
         name: 'Recruiter Settings',
-        url: '/admin/recruitment/settings',
+        url: '/recruitment-settings',
       },
     ],
   },

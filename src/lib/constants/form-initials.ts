@@ -339,3 +339,21 @@ export const editKanbanTaskInitials = {
   ...createKanbanTaskInitials,
   id: 0,
 }
+
+export const createTalentRequisitionInitials = {
+  department_id: 0,
+  role: '',
+  salary_range: '',
+  work_mode: '',
+  type: '',
+  reason: '',
+  description: '',
+  branch_id: 0,
+  salary_min: undefined as unknown as number,
+  salary_max: undefined as unknown as number,
+}
+
+export const editTalentRequisitionInitials = {
+  ...createTalentRequisitionInitials,
+  id: 0,
+}

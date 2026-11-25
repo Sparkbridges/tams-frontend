@@ -26,6 +26,7 @@ export type TPostApiResponse<T> = {
 
 export type TBaseQueryParams = {
   page: number
-  perPage: number
+  perPage?: number
   search_query?: string
+  per_page?: number
 }
