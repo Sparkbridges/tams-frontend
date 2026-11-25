@@ -175,7 +175,9 @@ const TamsTable = ({
             )
           }
           if (['status', 'isPaid'].includes(column.accessor)) {
-            const statusObject = getStatusColor(row[column.accessor] as string)
+            const statusObject = getStatusColor(
+              (row[column.accessor] as string) ?? '',
+            )
             return (
               <Table.Td key={i}>
                 <Badge

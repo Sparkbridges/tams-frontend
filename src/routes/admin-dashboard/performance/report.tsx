@@ -1,10 +1,10 @@
 import { z } from 'zod/v4'
 import { createFileRoute } from '@tanstack/react-router'
-import AllPerformanceReports from '#/components/organisms/boxes/AllPerformanceReports'
 import { documentHelper } from '#/lib'
 import useGetPageHeader from '#/lib/hooks/useGetPageHeader'
 import { useAttendanceScope } from '#/lib/api/services/attendance'
 import { performanceReportSchema } from '#/lib/utils/schema/performanceReports.schema'
+import { AllPerformanceReports } from '#/components'
 
 export const Route = createFileRoute('/admin-dashboard/performance/report')({
   validateSearch: z.object({ report: performanceReportSchema.optional() }),

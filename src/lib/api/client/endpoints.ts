@@ -130,6 +130,11 @@ export const ENDPOINTS = {
   feedbackSurveys: '/hrm/surveys',
   tasksByProjectId: '/hrm/projects/tasks/get-tasks-by-project',
 
+  // -----------------------Recruitment-----------------------------------
+  recruitmentEmailTemplates: '/hrm/recruitment/email-templates',
+  recruitmentSettings: '/hrm/recruitment/settings',
+  recruitmentTalentRequests: '/hrm/recruitment/job-requests',
+
   // --------------------------payroll-----------------------------------
   verifyAccountNumber:
     '/payroll/payment-management/payments/verify-account-number',
