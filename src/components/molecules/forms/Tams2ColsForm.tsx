@@ -2,6 +2,7 @@ import {
   TamsDateInput,
   TamsDatePickerInput,
   TamsDropzone,
+  TamsMaskInput,
   TamsMultiSelect,
   TamsNumberInput,
   TamsSelectInput,
@@ -12,7 +13,12 @@ import {
 import type { TamsBy2ColsFormFields } from '#/lib'
 import { Grid, Paper, Text } from '@mantine/core'
 import type { UseFormReturnType } from '@mantine/form'
-import { TamsPhoneInput, TamsSearchDropdown, TamsUrlInput } from '../inputs'
+import {
+  TamsCurrencyRange,
+  TamsPhoneInput,
+  TamsSearchDropdown,
+  TamsUrlInput,
+} from '../inputs'
 import type { FileWithPath } from '@mantine/dropzone'
 
 type Props<T, TTransform = (values: T) => T> = {
@@ -91,6 +97,56 @@ const Tams2ColsForm = <T, TTransform = (values: T) => T>({
                         withAsterisk={subField.required}
                         data={subField.options}
                         searchable
+                      />
+                    </Grid.Col>
+                  )
+                }
+                if (subField.type == 'currency-range') {
+                  const names = subField.name.split('-')
+                  const newValues = form.getValues() as unknown as Record<
+                    string,
+                    number
+                  >
+                  const errors = form.errors as Record<string, string>
+                  return (
+                    <Grid.Col
+                      span={{ base: 12, md: 6, lg: subField.cols }}
+                      key={subField.name}
+                    >
+                      <TamsCurrencyRange
+                        label={subField.label}
+                        placeholders={subField?.placeholder?.split('-')}
+                        withAsterisk={subField.required}
+                        names={names}
+                        values={[newValues[names[0]], newValues[names[1]]]}
+                        errors={[
+                          errors[names[0]] ?? '',
+                          errors[names[1]] ?? '',
+                        ]}
+                        onChange={(name, value) =>
+                          form.setFieldValue(name, Number(value) as any)
+                        }
+                      />
+                    </Grid.Col>
+                  )
+                }
+                if (subField.type == 'mask') {
+                  return (
+                    <Grid.Col
+                      span={{ base: 12, md: 6, lg: subField.cols }}
+                      key={subField.name}
+                    >
+                      <TamsMaskInput
+                        label={subField.label}
+                        key={form.key(subField.name)}
+                        {...form.getInputProps(subField.name)}
+                        withAsterisk={subField.required}
+                        mask={subField.mask as string}
+                        onChangeRaw={(raw) =>
+                          form.setFieldValue(subField.name, raw as any, {
+                            forceUpdate: false,
+                          })
+                        }
                       />
                     </Grid.Col>
                   )
@@ -205,6 +261,7 @@ const Tams2ColsForm = <T, TTransform = (values: T) => T>({
                         label={subField.label}
                         key={form.key(subField.name)}
                         {...form.getInputProps(subField.name)}
+                        withAsterisk={subField.required}
                       />
                     </Grid.Col>
                   )

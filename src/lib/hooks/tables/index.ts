@@ -21,3 +21,7 @@ export { default as usePerformanceTraining } from './usePerformanceTraining'
 export { default as usePerformanceTaskProjects } from './usePerformanceTaskProjects'
 export { default as useHandleProjectKanban } from './useHandleProjectKanban'
 export { default as usePerformanceAppraisalGroups } from './usePerformanceAppraisalGroups'
+
+// recruitment
+export { default as useHandleEmailSettings } from './useHandleEmailSettings'
+export { default as useRecruitmentTalentRequestTable } from './useRecruitmentTalentRequestTable'

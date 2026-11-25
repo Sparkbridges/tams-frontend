@@ -85,6 +85,8 @@ export type TFormFieldType =
   | 'switch'
   | 'url'
   | 'list'
+  | 'mask'
+  | 'currency-range'
 
 export type TamsBy2ColsFormField = {
   name: string
@@ -102,12 +104,14 @@ export type TamsBy2ColsFormField = {
   alias?: string
   readonly?: boolean
   hidden?: boolean
+  placeholder?: string
   disabled?: boolean
   suffix?: string
   maxSize?: number
   dateType?: 'multiple' | 'range'
   listItems?: React.ReactNode
   maxNumber?: number
+  mask?: string | (RegExp | string)[]
 }
 
 export type TamsBy2ColsFormFields = {

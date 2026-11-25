@@ -1,4 +1,4 @@
-import { Box, Divider, Paper, Text, ThemeIcon } from '@mantine/core'
+import { Box, Divider, Paper, Skeleton, Text, ThemeIcon } from '@mantine/core'
 import { CaretRightIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
@@ -12,6 +12,7 @@ type Props = {
   title?: string
   actions?: React.ReactNode
   content: React.ReactNode
+  loading?: boolean
 }
 const TamsSideNavTable = ({
   setSelectedId,
@@ -20,6 +21,7 @@ const TamsSideNavTable = ({
   title,
   actions,
   content,
+  loading,
 }: Props) => {
   const [active, setActive] = useState(0)
 
@@ -32,23 +34,28 @@ const TamsSideNavTable = ({
       <section className="flex">
         <div className="w-4/12 py-4 px-3 space-y-5">
           <ul className="space-y-1.5">
-            {columnData?.map((item, index) => {
-              return (
-                <li
-                  key={index}
-                  onClick={() => handleItemClick(index, Number(item.value))}
-                  className={`${index === active ? 'bg-gray-100 font-semibold' : 'font-thin'} text-sm pr-3 hover:bg-gray-200 flex gap-3 py-2 items-center rounded-sm`}
-                >
-                  <span
-                    className={`${index === active ? 'bg-primary' : ''} w-1.5 h-7 rounded-r-xl`}
-                  />
-                  {item.label}
-                  <ThemeIcon variant="transparent" className="ml-auto">
-                    <CaretRightIcon />
-                  </ThemeIcon>
-                </li>
-              )
-            })}
+            {loading &&
+              Array.from({ length: 5 }).map((_, i) => (
+                <Skeleton key={i} height={24} className="w-full mb-2" />
+              ))}
+            {!loading &&
+              columnData?.map((item, index) => {
+                return (
+                  <li
+                    key={index}
+                    onClick={() => handleItemClick(index, Number(item.value))}
+                    className={`${index === active ? 'bg-gray-100 font-semibold' : 'font-thin'} text-sm pr-3 hover:bg-gray-200 flex gap-3 py-2 items-center rounded-sm`}
+                  >
+                    <span
+                      className={`${index === active ? 'bg-primary' : ''} w-1.5 h-7 rounded-r-xl`}
+                    />
+                    {item.label}
+                    <ThemeIcon variant="transparent" className="ml-auto">
+                      <CaretRightIcon />
+                    </ThemeIcon>
+                  </li>
+                )
+              })}
           </ul>
           <div>{columnButton}</div>
         </div>

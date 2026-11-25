@@ -49,7 +49,7 @@ export const validateStepForms = <TSchema extends z.ZodObject<z.ZodRawShape>>(
 }
 
 export const getStatusColor = (status: string) => {
-  switch (status.toLowerCase()) {
+  switch (status?.toLowerCase()) {
     case 'active':
     case 'online':
       return { variant: 'dot', color: 'green' }
@@ -285,4 +285,32 @@ export const getErrorMessage = (error: any): string => {
     (error as AxiosError<{ message: string }>)?.response?.data?.message ??
     (error as Error).message
   return errorMessage
+}
+
+const parseCurrencyAmount = (amount: string): number | null => {
+  const value = amount.trim()
+  if (!/^[+-]?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$/.test(value)) {
+    return null
+  }
+  const parsed = Number(value.replace(/,/g, ''))
+  return Number.isFinite(parsed) ? parsed : null
+}
+
+const formatValue = (value: string | number | null | undefined) =>
+  value === null || value === undefined || value === ''
+    ? 'Not provided'
+    : String(value)
+
+export const formatCurrency = (
+  amount: string,
+  currency: 'NGN' | 'USD' = 'NGN',
+  displayStyle: 'narrowSymbol' | 'symbol' | 'code' = 'narrowSymbol',
+): string => {
+  const value = parseCurrencyAmount(amount)
+  if (value === null) return formatValue(amount)
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+    currencyDisplay: displayStyle,
+  }).format(value)
 }

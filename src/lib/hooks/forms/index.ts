@@ -18,3 +18,4 @@ export { default as useCreateEditFeedbackSurveyForm } from './useCreateEditFeedb
 export { default as useCreateEditAppraisalGroupForm } from './useCreateEditAppraisalGroupForm'
 export { default as useCreateEditPerformanceTaskManagementProjectForm } from './useCreateEditPerformanceTaskManagementProjectForm'
 export { default as useCreateEditKanbanTaskForm } from './useCreateEditKanbanTaskForm'
+export { default as useCreateEditTalentRequisitionForm } from './useCreateEditTalentRequisitionForm'
