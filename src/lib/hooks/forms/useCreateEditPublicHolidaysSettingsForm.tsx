@@ -264,7 +264,7 @@ const useCreateEditPublicHolidaysSettingsForm = ({
         }
       },
       (errors) => {
-        console.log('errors', errors)
+        console.error('errors', errors)
       },
     )()
   }

@@ -357,3 +357,22 @@ export const editTalentRequisitionInitials = {
   ...createTalentRequisitionInitials,
   id: 0,
 }
+
+export const createJobPostingInitials = {
+  role: '',
+  job_request_id: undefined as unknown as number,
+  work_mode: '',
+  type: '',
+  description: '',
+  job_location_country_id: undefined as unknown as number,
+  job_location_state_id: undefined as unknown as number,
+  custom_fields: '',
+  required_documents: [{ name: '', size: 0, required: true, data: '' }],
+  files: [] as File[],
+}
+
+// '[{"question":"loo","answer_type":"dropdown","required":true,"options":["a","b","c"]},{"question":"klpo","answer_type":"checkbox","required":false,"options":["lol","asd"]},{"question":"lslsls","answer_type":"date","required":false,"options":[]},{"question":"kdl","answer_type":"yes_no","required":false,"options":[]},{"question":"jdjdj","answer_type":"long_text","required":false,"options":[]},{"question":"kkljk","answer_type":"short_text","required":false,"options":[]}]'
+export const editJobPostingInitials = {
+  ...createJobPostingInitials,
+  id: 0,
+}

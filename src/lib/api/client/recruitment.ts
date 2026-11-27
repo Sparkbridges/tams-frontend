@@ -10,9 +10,13 @@ import type {
   TRecruitmentTalentRequestByIdResponse,
   TUpdateRecruitmentTalentRequestStatusParams,
   TCreateTalentRequisitionResponse,
+  TRecruitmentJobPostingsResponse,
+  TRecruitmentJobPostingsByIdResponse,
 } from '#/lib/types'
 import type {
+  TCreateJobPostingPayload,
   TCreateTalentRequisitionPayload,
+  TEditJobPostingPayload,
   TEditTalentRequisitionPayload,
 } from '#/lib/utils/schema/recruitment.schema'
 import { ENDPOINTS } from './endpoints'
@@ -155,6 +159,118 @@ const recruitmentClient = {
   ) => {
     return await Client.put(
       `${ENDPOINTS.recruitmentTalentRequests}/${data.id}`,
+      data,
+    )
+  },
+
+  /**
+   * Description - fetch all recruitment job postings.
+   * @returns Data fetched from `/recruitment/job-postings`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  fetchRecruitmentJobPostings: async (
+    params?: TRecruitmentJobRequestsParams,
+  ) => {
+    return await Client.get<TRecruitmentJobPostingsResponse>(
+      ENDPOINTS.recruitmentJobPostings,
+      { params },
+    )
+  },
+
+  /**
+   * Description - fetch all archived recruitment job postings.
+   * @returns Data fetched from `/recruitment/job-postings/archives`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  fetchRecruitmentJobPostingsArchived: async (
+    params?: TRecruitmentJobRequestsParams,
+  ) => {
+    return await Client.get<TRecruitmentJobPostingsResponse>(
+      ENDPOINTS.recruitmentJobPostingsArchived,
+      { params },
+    )
+  },
+
+  /**
+   * Description - fetch a recruitment job posting by ID.
+   * @param {number} id - The ID of the recruitment job posting to fetch.
+   * @returns Data fetched from `/recruitment/job-postings/{id}`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  fetchRecruitmentJobPostingById: async (id: number) => {
+    return await Client.get<TRecruitmentJobPostingsByIdResponse>(
+      `${ENDPOINTS.recruitmentJobPostings}/${id}`,
+    )
+  },
+
+  /**
+   * Description - Publish or unpublish a job posting.
+   * @param {number} id - The ID of the recruitment job posting to update.
+   * @param {object} data - The data to update the recruitment job posting with.
+   * @returns Data fetched from `/recruitment/job-postings/{id}`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  updateRecruitmentJobPostingStatus: async (
+    data: Partial<{ status: string; id: number }>,
+  ) => {
+    return await Client.put(
+      `${ENDPOINTS.recruitmentJobPostings}/${data.status}/${data.id}`,
+    )
+  },
+
+  /**
+   * Description - archive a recruitment job posting.
+   * @param {number} id - The ID of the recruitment job posting to archive.
+   * @returns Data fetched from `/recruitment/job-postings/{id}`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  archiveRecruitmentJobPosting: async (id: number) => {
+    return await Client.delete(`${ENDPOINTS.recruitmentJobPostings}/${id}`)
+  },
+
+  /**
+   * Description - delete a recruitment job posting.
+   * @param {object} data - The data containing the IDs of the recruitment job postings to delete.
+   * @returns Data fetched from `/recruitment/job-postings/{id}`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  deleteRecruitmentJobPosting: async (data: { ids: number[] }) => {
+    return await Client.delete(`${ENDPOINTS.recruitmentJobPostings}/archives`, {
+      data,
+    })
+  },
+
+  /**
+   * Description - restore archived recruitment job postings.
+   * @param {object} data - The data containing the IDs of the recruitment job postings to restore.
+   * @returns Data fetched from `/recruitment/job-postings/archives/restore`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  restoreArchivedRecruitmentJobPostings: async (data: { ids: number[] }) => {
+    return await Client.put(`${ENDPOINTS.recruitmentJobPostings}/restore`, data)
+  },
+
+  /**
+   * Description - create a recruitment job posting.
+   * @param {TCreateJobPostingPayload} data - The data to create the recruitment job posting with.
+   * @returns Data fetched from `/recruitment/job-postings`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  createRecruitmentJobPosting: async (
+    data: Partial<TCreateJobPostingPayload>,
+  ) => {
+    return await Client.post(`${ENDPOINTS.recruitmentJobPostings}`, data)
+  },
+
+  /**
+   * Description - edit a recruitment job posting.
+   * @param {TEditJobPostingPayload} data - The data to update the recruitment job posting with.
+   * @returns Data fetched from `/recruitment/job-postings/{id}`, or an error if the API call fails.
+   * @throws {Error} If the request fails.
+   */
+  editRecruitmentJobPosting: async (data: Partial<TEditJobPostingPayload>) => {
+    return await Client.put(
+      `${ENDPOINTS.recruitmentJobPostings}/${data.id}`,
       data,
     )
   },

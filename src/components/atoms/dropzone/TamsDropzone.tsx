@@ -26,9 +26,13 @@ type TamsDropzoneProps = Partial<DropzoneProps> & {
   value?: FileWithPath[] | string[]
   status?: 'idle' | 'uploading' | 'uploaded'
   additionalText?: string
-  onremove?: (file: FileWithPath | string) => void
+  onremove?: (files?: (FileWithPath | string)[]) => void
 }
 const TamsDropzone = (props: TamsDropzoneProps) => {
+  const handleRemove = (index: number) => {
+    const remaining = props.value?.filter((_, i) => i !== index) ?? []
+    props.onremove?.(remaining)
+  }
   return (
     <div>
       <Dropzone
@@ -82,7 +86,7 @@ const TamsDropzone = (props: TamsDropzoneProps) => {
       </Dropzone>
 
       <section className="mt-4">
-        {props.value?.map((file) => {
+        {props.value?.map((file, index) => {
           if (typeof file === 'string')
             return (
               <Paper
@@ -111,7 +115,7 @@ const TamsDropzone = (props: TamsDropzoneProps) => {
                     color="red"
                     variant="light"
                     size="sm"
-                    onClick={() => props.onremove?.(file)}
+                    onClick={() => handleRemove(index)}
                   >
                     <TrashIcon size={32} />
                   </ActionIcon>
@@ -143,7 +147,9 @@ const TamsDropzone = (props: TamsDropzoneProps) => {
                 </div>
 
                 <div className="text-gray-600 text-xs font-semibold flex items-center gap-1">
-                  <span>{millifyValue(file.size, 'bytes')}</span>
+                  <span>
+                    {file.size ? millifyValue(file.size, 'bytes') : ''}
+                  </span>
 
                   {props.additionalText && (
                     <>
@@ -160,7 +166,7 @@ const TamsDropzone = (props: TamsDropzoneProps) => {
                   color="red"
                   variant="light"
                   size="sm"
-                  onClick={() => props.onremove?.(file)}
+                  onClick={() => handleRemove(index)}
                 >
                   <TrashIcon size={32} />
                 </ActionIcon>

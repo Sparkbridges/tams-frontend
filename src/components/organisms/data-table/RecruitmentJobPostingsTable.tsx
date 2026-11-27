@@ -3,12 +3,16 @@ import { TamsConfirmation, TamsTableFilter } from '#/components/molecules'
 import {
   capitalize,
   jobTypeOptions,
-  useRecruitmentTalentRequestTable,
+  useRecruitmentJobPostingsTable,
   workModeOptions,
 } from '#/lib'
-import { RecruitmentTalentRequestDetailDrawer } from '../drawers'
+import { RecruitmentJobPostingDetailDrawer } from '../drawers'
 
-const RecruitmentTalentRequestTable = () => {
+const RecruitmentJobPostingsTable = ({
+  activeTab,
+}: {
+  activeTab: 'all' | 'archived'
+}) => {
   const {
     columns,
     tableData,
@@ -26,22 +30,16 @@ const RecruitmentTalentRequestTable = () => {
     openedDetailDrawer,
     handleRowClick,
     closeDetailDrawer,
-    selectedRequest,
+    selectedId,
     statusOptions,
     workModeFilter,
     setWorkModeFilter,
     jobTypeFilter,
     setJobTypeFilter,
-    setBranchId,
-    organizationBranches,
-    branchId,
-    departmentFilter,
-    setDepartmentFilter,
-    organizationDepartments,
     actionType,
     isPending,
     emptyState,
-  } = useRecruitmentTalentRequestTable()
+  } = useRecruitmentJobPostingsTable({ activeTab })
 
   return (
     <div>
@@ -58,24 +56,6 @@ const RecruitmentTalentRequestTable = () => {
         total={total}
         filters={
           <div className="flex gap-3">
-            <TamsTableFilter
-              label="Branch"
-              selectedOption={branchId}
-              setSelectedItem={setBranchId}
-              data={organizationBranches}
-              showLabelAsSelectedOption
-              disableAllOption
-            />
-            {branchId && (
-              <TamsTableFilter
-                label="Department"
-                selectedOption={departmentFilter}
-                setSelectedItem={setDepartmentFilter}
-                data={organizationDepartments}
-                showLabelAsSelectedOption
-                disableAllOption
-              />
-            )}
             <TamsTableFilter
               label="Status"
               selectedOption={statusFilter}
@@ -106,19 +86,18 @@ const RecruitmentTalentRequestTable = () => {
       <TamsConfirmation
         opened={openedConfirmation}
         onClose={closeConfirmation}
-        title={`${capitalize(actionType ?? '')} Talent Request`}
-        message={`Are you sure you want to ${actionType ?? ''} this talent request?`}
+        title={`${capitalize(actionType ?? '')} Job Posting`}
+        message={`Are you sure you want to ${actionType ?? ''} this job posting?`}
         onConfirm={handleAction}
         loading={isPending}
       />
-      <RecruitmentTalentRequestDetailDrawer
+      <RecruitmentJobPostingDetailDrawer
         opened={openedDetailDrawer}
         onClose={closeDetailDrawer}
-        request={selectedRequest}
-        branches={organizationBranches}
+        selectedId={selectedId}
       />
     </div>
   )
 }
 
-export default RecruitmentTalentRequestTable
+export default RecruitmentJobPostingsTable

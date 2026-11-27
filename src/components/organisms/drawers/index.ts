@@ -1,5 +1,6 @@
 export { default as OrgBranchDetailDrawer } from './OrgBranchDetailDrawer'
 export { default as RecruitmentTalentRequestDetailDrawer } from './RecruitmentTalentRequestDetailDrawer'
+export { default as RecruitmentJobPostingDetailDrawer } from './RecruitmentJobPostingDetailDrawer'
 export { default as HrmExemptionDetailDrawer } from './HrmExemptionDetailDrawer'
 export { default as HrmLeaveDetailDrawer } from './HrmLeaveDetailDrawer'
 export { default as OrgDepartmentDetailDrawer } from './OrgDepartmentDetailDrawer'

@@ -1,5 +1,5 @@
 import {
-  CreateEditTalentRequisitionForm,
+  CreateEditJobPostingForm,
   TamsBanner,
   TamsGoBackNavigation,
   TamsPageError,
@@ -9,7 +9,7 @@ import { useRecruitmentAccess } from '#/lib/api/services/recruitment'
 import { createFileRoute } from '@tanstack/react-router'
 
 const productSearchSchema = zodObjectSchema({
-  talentRequestId: numberSchema(),
+  id: numberSchema(),
 })
 
 export const Route = createFileRoute(
@@ -19,23 +19,23 @@ export const Route = createFileRoute(
   validateSearch: (search) => productSearchSchema.parse(search),
   head: () =>
     documentHelper({
-      title: 'Edit Talent Requisition | Tams',
-      content: 'Talent Requisition Edit Page',
+      title: 'Edit Job Posting | Tams',
+      content: 'Job Posting Edit Page',
       name: 'description',
     }),
 })
 
 function RouteComponent() {
-  const { talentRequestId } = Route.useSearch()
-  const { canCreateTalentRequest } = useRecruitmentAccess()
-  if (!canCreateTalentRequest) return <TamsPageError type="403" />
+  const { id } = Route.useSearch()
+  const { canCreateJobPosting } = useRecruitmentAccess()
+  if (!canCreateJobPosting) return <TamsPageError type="403" />
   return (
     <div className="space-y-4 px-7">
-      <TamsGoBackNavigation label="Back to Talent Requests" />
+      <TamsGoBackNavigation label="Back to Job Postings" />
 
       <TamsBanner />
 
-      <CreateEditTalentRequisitionForm type="edit" id={talentRequestId} />
+      <CreateEditJobPostingForm type="edit" id={id} />
     </div>
   )
 }

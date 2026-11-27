@@ -265,7 +265,7 @@ const useCreateEditAppraisalGroupForm = ({ type, id }: Props) => {
           console.error('Error submitting appraisal group', error)
         }
       },
-      (errors) => console.log('errors', errors),
+      (errors) => console.error('errors', errors),
     )()
   }
 

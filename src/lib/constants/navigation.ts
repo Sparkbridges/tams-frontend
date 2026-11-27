@@ -471,7 +471,7 @@ export const adminNavigation: TamsNavigation[] = [
       {
         id: 104,
         name: 'Applicant Tracking System',
-        url: '/tracking',
+        url: '/ats',
       },
       {
         id: 105,

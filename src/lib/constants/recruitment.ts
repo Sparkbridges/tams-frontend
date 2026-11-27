@@ -24,3 +24,13 @@ export const jobTypeOptions = [
   { label: 'Part-time', value: 'parttime' },
   { label: 'Contract', value: 'contract' },
 ]
+
+export const answerTypes = [
+  { label: 'Short Text', value: 'short_text' },
+  { label: 'Long Text', value: 'long_text' },
+  { label: 'Dropdown (Single Select)', value: 'dropdown' },
+  { label: 'Checkbox (Multi Select)', value: 'checkbox' },
+  { label: 'Date Picker', value: 'date' },
+  { label: 'Yes / No', value: 'yes_no' },
+  { label: 'File Upload', value: 'file_upload' },
+]

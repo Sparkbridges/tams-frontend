@@ -16,6 +16,7 @@ import type { UseFormReturnType } from '@mantine/form'
 import {
   TamsCurrencyRange,
   TamsPhoneInput,
+  TamsRichTextEditor,
   TamsSearchDropdown,
   TamsUrlInput,
 } from '../inputs'
@@ -78,9 +79,42 @@ const Tams2ColsForm = <T, TTransform = (values: T) => T>({
                         {...form.getInputProps(subField.name)}
                         withAsterisk={subField.required}
                         data={subField.options}
+                        readOnly={subField.readonly}
                         disabled={subField.disabled}
                         searchable
                       />
+                    </Grid.Col>
+                  )
+                }
+                if (subField.type == 'rich-text') {
+                  const newValues = form.getValues() as unknown as Record<
+                    string,
+                    string
+                  >
+                  return (
+                    <Grid.Col
+                      span={{ base: 12, md: 6, lg: subField.cols }}
+                      key={subField.name}
+                    >
+                      <TamsRichTextEditor
+                        key={form.key(subField.name)}
+                        label={subField.label}
+                        withAsterisk={subField.required}
+                        value={newValues[subField.name] ?? ''}
+                        onChange={(value) =>
+                          form.setFieldValue(subField.name, value as any)
+                        }
+                      />
+                    </Grid.Col>
+                  )
+                }
+                if (subField.type == 'list') {
+                  return (
+                    <Grid.Col
+                      span={{ base: 12, lg: subField.cols }}
+                      key={subField.name}
+                    >
+                      {subField.listItems}
                     </Grid.Col>
                   )
                 }
@@ -321,7 +355,7 @@ const Tams2ColsForm = <T, TTransform = (values: T) => T>({
                   const newValue = (
                     form.getValues() as unknown as Record<
                       string,
-                      FileWithPath | undefined
+                      FileWithPath | FileWithPath[] | undefined
                     >
                   )[subField.name]
                   return (
@@ -332,15 +366,24 @@ const Tams2ColsForm = <T, TTransform = (values: T) => T>({
                       <TamsDropzone
                         title={subField.label}
                         maxSize={subField.maxSize}
+                        accept={subField.acceptedTypes as string[]}
                         onDrop={(files) =>
                           form.setValues({
-                            [subField.name]: files[0],
+                            [subField.name]: subField.acceptMultipleFiles
+                              ? [...(newValue as FileWithPath[]), ...files]
+                              : files[0],
                           } as unknown as Partial<T>)
                         }
-                        value={newValue ? [newValue] : []}
-                        onremove={() =>
+                        value={
+                          newValue
+                            ? subField.acceptMultipleFiles
+                              ? (newValue as FileWithPath[])
+                              : [newValue as FileWithPath]
+                            : []
+                        }
+                        onremove={(files) =>
                           form.setValues({
-                            [subField.name]: undefined,
+                            [subField.name]: files,
                           } as unknown as Partial<T>)
                         }
                         error={form.errors[subField.name] as string}

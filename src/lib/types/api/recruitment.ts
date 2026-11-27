@@ -214,3 +214,37 @@ export type TCreateTalentRequisitionResponse = TPostApiResponse<{
   updated_at: string
   id: number
 }>
+
+export type TRecruitmentJobPostingsResponse = TGetApiResponse<{
+  results: TRecruitmentJobPosting[]
+  total: number
+}>
+
+export type TRecruitmentJobPosting = {
+  id: number
+  description: string | null
+  role: string
+  work_mode: string | null
+  type: string | null
+  status: string
+  uuid: string
+  published_url: string | null
+  custom_fields?: string
+  created_by_id: number
+  company_id: number
+  station_id: number
+  created_at: string
+  updated_at: string
+  job_location_country_id: number | null
+  job_location_state_id: number | null
+  accepted_formats: unknown
+  max_file_size_mb: number | null
+  job_request_id: number | null
+  department_id: number | null
+  required_documents:
+    string | { url: string; name: string; required: boolean }[]
+  deleted_at: string | null
+}
+
+export type TRecruitmentJobPostingsByIdResponse =
+  TGetApiResponse<TRecruitmentJobPosting | null>

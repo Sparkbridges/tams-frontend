@@ -3,16 +3,26 @@ import type { ExtractState } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { createAuthSlice } from './auth.slice'
 import type { TamsAuth } from './auth.slice'
+import { createToastSlice } from './toast.slice'
+import type { TamsToast } from './toast.slice'
 
-type TamsStore = TamsAuth
+type TamsStore = TamsAuth & TamsToast
 
 export const useTamsStore = create<TamsStore>()(
   persist(
     (...a) => ({
       ...createAuthSlice(...a),
+      ...createToastSlice(...a),
     }),
     {
       name: 'tams-storage',
+      partialize: ({ opened, data, setToast, clearToast, ...state }) => state,
+      merge: (persisted, current) => ({
+        ...current,
+        ...(persisted as Partial<TamsStore>),
+        opened: current.opened,
+        data: current.data,
+      }),
       storage: createJSONStorage(() => localStorage, {
         replacer: (_, value) => {
           if (value instanceof Map) {
