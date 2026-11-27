@@ -66,6 +66,7 @@ export const getStatusColor = (status: string) => {
     case 'pending':
       return { variant: 'light', color: 'blue' }
     case 'archived':
+    case 'draft':
     case 'offline':
       return { variant: 'light', color: 'gray' }
     case 'completed':
@@ -313,4 +314,20 @@ export const formatCurrency = (
     currency,
     currencyDisplay: displayStyle,
   }).format(value)
+}
+
+export function fileToBase64(file: File, returnFullDataUrl = false) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () =>
+      resolve(
+        reader
+          ? returnFullDataUrl
+            ? reader.result
+            : (reader.result as string)?.split(',')[1]
+          : null,
+      ) // strip "data:...;base64,"
+    reader.onerror = () => reject(reader.error)
+    reader.readAsDataURL(file)
+  })
 }

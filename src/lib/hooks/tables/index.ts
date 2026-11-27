@@ -25,3 +25,4 @@ export { default as usePerformanceAppraisalGroups } from './usePerformanceApprai
 // recruitment
 export { default as useHandleEmailSettings } from './useHandleEmailSettings'
 export { default as useRecruitmentTalentRequestTable } from './useRecruitmentTalentRequestTable'
+export { default as useRecruitmentJobPostingsTable } from './useRecruitmentJobPostingsTable'

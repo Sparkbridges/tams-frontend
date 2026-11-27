@@ -66,6 +66,7 @@ import { Route as AdminDashboardPerformanceTaskManagementIndexRouteImport } from
 import { Route as AdminDashboardPerformanceTaskManagementPathlessLayoutRouteImport } from './routes/admin-dashboard/performance/task-management/_pathlessLayout'
 import { Route as AdminDashboardPerformanceTrainingIndexRouteImport } from './routes/admin-dashboard/performance/training/index'
 import { Route as AdminDashboardPerformanceTrainingPathlessLayoutRouteImport } from './routes/admin-dashboard/performance/training/_pathlessLayout'
+import { Route as AdminDashboardRecruitmentAtsIndexRouteImport } from './routes/admin-dashboard/recruitment/ats/index'
 import { Route as AdminDashboardRecruitmentJobPostingsIndexRouteImport } from './routes/admin-dashboard/recruitment/job-postings/index'
 import { Route as AdminDashboardRecruitmentJobPostingsPathlessLayoutRouteImport } from './routes/admin-dashboard/recruitment/job-postings/_pathlessLayout'
 import { Route as AdminDashboardRecruitmentRecruitmentSettingsIndexRouteImport } from './routes/admin-dashboard/recruitment/recruitment-settings/index'
@@ -101,7 +102,7 @@ import { Route as AdminDashboardPerformanceTaskManagementPathlessLayoutCreateRou
 import { Route as AdminDashboardPerformanceTaskManagementPathlessLayoutEditRouteImport } from './routes/admin-dashboard/performance/task-management/_pathlessLayout.edit'
 import { Route as AdminDashboardPerformanceTrainingPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/performance/training/_pathlessLayout.create'
 import { Route as AdminDashboardPerformanceTrainingPathlessLayoutEditRouteImport } from './routes/admin-dashboard/performance/training/_pathlessLayout.edit'
-import { Route as AdminDashboardRecruitmentJobPostingsPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/recruitment/job-postings/_pathlessLayout.create'
+import { Route as AdminDashboardRecruitmentAtsTrackingIdRouteImport } from './routes/admin-dashboard/recruitment/ats/tracking.$id'
 import { Route as AdminDashboardRecruitmentJobPostingsPathlessLayoutEditRouteImport } from './routes/admin-dashboard/recruitment/job-postings/_pathlessLayout.edit'
 import { Route as AdminDashboardRecruitmentTalentRequisitionPathlessLayoutCreateRouteImport } from './routes/admin-dashboard/recruitment/talent-requisition/_pathlessLayout.create'
 import { Route as AdminDashboardRecruitmentTalentRequisitionPathlessLayoutEditRouteImport } from './routes/admin-dashboard/recruitment/talent-requisition/_pathlessLayout.edit'
@@ -443,6 +444,12 @@ const AdminDashboardPerformanceTrainingPathlessLayoutRoute =
     path: '/performance/training',
     getParentRoute: () => AdminDashboardRouteRoute,
   } as any)
+const AdminDashboardRecruitmentAtsIndexRoute =
+  AdminDashboardRecruitmentAtsIndexRouteImport.update({
+    id: '/recruitment/ats/',
+    path: '/recruitment/ats/',
+    getParentRoute: () => AdminDashboardRouteRoute,
+  } as any)
 const AdminDashboardRecruitmentJobPostingsIndexRoute =
   AdminDashboardRecruitmentJobPostingsIndexRouteImport.update({
     id: '/recruitment/job-postings/',
@@ -661,12 +668,11 @@ const AdminDashboardPerformanceTrainingPathlessLayoutEditRoute =
     path: '/edit',
     getParentRoute: () => AdminDashboardPerformanceTrainingPathlessLayoutRoute,
   } as any)
-const AdminDashboardRecruitmentJobPostingsPathlessLayoutCreateRoute =
-  AdminDashboardRecruitmentJobPostingsPathlessLayoutCreateRouteImport.update({
-    id: '/create',
-    path: '/create',
-    getParentRoute: () =>
-      AdminDashboardRecruitmentJobPostingsPathlessLayoutRoute,
+const AdminDashboardRecruitmentAtsTrackingIdRoute =
+  AdminDashboardRecruitmentAtsTrackingIdRouteImport.update({
+    id: '/recruitment/ats/tracking/$id',
+    path: '/recruitment/ats/tracking/$id',
+    getParentRoute: () => AdminDashboardRouteRoute,
   } as any)
 const AdminDashboardRecruitmentJobPostingsPathlessLayoutEditRoute =
   AdminDashboardRecruitmentJobPostingsPathlessLayoutEditRouteImport.update({
@@ -763,6 +769,7 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/performance/performance-settings/': typeof AdminDashboardPerformancePerformanceSettingsIndexRoute
   '/admin-dashboard/performance/task-management/': typeof AdminDashboardPerformanceTaskManagementIndexRoute
   '/admin-dashboard/performance/training/': typeof AdminDashboardPerformanceTrainingIndexRoute
+  '/admin-dashboard/recruitment/ats/': typeof AdminDashboardRecruitmentAtsIndexRoute
   '/admin-dashboard/recruitment/job-postings/': typeof AdminDashboardRecruitmentJobPostingsIndexRoute
   '/admin-dashboard/recruitment/recruitment-settings/': typeof AdminDashboardRecruitmentRecruitmentSettingsIndexRoute
   '/admin-dashboard/recruitment/talent-requisition/': typeof AdminDashboardRecruitmentTalentRequisitionIndexRoute
@@ -794,7 +801,7 @@ export interface FileRoutesByFullPath {
   '/admin-dashboard/performance/task-management/edit': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute
   '/admin-dashboard/performance/training/create': typeof AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute
   '/admin-dashboard/performance/training/edit': typeof AdminDashboardPerformanceTrainingPathlessLayoutEditRoute
-  '/admin-dashboard/recruitment/job-postings/create': typeof AdminDashboardRecruitmentJobPostingsPathlessLayoutCreateRoute
+  '/admin-dashboard/recruitment/ats/tracking/$id': typeof AdminDashboardRecruitmentAtsTrackingIdRoute
   '/admin-dashboard/recruitment/job-postings/edit': typeof AdminDashboardRecruitmentJobPostingsPathlessLayoutEditRoute
   '/admin-dashboard/recruitment/talent-requisition/create': typeof AdminDashboardRecruitmentTalentRequisitionPathlessLayoutCreateRoute
   '/admin-dashboard/recruitment/talent-requisition/edit': typeof AdminDashboardRecruitmentTalentRequisitionPathlessLayoutEditRoute
@@ -850,6 +857,7 @@ export interface FileRoutesByTo {
   '/admin-dashboard/performance/appraisal': typeof AdminDashboardPerformanceAppraisalIndexRoute
   '/admin-dashboard/performance/feedback': typeof AdminDashboardPerformanceFeedbackIndexRoute
   '/admin-dashboard/performance/performance-settings': typeof AdminDashboardPerformancePerformanceSettingsIndexRoute
+  '/admin-dashboard/recruitment/ats': typeof AdminDashboardRecruitmentAtsIndexRoute
   '/admin-dashboard/recruitment/recruitment-settings': typeof AdminDashboardRecruitmentRecruitmentSettingsIndexRoute
   '/ess/performance/appraisal': typeof EssPerformanceAppraisalIndexRoute
   '/ess/performance/feedback': typeof EssPerformanceFeedbackIndexRoute
@@ -879,7 +887,7 @@ export interface FileRoutesByTo {
   '/admin-dashboard/performance/task-management/edit': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute
   '/admin-dashboard/performance/training/create': typeof AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute
   '/admin-dashboard/performance/training/edit': typeof AdminDashboardPerformanceTrainingPathlessLayoutEditRoute
-  '/admin-dashboard/recruitment/job-postings/create': typeof AdminDashboardRecruitmentJobPostingsPathlessLayoutCreateRoute
+  '/admin-dashboard/recruitment/ats/tracking/$id': typeof AdminDashboardRecruitmentAtsTrackingIdRoute
   '/admin-dashboard/recruitment/job-postings/edit': typeof AdminDashboardRecruitmentJobPostingsPathlessLayoutEditRoute
   '/admin-dashboard/recruitment/talent-requisition/create': typeof AdminDashboardRecruitmentTalentRequisitionPathlessLayoutCreateRoute
   '/admin-dashboard/recruitment/talent-requisition/edit': typeof AdminDashboardRecruitmentTalentRequisitionPathlessLayoutEditRoute
@@ -948,6 +956,7 @@ export interface FileRoutesById {
   '/admin-dashboard/performance/performance-settings/': typeof AdminDashboardPerformancePerformanceSettingsIndexRoute
   '/admin-dashboard/performance/task-management/': typeof AdminDashboardPerformanceTaskManagementIndexRoute
   '/admin-dashboard/performance/training/': typeof AdminDashboardPerformanceTrainingIndexRoute
+  '/admin-dashboard/recruitment/ats/': typeof AdminDashboardRecruitmentAtsIndexRoute
   '/admin-dashboard/recruitment/job-postings/': typeof AdminDashboardRecruitmentJobPostingsIndexRoute
   '/admin-dashboard/recruitment/recruitment-settings/': typeof AdminDashboardRecruitmentRecruitmentSettingsIndexRoute
   '/admin-dashboard/recruitment/talent-requisition/': typeof AdminDashboardRecruitmentTalentRequisitionIndexRoute
@@ -979,7 +988,7 @@ export interface FileRoutesById {
   '/admin-dashboard/performance/task-management/_pathlessLayout/edit': typeof AdminDashboardPerformanceTaskManagementPathlessLayoutEditRoute
   '/admin-dashboard/performance/training/_pathlessLayout/create': typeof AdminDashboardPerformanceTrainingPathlessLayoutCreateRoute
   '/admin-dashboard/performance/training/_pathlessLayout/edit': typeof AdminDashboardPerformanceTrainingPathlessLayoutEditRoute
-  '/admin-dashboard/recruitment/job-postings/_pathlessLayout/create': typeof AdminDashboardRecruitmentJobPostingsPathlessLayoutCreateRoute
+  '/admin-dashboard/recruitment/ats/tracking/$id': typeof AdminDashboardRecruitmentAtsTrackingIdRoute
   '/admin-dashboard/recruitment/job-postings/_pathlessLayout/edit': typeof AdminDashboardRecruitmentJobPostingsPathlessLayoutEditRoute
   '/admin-dashboard/recruitment/talent-requisition/_pathlessLayout/create': typeof AdminDashboardRecruitmentTalentRequisitionPathlessLayoutCreateRoute
   '/admin-dashboard/recruitment/talent-requisition/_pathlessLayout/edit': typeof AdminDashboardRecruitmentTalentRequisitionPathlessLayoutEditRoute
@@ -1048,6 +1057,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/performance/performance-settings/'
     | '/admin-dashboard/performance/task-management/'
     | '/admin-dashboard/performance/training/'
+    | '/admin-dashboard/recruitment/ats/'
     | '/admin-dashboard/recruitment/job-postings/'
     | '/admin-dashboard/recruitment/recruitment-settings/'
     | '/admin-dashboard/recruitment/talent-requisition/'
@@ -1079,7 +1089,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/performance/task-management/edit'
     | '/admin-dashboard/performance/training/create'
     | '/admin-dashboard/performance/training/edit'
-    | '/admin-dashboard/recruitment/job-postings/create'
+    | '/admin-dashboard/recruitment/ats/tracking/$id'
     | '/admin-dashboard/recruitment/job-postings/edit'
     | '/admin-dashboard/recruitment/talent-requisition/create'
     | '/admin-dashboard/recruitment/talent-requisition/edit'
@@ -1135,6 +1145,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/performance/appraisal'
     | '/admin-dashboard/performance/feedback'
     | '/admin-dashboard/performance/performance-settings'
+    | '/admin-dashboard/recruitment/ats'
     | '/admin-dashboard/recruitment/recruitment-settings'
     | '/ess/performance/appraisal'
     | '/ess/performance/feedback'
@@ -1164,7 +1175,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/performance/task-management/edit'
     | '/admin-dashboard/performance/training/create'
     | '/admin-dashboard/performance/training/edit'
-    | '/admin-dashboard/recruitment/job-postings/create'
+    | '/admin-dashboard/recruitment/ats/tracking/$id'
     | '/admin-dashboard/recruitment/job-postings/edit'
     | '/admin-dashboard/recruitment/talent-requisition/create'
     | '/admin-dashboard/recruitment/talent-requisition/edit'
@@ -1232,6 +1243,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/performance/performance-settings/'
     | '/admin-dashboard/performance/task-management/'
     | '/admin-dashboard/performance/training/'
+    | '/admin-dashboard/recruitment/ats/'
     | '/admin-dashboard/recruitment/job-postings/'
     | '/admin-dashboard/recruitment/recruitment-settings/'
     | '/admin-dashboard/recruitment/talent-requisition/'
@@ -1263,7 +1275,7 @@ export interface FileRouteTypes {
     | '/admin-dashboard/performance/task-management/_pathlessLayout/edit'
     | '/admin-dashboard/performance/training/_pathlessLayout/create'
     | '/admin-dashboard/performance/training/_pathlessLayout/edit'
-    | '/admin-dashboard/recruitment/job-postings/_pathlessLayout/create'
+    | '/admin-dashboard/recruitment/ats/tracking/$id'
     | '/admin-dashboard/recruitment/job-postings/_pathlessLayout/edit'
     | '/admin-dashboard/recruitment/talent-requisition/_pathlessLayout/create'
     | '/admin-dashboard/recruitment/talent-requisition/_pathlessLayout/edit'
@@ -1681,6 +1693,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardPerformanceTrainingPathlessLayoutRouteImport
       parentRoute: typeof AdminDashboardRouteRoute
     }
+    '/admin-dashboard/recruitment/ats/': {
+      id: '/admin-dashboard/recruitment/ats/'
+      path: '/recruitment/ats'
+      fullPath: '/admin-dashboard/recruitment/ats/'
+      preLoaderRoute: typeof AdminDashboardRecruitmentAtsIndexRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
+    }
     '/admin-dashboard/recruitment/job-postings/': {
       id: '/admin-dashboard/recruitment/job-postings/'
       path: '/recruitment/job-postings'
@@ -1926,12 +1945,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardPerformanceTrainingPathlessLayoutEditRouteImport
       parentRoute: typeof AdminDashboardPerformanceTrainingPathlessLayoutRoute
     }
-    '/admin-dashboard/recruitment/job-postings/_pathlessLayout/create': {
-      id: '/admin-dashboard/recruitment/job-postings/_pathlessLayout/create'
-      path: '/create'
-      fullPath: '/admin-dashboard/recruitment/job-postings/create'
-      preLoaderRoute: typeof AdminDashboardRecruitmentJobPostingsPathlessLayoutCreateRouteImport
-      parentRoute: typeof AdminDashboardRecruitmentJobPostingsPathlessLayoutRoute
+    '/admin-dashboard/recruitment/ats/tracking/$id': {
+      id: '/admin-dashboard/recruitment/ats/tracking/$id'
+      path: '/recruitment/ats/tracking/$id'
+      fullPath: '/admin-dashboard/recruitment/ats/tracking/$id'
+      preLoaderRoute: typeof AdminDashboardRecruitmentAtsTrackingIdRouteImport
+      parentRoute: typeof AdminDashboardRouteRoute
     }
     '/admin-dashboard/recruitment/job-postings/_pathlessLayout/edit': {
       id: '/admin-dashboard/recruitment/job-postings/_pathlessLayout/edit'
@@ -2154,14 +2173,11 @@ const AdminDashboardPerformanceTrainingPathlessLayoutRouteWithChildren =
   )
 
 interface AdminDashboardRecruitmentJobPostingsPathlessLayoutRouteChildren {
-  AdminDashboardRecruitmentJobPostingsPathlessLayoutCreateRoute: typeof AdminDashboardRecruitmentJobPostingsPathlessLayoutCreateRoute
   AdminDashboardRecruitmentJobPostingsPathlessLayoutEditRoute: typeof AdminDashboardRecruitmentJobPostingsPathlessLayoutEditRoute
 }
 
 const AdminDashboardRecruitmentJobPostingsPathlessLayoutRouteChildren: AdminDashboardRecruitmentJobPostingsPathlessLayoutRouteChildren =
   {
-    AdminDashboardRecruitmentJobPostingsPathlessLayoutCreateRoute:
-      AdminDashboardRecruitmentJobPostingsPathlessLayoutCreateRoute,
     AdminDashboardRecruitmentJobPostingsPathlessLayoutEditRoute:
       AdminDashboardRecruitmentJobPostingsPathlessLayoutEditRoute,
   }
@@ -2238,6 +2254,7 @@ interface AdminDashboardRouteRouteChildren {
   AdminDashboardPerformancePerformanceSettingsIndexRoute: typeof AdminDashboardPerformancePerformanceSettingsIndexRoute
   AdminDashboardPerformanceTaskManagementIndexRoute: typeof AdminDashboardPerformanceTaskManagementIndexRoute
   AdminDashboardPerformanceTrainingIndexRoute: typeof AdminDashboardPerformanceTrainingIndexRoute
+  AdminDashboardRecruitmentAtsIndexRoute: typeof AdminDashboardRecruitmentAtsIndexRoute
   AdminDashboardRecruitmentJobPostingsIndexRoute: typeof AdminDashboardRecruitmentJobPostingsIndexRoute
   AdminDashboardRecruitmentRecruitmentSettingsIndexRoute: typeof AdminDashboardRecruitmentRecruitmentSettingsIndexRoute
   AdminDashboardRecruitmentTalentRequisitionIndexRoute: typeof AdminDashboardRecruitmentTalentRequisitionIndexRoute
@@ -2246,6 +2263,7 @@ interface AdminDashboardRouteRouteChildren {
   AdminDashboardOrganizationEmployeesDetailsIdRoute: typeof AdminDashboardOrganizationEmployeesDetailsIdRoute
   AdminDashboardPerformanceAppraisalEditIdRoute: typeof AdminDashboardPerformanceAppraisalEditIdRoute
   AdminDashboardPerformanceFeedbackEditIdRoute: typeof AdminDashboardPerformanceFeedbackEditIdRoute
+  AdminDashboardRecruitmentAtsTrackingIdRoute: typeof AdminDashboardRecruitmentAtsTrackingIdRoute
 }
 
 const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
@@ -2335,6 +2353,8 @@ const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
     AdminDashboardPerformanceTaskManagementIndexRoute,
   AdminDashboardPerformanceTrainingIndexRoute:
     AdminDashboardPerformanceTrainingIndexRoute,
+  AdminDashboardRecruitmentAtsIndexRoute:
+    AdminDashboardRecruitmentAtsIndexRoute,
   AdminDashboardRecruitmentJobPostingsIndexRoute:
     AdminDashboardRecruitmentJobPostingsIndexRoute,
   AdminDashboardRecruitmentRecruitmentSettingsIndexRoute:
@@ -2351,6 +2371,8 @@ const AdminDashboardRouteRouteChildren: AdminDashboardRouteRouteChildren = {
     AdminDashboardPerformanceAppraisalEditIdRoute,
   AdminDashboardPerformanceFeedbackEditIdRoute:
     AdminDashboardPerformanceFeedbackEditIdRoute,
+  AdminDashboardRecruitmentAtsTrackingIdRoute:
+    AdminDashboardRecruitmentAtsTrackingIdRoute,
 }
 
 const AdminDashboardRouteRouteWithChildren =

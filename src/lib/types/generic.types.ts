@@ -87,6 +87,7 @@ export type TFormFieldType =
   | 'list'
   | 'mask'
   | 'currency-range'
+  | 'rich-text'
 
 export type TamsBy2ColsFormField = {
   name: string
@@ -112,6 +113,8 @@ export type TamsBy2ColsFormField = {
   listItems?: React.ReactNode
   maxNumber?: number
   mask?: string | (RegExp | string)[]
+  acceptMultipleFiles?: boolean
+  acceptedTypes?: readonly string[]
 }
 
 export type TamsBy2ColsFormFields = {

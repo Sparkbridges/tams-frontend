@@ -1,12 +1,11 @@
 import { HeadContent, Outlet, createRootRoute } from '@tanstack/react-router'
 import { Notifications } from '@mantine/notifications'
-
 import '../styles/css/styles.css'
 import '@mantine/schedule/styles.css'
 import { MantineProvider } from '@mantine/core'
 import { theme } from '#/styles/theme/theme.config'
 import { QueryProvider } from '#/lib'
-import { TamsPageError } from '#/components'
+import { TamsPageError, TamsToast } from '#/components'
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -22,6 +21,7 @@ function RootComponent() {
         <MantineProvider theme={theme}>
           <Notifications position="top-right" />
           <Outlet />
+          <TamsToast />
         </MantineProvider>
       </QueryProvider>
     </>

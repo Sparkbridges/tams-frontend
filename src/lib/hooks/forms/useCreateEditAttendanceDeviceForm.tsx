@@ -194,7 +194,7 @@ const useCreateEditAttendanceDeviceForm = ({ type, id }: Props) => {
         }
       },
       (errors) => {
-        console.log('errors', errors)
+        console.error('errors', errors)
       },
     )()
   }

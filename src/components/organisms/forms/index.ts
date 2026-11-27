@@ -13,3 +13,4 @@ export { default as CreateEditPerformanceTaskManagementForm } from './CreateEdit
 export { default as CreateEditFeedbackSurveyForm } from './CreateEditFeedbackSurveyForm'
 export { default as CreateEditAppraisalGroupForm } from './CreateEditAppraisalGroupForm'
 export { default as CreateEditTalentRequisitionForm } from './CreateEditTalentRequisitionForm'
+export { default as CreateEditJobPostingForm } from './CreateEditJobPostingForm'

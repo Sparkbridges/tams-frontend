@@ -1,7 +1,14 @@
-import { RecruitmentJobPostingsTable, TamsButton } from '#/components'
+import {
+  RecruitmentJobPostingsTable,
+  TamsPageError,
+  TamsTabs,
+} from '#/components'
 import { documentHelper, useGetPageHeader } from '#/lib'
-import { PlusIcon } from '@phosphor-icons/react'
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import type { TTamsTabs } from '#/lib'
+import { useRecruitmentAccess } from '#/lib/api/services/recruitment'
+import { Divider } from '@mantine/core'
+import { createFileRoute } from '@tanstack/react-router'
+import { useState } from 'react'
 
 export const Route = createFileRoute(
   '/admin-dashboard/recruitment/job-postings/',
@@ -17,28 +24,36 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const { pageHeader } = useGetPageHeader()
-  const navigate = useNavigate()
+  const { canViewJobPostings } = useRecruitmentAccess()
+
+  const [activeTab, setActiveTab] = useState<'all' | 'archived'>('all')
+
+  const tabs: TTamsTabs[] = [
+    {
+      label: 'All',
+      value: 'all',
+      color: 'blue',
+    },
+    {
+      label: 'Archived',
+      value: 'archived',
+      color: 'gray',
+    },
+  ]
+  if (!canViewJobPostings) return <TamsPageError type="403" />
   return (
     <main>
       <section className="flex items-center justify-between">
         {pageHeader()}
-
-        <div>
-          <TamsButton
-            leftSection={<PlusIcon />}
-            size="md"
-            onClick={() =>
-              navigate({
-                to: '/admin-dashboard/recruitment/job-postings/create',
-              })
-            }
-          >
-            New Job Posting
-          </TamsButton>
-        </div>
       </section>
+      <Divider my="md" />
+      <TamsTabs
+        tabValue={activeTab}
+        data={tabs}
+        onTabChange={(val) => setActiveTab(val as 'all' | 'archived')}
+      />
       <div className="mt-10">
-        <RecruitmentJobPostingsTable />
+        <RecruitmentJobPostingsTable activeTab={activeTab} />
       </div>
     </main>
   )

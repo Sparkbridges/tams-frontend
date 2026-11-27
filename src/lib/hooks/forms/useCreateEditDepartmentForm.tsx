@@ -94,7 +94,7 @@ const useCreateEditDepartmentForm = ({ type, departmentId }: Props) => {
   const {
     data: departmentDetails,
     isLoading: isLoadingDepartmentDetails,
-    isError
+    isError,
   } = useFetchOrganizationDepartmentDetails(
     { department_id: departmentId as number },
     (data) => data.data,
@@ -188,7 +188,7 @@ const useCreateEditDepartmentForm = ({ type, departmentId }: Props) => {
         }
       },
       (errors) => {
-        console.log('errors', errors)
+        console.error('errors', errors)
       },
     )()
   }
@@ -204,7 +204,8 @@ const useCreateEditDepartmentForm = ({ type, departmentId }: Props) => {
     closeActionWidget,
     handleSubmit,
     handleCancel,
-    loading: isCreatingOrganizationDepartment || isUpdatingOrganizationDepartment,
+    loading:
+      isCreatingOrganizationDepartment || isUpdatingOrganizationDepartment,
     isLoadingDepartmentDetails,
     isError,
   }

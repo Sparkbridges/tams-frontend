@@ -79,6 +79,7 @@ const useRecruitmentTalentRequestTable = () => {
             work_mode: item.work_mode,
             type: item.type,
             status: item.status,
+            linked_posting_id: item.linked_posting?.id,
             request_date: newDayjs(item.created_at).format('YYYY-MM-DD'),
           })),
           requests: data.data.results,
@@ -206,7 +207,7 @@ const useRecruitmentTalentRequestTable = () => {
         },
         color: 'red',
         icon: TrashIcon,
-        hidden: !['rejected'].includes(status),
+        hidden: !['rejected'].includes(status) || !!row.linked_posting_id,
       },
     ]
   }

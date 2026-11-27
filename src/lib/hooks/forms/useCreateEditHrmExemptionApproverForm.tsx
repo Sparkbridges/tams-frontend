@@ -396,7 +396,7 @@ const useCreateEditHrmExemptionApproverForm = ({
         }
       },
       (errors) => {
-        console.log('errors', errors)
+        console.error('errors', errors)
       },
     )()
   }
