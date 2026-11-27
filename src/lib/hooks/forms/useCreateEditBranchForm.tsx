@@ -280,7 +280,7 @@ const useCreateEditBranchForm = ({ type, branchId }: Props) => {
         }
       },
       (errors) => {
-        console.log('errors', errors)
+        console.error('errors', errors)
       },
     )()
   }

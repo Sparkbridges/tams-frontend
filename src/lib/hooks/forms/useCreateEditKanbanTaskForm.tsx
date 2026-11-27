@@ -95,7 +95,6 @@ const useCreateEditKanbanTaskForm = ({
 
   useEffect(() => {
     if (type === 'create' && opened) {
-      console.log('resetting form', initialTask)
       form.reset()
       setIsDirty(false)
     }
@@ -257,7 +256,7 @@ const useCreateEditKanbanTaskForm = ({
         }
       },
       (errors) => {
-        console.log('errors', errors)
+        console.error('errors', errors)
       },
     )()
   }

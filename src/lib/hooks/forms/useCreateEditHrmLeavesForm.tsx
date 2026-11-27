@@ -50,7 +50,7 @@ const useCreateEditHrmLeavesForm = ({ type, leaveId }: Props) => {
 
   const { data: employees } = useSearchOrganizationEmployees(
     {
-      query: form.getValues().employee_search as string,
+      query: form.getValues().employee_search,
     },
     (data) =>
       data.data.map((employee) => ({
@@ -62,7 +62,7 @@ const useCreateEditHrmLeavesForm = ({ type, leaveId }: Props) => {
 
   const { data: reliefEmployees } = useSearchOrganizationEmployees(
     {
-      query: form.getValues().handover_search as string,
+      query: form.getValues().handover_search,
     },
     (data) =>
       data.data.map((employee) => ({
@@ -203,7 +203,7 @@ const useCreateEditHrmLeavesForm = ({ type, leaveId }: Props) => {
         }
       },
       (errors) => {
-        console.log('errors', errors)
+        console.error('errors', errors)
       },
     )()
   }

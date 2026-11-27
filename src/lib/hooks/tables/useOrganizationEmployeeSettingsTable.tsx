@@ -293,7 +293,7 @@ const useOrganizationEmployeeSettingsTable = ({
   }
 
   const handleRowClick = (row: TamsTableData) => {
-    console.log('Row clicked:', row)
+    console.error('Row clicked:', row)
   }
 
   const actionPopoverOptions = (

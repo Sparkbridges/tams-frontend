@@ -107,7 +107,11 @@ const RecruitmentTalentRequestTable = () => {
         opened={openedConfirmation}
         onClose={closeConfirmation}
         title={`${capitalize(actionType ?? '')} Talent Request`}
-        message={`Are you sure you want to ${actionType ?? ''} this talent request?`}
+        message={
+          actionType === 'cancel'
+            ? 'Cancel this talent request? Its linked job posting will be unpublished and removed from public listings.'
+            : `Are you sure you want to ${actionType ?? ''} this talent request?`
+        }
         onConfirm={handleAction}
         loading={isPending}
       />

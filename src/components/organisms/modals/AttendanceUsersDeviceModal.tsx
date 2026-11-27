@@ -88,7 +88,6 @@ const AttendanceUsersDeviceModal = ({
     },
   ]
   const handleSubmit = async () => {
-    console.log('values', form.getValues())
     form.onSubmit(
       async (values: any) => {
         try {
@@ -100,7 +99,7 @@ const AttendanceUsersDeviceModal = ({
         }
       },
       (errors) => {
-        console.log('errors', errors)
+        console.error('errors', errors)
       },
     )()
   }

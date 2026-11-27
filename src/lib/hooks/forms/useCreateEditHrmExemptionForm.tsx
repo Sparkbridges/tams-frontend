@@ -58,7 +58,7 @@ const useCreateEditHrmExemptionForm = ({ type, exemptionId }: Props) => {
   })
 
   const { data: employees } = useSearchOrganizationEmployees(
-    { query: form.getValues().employee_search as string },
+    { query: form.getValues().employee_search },
     (data) =>
       data.data.map((employee) => ({
         label: employee.name,
@@ -147,7 +147,6 @@ const useCreateEditHrmExemptionForm = ({ type, exemptionId }: Props) => {
       async (values: any) => {
         try {
           if (type === 'create') {
-            console.log('Creating HRM Exemption with values:', employees)
             const { employee_search, ...payload } = values
             const response = await createHrmExemptionAsync(
               payload as TCreateHrmExemptionPayload,
@@ -176,7 +175,7 @@ const useCreateEditHrmExemptionForm = ({ type, exemptionId }: Props) => {
         }
       },
       (errors) => {
-        console.log('errors', errors)
+        console.error('errors', errors)
       },
     )()
   }

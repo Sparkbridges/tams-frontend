@@ -89,7 +89,7 @@ const useCreateEditHrmLeaveTypeForm = ({
   )
 
   const { data: organizationEmployeesData } = useSearchOrganizationEmployees(
-    { query: form.getValues()['employee_query'] as string },
+    { query: form.getValues()['employee_query'] },
     (data) =>
       data.data.map((employee) => ({
         value: employee.id.toString(),
@@ -319,7 +319,7 @@ const useCreateEditHrmLeaveTypeForm = ({
         }
       },
       (errors) => {
-        console.log('errors', errors)
+        console.error('errors', errors)
       },
     )()
   }

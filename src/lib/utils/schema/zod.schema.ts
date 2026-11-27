@@ -83,6 +83,8 @@ export const ACCEPTED_IMAGE_TYPES = [
   'image/webp',
 ] as const
 
+export const ACCEPTED_FILE_TYPES = ['application/pdf'] as const
+
 // ─────────────────────────────────────────
 // BASE FACTORY
 // ─────────────────────────────────────────

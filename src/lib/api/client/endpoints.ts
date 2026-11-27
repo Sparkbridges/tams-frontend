@@ -134,6 +134,8 @@ export const ENDPOINTS = {
   recruitmentEmailTemplates: '/hrm/recruitment/email-templates',
   recruitmentSettings: '/hrm/recruitment/settings',
   recruitmentTalentRequests: '/hrm/recruitment/job-requests',
+  recruitmentJobPostings: '/hrm/recruitment/job-postings',
+  recruitmentJobPostingsArchived: '/hrm/recruitment/job-postings/archives',
 
   // --------------------------payroll-----------------------------------
   verifyAccountNumber:
