@@ -11,6 +11,14 @@ import { useTamsStore } from '#/lib/store'
 export function useRecruitmentAccess() {
   const user = useTamsStore((state) => state.user)
   return {
+    canViewApplicants:
+      user?.permissions.includes('get all job applications') ?? false,
+    canViewApplicantDetails:
+      user?.permissions.includes('get one job application') ?? false,
+    canUpdateApplicants:
+      user?.permissions.includes('update job application status') ?? false,
+    canDeleteApplicants:
+      user?.permissions.includes('delete job applications') ?? false,
     canViewTalentRequests:
       user?.permissions.includes('get all talent requests') ?? false,
     canCreateTalentRequest:
