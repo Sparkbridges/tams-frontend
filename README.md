@@ -1,5 +1,56 @@
 Welcome to your new TanStack Start app!
 
+## Recruitment overview
+
+The recruitment overview shows active non-archived job postings, pending talent
+requests, total applications and their current status breakdown. The pending
+requests panel shows the five most recently created requests. Data is all-time
+and scoped to the caller's managed branches. Application totals include
+applications to archived postings; shortlist counts do not imply scheduled
+interviews. Sections and requests are gated independently by existing list
+permissions, so users see only data they can access. Backend deployment must
+include the `total_applications` field added to the existing ATS statistics API.
+
+## Recruitment ATS
+
+Open Recruitment > Applicant Tracking System and select **Track applicants** for a
+job. The job UUID is also shown for CSV imports. This implements the working legacy
+candidate/interview/hired workflows; legacy employee-profile mockups are not migrated.
+
+- Job-based applicant tabs, search, source and independent experience filters.
+  Job selection is in the route; applicant filters and pagination persist in the URL.
+  The backend's `completed` state is labelled Hired without changing existing records.
+- Candidate drawer: contact and job details, declared experience, CV, custom answers,
+  uploaded-answer links and interview details. Google storage documents use the
+  existing signed-URL endpoint.
+- Individual interview scheduling/rescheduling, hire/reject and confirmed deletion;
+  bulk interview/hire/reject on the selected page. Configured recruitment emails
+  remain handled by the backend.
+- CSV import with a downloadable sample and explicit column mapping. Use the job
+  UUID in the CSV's Job ID field. Invalid files display backend validation errors.
+- Recruitment statistics with an optional date period and per-job stage counts.
+- **Screening requirements** configures recruiter-confirmed required/preferred
+  skills, qualifications and optional minimum experience. Read the job description
+  when choosing terms; changes do not modify approved requisition fields.
+- **Run local screening** shows keyword evidence, absent/uncertain mentions and
+  applicant-declared experience against requirements. No paid API or automatic hiring
+  decision is used. Missing keywords do not prove a lack of skills. Prior assessments
+  show an outdated warning when the job or requirements change.
+- Existing/imported applicants may need a PDF/DOCX uploaded in the drawer before
+  screening. This replaces their CV link. Scanned PDFs require manual review; OCR
+  and semantic AI matching are not included.
+
+Deploy the backend ATS screening migration before using these screens. Existing
+ATS permissions govern list/detail/status/delete actions; imports reuse status-update
+permission and screening requirements use job-posting creation permission. Job
+selection additionally requires permission to list job postings.
+
+Tests:
+
+```sh
+pnpm exec vitest run src/lib/hooks/tables/useApplicantTrackingTable.test.tsx src/lib/utils/applicantAnswers.test.ts src/components/organisms/drawers/RecruitmentApplicantDetailDrawer.test.tsx src/components/organisms/modals/AtsRequirementsModal.test.tsx
+```
+
 ## HRM, attendance and performance dashboards
 
 The HRM and attendance overview pages use the dashboard statistics APIs with

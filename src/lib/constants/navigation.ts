@@ -201,7 +201,7 @@ export const pageHeaderNav: Record<
   recruitment: {
     title: 'Recruitment Overview',
     icon: UsersIcon,
-    description: 'Overview of recruitment activities within the organization',
+    description: 'Monitor hiring requests, open jobs and applicant progress',
   },
   'recruitment-reports': {
     title: 'Recruitment Reports',
@@ -227,6 +227,11 @@ export const pageHeaderNav: Record<
     title: 'Job Postings',
     icon: BriefcaseIcon,
     description: 'Manage job postings within the organization',
+  },
+  ats: {
+    title: 'Applicant Tracking System',
+    icon: UsersIcon,
+    description: 'Manage recruitment activities within the organization',
   },
 }
 
