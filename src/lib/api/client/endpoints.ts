@@ -1,4 +1,6 @@
 export const ENDPOINTS = {
+  recruitmentApplicants: '/hrm/recruitment/job-application',
+  documentSignedUrl: '/document/signed-url',
   // auth
   verifyCompanyUrl: '/auth/company/verify',
   login: '/auth/login',
